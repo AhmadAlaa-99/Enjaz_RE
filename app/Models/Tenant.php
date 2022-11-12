@@ -14,7 +14,7 @@ class Tenant extends Model
     protected $guarded=[];
     public function leases()
     {
-         return $this->belongsTo(Lease::class,'tenant_id');
+         return $this->hasMany(Lease::class,'tenant_id');
     }
     public function units()
     {

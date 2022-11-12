@@ -55,9 +55,7 @@
                           <th> رقم الجوال </th>
                           <th>البريد الالكتروني</th>
                           <th> رقم الوحدة</th>
-                          <th> رقم العقد</th>
-                          <th> تاريخ بداية العقد</th>
-                          <th> تاريخ نهاية  العقد</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -77,9 +75,7 @@
                           <td>{{$tenant->user->phone}}</td>
                           <td>{{$tenant->user->email}}</td>
                           <td><span class="badge badge-success"> {{$tenant->units->number}} </a></td>
-                          <td><span class="badge badge-success"> {{$tenant->leases->number}} </a></td>
-                          <td>{{$tenant->leases->st_rental_date}}</td>
-                          <td>{{$tenant->leases->end_rental_date}}</td>
+                     
                         </tr>
                         @empty
                         @endforelse
