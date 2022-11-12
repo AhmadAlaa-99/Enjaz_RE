@@ -92,7 +92,7 @@ Route::group([
      Route::get('/payments_details/{id}',[ReportsController::class,'payments_details'])->name('payments.details');
 
 
-     Route::resource('/receives_reports',\receive_reports::class);
+     Route::resource('/receives_reports',\Admin\receive_reports::class);
     Route::get('/receive_details/{id}',[receive_reports::class,'details'])->name('receive.details');
     Route::get('/receive_destroy/{id}',[receive_reports::class,'destroy'])->name('receive.destroy');
 

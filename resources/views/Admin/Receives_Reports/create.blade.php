@@ -66,11 +66,11 @@
                      </div>
                         <div class="form-group">
                             <label for="ciTy">تاريخ التسليم</label>
-                            <input type="date" class="form-control" name="receive_date" placeholder="receive_date">
+                            <input type="date" class="form-control" name="receive_date" >
                         </div>
                         <div class="form-group">
                             <label for="ciTy">حالة الوحدة</label>
-                            <input type="text" class="form-control" name="maint_status" placeholder="maint_status">
+                            <input type="text" class="form-control" name="maint_status" >
                         </div>
 
                     </div>
@@ -78,12 +78,12 @@
 
                         <div class="form-group">
                             <label for="ciTy">تصفية الفواتير</label>
-                            <input type="textarea" class="form-control" name="paymennts_status" placeholder="paymennts_status">
+                            <input type="textarea" class="form-control" name="paymennts_status">
                         </div>
                         <div class="form-group">
                             <label for="ciTy">ملاحظات</label>
-                         
-                            <input type="textarea" class="form-control" name="notes" placeholder="notes">
+
+                            <input type="textarea" class="form-control" name="notes">
                         </div>
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
