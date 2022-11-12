@@ -81,15 +81,16 @@
 
 @endcan
 
-						<li class="nav-item dropdown">
+
+
+
+                            @can('طلبات الصيانة - الوسيط- المالك')
+                            	<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="icon-refresh nav-icon"></i>
 								  طلبات الصيانة
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="appsDropdown">
-
-
-                            @can('طلبات الصيانة - الوسيط- المالك')
 								<li>
 									<a class="dropdown-item"  href="{{ url('/' . $page='Admin/accept_requests') }}">الطلبات المنجزة </a>
 								</li>
@@ -103,9 +104,18 @@
                                 <li>
                                 <a class="dropdown-item" href="{{ url('/' . $page='Admin/maintenance_payments') }}">مدفوعات الصيانة</a>
 								</li>
+                                       	</ul>
+						</li>
                                 @endcan
 
+
                                @can('الصيانة - المستأجر')
+                               	<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="icon-refresh nav-icon"></i>
+								  طلبات الصيانة
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="appsDropdown">
 
                                 <li>
 									<a class="dropdown-item" href="{{ url('/' . $page='Tenant/request_form') }}">ارسال الطلب</a>
@@ -113,10 +123,11 @@
                                 <li>
 									<a class="dropdown-item" href="{{ url('/' . $page='Tenant/maints_requests') }}">طلباتي</a>
 								</li>
-                              @endcan
 
 							</ul>
 						</li>
+                              @endcan
+
 
 
 @can('ادارة العقارات - الوسيط')
