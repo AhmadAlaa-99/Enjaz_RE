@@ -59,9 +59,7 @@
                           <th> رقم الجوال </th>
                           <th>البريد الالكتروني</th>
                           <th> رقم الوحدة</th>
-                          <th> رقم العقد</th>
-                          <th> تاريخ بداية العقد</th>
-                          <th> تاريخ نهاية  العقد</th>
+
                         </tr>
                     </thead>
                     @php
@@ -81,9 +79,7 @@
                           <td>{{$tenant->user->phone}}</td>
                           <td>{{$tenant->user->email}}</td>
                           <td>{{$tenant->units->number}}</td>
-                          <td>{{$tenant->units->number}}</td>
-                          <td>{{$tenant->units->number}}</td>
-                          <td>{{$tenant->units->number}}</td>
+                        
 
 
                         </tr>
