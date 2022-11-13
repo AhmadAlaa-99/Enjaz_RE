@@ -103,9 +103,7 @@
                                                         <a href="{{route('unit.rent',$unit->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="rent">
 															<i class="icon-home"></i>
 														</a>
-                                                         <a href="{{route('unit.destroy',$unit->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="rent">
-															<i class="icon-delete"></i>
-														</a>
+                                                        
 
 													</div>
 												</td>
