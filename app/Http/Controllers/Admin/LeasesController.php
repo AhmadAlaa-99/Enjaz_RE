@@ -128,6 +128,8 @@ class LeasesController extends Controller
             ]);
             $role=Role::where('name','Tenant')->first();
             $user->assignRole([$role->id]);
+
+            $unit_id=Units::where('id',$requst->unit_id)->update(['status'=>'rented']);
             //sendNotify
        //     Notification::send($user, new \App\Notifications\NewTenantNotify($user,$pass));
        $us=User::latest()->first();

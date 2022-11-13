@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Maintenance;
 use Auth;
+use Carbon\Carbon;
 
 class MainTenancesController extends Controller
 {
@@ -61,7 +62,7 @@ response_date*/
     public function accept_requests() //1
     {
 
-        $maints=Maintenance::where('status','1')->with('units')->get();
+        $maints=Maintenance::where('status','completed')->with('units')->get();
         return view('Admin.MainTenance.accepted',compact('maints'));
     }
     public function refuse_requests() //2
@@ -73,9 +74,25 @@ response_date*/
     }
     public function wait_request() //0
     {
-        $maints=Maintenance::where('status','0')->with('units')->get();
-
+         $maints=Maintenance::where('status','progress')->with('units')->get();
         return view('Admin.MainTenance.wait',compact('maints'));
+    }
+    public function maint_response(Request $request,$id)
+    {
+         Maintenance::where('id',$id)->update([
+            'status'=>'completed',
+            'cost'=>$request->cost,
+            'notes'=>$request->notes,
+            'response_date'=>Carbon::now(),
+        ]);
+        $maint=Maintenance::where('id',$id)->first();
+        $unit=Units::where('id',$maint->unit_id)->first();
+        $unit->update(['maint_cost'=>$unit->maint_cost+$request->maint_cost]);
+         return redirect()->route('wait_request')->with([
+                'message' => 'Realty edited successfully',
+                'alert-type' => 'success',
+            ]);
+
     }
 
 

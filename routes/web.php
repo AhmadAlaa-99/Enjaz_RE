@@ -64,12 +64,14 @@ Route::group([
 
      Route::get('/tenants',[AdminTenantController::class,'index']);
      Route::get('/accept_requests',[AdminMainTenancesController::class,'accept_requests']);
-     Route::get('/wait_request',[AdminMainTenancesController::class,'wait_request']);
-     Route::get('/refuse_requests',[AdminMainTenancesController::class,'refuse_requests']);
+     Route::get('/wait_request',[AdminMainTenancesController::class,'wait_request'])->name('wait_request');
+     Route::post('/maint_response/{id}',[AdminMainTenancesController::class,'maint_response'])->name('maint_response');
      Route::resource('/realties',\Admin\RealtiesController::class);
 
     Route::get('/realty_destroy/{id}',[AdminRealtiesController::class,'destroy'])->name('realty.destroy');
-
+   Route::get('/printl', function () {
+    return view('lease_print');
+});
 
      Route::post('/units_add',[AdminUnitsController::class,'units_add'])->name('units_add');
      Route::get('/empty_units',[AdminUnitsController::class,'empty_units'])->name('empty_units');
@@ -90,6 +92,7 @@ Route::group([
      Route::get('/payment_details/{id}',[AdminLeasesController::class,'payment_details'])->name('payment.details');
 
      Route::get('/payments_details/{id}',[ReportsController::class,'payments_details'])->name('payments.details');
+
 
 
      Route::resource('/receives_reports',\Admin\receive_reports::class);

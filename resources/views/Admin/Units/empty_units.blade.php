@@ -88,7 +88,7 @@
                           <td>{{$unit->condition_units}}</td>
                           <td>{{$unit->condition_type}}</td>
                           <td>{{$unit->water_number}}</td>
-                          <td><a href=""> <span class="badge badge-danger">{{$unit->electricity_number}}</a></td>
+                          <td><a href=""> <span class="badge badge-danger">{{$unit->Elecrtricity_number}}</a></td>
 
                           <td>
 													<div class="td-actions">

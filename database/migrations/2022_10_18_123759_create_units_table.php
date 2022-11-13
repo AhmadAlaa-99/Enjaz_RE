@@ -28,6 +28,7 @@ class CreateUnitsTable extends Migration
             $table->string('condition_type');
             $table->string('Elecrtricity_number');
             $table->string('water_number');
+            $table->string('maint_cost')->default('0');
             $table->enum('status', ['rented', 'empty'])->default('empty');
             $table->timestamps();
         });

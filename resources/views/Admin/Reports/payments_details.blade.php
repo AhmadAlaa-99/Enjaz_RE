@@ -85,25 +85,9 @@
 													<td>{{$payment->remain}}</td>
                                                     <td><span class="badge badge-danger"><a href="{{route('payment.details',$payment->id)}}" > print </a></td>
                                                     <td><span class="badge badge-danger"> <a
-                                                    data-toggle="modal" href="#modaldemo8"> Edit</a></td>
-
-
+                                                    data-toggle="modal" href="" data-target="#edit_payment{{ $payment->id }}"> Edit</a></td>
 												</tr>
-                                                @empty
-                        @endforelse
-
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-
-
-						</div>
-					</div>
-
-</div>
-<div class="modal fade" id="modaldemo8" tabindex="-1" role="dialog" aria-labelledby="customModalTwoLabel" aria-hidden="true">
+                                                <div class="modal" id="edit_payment{{$payment->id}}" tabindex="-1" role="dialog" aria-labelledby="customModalTwoLabel" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header">
@@ -136,6 +120,21 @@
 											</div>
 										</div>
 									</div>
+                                                @empty
+                        @endforelse
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+</div>
+
 
 
         <!-- End Basic modal -->

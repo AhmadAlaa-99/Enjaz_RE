@@ -110,7 +110,7 @@
                         </div>
                         <div class="form-group">
                             <label for="zIp">رقم عداد الكهرباء</label>
-                            <input type="text" class="form-control" name="electricity_number" value="{{$unit->electricity_number}}"required>
+                            <input type="text" class="form-control" name="electricity_number" value="{{$unit->Elecrtricity_number}}"required>
                         </div>
 
 

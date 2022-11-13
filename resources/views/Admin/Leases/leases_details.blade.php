@@ -211,7 +211,6 @@
 													<th>  عدد الوحدات </th>
 													<th>  عدد الأدوار </th>
 													<th>   المساحة</th>
-													<th>  رقم سند التمثيل </th>
                                                     <th>   استخدام </th>
                                                     <th>    المميزات </th>
 												</tr>
@@ -224,6 +223,7 @@
                                                     <td>{{$lease->realties->units}}</td>
                                                     <td>{{$lease->realties->roles}}</td>
                                                     <td>{{$lease->realties->size}}</td>
+
                                                     <td>{{$lease->realties->use}}</td>
                                                     <td>{{$lease->realties->advantages}}</td>
 
@@ -254,11 +254,12 @@
                                                     <th> عدد  دورات المياه </th>
                                                     <th>رقم عداد الكهرباء </th>
                                                     <th>رقم عداد المياه  </th>
+                                                     <th> تفاصيل</th>
+
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
-
 													<td>{{$lease->units->number}}</td>
                                                     <td>{{$lease->units->role_number}}</td>
                                                     <td>{{$lease->units->type}}</td>

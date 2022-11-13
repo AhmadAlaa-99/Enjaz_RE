@@ -51,10 +51,11 @@
                     <thead>
                         <tr>
                         <th>الرقم التسلسلي </th>
-                          <th>  اسم المنشأة</th>
                           <th>رقم الوحدة</th>
                           <th>الصيانة</th>
                           <th>تاريخ الطلب</th>
+                        <th>الحالة</th>
+
 
                         </tr>
                     </thead>
@@ -68,10 +69,11 @@
                                     @endphp
                         <tr>
                             <td>{{$i}}</td>
-                          <td>{{$maint->realties->name}}</td>
-                          <td>{{$maint->units->name}}</td>
+                          <td>{{$maint->units->number}}</td>
                           <td>{{$maint->desc}}</td>
                           <td>{{$maint->request_date}}</td>
+                     <td>{{$maint->status}}</td>
+
                         </tr>
                         @empty
                         @endforelse

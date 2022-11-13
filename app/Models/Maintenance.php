@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Units;
 
 class Maintenance extends Model
 {
@@ -11,6 +12,6 @@ class Maintenance extends Model
     protected $guarded=[];
     public function units()
     {
-        return $this->belongsTo(App\Models\Units::class,'unit_id');
+        return $this->belongsTo(Units::class,'unit_id');
     }
 }

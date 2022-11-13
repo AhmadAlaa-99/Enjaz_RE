@@ -50,6 +50,9 @@
                 <table id="copy-print-csv" class="table custom-table">
                     <thead>
                         <tr>
+                                                      <th>الرقم التسلسلي</th>
+
+
                           <th>رقم الوحدة</th>
                           <th> اسم المنشأة</th>
                           <th>التكلفة الاجمالية للصيانة</th>
@@ -66,8 +69,8 @@
                                     @endphp
                          <tr>
                           <td>{{$i}}</td>
-                          <td>{{$payment->units->name}}</td>
-                          <td>{{$payment->units->realty->name}}</td>
+                          <td>{{$payment->units->number}}</td>
+                          <td>{{$payment->units->realties->realty_name}}</td>
                           <td>{{$payment->total}}</td>
                         </tr>
                         @empty

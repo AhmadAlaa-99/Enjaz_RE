@@ -75,7 +75,7 @@ class testSeeders extends Seeder
             Tenant::create([
                 'user_id'=>'3',
                 'unit_id'=>'1',
-                
+
             ]);
 
             Financial_statements::create([
@@ -118,8 +118,29 @@ class testSeeders extends Seeder
                 'due_date'=>'2020/10/10',
                 'total'=>'432432',
                 'remain'=>'432432',
-
             ]);
+             Payments::create([
+                 'lease_id'=>'1',
+                'release_date'=>'2020/10/10',
+                'due_date'=>'2020/10/10',
+                'total'=>'432432',
+                'remain'=>'432432',
+            ]);
+             Payments::create([
+                 'lease_id'=>'1',
+                'release_date'=>'2020/10/10',
+                'due_date'=>'2020/10/10',
+                'total'=>'432432',
+                'remain'=>'432432',
+            ]);
+             Payments::create([
+                 'lease_id'=>'1',
+                'release_date'=>'2020/10/10',
+                'due_date'=>'2020/10/10',
+                'total'=>'432432',
+                'remain'=>'432432',
+            ]);
+            Units::where('id','1')->update(['status'=>'rented']);
 
 
 

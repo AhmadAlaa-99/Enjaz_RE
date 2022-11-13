@@ -51,13 +51,15 @@
                     <thead>
                         <tr>
                         <th>الرقم التسلسلي </th>
-                          <th>اسم المستأجر</th>
-                          <th>اسم المؤجر</th>
-                          <th>  اسم المنشأة</th>
+
                           <th>رقم الوحدة</th>
                           <th>الصيانة</th>
+                          <th>الكلفة</th>
                           <th>تاريخ الطلب</th>
+                          <th>تاريخ الاستجابة</th>
                           <th>ملاحظات </th>
+                        <th>العمليات</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -72,9 +74,56 @@
                             <td>{{$i}}</td>
                           <td>{{$maint->units->number}}</td>
                           <td>{{$maint->desc}}</td>
+                          <td>{{$maint->cost}}</td>
                           <td>{{$maint->request_date}}</td>
+                          <td>{{$maint->response_date}}</td>
                           <td>{{$maint->notes}}</td>
+
+
+
+                           <td><span class="badge badge-success"> <a
+                                                    data-toggle="modal" href=""data-target="#accept_maint{{$maint->id}}"> قبول طلب الصيانة</a></td>
+
+                            <td>
+
                         </tr>
+                        <div class="modal fade" id="accept_maint{{$maint->id}} tabindex="-1" role="dialog" aria-labelledby="customModalTwoLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="customModalTwoLabel">انجاز طلب الصيانة</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+
+                                                <form action="{{ route('maint_response',$maint->id) }}" method="post">
+                                                         {{ csrf_field() }}
+														<div class="form-group">
+															<label for="recipient-name" class="col-form-label">كلفة الصيانة</label>
+															<input type="number" name="cost" class="form-control" id="recipient-name">
+														</div>
+                                                        <div class="form-group">
+															<label for="recipient-name" class="col-form-label">ملاحظات</label>
+															<input type="textarea" name="notes" class="form-control" id="recipient-name">
+														</div>
+
+												</div>
+												<div class="modal-footer custom">
+													<div class="left-side">
+                                                    <button type="submit" class="btn btn-link success">حفظ</button>
+
+													</div>
+													<div class="divider"></div>
+													<div class="right-side">
+                                                    <button type="button" class="btn btn-link danger" data-dismiss="modal">اغلاق</button>
+													</div>
+                                                    </form>
+												</div>
+											</div>
+										</div>
+									</div>
                         @empty
                         @endforelse
 
@@ -92,6 +141,8 @@
 
 </div>
 <!-- Content wrapper end -->
+
+
 @endsection
 @section('js')
 	<!-- Data Tables -->

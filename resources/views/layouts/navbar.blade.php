@@ -98,9 +98,7 @@
 								<li>
 									<a class="dropdown-item" href="{{ url('/' . $page='Admin/wait_request') }}">  الطلبات المعلقة</a>
 								</li>
-								<li>
-									<a class="dropdown-item" href="{{ url('/' . $page='Admin/refuse_requests') }}">  الطلبات المرفوضة</a>
-								</li>
+
                                 <li>
                                 <a class="dropdown-item" href="{{ url('/' . $page='Admin/maintenance_payments') }}">مدفوعات الصيانة</a>
 								</li>
@@ -250,7 +248,7 @@
 								<a class="dropdown-item" href="{{ url('/' . $page='Owner/statistics') }}">الاحصائيات</a>
                                 @endcan
                                 @can('الاعدادات المستأجر')
-                                <a class="dropdown-item" href="{{ url('/' . $page='Tenant/leases') }}">بيانات العقود</a>
+                                <a class="dropdown-item" href="{{ url('/' . $page='Tenant/leases') }}">بيانات العقد</a>
                                 @endcan
                                 <a class="dropdown-item" href="{{ url('/' . $page='profile') }}">الملف الشخصي</a>
 								</li>

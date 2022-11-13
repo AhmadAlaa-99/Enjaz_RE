@@ -100,7 +100,7 @@
 															<i class="icon-edit"></i>
 														</a>
 
-                                                         <a href="{{route('unit.destroy',$unit->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="rent">
+                                                         <a href="{{route('unit.destroy',$unit->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="delete">
 															<i class="icon-delete"></i>
 														</a>
 													</div>

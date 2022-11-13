@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Models\Maintenance;
 use Carbon\Carbon;
 use App\Models\Lease;
-
+use App\Models\Payments;
 class TenantController extends Controller
 {
 
@@ -20,17 +20,17 @@ class TenantController extends Controller
 
     public function leases()
     {
-        $tenant_id=Tenant::where('user_id',Auth::user()->id)->first();
-        $leases=Lease::where('tenant_id',$tenant_id)->with('tenants','organization','realties','units','financial')
+        $tenant=Tenant::where('user_id',Auth::user()->id)->first();
+        $leases=Lease::where('tenant_id',$tenant->id)->with('tenants','organization','realties','units','financial')
         /*->select('number','type','st_rental_date','end_rental_date')*/->get();
          return view('Tenant.myleases',compact('leases'));
     }
 
-    public function tn_lease_details()
+    public function tn_lease_details($id)
     {
-        $tenant_id=Tenant::where('user_id',Auth::user()->id)->first();
-        $lease=Lease::where('tenant_id',$tenant_id)->with('organization','units','realties','financial')->where('id',$id)->first();
-        $tenant=Tenant::where('id',$tenant_id)->with('user')->first();
+        $tenant=Tenant::where('user_id',Auth::user()->id)->first();
+        $lease=Lease::where('tenant_id',$tenant->id)->with('organization','units','realties','financial')->where('id',$id)->first();
+        $tenant=Tenant::where('id',$tenant->id)->with('user')->first();
         $payments=Payments::where('lease_id',$lease->id)->get();
         $broker=User::first();
         return view('Tenant.leases_details',compact('lease','tenant','payments','broker'));
@@ -56,12 +56,12 @@ class TenantController extends Controller
             'desc'=>$request->desc,
             'tenant_id'=>$tenant->id,
             'unit_id'=>$tenant->units->id,
-            'real_id'=>$real->id,
+
             //'notes'=>$request->notes,
-            //'status'=>$request->status, default(0)
+            //'status'=> default(progress)
             //'cost'=>$request->cost,
             'request_date'=>Carbon::now(),
-           // 'response_date'=>$request->response_date,
+           'response_date'=>Carbon::now(),
         ]);
         //send notify to OwnerMail
         //$owner_id=Reality::where('id',$real_id)->pluck('owner_id');
@@ -72,8 +72,8 @@ class TenantController extends Controller
 
     public function maints_requests()
     {
-        $tenant_id=Tenant::where('user_id',Auth::user()->id)->first();
-        $maintenances=Maintenance::where('tenant_id',$tenant_id)->get();
+        $tenant=Tenant::where('user_id',Auth::user()->id)->first();
+        $maintenances=Maintenance::where('tenant_id',$tenant->id)->get();
         return view('Tenant.maints_requests',compact('maintenances'));
     }
 

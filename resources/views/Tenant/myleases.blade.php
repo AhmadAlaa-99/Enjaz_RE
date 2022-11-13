@@ -45,7 +45,7 @@
 
 
         <div class="table-container">
-            <div class="t-header"> العقود الجارية</div>
+            <div class="t-header"> بيانات العقد</div>
             <div class="table-responsive">
                 <table id="copy-print-csv" class="table custom-table">
                     <thead>
@@ -86,9 +86,9 @@
                           <td>{{$lease->type}}</td>
                           <td>{{$lease->st_rental_date}}</td>
                           <td>{{$lease->end_rental_date}}</td>
-                          <td>{{$lease->financial->total}}</td>
+                          <td>{{$lease->financial->Total}}</td>
                           <td><span class="badge badge-success"><a href="{{route('tn_lease.details',$lease->id) }}">معاينة</a></td>
-                          <td>{{$lease->status}}</td>
+                          <td><span class="badge badge-danger">{{$lease->status}}</td>
                         </tr>
                         @empty
                         @endforelse
