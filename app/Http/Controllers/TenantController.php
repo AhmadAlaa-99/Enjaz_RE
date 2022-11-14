@@ -22,7 +22,7 @@ class TenantController extends Controller
     {
         $tenant=Tenant::where('user_id',Auth::user()->id)->first();
         $leases=Lease::where('tenant_id',$tenant->id)->with('tenants','organization','realties','units','financial')
-        /*->select('number','type','st_rental_date','end_rental_date')*/->get();
+        /*->select('number','type','st_rental_date','end_rental_date')*/->latest()->paginate(5);
          return view('Tenant.myleases',compact('leases'));
     }
 
@@ -31,7 +31,7 @@ class TenantController extends Controller
         $tenant=Tenant::where('user_id',Auth::user()->id)->first();
         $lease=Lease::where('tenant_id',$tenant->id)->with('organization','units','realties','financial')->where('id',$id)->first();
         $tenant=Tenant::where('id',$tenant->id)->with('user')->first();
-        $payments=Payments::where('lease_id',$lease->id)->get();
+        $payments=Payments::where('lease_id',$lease->id)->latest()->paginate(5);
         $broker=User::first();
         return view('Tenant.leases_details',compact('lease','tenant','payments','broker'));
     }
@@ -73,7 +73,7 @@ class TenantController extends Controller
     public function maints_requests()
     {
         $tenant=Tenant::where('user_id',Auth::user()->id)->first();
-        $maintenances=Maintenance::where('tenant_id',$tenant->id)->get();
+        $maintenances=Maintenance::where('tenant_id',$tenant->id)->latest()->paginate(5);
         return view('Tenant.maints_requests',compact('maintenances'));
     }
 

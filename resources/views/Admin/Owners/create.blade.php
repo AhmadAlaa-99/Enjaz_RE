@@ -18,19 +18,8 @@
 
     <ul class="app-actions">
         <li>
-            <a href="#" name="reportrange">
-                <span class="range-text"></span>
-                <i class="icon-chevron-down"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                <i class="icon-print"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download CSV">
-                <i class="icon-cloud_download"></i>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
+                <span id="clock"></span>
             </a>
         </li>
     </ul>
@@ -78,10 +67,17 @@
                             <label for="eMail">رقم الجوال</label>
                             <input type="text" class="form-control" name="phone" placeholder="phone"required>
                         </div>
-                        <div class="form-group">
-                            <label for="phone">الجنسية</label>
-                            <input type="text" class="form-control" name="nationality" placeholder="nationality"required>
-                        </div>
+                         <div class="form-group">
+                                <label for="inputName" class="control-label">الجنسية</label>
+                                <select name="nationalitie_id" class="form-control SlectBox" onclick="console.log($(this).val())"
+                                    onchange="console.log('change is firing')"required>
+                                    <!--placeholder-->
+                                    <option value="" selected disabled>حدد الجنسية</option>
+                                    @foreach ($nationals as $national)
+                                        <option value="{{$national->id }}"> {{ $national->Name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">

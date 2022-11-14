@@ -49,12 +49,14 @@ Route::get('/', function () {
     return view('auth.login');
 });
  Auth::routes(['register' => false]);
+   Route::get('/downFile/{id}',[AdminLeasesController::class, 'downFile'])->name('down.file');
+
 
 //Admin
 
 Route::group([
     'prefix'=>'Admin',
-    //'middleware'=>'auth',
+    'middleware'=>'auth',
   ],function()
 
   {
@@ -86,6 +88,7 @@ Route::group([
      Route::get('/effictive',[AdminLeasesController::class,'effictive'])->name('effictive');;
      Route::get('/finished',[AdminLeasesController::class,'finished'])->name('finished');;
      Route::get('/lease_details/{id}',[AdminLeasesController::class,'details'])->name('lease.details');
+          Route::get('/lease_un.details/{id}',[AdminLeasesController::class,'lease_un_details'])->name('lease_un.details');
 
 
      Route::post('/payments_edit/{id}',[AdminLeasesController::class,'payments_edit'])->name('payment.edit');
@@ -141,7 +144,7 @@ Route::group([
 
   Route::group([
     'prefix'=>'Tenant',
-   // 'middleware'=>'auth|privateAdmin',
+   'middleware'=>'auth|privateAdmin',
   ],function()
   {
 
@@ -156,7 +159,7 @@ Route::group([
 
   Route::group([
     'prefix'=>'Owner',
-   // 'middleware'=>'auth|privateAdmin',
+   'middleware'=>'auth|privateAdmin',
   ],function()
   {
     Route::get('/actived_tenants',[OwnerController::class,'actived_tenants']);

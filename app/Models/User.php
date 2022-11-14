@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Broker;
 use App\Models\organization;
+use App\Models\Nationalitie;
 
 
 class User extends Authenticatable
@@ -21,6 +22,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+      public function Nationality()
+    {
+        return $this->belongsTo(Nationalitie::class, 'nationalitie_id');
+    }
     public function organization()
     {
         return $this->hasOne(organization::class,'email','email');

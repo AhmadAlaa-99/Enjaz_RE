@@ -18,19 +18,8 @@
 
     <ul class="app-actions">
         <li>
-            <a href="#" id="reportrange">
-                <span class="range-text"></span>
-                <i class="icon-chevron-down"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                <i class="icon-print"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download CSV">
-                <i class="icon-cloud_download"></i>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
+                <span id="clock"></span>
             </a>
         </li>
     </ul>
@@ -63,9 +52,8 @@
                           <th>نوع التكييف </th>
                           <th>رقم عداد المياه  </th>
                           <th>رقم عداد الكهرباء </th>
-                          <th> الحالة</th>
-                          <th>تاريخ بداية العقد </th>
-                          <th> تاريخ نهاية العقد</th>
+                         <th>  تفاصيل العقد </th>
+
 
                         </tr>
                     </thead>
@@ -91,13 +79,15 @@
                           <td>{{$unit->condition_type}}</td>
                           <td>{{$unit->water_number}}</td>
                           <td><a href=""> <span class="badge badge-danger">{{$unit->Elecrtricity_number}}</a></td>
-                          <td>{{$unit->status}}</td>
-                          <td>{{$unit->leases->st_rental_date}}</td>
-                          <td>{{$unit->leases->end_rental_date}}</td>
-                         
+                          <a class="btn btn-secondary" href="{{route('lease_un.details',$unit->id) }}" role="button">تفاصيل العقد</a>
+
+
                         </tr>
                         @empty
                         @endforelse
+								<div class="d-flex justify-content-center">
+			                         {!!$units->links()!!}
+                        </div>
                     </tbody>
             </table>
             </div>

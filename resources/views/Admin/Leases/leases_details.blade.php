@@ -150,7 +150,7 @@
                                                     <td>{{$lease->organization->user->ID_num}}</td>
                                                     <td>{{$lease->organization->user->ID_type}}</td>
                                                     <td>{{$lease->organization->user->phone}}</td>
-                                                    <td>{{$lease->organization->user->nationality}}</td>
+                                                    <td>{{$lease->organization->user->Nationality->Name}}</td>
                                                     <td>{{$lease->organization->user->telephone}}</td>
                                                     <td>{{$lease->organization->email}}</td>
                                                     <td>{{$lease->organization->record_date}}</td>
@@ -188,7 +188,7 @@
                                                     <td>{{$tenant->user->ID_num}}</td>
                                                     <td>{{$tenant->user->ID_type}}</td>
                                                     <td>{{$tenant->user->phone}}</td>
-                                                    <td>{{$tenant->user->nationality}}</td>
+                                                    <td>{{$tenant->user->Nationality->Name}}</td>
                                                     <td>{{$tenant->user->telephone}}</td>
                                                     <td>{{$tenant->user->email}}</td>
 
@@ -372,6 +372,9 @@
 												</tr>
                                                 @empty
                         @endforelse
+								<div class="d-flex justify-content-center">
+			                         {!!$payments->links()!!}
+                        </div>
 
 											</tbody>
             </table>

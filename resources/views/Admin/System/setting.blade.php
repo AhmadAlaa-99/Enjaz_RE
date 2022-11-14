@@ -17,20 +17,9 @@
     </ol>
 
     <ul class="app-actions">
-        <li>
-            <a href="#" value="reportrange">
-                <span class="range-text"></span>
-                <i class="icon-chevron-down"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                <i class="icon-print"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download CSV">
-                <i class="icon-cloud_download"></i>
+       <li>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
+                <span id="clock"></span>
             </a>
         </li>
     </ul>
@@ -92,7 +81,7 @@
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
                             <label for="addRess">nationality</label>
-                            <input type="text" class="form-control" name="nationality" value="{{$user->nationality}}" placeholder="Enter Address">
+                            <input type="text" class="form-control" name="nationality" value="{{$user->Nationality->Name}}" placeholder="Enter Address">
                         </div>
                         <div class="form-group">
                             <label for="ciTy">ID_type</label>

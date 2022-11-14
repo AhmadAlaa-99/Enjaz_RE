@@ -13,7 +13,7 @@ class OwnersController extends Controller
     }
     public function show($id)
     {
-        $owner = organization::with('org_envoice')->where('id',$id)->get();
+        $owner = organization::with('org_envoice')->where('id',$id)->latest()->paginate(5);
         return view('Admin.Owners.show',compact('owner'));
     }
      public function create()
@@ -32,7 +32,7 @@ class OwnersController extends Controller
                     'issuer'=> $request->issuer,
                     'company_name'=> $request->company_name,
                     'unified_number'=> $request->unified_number,
-                    'record_date'=> $request->record_date, 
+                    'record_date'=> $request->record_date,
                 ]);
                 org_envoies::create([
                     'organization_id'=>$request->id,
@@ -55,13 +55,13 @@ class OwnersController extends Controller
         catch (\Exception $e){
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-         
+
      }
      public function edit($id)
      {
-        $owner = organization::with('org_envoice')->where('id',$id)->get();
+        $owner = organization::with('org_envoice')->where('id',$id)->latest()->paginate(5);
         return view('Admin.Owners.show',compact('owner'));
-        
+
      }
      public function update()
      {
@@ -72,7 +72,7 @@ class OwnersController extends Controller
                     'issuer'=> $request->issuer,
                     'company_name'=> $request->company_name,
                     'unified_number'=> $request->unified_number,
-                    'record_date'=> $request->record_date, 
+                    'record_date'=> $request->record_date,
         ]);
         $envoies=org_envoies::where('organization_id',$id)->update([
             'organization_id'=>$request->id,

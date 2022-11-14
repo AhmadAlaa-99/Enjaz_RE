@@ -62,19 +62,19 @@ response_date*/
     public function accept_requests() //1
     {
 
-        $maints=Maintenance::where('status','completed')->with('units')->get();
+        $maints=Maintenance::where('status','completed')->with('units')->latest()->paginate(5);
         return view('Admin.MainTenance.accepted',compact('maints'));
     }
     public function refuse_requests() //2
     {
 
-       $maints=Maintenance::where('status','2')->with('units')->get();
+       $maints=Maintenance::where('status','2')->with('units')->latest()->paginate(5);
 
         return view('Admin.MainTenance.refuse',compact('maints'));
     }
     public function wait_request() //0
     {
-         $maints=Maintenance::where('status','progress')->with('units')->get();
+         $maints=Maintenance::where('status','progress')->with('units')->latest()->paginate(5);
         return view('Admin.MainTenance.wait',compact('maints'));
     }
     public function maint_response(Request $request,$id)
@@ -104,7 +104,7 @@ response_date*/
 
     public function TenantRequest() //Tenant
     {
-        $maintenance=Maintenance::where('tenant_id',Auth::user()->id)->get();
+        $maintenance=Maintenance::where('tenant_id',Auth::user()->id)->latest()->paginate(5);
         return view('Admin.Tenant.MainTenance.index,',compact('maintenance'));
 
     }
@@ -113,7 +113,7 @@ response_date*/
          $user=Auth::user()->id;
          $owner=owners::where('email',$user->email)-first();
          $real=Realty::where('envoy_id',$owner->id)->first();
-         $maintenances=Maintenance::where('real_id',$real->id)->get();
+         $maintenances=Maintenance::where('real_id',$real->id)->latest()->paginate(5);
          return view('Admin.Tenant.MainTenance.index,',compact('maintenances'));
 
 

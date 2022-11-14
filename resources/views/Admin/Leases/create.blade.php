@@ -21,20 +21,9 @@
         <li class="breadcrumb-item active">اضافة</li>
     </ol>
     <ul class="app-actions">
-        <li>
-            <a href="#" name="reportrange">
-                <span class="range-text"></span>
-                <i class="icon-chevron-down"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                <i class="icon-print"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download CSV">
-                <i class="icon-cloud_download"></i>
+      <li>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
+                <span id="clock"></span>
             </a>
         </li>
     </ul>
@@ -50,19 +39,19 @@
       <div class="grid">
         <div class="col-1-4">
           <div class="controls">
-           <input type="text" id="reco_number" class="floatLabel" name="reco_number">
+           <input type="text" id="reco_number" class="floatLabel" name="reco_number"required>
            <label for="street">رقم سجل العقد - ID</label>
           </div>
         </div>
         <div class="col-1-4">
           <div class="controls">
-           <input type="text" id="place" class="floatLabel" name="place">
+           <input type="text" id="place" class="floatLabel" name="place"required>
            <label for="eMail"> مكان ابرام العقد</label>
           </div>
         </div>
         <div class="col-1-4">
           <div class="controls">
-           <input type="text" id="payment_channels" class="floatLabel" name="payment_channels">
+           <input type="text" id="payment_channels" class="floatLabel" name="payment_channels"required>
            <label for="eMail"> طريقة دفع رسوم العقد</label>
           </div>
         </div>
@@ -71,7 +60,6 @@
            <select name="type_le"id="type_le"class="floatLabel" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
-                                    <option value="" selected disabled>حدد النوع</option>
                                         <option value="new" >جديد</option>
                                         <option value="renew" >مجدد</option>
 
@@ -84,7 +72,7 @@
       <div class="grid">
       <div class="col-1-3">
           <div class="controls">
-            <input type="date" id="le_date" class="floatLabel" name="le_date">
+            <input type="date" id="le_date" class="floatLabel" name="le_date"required>
             <label for="phone">تاريخ ابرام العقد</label>
           </div>
         </div>
@@ -92,14 +80,14 @@
         <div class="col-1-3">
 
           <div class="controls">
-            <input type="date" id="st_rental_date" class="floatLabel" name="st_rental_date">
+            <input type="date" id="st_rental_date" class="floatLabel" name="st_rental_date"required>
             <label for="eMail">تاريخ بداية مدة الايجار</label>
           </div>
         </div>
 
         <div class="col-1-3">
           <div class="controls">
-            <input type="date" id="end_rental_date" class="floatLabel" name="end_rental_date">
+            <input type="date" id="end_rental_date" class="floatLabel" name="end_rental_date"required>
             <label for="phone">تاريخ نهاية مدة الايجار</label>
           </div>
         </div>
@@ -153,7 +141,7 @@
 
       <div class="col-1-2">
           <div class="controls">
-           <input type="text" id="nationality" name="nationality"value="{{$owner->nationality}}" class="floatLabel"readonly>
+           <input type="text" id="nationality" name="nationality"value="{{$owner->Nationality->Name}}" class="floatLabel"readonly>
            <label for="eMail">الجنسية</label>
           </div>
         </div>
@@ -193,10 +181,17 @@
           </div>
         </div>
         <div class="col-1-3">
-          <div class="controls">
-           <input type="text" name="t_nationality" class="floatLabel"required>
-           <label for="eMail">الجنسية</label>
-          </div>
+           <div class="controls">
+                                <select name="nationalitie_id" class="floatLabel" onclick="console.log($(this).val())"
+                                    onchange="console.log('change is firing')"required>
+                                    <!--placeholder-->
+                                    @foreach ($nationals as $national)
+                                        <option value="{{$national->id }}"> {{ $national->Name }}</option>
+                                    @endforeach
+                                </select>
+                                           <label for="street">حدد الجنسية</label>
+
+                            </div>
         </div>
         <div class="col-1-3">
           <div class="controls">
@@ -400,25 +395,25 @@
       <div class="grid">
         <div class="col-1-4">
           <div class="controls">
-           <input type="date" name="st_rental_date" class="floatLabel" >
+           <input type="date" name="st_rental_date" class="floatLabel"required>
            <label for="street">تاريخ بداية العقد </label>
           </div>
         </div>
         <div class="col-1-4">
           <div class="controls">
-           <input type="date" name="end_rental_date" class="floatLabel">
+           <input type="date" name="end_rental_date" class="floatLabel"required>
            <label for="eMail"> تاريخ نهاية العقد </label>
           </div>
         </div>
         <div class="col-1-4">
           <div class="controls">
-           <input type="text" name="annual_rent" class="floatLabel" >
+           <input type="text" name="annual_rent" class="floatLabel"required>
            <label for="street"> القيمة السنوية للايجار </label>
           </div>
         </div>
         <div class="col-1-4">
           <div class="controls">
-           <input type="text" name="Total" class="floatLabel">
+           <input type="text" name="Total" class="floatLabel"required>
            <label for="eMail">اجمالي قيمة العقد</label>
           </div>
         </div>
@@ -428,12 +423,11 @@
       </div>
       <div class="grid">
 
-      <div class="col-1-4">
+      <div class="col-1-3">
           <div class="controls">
            <select name="payment_cycle"id="payment_cycle"class="floatLabel" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
-                                    <option value="" selected disabled>دورة سداد الايجار</option>
                                     <option value="quarterly" >ربع سنوي</option>
                                         <option value="midterm" >نصف سنوي</option>
                                         <option value="monthly" >شهري</option>
@@ -443,22 +437,16 @@
            <label for="fruit">دورة سداد الايجارٍ</label>
           </div>
         </div>
-        <div class="col-1-4">
+        <div class="col-1-3">
           <div class="controls">
-           <input type="text" name="last_rent_payment" class="floatLabel">
+           <input type="text" name="last_rent_payment" class="floatLabel"required>
            <label for="eMail">دفعة الايجار الأخيرة</label>
           </div>
         </div>
-        <div class="col-1-4">
+        <div class="col-1-3">
           <div class="controls">
-           <input type="text" name="recurring_rent_payment" class="floatLabel">
+           <input type="text" name="recurring_rent_payment" class="floatLabel"required>
            <label for="eMail">  دفعة الايجار الدورية</label>
-          </div>
-        </div>
-        <div class="col-1-4">
-          <div class="controls">
-           <input type="text"  name="num_rental_payments" class="floatLabel">
-           <label for="eMail">عدد دفعات الايجار</label>
           </div>
         </div>
       </div>
@@ -531,25 +519,31 @@
 									<div class="card-sub-title">الالتزمات المتفق عليها من قبل الطرفين بموجب العقد</div>
 								</div>
 
-                                       <textarea name="desc"cols="30"rows="10"></textarea>
+
+                                       <textarea name="desc"cols="30"rows="10"required></textarea>
 									<!--<div class="summernote"></div>-->
 
 							</div>
 						</div>
 					</div>
-                    <!--
-         <div class="grid">
-        <p class="info-text">الالتزمات المتفق عليها من قبل الطرفين بموجب العقد</p>
-        <br>
-        <div class="controls">
-          <textarea name="desc" class="floatLabel" id="desc"></textarea>
-          <label for="comments">Commitments</label>
-          </div>
-      </div>
--->
 
     </div>
+  <!-- التزامات الأطراف -->
+    <div class="form-group">
+         <h2 class="heading"> مرفقات العقد</h2>
+         <div class="row gutters">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
+<div class="mb-3">
+  <input class="form-control" name="docFile"accept=".pdf,.jpg, .png, image/jpeg, image/png"type="file" id="formFileDisabled"required>
+</div>
+
+
+
+						</div>
+					</div>
+
+    </div>
     <div class="form-group" >
     <button type="submit" value="Submit" class="col-1-4">حفظ البيانات</button>
     </div>

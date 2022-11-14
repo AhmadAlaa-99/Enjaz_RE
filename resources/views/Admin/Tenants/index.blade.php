@@ -17,20 +17,9 @@
     </ol>
 
     <ul class="app-actions">
-        <li>
-            <a href="#" id="reportrange">
-                <span class="range-text"></span>
-                <i class="icon-chevron-down"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                <i class="icon-print"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download CSV">
-                <i class="icon-cloud_download"></i>
+         <li>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
+                <span id="clock"></span>
             </a>
         </li>
     </ul>
@@ -69,16 +58,19 @@
                         <tr>
                            <td>{{$i}}</td>
                           <td><span class="badge badge-danger">{{$tenant->user->name}}</td>
-                          <td>{{$tenant->user->nationality}}</td>
+                          <td><span class="badge badge-success">{{$tenant->user->Nationality->Name}}</td>
                           <td>{{$tenant->user->ID_type}}</td>
                           <td>{{$tenant->user->ID_num}}</td>
                           <td>{{$tenant->user->phone}}</td>
                           <td>{{$tenant->user->email}}</td>
-                          <td><span class="badge badge-success"> {{$tenant->units->number}} </a></td>
-                     
+                          <td><span class="badge badge-warning"> {{$tenant->units->number}} </a></td>
+
                         </tr>
                         @empty
                         @endforelse
+								<div class="d-flex justify-content-center">
+			                         {!!$tenants->links()!!}
+                        </div>
 
                     </tbody>
             </table>

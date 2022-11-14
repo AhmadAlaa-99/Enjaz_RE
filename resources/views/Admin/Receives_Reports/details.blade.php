@@ -48,8 +48,7 @@
                           <td>{{$receive->notes}}</td>
 
                         </tr>
-                        @empty
-                        @endforelse
+                      
                     </tbody>
             </table>
             </div>

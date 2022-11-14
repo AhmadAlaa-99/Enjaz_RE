@@ -20,7 +20,7 @@ public function run()
 
     $user = User::create([
         'name'=>'Ahmad Alaa',
-        'nationality'=>'syrian',
+        'nationalitie_id'=>'1',
         'ID_type'=>'gpt432',
         'ID_num'=>'14040024',
         'phone'=>'0937607234',
@@ -43,7 +43,7 @@ $role->syncPermissions(
  $user->assignRole([$role->id]);
  $user= User::create([
     'name'=>'fdsf',
-    'nationality'=>'fdsf',
+    'nationalitie_id'=>'1',
     'ID_type'=>'ds',
     'ID_num'=>'fsd',
     'phone'=>'323',

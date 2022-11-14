@@ -7,7 +7,7 @@ use App\Models\Maintenance;
 
 class MainTenancesController extends Controller
 {
-    
+
 
     public function requestMe()
     {
@@ -26,7 +26,7 @@ class MainTenancesController extends Controller
             //'notes'=>$request->notes,
             //'status'=>$request->status, default(0)
             //'cost'=>$request->cost,
-            
+
             'request_date'=>Carbon::now(),
            // 'response_date'=>$request->response_date,
         ]);
@@ -54,30 +54,30 @@ class MainTenancesController extends Controller
             'response_date'=>Carbon::now(),
         ]);
         //send notify TenantMail
-             
+
     }
     public function index() //all
     {
-        $maintenance=Maintenance::all()->get();
+        $maintenance=Maintenance::all()->latest()->paginate(5);
         return view('Tenant.MainTenance.index,',compact('maintenance'));
     }
 
     public function TenantRequest() //Tenant
-    {   
-        $maintenance=Maintenance::where('tenant_id',Auth::user()->id)->get();
+    {
+        $maintenance=Maintenance::where('tenant_id',Auth::user()->id)->latest()->paginate(5);
         return view('Tenant.MainTenance.index,',compact('maintenance'));
-             
+
     }
-    public function ownerRequest()  //Owner 
+    public function ownerRequest()  //Owner
     {        //get id real_state
          $user=Auth::user()->id;
          $owner=owners::where('email',$user->email)-first();
          $real=Realty::where('envoy_id',$owner->id)->first();
-         $maintenances=Maintenance::where('real_id',$real->id)->get();
+         $maintenances=Maintenance::where('real_id',$real->id)->latest()->paginate(5);
          return view('Tenant.MainTenance.index,',compact('maintenances'));
 
 
 
-          
+
     }
 }

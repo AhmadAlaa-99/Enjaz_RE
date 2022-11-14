@@ -17,20 +17,9 @@
     </ol>
 
     <ul class="app-actions">
-        <li>
-            <a href="#" id="reportrange">
-                <span class="range-text"></span>
-                <i class="icon-chevron-down"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                <i class="icon-print"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download CSV">
-                <i class="icon-cloud_download"></i>
+       <li>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
+                <span id="clock"></span>
             </a>
         </li>
     </ul>
@@ -72,22 +61,23 @@
                           <tr>
                           <td>{{$i}}</td>
                           <td><span class="badge badge-danger">{{$owner->name}}</td>
-                          <td>{{$owner->name}}</td>
+                          <td>{{$owner->organization->company_name}}</td>
                           <td>{{$owner->ID_num}}</td>
                           <td>{{$owner->ID_type}}</td>
                           <td>{{$owner->phone}}</td>
                           <td>{{$owner->telephone}}</td>
                           <td><span class="badge badge-warning">{{$owner->email}}</td>
-                          <td><span class="badge badge-success">{{$owner->nationality}}</td>
-                          <td>{{$owner->nationality}}</td>
+                          <td><span class="badge badge-success">{{$owner->Nationality->Name}}</td>
+                          <td>{{$owner->organization->record_date}}</td>
+
                           <td>
 									<div class="td-actions">
-										<a href="{{route('owners.edit',$owner->id)}}" class="icon red" data-toggle="tooltip" data-placement="top" title="edit Row">
+										<a href="{{route('owners.edit',$owner->id)}}" class="icon red" data-toggle="tooltip" data-placement="top" title="edit">
 															<i class="icon-edit"></i>
 														</a>
 
 
-														<a href="{{route('owner.destroy',$owner->id)}}" class="icon blue" data-toggle="tooltip" data-placement="top" title="Delete Row">
+														<a href="{{route('owner.destroy',$owner->id)}}" class="icon blue" data-toggle="tooltip" data-placement="top" title="Delete">
 															<i class="icon-delete"></i>
 														</a>
 													</div>
@@ -95,8 +85,12 @@
                         </tr>
                         @empty
                         @endforelse
+
                     </tbody>
             </table>
+            	<div class="d-flex justify-content-center">
+			                         {!!$owners->links()!!}
+                        </div>
             </div>
         </div>
 

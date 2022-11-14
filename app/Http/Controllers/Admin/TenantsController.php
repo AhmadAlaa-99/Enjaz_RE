@@ -9,7 +9,7 @@ class TenantsController extends Controller
 {
     public function index()
     {
-         $tenants=Tenant::where('status','actived')->with('user','units')->get();
+         $tenants=Tenant::where('status','actived')->with('user','units')->latest()->paginate(5);
          return view('Admin.Tenants.index',compact('tenants'));
     }
     public function payments()
@@ -18,7 +18,7 @@ class TenantsController extends Controller
     }
     public function archive()
     {
-        $tenants=Tenant::where('status','archived')->with('user','units')->get();
+        $tenants=Tenant::where('status','archived')->with('user','units')->latest()->paginate(5);
         return view('Admin.Archives.tenants',compact('tenants'));
     }
 }

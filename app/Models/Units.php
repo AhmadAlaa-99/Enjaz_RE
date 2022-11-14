@@ -22,8 +22,6 @@ class Units extends Model
     {
          return $this->hasMany(App\Models\Maintenance::class,'unit_id','id');
     }
-
-
     public function leases()
     {
 

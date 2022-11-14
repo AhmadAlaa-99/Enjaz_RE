@@ -24,8 +24,9 @@ class CreateLeasesTable extends Migration
             $table->enum('type',['new','renew']);
             $table->enum('status',['expired','active'])->default('active');
             $table->string('place');
+            $table->string('docFile');
             $table->date('end_rental_date');
-            
+
             $table->foreignId('org_id')->constrained('organization')->cascadeOnDelete(); //many to one
             $table->foreignId('financial_id')->constrained('financial_statements')->cascadeOnDelete();  //one to one
             $table->foreignId('tenant_id')->constrained('tenants')->cascadeOnDelete(); //many to one

@@ -16,21 +16,10 @@
         <li class="breadcrumb-item active">  العقود المنتهية </li>
     </ol>
 
-    <ul class="app-actions">
-        <li>
-            <a href="#" id="reportrange">
-                <span class="range-text"></span>
-                <i class="icon-chevron-down"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                <i class="icon-print"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download CSV">
-                <i class="icon-cloud_download"></i>
+     <ul class="app-actions">
+      <li>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
+                <span id="clock"></span>
             </a>
         </li>
     </ul>
@@ -62,8 +51,6 @@
                           <th> الكلفة الاجمالية للعقد</th>
                           <th> دورة الدفع</th>
                           <th>عدد دورات الدفع</th>
-                          <th> سداد الدفعات </th>
-                          <th>تفاصيل العقد </th>
                           <th> العمليات </th>
 
                         </tr>
@@ -93,18 +80,24 @@
                           <td>{{$lease->financial->Total}}</td>
                           <td>{{$lease->financial->payment_cycle}}</td>
                           <td>{{$lease->financial->num_rental_payments}}</td>
-                          <td><span class="badge badge-success"><a href="{{route('payments.details',$lease->id)}}">معاينة</a></td>
-                          <td><span class="badge badge-success"><a href="{{route('lease.details',$lease->id) }}">معاينة</a></td>
-                          <td>
-									<div class="td-actions">
-										<a href="{{route('leases.destroy',$lease->id)}}" class="icon red" data-toggle="tooltip" data-placement="top" title="delete ">
-															<i class="icon-delete"></i>
-														</a>
-													</div>
-									          </td>
+                        <td>
+                                                    <div class="dropdown show">
+                                                        <a class="btn btn-success btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            العمليات
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            <a class="dropdown-item" href="{{route('payments.details',$lease->id)}}"><i style="color:green" class="icon-details"></i>&nbsp;سداد الدفعات</a>
+                                                            <a class="dropdown-item" href="{{route('lease.details',$lease->id)}}"><i style="color:green" class="icon-details"></i>&nbsp;تفاصيل العقد</a>
+                                                            <a class="dropdown-item" href="{{route('down.file',$lease->id)}}"><i style="color:green" class="icon-download"></i>&nbsp;  تحميل المرفقات&nbsp;</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
                         </tr>
                         @empty
                         @endforelse
+								<div class="d-flex justify-content-center">
+			                         {!!$leases->links()!!}
+                        </div>
                     </tbody>
             </table>
             </div>

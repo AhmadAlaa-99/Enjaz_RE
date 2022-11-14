@@ -14,14 +14,14 @@ class TenantsController extends Controller
     {
         $user=User::auth();
         $owner=organization::where('email',$user->email);
-        $tenants=Tenant::where('status','actived')->with('user','leases','units')->get();
+        $tenants=Tenant::where('status','actived')->with('user','leases','units')->latest()->paginate(5);
         return view('Owner.Tenants.index',compact('tenants'));
     }
     public function archive_tenants()
     {
         $user=User::auth();
         $owner=organization::where('email',$user->email);
-        $tenants=Tenant::where('status','archived')->with('user','leases','units')->get();
+        $tenants=Tenant::where('status','archived')->with('user','leases','units')->latest()->paginate(5);
         return view('Owner.Tenants.archived',compact('tenants'));
     }
 

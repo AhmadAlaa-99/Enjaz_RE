@@ -59,7 +59,7 @@ class testSeeders extends Seeder
 
            $user= User::create([
                'name'=>'ali',
-               'nationality'=>'syrian',
+               'nationalitie_id'=>'2',
                'ID_type'=>'wrw',
                'ID_num'=>'4433',
                'phone'=>'04324334',
@@ -110,6 +110,7 @@ class testSeeders extends Seeder
                 'financial_id'=>'1',  //one to one
                 'tenant_id'=>'1', //many to one
                 'unit_id'=>'1',   //many to one
+                  'docFile'=>'doc-34545.jpg',
             ]);
 
             Payments::create([

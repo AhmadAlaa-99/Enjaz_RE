@@ -3,8 +3,8 @@
 
     <link href="{{URL::asset('assets/vendor/datepicker/css/classic.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/vendor/datepicker/css/classic.date.css')}}" rel="stylesheet">
-    
-       
+
+
 @endsection
 @section('title')
 المهمات
@@ -18,19 +18,8 @@
 
     <ul class="app-actions">
         <li>
-            <a href="#" id="reportrange">
-                <span class="range-text"></span>
-                <i class="icon-chevron-down"></i>	
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                <i class="icon-print"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download CSV">
-                <i class="icon-cloud_download"></i>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
+                <span id="clock"></span>
             </a>
         </li>
     </ul>
@@ -68,7 +57,7 @@
                                     </a>
                                 </div>
                             </div>
-                           										
+
                         </div>
                     </div>
                 </div>
@@ -151,7 +140,7 @@
                                                 <div class="task-name">Create Notification</div>
                                                 <div class="task-desc">Incentivize, incentivize convergence weblogs, schemas sticky plug-and-play. Customized markets, sticky one-to-one exploit.</div>
                                                 <div class="task-types">
-                                                   
+
                                                 </div>
                                             </div>
                                             <ul class="task-actions">
@@ -184,14 +173,14 @@
                                             </ul>
                                         </div>
 
-                                      
 
-                                     
-                                    
 
-                                      
 
-                                    
+
+
+
+
+
                                     </section>
                                 </div>
                             </div>
@@ -210,8 +199,8 @@
 <!-- Content wrapper end -->
 @endsection
 @section('js')
-	
+
     <script src="{{URL::asset('assets/vendor/datepicker/js/picker.js')}}"></script>
     <script src="{{URL::asset('assets/vendor/datepicker/js/picker.date.js')}}"></script>
-    <script src="{{URL::asset('assets/datepicker/js/custom-picker.js')}}"></script>		
+    <script src="{{URL::asset('assets/datepicker/js/custom-picker.js')}}"></script>
 @endsection

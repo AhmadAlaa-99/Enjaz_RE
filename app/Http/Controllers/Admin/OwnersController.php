@@ -7,12 +7,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\organization;
 use App\Models\User;
+use App\Models\Nationalitie;
 
 class OwnersController extends Controller
 {
     public function index()
     {
-        $owners=User::where('role_name','Owner')->with('organization')->get();
+        $owners=User::where('role_name','Owner')->with('organization')->latest()->paginate(2);
         return view('Admin.Owners.index',compact('owners'));
     }
     public function show($id)
@@ -22,7 +23,9 @@ class OwnersController extends Controller
     }
      public function create()
      {
-        return view('Admin.Owners.create');
+
+       $nationals= Nationalitie::all();
+       return view('Admin.Owners.create',compact('nationals'));
 
      }
      public function store(Request $request)
@@ -33,7 +36,8 @@ class OwnersController extends Controller
             $pass='owner'.random_int(1999999999,9999999999);
             $user= User::create([
                 'name'=>$request->name,
-                'nationality'=>$request->nationality,
+
+                'nationalitie_id'=>$request->nationalitie_id,
                 'ID_type'=>$request->ID_type,
                 'ID_num'=>$request->ID_num,
                 'phone'=>$request->phone,
@@ -65,8 +69,10 @@ class OwnersController extends Controller
      }
      public function edit($id)
      {
+        $nationals= Nationalitie::all();
+
         $owner=User::where('id',$id)->with('organization')->first();
-        return view('Admin.Owners.edit',compact('owner'));
+        return view('Admin.Owners.edit',compact('owner','nationals'));
      }
      public function update(Request $request,$id)
      {
@@ -74,7 +80,7 @@ class OwnersController extends Controller
      //   $user = User::findorFail($id);
         $user->update([
             'name'=>$request->name,
-            'nationality'=>$request->nationality,
+            'nationalitie_id'=>$request->nationalitie_id,
             'ID_type'=>$request->ID_type,
             'ID_num'=>$request->ID_num,
             'phone'=>$request->phone,

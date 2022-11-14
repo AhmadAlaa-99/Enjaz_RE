@@ -18,19 +18,8 @@
 
     <ul class="app-actions">
         <li>
-            <a href="#" id="reportrange">
-                <span class="range-text"></span>
-                <i class="icon-chevron-down"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                <i class="icon-print"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download CSV">
-                <i class="icon-cloud_download"></i>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
+                <span id="clock"></span>
             </a>
         </li>
     </ul>
@@ -87,10 +76,13 @@
                           <td><span class="badge badge-success">{{$realty->roles}}</td>
                           <td><span class="badge badge-success">{{$realty->units}}</td>
                           <td><span class="badge badge-success">{{$units_tn}}</td>
-                         
+
                         </tr>
                         @empty
                         @endforelse
+								<div class="d-flex justify-content-center">
+			                         {!!$realties->links()!!}
+                        </div>
                     </tbody>
             </table>
             </div>

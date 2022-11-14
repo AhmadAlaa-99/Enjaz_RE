@@ -22,7 +22,7 @@ class UnitsController extends Controller
     }
     public function show($id)
     {
-        $unit = Units::with('Realties')->where('id',$id)->get();
+        $unit = Units::with('Realties')->where('id',$id)->latest()->paginate(5);
         return view('Admin.Units.show',compact('unit'));
     }
      public function create()
@@ -68,7 +68,7 @@ class UnitsController extends Controller
      }
      public function edit($id)
      {
-        $unit = Units::where('id',$id)->get();
+        $unit = Units::where('id',$id)->latest()->paginate(5);
         return view('Admin.Unit.edit',compact('unit'));
 
      }

@@ -11,7 +11,7 @@ class receive_reports extends Controller
 {
     public function index()
     {
-        $receives=receives::with('unit','lease')->get();
+        $receives=receives::with('unit','lease')->latest()->paginate(5);
 
         return view('Admin.Receives_Reports.index',compact('receives'));
     }

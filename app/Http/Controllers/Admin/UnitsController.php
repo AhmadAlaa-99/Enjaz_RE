@@ -19,7 +19,7 @@ class UnitsController extends Controller
     public function getunits(Request $request)
     {
         $unit_le=Lease_units::where('lease_id',$request->lease_id)->pluck('unit_id');
-        $units=Units::where('id',$unit_le)->get();
+        $units=Units::where('id',$unit_le)->latest()->paginate(5);
         if (count($units) > 0) {
             return response()->json($units);
         }
@@ -27,7 +27,7 @@ class UnitsController extends Controller
     public function realty_units_show($id)
     {
 
-        $units=Units::where('realty_id',$id)->get();
+        $units=Units::where('realty_id',$id)->latest()->paginate(5);
         return view('Admin.Units.index',compact('units'));
 
     }
@@ -71,7 +71,7 @@ class UnitsController extends Controller
          //lease - unit : many to many
          // unit - tenant : many to many
          // reality - unit :  one to many
-         $units=Units::where('status','rented')->with('leases','tenants','realties')->get();
+         $units=Units::where('status','rented')->with('leases','tenants')->latest()->paginate(5);
         return view('Admin.Units.rented_units',compact('units'));
     }
     public function empty_units()
@@ -79,12 +79,12 @@ class UnitsController extends Controller
          //lease - unit : many to many
          // unit - tenant : many to many
          // reality - unit :  one to many
-         $units=Units::with('realties')->get();
+         $units=Units::where('status','empty')->with('realties')->latest()->paginate(5);
         return view('Admin.Units.empty_units',compact('units'));
     }
     public function show($id)
     {
-        $unit = Units::with('realties')->where('id',$id)->get();
+        $unit = Units::with('realties')->where('id',$id)->latest()->paginate(5);
         return view('Admin.Units.show',compact('unit'));
     }
      public function units_add($id)

@@ -18,12 +18,12 @@ class RealtiesController extends Controller
     public function index()
     {
        // return 'k';
-        $realties = Realty::with('organization')->get();
+        $realties = Realty::with('organization')->latest()->paginate(5);
         if($realties->count()>0)
         {
         foreach($realties as $realty)
         {
-            $units_tn= Units::where(['realty_id'=>$realty->id,'status'=>'rent'])->get();
+            $units_tn= Units::where(['realty_id'=>$realty->id,'status'=>'rent'])->latest()->paginate(5);
 
         }
     }
@@ -41,9 +41,9 @@ class RealtiesController extends Controller
     }
      public function create()
      {
-//        $owners=User::where('role_name','Owner')->with('organization')->get();
+//        $owners=User::where('role_name','Owner')->with('organization')->latest()->paginate(5);
 
-       // $owners=User::where('role_name','Owner')->get();
+       // $owners=User::where('role_name','Owner')->latest()->paginate(5);
         $owners=organization::get();
         return view('Admin.Realties.create')->with([
             'owners'=>$owners,

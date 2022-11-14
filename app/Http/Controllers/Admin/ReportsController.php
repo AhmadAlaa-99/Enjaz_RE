@@ -18,7 +18,7 @@ class ReportsController extends Controller
 
     public function maintenance_payments()
     {
-         $payments=Maintenance::with('units')->get();
+         $payments=Maintenance::with('units')->latest()->paginate(5);
          return view('Admin.Reports.maintenance_payments',compact('payments'));
     }
 
@@ -38,7 +38,7 @@ class ReportsController extends Controller
     public function payments_details($id)
     {
 
-       $payments= Payments::where('lease_id',$id)->get();
+       $payments= Payments::where('lease_id',$id)->latest()->paginate(5);
        return view('Admin.Reports.payments_details',compact('payments'));
 
     }

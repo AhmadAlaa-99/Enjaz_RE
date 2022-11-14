@@ -18,12 +18,12 @@ class LeasesController extends Controller
 
     public function index()
     {
-        $leases=Leases::select()->get();
+        $leases=Leases::select()->latest()->paginate(5);
         return view('Admin.Leases.index',compact('leases'));
     }
     public function show($id)
     {
-        $lease = Leases::with()->get();
+        $lease = Leases::with()->latest()->paginate(5);
         return view('Admin.Leases.show',compact('lease'));
     }
      public function create()

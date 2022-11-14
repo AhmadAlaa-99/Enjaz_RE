@@ -68,7 +68,7 @@ public function show($id)
 $role = Role::find($id);
 $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
 ->where("role_has_permissions.role_id",$id)
-->get();
+->latest()->paginate(5);
 return view('roles.show',compact('role','rolePermissions'));
 }
 /**

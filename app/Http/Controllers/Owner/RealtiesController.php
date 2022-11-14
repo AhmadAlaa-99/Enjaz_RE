@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 
 class RealtiesController extends Controller
 {
-    
+
     public function index()
     {
         return view('Admin.Realties.index');
     }
     public function show($id)
     {
-        $Real = Realty::with('units','org_envoices')->where('id',$id)->get();
+        $Real = Realty::with('units','org_envoices')->where('id',$id)->latest()->paginate(5);
         return view('Admin.Realties.show',compact('owner'));
     }
      public function create()
@@ -33,11 +33,11 @@ class RealtiesController extends Controller
                     'use'=> $request->use,
                     'roles'=> $request->roles,
                     'units'=> $request->units,
-                    'lifts'=> $request->lifts, 
+                    'lifts'=> $request->lifts,
                     'parking'=> $request->parking,
                     'envoy_id'=> $request->envoy_id,
                 ]);
-               
+
             //toastr()->success(trans('messages.success'));
             return redirect()->back();
 
@@ -46,13 +46,13 @@ class RealtiesController extends Controller
         catch (\Exception $e){
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-         
+
      }
      public function edit($id)
      {
-        $Realty = Realty::with('org_envoice')->where('id',$id)->get();
+        $Realty = Realty::with('org_envoice')->where('id',$id)->latest()->paginate(5);
         return view('Admin.Realties.edit',compact('Realty'));
-        
+
      }
      public function update($id)
      {
@@ -63,7 +63,7 @@ class RealtiesController extends Controller
             'use'=> $request->use,
             'roles'=> $request->roles,
             'units'=> $request->units,
-            'lifts'=> $request->lifts, 
+            'lifts'=> $request->lifts,
             'parking'=> $request->parking,
             'envoy_id'=> $request->envoy_id,
         ]);

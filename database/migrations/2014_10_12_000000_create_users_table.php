@@ -16,7 +16,10 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nationality');
+              $table->bigInteger('nationalitie_id')->unsigned();
+            $table->foreign('nationalitie_id')->references('id')->on('nationalities')->onDelete('cascade');
+
+        
             $table->date('date_birth')->nullable();
             $table->string('ID_type');
             $table->string('ID_num');

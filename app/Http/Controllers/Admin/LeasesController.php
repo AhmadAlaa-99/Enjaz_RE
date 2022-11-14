@@ -10,11 +10,17 @@ use App\Models\Owner_deeds;
 use App\Models\Payments;
 use App\Models\Commitments;
 use App\Models\Lease;
+use App\Models\Nationalitie;
 use App\Models\User;
 use App\Models\Realty;
 use App\Models\Units;
 use App\Models\organization;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
+use File;
 use Carbon;
 use DB;
 class LeasesController extends Controller
@@ -27,16 +33,23 @@ class LeasesController extends Controller
     {
         $lease=Lease::with('organization','units','realties','financial')->where('id',$id)->first();
         $tenant=Tenant::where('id',$lease->tenant_id)->with('user')->first();
-        $payments=Payments::where('lease_id',$lease->id)->get();
+        $payments=Payments::where('lease_id',$lease->id)->latest()->paginate(5);
         $broker=User::first();
         return view('Admin.Leases.leases_details',compact('lease','tenant','payments','broker'));
     }
+    public function lease_un_details($id)
+    {
+        $lease=Lease::where(['status'=>'active','unit_id'=>$id])->first();
+        return $this->details($lease->id);
+
+    }
+
 
 
     public function effictive()
     {
         $Lease=Lease::where('status','active')->with('tenants','organization','realties','units','financial')
-        /*->select('number','type','st_rental_date','end_rental_date')*/->get();
+        /*->select('number','type','st_rental_date','end_rental_date')*/->latest()->paginate(5);
         /*
         foreach($Lease as $lease)
         {
@@ -65,7 +78,7 @@ class LeasesController extends Controller
     public function finished()
     {
         $Lease=Lease::where('status','expired')->with('tenants','organization','realties','units','financial')
-        /*->select('number','type','st_rental_date','end_rental_date')*/->get();
+        /*->select('number','type','st_rental_date','end_rental_date')*/->latest()->paginate(5);
         /*
         foreach($Lease as $lease)
         {
@@ -79,25 +92,25 @@ class LeasesController extends Controller
     public function archive()
      {
         $leases=Lease::where('status','expired')->with('tenants','owners','realties','units','financial_statements')
-        ->select('number','type','st_rental_date','end_rental_date')->get();
+        ->select('number','type','st_rental_date','end_rental_date')->latest()->paginate(5);
         return view('Admin.Archives.Lease',compact('leases'));
      }
 
     public function index()
     {
-       // $Lease=Lease::select()->get();
+       // $Lease=Lease::select()->latest()->paginate(5);
         return view('Admin.Leases.index');
     }
     public function show($id)
     {
-        $lease = Lease::with()->get();
+        $lease = Lease::with()->latest()->paginate(5);
         return view('Admin.Lease.show',compact('lease'));
     }
      public function create(Request $request,$id)
      {
 
     //    return dd($request->owner->id);
-
+       $nationals= Nationalitie::all();
        $unit=Units::where('id',$id)->first();
        $realty=Realty::where('id',$unit->realty_id)->first();
        $user=organization::where('id',$realty->owner_id)->first();
@@ -105,7 +118,7 @@ class LeasesController extends Controller
 
         $broker=User::where('role_name','owner')->first();
        // return dd($owner->id);
-        return view('Admin.Leases.create',compact('unit','realty','owner','broker'));
+        return view('Admin.Leases.create',compact('unit','realty','owner','broker','nationals'));
      }
      public function store(Request $request)
      {
@@ -117,7 +130,7 @@ class LeasesController extends Controller
     $pass='12345678';
            $user= User::create([
                'name'=>$request->t_name,
-               'nationality'=>$request->t_nationality,
+              'nationalitie_id'=>$request->nationalitie_id,
                'ID_type'=>$request->t_ID_type,
                'ID_num'=>$request->t_ID_num,
                'phone'=>$request->t_phone,
@@ -129,7 +142,7 @@ class LeasesController extends Controller
             $role=Role::where('name','Tenant')->first();
             $user->assignRole([$role->id]);
 
-            $unit_id=Units::where('id',$requst->unit_id)->update(['status'=>'rented']);
+            $unit_id=Units::where('id',$request->unit_id)->update(['status'=>'rented']);
             //sendNotify
        //     Notification::send($user, new \App\Notifications\NewTenantNotify($user,$pass));
        $us=User::latest()->first();
@@ -149,13 +162,13 @@ class LeasesController extends Controller
              */
             ]);
 
-            Financial_statements::create([
+            $financaila=Financial_statements::create([
                 'st_rental_date'=>$request->st_rental_date,
                 'annual_rent'=>$request->annual_rent,
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
                 'recurring_rent_payment'=>$request->recurring_rent_payment,
               //  'last_rent_payment'=>'0',
-                'num_rental_payments'=>$request->num_rental_payments,
+                'num_rental_payments'=>'0',
                 'end_rental_date'=>$request->end_rental_date,
                 'Total'=>$request->Total,
                 'payment_channels'=>$request->payment_channels,
@@ -168,7 +181,8 @@ class LeasesController extends Controller
            $commit=Commitments::latest()->first();
             $fin=Financial_statements::latest()->first();
             $ten=Tenant::latest()->first();
-
+            $image_name='doc-'.time().'.'.$request->docFile->extension();
+            $request->docFile->storeAs('public/Documents',$image_name);
             Lease::create([
                 'realty_id'=>$request->realty_id,
                 //payments one to many
@@ -184,6 +198,8 @@ class LeasesController extends Controller
                 'financial_id'=>$fin->id,  //one to one
                 'tenant_id'=>$ten->id, //many to one
                 'unit_id'=>$request->unit_id,   //many to one
+                'docFile'=>$image_name,
+
             ]);
             $les=Lease::latest()->first();
             foreach($request->release_date as $key=>$items )
@@ -195,6 +211,7 @@ class LeasesController extends Controller
                 $input['remain']=$request->total[$key];
                 Payments::create($input);
             }
+            $financaila->update(['num_rental_payments'=>Payments::where('lease_id',$les->id)->count(),]);
             return redirect()->route('effictive')->with([
                 'message' => 'Realty edited successfully',
                 'alert-type' => 'success',
@@ -268,4 +285,14 @@ class LeasesController extends Controller
 
         }
      }
+      public function downFile($id)
+    {
+        $file_name=Lease::select('docFile')->where('id',$id)->latest()->paginate(5);
+        foreach($file_name as $file)
+        {
+            $path=public_path().'/storage/Documents/'.$file->docFile;
+        }
+
+         return Response::download($path);
+    }
 }

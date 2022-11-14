@@ -31,7 +31,7 @@ class MainTenancesController extends Controller
     }
     public function maints_requests() //Tenant
     {
-        $maintenance=Maintenance::where('tenant_id',Auth::user()->id)->get();
+        $maintenance=Maintenance::where('tenant_id',Auth::user()->id)->latest()->paginate(5);
         return view('Tenants.maints_requests,',compact('maintenance'));
     }
 
@@ -61,7 +61,7 @@ class MainTenancesController extends Controller
     }
     public function index() //all
     {
-        $maintenance=Maintenance::all()->get();
+        $maintenance=Maintenance::all()->latest()->paginate(5);
         return view('Tenant.MainTenance.index,',compact('maintenance'));
     }
 
@@ -71,7 +71,7 @@ class MainTenancesController extends Controller
          $user=Auth::user()->id;
          $owner=owners::where('email',$user->email)-first();
          $real=Realty::where('envoy_id',$owner->id)->first();
-         $maintenances=Maintenance::where('real_id',$real->id)->get();
+         $maintenances=Maintenance::where('real_id',$real->id)->latest()->paginate(5);
          return view('Tenant.MainTenance.index,',compact('maintenances'));
 
 

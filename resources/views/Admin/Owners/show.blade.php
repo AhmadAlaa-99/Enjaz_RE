@@ -17,20 +17,9 @@
     </ol>
 
     <ul class="app-actions">
-        <li>
-            <a href="#" id="reportrange">
-                <span class="range-text"></span>
-                <i class="icon-chevron-down"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                <i class="icon-print"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download CSV">
-                <i class="icon-cloud_download"></i>
+       <li>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
+                <span id="clock"></span>
             </a>
         </li>
     </ul>
@@ -75,7 +64,7 @@
                           <td>{{$owner->phone}}</td>
                           <td>{{$owner->telephone}}</td>
                           <td><span class="badge badge-warning">{{$owner->email}}</td>
-                          <td><span class="badge badge-success">{{$owner->nationality}}</td>
+                          <td><span class="badge badge-success">{{$owner->Nationality->Name}}</td>
                           <td>{{$owner->record_date}}</td>
                           <td>
 									<div class="td-actions">

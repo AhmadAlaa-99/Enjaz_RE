@@ -18,7 +18,7 @@ class LeasesController extends Controller
 
     public function my_lease()
     {
-        $lease=Leases::select()->get();
+        $lease=Leases::select()->latest()->paginate(5);
         return view('Leases.myLease',compact('lease'));
     }
 }
