@@ -114,13 +114,12 @@
 										</div>
 									</div>
                         @empty
-                        @endforelse
+                        @endforelse  </tbody>   </table>
 								<div class="d-flex justify-content-center">
 			                         {!!$maints->links()!!}
                         </div>
 
-                    </tbody>
-            </table>
+                    
             </div>
         </div>
 

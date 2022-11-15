@@ -39,6 +39,9 @@
       <div class="grid">
         <div class="col-1-4">
           <div class="controls">
+             <input type="hidden"name="ownerId" id="ownerId" value="{{$owner->id}}">
+                <input type="hidden" value="{{$unit->id}}"name="unit_id">
+                 <input type="hidden" value="{{$realty->id}}"name="realty_id">
            <input type="text" id="reco_number" class="floatLabel" name="reco_number"required>
            <label for="street">رقم سجل العقد - ID</label>
           </div>
@@ -98,12 +101,44 @@
 
 
  <!--  بيانات المؤجر -->
+ <div class="form-group">
+         <h2 class="heading"> بيانات  المؤجر</h2>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-dark m-0">
+                                                 <thead>
+                                            <tr>
+                                                <th > الاسم الكامل :</br></br> {{$owner->name}}</th>
+                                                 <th >  اسم الشركة  : </br></br> {{$owner->organization->company_name}}</th>
+                                                  <th >  رقم الهوية : </br> </br>{{$owner->ID_num}}</th>
+                                                   <th >  نوع الهوية :</br> </br>{{$owner->ID_type}}</th>
+                                                    <th >  رقم الجوال  :  </br></br>{{$owner->phone}}</th>
+                                                     <th >  الحنسية :  </br></br>{{$owner->Nationality->Name}}</th>
+                                                      <th >  رقم الهاتف : </br> </br>{{$owner->phone}}</th>
+                                                       <th >  البريد الالكتروني  :</br></br>  {{$owner->email}}</th>
+                                                        <th > تاريخ التسجيل :</br> </br> {{$owner->organization->record_date}}</th>
+
+
+
+                                            </tr>
+                                        </thead>
+
+
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+    </div>
+    <!--
   <div class="form-group">
     <h2 class="heading">بيانات المؤجر</h2>
       <div class="grid">
         <div class="col-1-2">
           <div class="controls">
-           <input type="hidden"name="ownerId" id="ownerId" value="{{$owner->id}}">
+
            <input type="text" value="{{$owner->name}}" id=ID_type  name="ID_type" class="floatLabel"readonly>
            <label for="street">الاسم الكامل</label>
           </div>
@@ -168,6 +203,7 @@
         </div>
       </div>
   </div>
+-->
  <!--  بيانات المستأجر -->
   <div class="form-group">
     <h2 class="heading">بيانات المستأجر</h2>
@@ -228,15 +264,46 @@
 
   </div>
 
+<div class="form-group">
+         <h2 class="heading"> بيانات  المنشأة العقارية</h2>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-dark m-0">
+                                                 <thead>
+                                            <tr>
+                                                <th >  اسم المنشأة :</br></br> {{$realty->name}}</th>
+                                                 <th >   المنطقة  : </br></br> {{$realty->address}}</th>
+                                                  <th >   نوع العقار : </br> </br>{{$realty->type}}</th>
+                                                   <th >   الوحدات :</br> </br>{{$realty->units}}</th>
+                                                    <th >   الادوار  :  </br></br>{{$realty->roles}}</th>
+                                                     <th >  المساحة :  </br></br>{{$realty->size}}</th>
+                                                      <th >   الاستخدام : </br> </br>{{$realty->use}}</th>
+                                                       <th >   المميزات  :</br></br>  {{$realty->advantages}}</th>
+
+
+
+                                            </tr>
+                                        </thead>
+
+
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+    </div>
 
    <!--  بيانات المنشأة العقارية -->
+   <!--
   <div class="form-group">
     <h2 class="heading">بيانات المنشأة العقارية  </h2>
       <div class="grid">
         <div class="col-1-3">
           <div class="controls">
-           <input type="text" id="owner_name" name="owner_name" value="{{$owner->name}}" class="floatLabel"readonly >
-           <input type="hidden" value="{{$realty->id}}"name="realty_id">
+           <input type="text" id="owner_name" name="owner_name" value="{{$realty->name}}" class="floatLabel"readonly >
+
            <label for="street">اسم المنشأة</label>
           </div>
         </div>
@@ -291,8 +358,49 @@
       </div>
 
   </div>
+-->
 
    <!--  بيانات الوحدة الايجارية -->
+
+<div class="form-group">
+         <h2 class="heading"> بيانات الوحدة الايجارية</h2>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-dark m-0">
+                                                 <thead>
+                                            <tr>
+                                                <th > رقم الوحدة :</br></br> {{$unit->number}}</th>
+                                                 <th >   رقم الدور  : </br></br> {{$unit->role_number}}</th>
+                                                  <th >   نوع الوحدة : </br> </br>{{$unit->type}}</th>
+                                                   <th >   مساحة الوحدة :</br> </br>{{$unit->size}}</th>
+                                                    <th >   حالة الأثاث  :  </br></br>{{$unit->furnished_mode}}</th>
+                                                     <th >  خزائن مطبخ  :  </br></br>{{$unit->kitchen_Cabinets}}</th>
+                                                      <th >   نوع التكييف : </br> </br>{{$unit->condition_type}}</th>
+                                                      <th >    عدد وحدات التكييف : </br> </br>{{$unit->condition_units}}</th>
+
+                                                       <th >    رقم عداد المياه  :</br></br>  {{$unit->weater_number}}</th>
+
+                                                       <th >     رقم عداد الكهرباء  :</br></br>  {{$unit->Elecrtricity_number}}</th>
+                                                       <th >   عدد دورات المياه  :</br></br>  {{$unit->bathrooms}}</th>
+
+                                                       <th >     تفاصيل  :</br></br>  {{$unit->details}}</th>
+
+
+
+
+                                            </tr>
+                                        </thead>
+
+
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+    </div>
+    <!--
    <div class="form-group">
     <h2 class="heading">بيانات الوحدة الايجارية</h2>
       <div class="grid">
@@ -361,7 +469,7 @@
       <div class="grid">
       <div class="col-1-3">
           <div class="controls">
-           <input type="text" id="water_number" name="water_number" value="{{$unit->eater_number}}" class="floatLabel" readonly>
+           <input type="text" id="water_number" name="water_number" value="{{$unit->weater_number}}" class="floatLabel" readonly>
            <label for="street"> رقم عداد المياه</label>
           </div>
         </div>
@@ -383,12 +491,13 @@
       <div class="col-1-1">
           <div class="controls">
            <input type="text" id="details" name="details" value="{{$unit->details}}" class="floatLabel"readonly >
-           <input type="hidden" value="{{$unit->id}}"name="unit_id">
+
            <label for="street"> تفاصيل </label>
           </div>
         </div>
       </div>
   </div>
+-->
     <!--  البيانات المالية -->
     <div class="form-group">
          <h2 class="heading">البيانات المالية</h2>
@@ -493,12 +602,14 @@
 										<table class="table table-bordered table-dark m-0">
                                                  <thead>
                                             <tr>
-                                                <th >{{$broker->name}} </th>
-                                                <th > {{$broker->email}}</th>
-                                                <th >{{$broker->name}}</th>
+                                               <th >  الاسم :</br></br>{{$broker->name}} </th>
+                                                 <th >  البريد الالكتروني :</br></br> {{$broker->email}}</th>
+                                             <th >  البريد الالكتروني :</br></br> {{$broker->email}}</th>
+
 
                                             </tr>
                                         </thead>
+
 
 										</table>
 									</div>

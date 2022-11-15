@@ -84,7 +84,7 @@
 												</td>
                         </tr>
                         @empty
-                        @endforelse
+                        @endforelse  </tbody>   </table>
 
                     </tbody>
             </table>

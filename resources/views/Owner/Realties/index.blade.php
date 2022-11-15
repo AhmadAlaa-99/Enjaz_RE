@@ -79,12 +79,11 @@
 
                         </tr>
                         @empty
-                        @endforelse
+                        @endforelse  </tbody>   </table>
 								<div class="d-flex justify-content-center">
 			                         {!!$realties->links()!!}
                         </div>
-                    </tbody>
-            </table>
+                    
             </div>
         </div>
 

@@ -74,7 +74,6 @@ Route::group([
    Route::get('/printl', function () {
     return view('lease_print');
 });
-
      Route::post('/units_add',[AdminUnitsController::class,'units_add'])->name('units_add');
      Route::get('/empty_units',[AdminUnitsController::class,'empty_units'])->name('empty_units');
      Route::get('/unit_destroy/{id}',[AdminUnitsController::class,'destroy'])->name('unit.destroy');
@@ -88,7 +87,7 @@ Route::group([
      Route::get('/effictive',[AdminLeasesController::class,'effictive'])->name('effictive');;
      Route::get('/finished',[AdminLeasesController::class,'finished'])->name('finished');;
      Route::get('/lease_details/{id}',[AdminLeasesController::class,'details'])->name('lease.details');
-          Route::get('/lease_un.details/{id}',[AdminLeasesController::class,'lease_un_details'])->name('lease_un.details');
+     Route::get('/lease_un.details/{id}',[AdminLeasesController::class,'lease_un_details'])->name('lease_un.details');
 
 
      Route::post('/payments_edit/{id}',[AdminLeasesController::class,'payments_edit'])->name('payment.edit');

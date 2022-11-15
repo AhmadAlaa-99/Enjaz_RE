@@ -371,13 +371,10 @@
 
 												</tr>
                                                 @empty
-                        @endforelse
+                        @endforelse  </tbody>   </table>
 								<div class="d-flex justify-content-center">
 			                         {!!$payments->links()!!}
                         </div>
-
-											</tbody>
-            </table>
         </div>
     </div>
 </div>

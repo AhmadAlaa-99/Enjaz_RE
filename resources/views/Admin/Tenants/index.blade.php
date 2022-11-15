@@ -36,7 +36,7 @@
                 <table id="copy-print-csv" class="table custom-table">
                     <thead>
                         <tr>
-                        <th>الرقم التسلسلي </th>
+                         <th>الرقم التسلسلي </th>
                           <th>الاسم </th>
                           <th>الجنسية</th>
                           <th>نوع الهوية</th>
@@ -67,13 +67,12 @@
 
                         </tr>
                         @empty
-                        @endforelse
+                        @endforelse  </tbody>   </table>
 								<div class="d-flex justify-content-center">
 			                         {!!$tenants->links()!!}
                         </div>
 
-                    </tbody>
-            </table>
+                    
             </div>
         </div>
 

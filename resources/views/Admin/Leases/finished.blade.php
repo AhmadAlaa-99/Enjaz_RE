@@ -94,12 +94,10 @@
                                                 </td>
                         </tr>
                         @empty
-                        @endforelse
+                        @endforelse  </tbody>   </table>
 								<div class="d-flex justify-content-center">
 			                         {!!$leases->links()!!}
                         </div>
-                    </tbody>
-            </table>
             </div>
         </div>
 

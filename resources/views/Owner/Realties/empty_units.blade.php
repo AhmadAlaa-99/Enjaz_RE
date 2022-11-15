@@ -80,12 +80,11 @@
 
                         </tr>
                         @empty
-                        @endforelse
+                        @endforelse  </tbody>   </table>
 								<div class="d-flex justify-content-center">
 			                         {!!$units->links()!!}
                         </div>
-                    </tbody>
-            </table>
+                    
             </div>
         </div>
 

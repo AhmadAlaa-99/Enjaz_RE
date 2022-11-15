@@ -68,13 +68,12 @@
                           <td>{{$maint->notes}}</td>
                         </tr>
                         @empty
-                        @endforelse
+                        @endforelse  </tbody>   </table>
 								<div class="d-flex justify-content-center">
 			                         {!!$maints->links()!!}
                         </div>
 
-                    </tbody>
-            </table>
+                   
             </div>
         </div>
 
