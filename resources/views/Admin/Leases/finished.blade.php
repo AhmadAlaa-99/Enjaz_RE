@@ -41,6 +41,7 @@
                         <tr>
                         <th>الرقم التسلسلي</th>
                           <th>رقم العقد</th>
+                         <th> الحالة</th>
                           <th>اسم المستأجر</th>
                           <th>اسم المؤجر</th>
                           <th>اسم المنشأة</th>
@@ -70,6 +71,7 @@
 
                           <td>{{$i}}</td>
                           <td>{{$lease->reco_number}}</td>
+                        <td>{{$lease->status}}</td>
                           <td>{{$lease->tenants->user->name}}</td>
                           <td>{{$lease->organization->user->name}}</td>
                           <td>{{$lease->realties->realty_name}}</td>
