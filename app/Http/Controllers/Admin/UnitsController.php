@@ -29,7 +29,7 @@ class UnitsController extends Controller
 
 
         $units=Units::where('realty_id',$id)->latest()->paginate(5);
-        return view('Admin.Units.index',compact('units'));
+        return view('Admin.Units.empty_units',compact('units'));
 
 
     }
@@ -188,7 +188,7 @@ class UnitsController extends Controller
             //name_tenant
                 ]);
             //toastr()->success(trans('messages.success'));
-            return redirect()->route('realty_units_show',$id)->with([
+            return redirect()->route('empty_units')->with([
                 'message' => 'Realty edited successfully',
                 'alert-type' => 'success',
             ]);
