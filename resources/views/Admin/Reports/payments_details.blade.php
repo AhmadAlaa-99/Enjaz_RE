@@ -41,6 +41,15 @@
 
                         <div class="card">
 								<div class="card-body">
+                                    </br>
+@if (session()->has('max'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('max') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 									<div class="table-responsive">
 										<table class="table table-bordered table-dark m-0">
 											<thead>
@@ -52,7 +61,7 @@
                                                     <th> الرصيد  المدفوع </th>
                                                     <th> الرصيد  المتبقي </th>
                                                     <th> وصل استلام </th>
-                                                    <th>   اضافة رصيد  </th>
+                                                    <th>  اضافة رصيد  </th>
 
 
 												</tr>
@@ -74,7 +83,7 @@
 													<td>{{$payment->remain}}</td>
                                                     <td><span class="badge badge-danger"><a href="{{route('payment.details',$payment->id)}}" > print </a></td>
                                                     <td><span class="badge badge-danger"> <a
-                                                    data-toggle="modal" href="" data-target="#edit_payment{{ $payment->id }}"> Edit</a></td>
+                                                    data-toggle="modal" href="" data-target="#edit_payment{{ $payment->id }}"> Add</a></td>
 												</tr>
                                                 <div class="modal" id="edit_payment{{$payment->id}}" tabindex="-1" role="dialog" aria-labelledby="customModalTwoLabel" aria-hidden="true">
 										<div class="modal-dialog" role="document">
@@ -115,7 +124,7 @@
 			                         {!!$payments->links()!!}
                         </div>
 
-											
+
 									</div>
 								</div>
 							</div>

@@ -72,8 +72,38 @@
 									<!-- Row ends -->
 
 								</div>
+                                <div class="card-body">
+									<!-- Row starts -->
+									<div class="row gutters">
+
+										<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+											<div class="goal-card">
+												<h5>الواردات المالية</h5>
+												<p class="percentage">المزيد من الاحصائيات في السجل المالي</p>
+												<div class="progress progress-dot">
+													<div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="107" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+												<h4>{{$proceeds}}</h4>
+											</div>
+										</div>
+										<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+											<div class="goal-card">
+												<h5> الذمم المالية</h5>
+												<p class="percentage">المزيد من الاحصائيات في السجل المالي</p>
+												<div class="progress progress-dot">
+													<div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="107" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+												<h4>{{$receivs}}</h4>
+											</div>
+										</div>
+
+									</div>
+									<!-- Row ends -->
+
+								</div>
 							</div>
 						</div>
+
 					</div>
 					<!-- Row ends -->
 </div>

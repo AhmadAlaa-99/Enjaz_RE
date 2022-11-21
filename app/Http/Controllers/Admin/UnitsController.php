@@ -27,18 +27,33 @@ class UnitsController extends Controller
     public function realty_units_show($id)
     {
 
+
         $units=Units::where('realty_id',$id)->latest()->paginate(5);
         return view('Admin.Units.index',compact('units'));
+
 
     }
     public function realty_units_add($id)
     {
+         $realty=Realty::where('id',$id)->first();
+        $units_count=Units::where('realty_id',$id)->get();
+        if($units_count->count() < $realty->units)
+        {
         $realty=Realty::where('id',$id)->first();
         return view('Admin.Units.create',compact('realty'));
+        }
+        else{
+                    session()->flash('max', 'عذرا, لقد بلغت الحد الأقصى للوحدات الايجارية في هذه المنشأة');
+        return back();
+        }
 
     }
     public function realty_units_store($id,Request $request)
     {
+        $realty=Realty::where('id',$id)->first();
+        $units_count=Units::where('realty_id',$id)->get();
+        if($units_count->count() < $realty->units)
+        {
 
             Units::create([
                     'realty_id'=> $id,
@@ -54,6 +69,7 @@ class UnitsController extends Controller
                     'Elecrtricity_number'=>$request->electricity_number,
                     'details'=>$request->details,
                     'bathrooms'=>$request->bathrooms,
+                    'rooms'=>$request->rooms,
                     //'status'=>$request->status,
                     //start_date
                     //end_date
@@ -65,6 +81,15 @@ class UnitsController extends Controller
                 'message' => 'Unit Added successfully',
                 'alert-type' => 'success',
             ]);
+        }
+        else
+        {
+                    session()->flash('max', 'عذرا, لقد بلغت الحد الأقصى للوحدات الايجارية في هذه المنشأة');
+            return redirect()->route('realties.index')->with([
+                'message' => 'عذرا, لقد بلغت الحد الأقصى للوحدات الايجارية في هذه المنشأة',
+                'alert-type' => 'success',
+            ]);
+        }
     }
     public function rented_units()
     {
@@ -93,6 +118,10 @@ class UnitsController extends Controller
      }
      public function store(Request $request,$id)
      {
+        $realty=Realty::where('id',$id)->first();
+        $units_count=Units::where('realty_id',$id)->get();
+        if($units_count->count() < $realty->units)
+        {
         try {
             Units::create([
                     'realty_id'=>$id,
@@ -119,9 +148,15 @@ class UnitsController extends Controller
             ]);
         }
 
+
         catch (\Exception $e){
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
+    }
+    else
+    {
+
+    }
 
      }
      public function edit($id)

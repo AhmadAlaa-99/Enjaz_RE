@@ -7,7 +7,10 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\organization;
-
+use Carbon\Carbon;
+use Faker\Factory;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 class CreateAdminUserSeeder extends Seeder
 {
 /**
@@ -17,6 +20,7 @@ class CreateAdminUserSeeder extends Seeder
 */
 public function run()
 {
+    $faker = Factory::create();
 
     $user = User::create([
         'name'=>'Ahmad Alaa',
@@ -24,6 +28,7 @@ public function run()
         'ID_type'=>'gpt432',
         'ID_num'=>'14040024',
         'phone'=>'0937607234',
+         'gender'=>'male',
         'telephone'=>'6554334',
         'email'=>'ahmad@gmail.com',
         'role_name'=>'Admin',
@@ -39,25 +44,10 @@ $role->syncPermissions(
 'ادارة العقارات - الوسيط',
 'حركة التأجير - الوسيط العقاري',
 'الاعدادات  - الوسيط',
+' السجل المالي- الوسيط',
 );
  $user->assignRole([$role->id]);
- $user= User::create([
-    'name'=>'fdsf',
-    'nationalitie_id'=>'1',
-    'ID_type'=>'ds',
-    'ID_num'=>'fsd',
-    'phone'=>'323',
-    'telephone'=>'43243',
-    'email'=>'ds@gmail.com',
-    'role_name'=>'Owner',
-    'password'=>bcrypt('21412123'),
-]);
-organization::create([
-    'email'=>'ds@gmail.com',
-    'company_name'=>'safsa',
-    'record_date'=> '2020/10/10',
-]);
-
+ ///////////////////////////////////////////////////////////////
 $role = Role::create(['name' => 'Owner']);
 $role=Role::where('name','Owner')->first();
 $role->syncPermissions(
@@ -65,8 +55,33 @@ $role->syncPermissions(
 'عقاراتي - المالك',
 'حركة التأجير- المالك',
 'الاعدادات المالك',);
-$user->assignRole([$role->id]);
 
+
+$id_type=['civilian','stay'];
+$gender=['male','female'];
+for ($i = 0; $i < 3; $i++)
+{
+ $user= User::create([
+    'name'=>$faker->sentence(mt_rand(1,2), true),
+    'nationalitie_id'=>rand(1,10),
+    'ID_type'=>Arr::random($id_type),
+    'ID_num'=>$faker->numerify('##########'),
+    'phone'=>$faker->numerify('9669########'),
+     'gender'=>Arr::random($gender),
+    'telephone'=>$faker->numerify('########'),
+    'email'=>$faker->email,
+    'role_name'=>'Owner',
+    'password'=>bcrypt('21412123'),
+]);
+organization::create([
+    'email'=>$user->email,
+    'company_name'=> $user->name,
+    'record_date'=>$faker->date,
+]);
+
+
+$user->assignRole([$role->id]);
+}
 
 
 $role = Role::create(['name' => 'Tenant']);

@@ -25,6 +25,7 @@ class CreateUnitsTable extends Migration
             $table->integer('condition_units');
             $table->integer('role_number');
             $table->integer('bathrooms');
+            $table->integer('rooms');
             $table->string('condition_type');
             $table->string('Elecrtricity_number');
             $table->string('water_number');

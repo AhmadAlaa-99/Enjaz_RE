@@ -48,25 +48,48 @@
                             <label for="fullName">الاسم</label>
                             <input type="text" class="form-control" name="name" placeholder="Full name"required>
                         </div>
-                        <div class="form-group">
-                            <label for="addRess">نوع الهوية</label>
-                            <input type="text" class="form-control" name="ID_type" placeholder="ID_type"required>
+                           <div class="form-group">
+                            <label for="website"> نوع الهوية</label>
+                            <div class="form-radio-item">
+                                <input type="radio" name="ID_type" value="civilian" id="male" checked="checked" />
+                                <label for="civilian">سجل مدني</label>
+
+                                <input type="radio" name="ID_type" value="stay" id="female" />
+                                <label for="stay">اقامة</label>
+                            </div>
                         </div>
+
+
+
+
+
 
                         <div class="form-group">
                             <label for="website">البريد الاكتروني</label>
                             <input type="email" class="form-control" name="email" placeholder="email"required>
                         </div>
+                        <div class="form-group">
+                            <label for="addRess">تاريخ الاشتراك</label>
+                            <input type="date" class="form-control" name="record_date" placeholder="record_date">
+                        </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
                             <label for="fullName">اسم الشركة</label>
-                            <input type="text" class="form-control" name="company_name" placeholder="company_name"required>
+                            <input type="text" class="form-control" name="company_name" placeholder="company_name">
                     </div>
-                    <div class="form-group">
-                            <label for="eMail">رقم الجوال</label>
-                            <input type="text" class="form-control" name="phone" placeholder="phone"required>
+                       <div class="form-group">
+                            <label for="website"> الجنس</label>
+                            <div class="form-radio-item">
+                                <input type="radio" name="gender" value="male" id="male" checked="checked" />
+                                <label for="male">Male</label>
+
+                                <input type="radio" name="gender" value="female" id="female" />
+                                <label for="female">Female</label>
+                            </div>
                         </div>
+
+
                          <div class="form-group">
                                 <label for="inputName" class="control-label">الجنسية</label>
                                 <select name="nationalitie_id" class="form-control SlectBox" onclick="console.log($(this).val())"
@@ -84,14 +107,15 @@
                             <label for="website">رقم الهوية</label>
                             <input type="text" class="form-control" name="ID_num" placeholder="ID_num"required>
                         </div>
+                         <div class="form-group">
+                            <label for="eMail">رقم الجوال</label>
+                            <input type="tel" class="form-control" name="phone" placeholder="phone"required>
+                        </div>
                         <div class="form-group">
                             <label for="ciTy">رقم الهاتف</label>
-                            <input type="text" class="form-control" name="telephone" placeholder="telephone"required>
+                            <input type="text" class="form-control" name="telephone" placeholder="telephone">
                         </div>
-                        <div class="form-group">
-                            <label for="addRess">تاريخ الاشتراك</label>
-                            <input type="date" class="form-control" name="record_date" placeholder="record_date"required>
-                        </div>
+
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="text-right">

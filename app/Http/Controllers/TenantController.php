@@ -13,11 +13,6 @@ use App\Models\Lease;
 use App\Models\Payments;
 class TenantController extends Controller
 {
-
-
-
-
-
     public function leases()
     {
         $tenant=Tenant::where('user_id',Auth::user()->id)->first();

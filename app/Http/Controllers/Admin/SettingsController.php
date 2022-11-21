@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Broker;
+use App\Models\Payments;
+use DB;
 
 class SettingsController extends Controller
 {
@@ -40,6 +42,19 @@ class SettingsController extends Controller
 
      public function statistics()
      {
-        return view('Admin.System.statistics');
+        $query=DB::table('payments')->get();
+        $proceeds=0;
+        $receivs=0;
+
+         foreach($query as $rec)
+        {
+              $proceeds+=$rec->paid;
+              $receivs+=$rec->remain;
+        }
+
+        return view('Admin.System.statistics')->with([
+       'proceeds'=>$proceeds,
+        'receivs'=>$receivs,
+        ]);
      }
 }

@@ -19,8 +19,7 @@ class receive_reports extends Controller
     public function create()
     {
 
-        $leases=Lease::all();
-
+        $leases=Lease::where('status','expired')->get();
         return view('Admin.Receives_Reports.create',compact('leases'));
 
 
@@ -42,6 +41,10 @@ class receive_reports extends Controller
             'maint_status'=>$request->maint_status,
             'notes'=>$request->notes,
         ]);
+        $unit=Units::where('id',$unit->unit_id)->update(['status'=>'empty']);
+        $lease=Lease::where('id',$request->lease_id)->first();
+        $lease->update('status','received');
+        $tenant=Tenant::where('id',$lease->tenant_id)->update(['status'=>'archived']);
         return redirect()->route('receives_reports.index')->with([
             'message' => 'receives_reports created successfully',
             'alert-type' => 'success',

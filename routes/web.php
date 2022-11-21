@@ -48,6 +48,9 @@ Route::get('/profile',[SettingsController::class,'profile'])->name('profile');
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::get('/test', function () {
+    return view('test');
+});
  Auth::routes(['register' => false]);
    Route::get('/downFile/{id}',[AdminLeasesController::class, 'downFile'])->name('down.file');
 
@@ -56,7 +59,7 @@ Route::get('/', function () {
 
 Route::group([
     'prefix'=>'Admin',
-    'middleware'=>'auth',
+    //'middleware'=>'auth',
   ],function()
 
   {
@@ -104,8 +107,11 @@ Route::group([
      Route::get('/maintenance_payments',[ReportsController::class,'maintenance_payments']);
 
 
+     Route::get('/proceeds',[ReportsController::class,'proceeds'])->name('proceeds');
+     Route::post('/proceeds_date',[ReportsController::class,'proceeds_date'])->name('proceeds_date');
 
-
+     Route::get('/receivables',[ReportsController::class,'receivables'])->name('receivables');
+     Route::post('/receivables_date',[ReportsController::class,'receivables_date'])->name('receivables_date');
 
 
      Route::get('/Account_settings',[SettingsController::class,'Account_settings']);
@@ -143,7 +149,7 @@ Route::group([
 
   Route::group([
     'prefix'=>'Tenant',
-   'middleware'=>'auth|privateAdmin',
+  // 'middleware'=>'auth|privateAdmin',
   ],function()
   {
 
@@ -158,7 +164,7 @@ Route::group([
 
   Route::group([
     'prefix'=>'Owner',
-   'middleware'=>'auth|privateAdmin',
+   //'middleware'=>'auth|privateAdmin',
   ],function()
   {
     Route::get('/actived_tenants',[OwnerController::class,'actived_tenants']);

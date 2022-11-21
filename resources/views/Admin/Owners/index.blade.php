@@ -39,6 +39,8 @@
                         <tr>
                         <th> الرقم التسلسلي </th>
                           <th> الاسم </th>
+                                                    <th> الجنس </th>
+
                           <th>  اسم المدير  </th>
                           <th>رقم الهوية</th>
                           <th>نوع الهوية </th>
@@ -61,6 +63,8 @@
                           <tr>
                           <td>{{$i}}</td>
                           <td><span class="badge badge-danger">{{$owner->name}}</td>
+                                                    <td><span class="badge badge-success">{{$owner->gender}}</td>
+
                           <td>{{$owner->organization->company_name}}</td>
                           <td>{{$owner->ID_num}}</td>
                           <td>{{$owner->ID_type}}</td>

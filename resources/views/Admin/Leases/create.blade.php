@@ -229,6 +229,19 @@
 
                             </div>
         </div>
+          <div class="col-1-3">
+           <div class="controls">
+                            <label for="website"> الجنس</label>
+                            <div class="form-radio-item">
+                                <input type="radio" name="t_gender" value="male" id="male" checked="checked" />
+                                <label for="male">Male</label>
+
+                                <input type="radio" name="t_gender" value="female" id="female" />
+                                <label for="female">Female</label>
+                            </div>
+                        </div>
+</div>
+
         <div class="col-1-3">
           <div class="controls">
            <input type="text" name="t_ID_num" class="floatLabel"required>
@@ -239,8 +252,15 @@
       <div class="grid">
         <div class="col-1-4">
           <div class="controls">
-           <input type="text" name="t_ID_type" class="floatLabel"required>
-           <label for="street">  نوع الهوية </label>
+            <select name="t_ID_type"  class="form-control SlectBox" onclick="console.log($(this).val())"
+                                    onchange="console.log('change is firing')"required>
+                                    <!--placeholder-->
+                                    <option value="" selected disabled>حدد النوع</option>
+
+                                        <option value="civilian">سجل مدني</option>
+                                        <option value="stay">اقامة</option>
+
+                                </select>
           </div>
         </div>
         <div class="col-1-4">
@@ -257,11 +277,10 @@
         </div>
         <div class="col-1-4">
           <div class="controls">
-           <input type="text" name="t_telephone" class="floatLabel"required>
+           <input type="text" name="t_telephone" class="floatLabel">
            <label for="eMail">رقم الهاتف</label>
           </div>
         </div>
-
   </div>
 
 <div class="form-group">

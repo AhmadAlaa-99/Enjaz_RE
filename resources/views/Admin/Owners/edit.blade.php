@@ -53,27 +53,44 @@
                             <input type="text" class="form-control" name="name" value="{{$owner->name}}" required>
                         </div>
                         <div class="form-group">
-                            <label for="addRess">نوع الهوية</label>
-                            <input type="text" class="form-control" name="ID_type" value="{{$owner->ID_type}}"required>
-                        </div>
+                            <label for="website"> نوع الهوية</label>
+                            <div class="form-radio-item">
+                                <input type="radio" name="ID_type" value="civilian" id="male" checked="checked" />
+                                <label for="civilian">سجل مدني</label>
+
+                                <input type="radio" name="ID_type" value="stay" id="female" />
+                                <label for="stay">اقامة</label>
+                            </div>
+</div>
 
                         <div class="form-group">
                             <label for="website">البريد الاكتروني</label>
                             <input type="email" class="form-control" name="email" value="{{$owner->email}}"required>
                         </div>
+                         <div class="form-group">
+                            <label for="addRess">تاريخ الاشتراك</label>
+                            <input type="date" class="form-control" name="record_date" value="{{$owner->record_date}}">
+                        </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
                             <label for="fullName">اسم الشركة</label>
-                            <input type="text" class="form-control" name="company_name" value="{{$owner->company_name}}"required>
+                            <input type="text" class="form-control" name="company_name" value="{{$owner->organization->company_name}}"required>
                     </div>
                     <div class="form-group">
-                            <label for="eMail">رقم الجوال</label>
-                            <input type="text" class="form-control" name="phone" value="{{$owner->phone}}"required>
+                            <label for="website"> الجنس</label>
+                            <div class="form-radio-item">
+                                <input type="radio" name="gender" value="male" id="male" checked="checked" />
+                                <label for="male">Male</label>
+
+                                <input type="radio" name="gender" value="female" id="female" />
+                                <label for="female">Female</label>
+                            </div>
                         </div>
+
                        <div class="form-group">
                                 <label for="inputName" class="control-label">الجنسية</label>
-                                <select name="nationalitie_id" class="form-control SlectBox" onclick="console.log($(this).val())"
+                                <select name="nationalitie_id" value="{{$owner->Nationality->Name}}"class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
                                     <option value="" selected disabled>حدد الجنسية</option>
@@ -90,13 +107,14 @@
                             <input type="text" class="form-control" name="ID_num" value="{{$owner->ID_num}}"required>
                         </div>
                         <div class="form-group">
+                            <label for="eMail">رقم الجوال</label>
+                            <input type="text" class="form-control" name="phone" value="{{$owner->phone}}"required>
+                        </div>
+                        <div class="form-group">
                             <label for="ciTy">رقم الهاتف</label>
                             <input type="text" class="form-control" name="telephone" value="{{$owner->telephone}}"required>
                         </div>
-                        <div class="form-group">
-                            <label for="addRess">تاريخ الاشتراك</label>
-                            <input type="date" class="form-control" name="company_name" value="{{$owner->company_name}}"required>
-                        </div>
+
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="text-right">

@@ -10,6 +10,7 @@
 المنشأت العقارية
 @stop
 @section('content')
+
 <div class="page-header">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">ادارة العقارات</li>
@@ -35,7 +36,20 @@
 
         <div class="table-container">
             <div class="t-header">المنشأت العقارية</div>
-            <div class="table-responsive">
+</br>
+
+@if (session()->has('max'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('max') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+        <div class="table-responsive">
+
+
+
                 <table id="copy-print-csv" class="table custom-table">
                     <thead>
                         <tr>
@@ -75,7 +89,7 @@
                           <td>{{$realty->advantages}}</td>
                           <td><span class="badge badge-success">{{$realty->roles}}</td>
                           <td><span class="badge badge-success">{{$realty->units}}</td>
-                          <td><span class="badge badge-success">{{$units_tn}}</td>
+                          <td><span class="badge badge-success">{{$realty->rents}}</td>
                           <td>
 													<div class="td-actions">
                                                         <!--
@@ -101,7 +115,7 @@
 								<div class="d-flex justify-content-center">
 			                         {!!$realties->links()!!}
                         </div>
-                   
+
             </div>
         </div>
 

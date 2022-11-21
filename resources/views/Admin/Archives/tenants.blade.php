@@ -43,6 +43,8 @@
 
                          <th>الرقم التسلسلي </th>
                           <th>الاسم </th>
+                                                    <th>الجنس </th>
+
                           <th>الجنسية</th>
                           <th>المواليد</th>
                           <th>نوع الهوية</th>
@@ -63,6 +65,7 @@
                         <tr>
                           <td>{{$i}}</td>
                           <td>{{$tenant->user->name}}</td>
+                          <td>{{$tenant->user->gender}}</td>
                           <td>{{$tenant->user->Nationality->Name}}</td>
                           <td>{{$tenant->user->name}}</td>
                            <td>{{$tenant->user->name}}</td>
@@ -79,7 +82,7 @@
 								<div class="d-flex justify-content-center">
 			                         {!!$tenants->links()!!}
                         </div>
-                    
+
             </div>
         </div>
 

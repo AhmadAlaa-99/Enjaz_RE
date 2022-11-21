@@ -22,7 +22,7 @@ class CreateLeasesTable extends Migration
             $table->date('st_rental_date');
             $table->string('payment_method');
             $table->enum('type',['new','renew']);
-            $table->enum('status',['expired','active'])->default('active');
+            $table->enum('status',['expired','active','received'])->default('active');
             $table->string('place');
             $table->string('docFile');
             $table->date('end_rental_date');

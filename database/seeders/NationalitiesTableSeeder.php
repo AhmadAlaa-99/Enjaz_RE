@@ -14,14 +14,7 @@ class NationalitiesTableSeeder extends Seeder
     public function run()
     {
         DB::table('nationalities')->delete();
-         $nationals = [
-
-
-            'أفغانستاني','ألباني'
-        ];
- /*
         $nationals = [
-
             [
                 'en'=> 'Afghan',
                 'ar'=> 'أفغانستاني'
@@ -1252,7 +1245,7 @@ class NationalitiesTableSeeder extends Seeder
                 'ar'=> 'زمبابوي'
             ]
         ];
-*/
+
         foreach ($nationals as $n) {
             Nationalitie::create(['Name' => $n]);
         }

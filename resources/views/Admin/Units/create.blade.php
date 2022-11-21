@@ -42,8 +42,8 @@
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
-                            <label for="fullName"> تفاصيل </label>
-                            <input type="text" class="form-control" id="details" name="details" placeholder="details"required>
+                            <label for="fullName"> عدد الغرف </label>
+                            <input type="number" class="form-control" id="rooms" name="rooms" placeholder="rooms"required>
                         </div>
 
                         <div class="form-group">
@@ -66,6 +66,10 @@
                             <input type="text" class="form-control" name="water_number" placeholder="water_number"required>
                         </div>
 
+                         <div class="form-group">
+                            <label for="fullName"> تفاصيل </label>
+                            <input type="text" class="form-control" id="details" name="details" placeholder="details"required>
+                        </div>
 
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">

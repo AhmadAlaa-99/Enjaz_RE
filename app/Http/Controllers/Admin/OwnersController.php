@@ -36,7 +36,6 @@ class OwnersController extends Controller
             $pass='owner'.random_int(1999999999,9999999999);
             $user= User::create([
                 'name'=>$request->name,
-
                 'nationalitie_id'=>$request->nationalitie_id,
                 'ID_type'=>$request->ID_type,
                 'ID_num'=>$request->ID_num,
@@ -101,7 +100,11 @@ class OwnersController extends Controller
 
      public function destroy($id)
      {
-           $user= User::destroy($id);
+
+          $user=User::where('id',$id)->first();
+          $org_id=organization::where('email',$user->email)->first();
+          organization::destroy($org_id->id);
+          $user= User::destroy($id);
            // toastr()->error(trans('messages.Delete'));
             return redirect()->route('owners.index')->with([
                 'message' => 'Owner deleted successfully',

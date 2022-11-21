@@ -62,10 +62,19 @@ class LeasesController extends Controller
     public function payments_edit(Request $request,$id)
     {
         $payment=Payments::where('id',$id)->first();
+        if($request->paid<=$payment->remain)
+        {
+
         $paid=$payment->paid + $request->paid;
-        $remain=$payment->Total - $paid;
+        $remain=$payment->total - $paid;
         $payment->update(['paid'=>$paid,'remain'=>$remain]);
         return redirect()->back();
+    }
+    else
+    {
+      session()->flash('max', 'خطأ,المبلغ المدفوع أكبر من المتبقي');
+      return back();
+    }
 
     }
     public function payment_details($id)
@@ -77,7 +86,7 @@ class LeasesController extends Controller
 
     public function finished()
     {
-        $Lease=Lease::where('status','expired')->with('tenants','organization','realties','units','financial')
+        $Lease=Lease::where('status','expired || received')->with('tenants','organization','realties','units','financial')
         /*->select('number','type','st_rental_date','end_rental_date')*/->latest()->paginate(5);
         /*
         foreach($Lease as $lease)
@@ -136,6 +145,7 @@ class LeasesController extends Controller
                'phone'=>$request->t_phone,
                'telephone'=>$request->t_telephone,
                'email'=>$request->t_email,
+               'gender'=>$request->t_gender,
                'role_name'=>'Tenant',
                'password'=>bcrypt($pass),
             ]);
@@ -143,6 +153,7 @@ class LeasesController extends Controller
             $user->assignRole([$role->id]);
 
             $unit_id=Units::where('id',$request->unit_id)->update(['status'=>'rented']);
+
             //sendNotify
        //     Notification::send($user, new \App\Notifications\NewTenantNotify($user,$pass));
        $us=User::latest()->first();
@@ -161,7 +172,10 @@ class LeasesController extends Controller
                 'tn_email'=>$request->tn_email,
              */
             ]);
-
+            $realty=Realty::where('id','$request->realty_id')->first();
+            $realty->update([
+                'rents'=>$realty->rents+=1,
+            ]);
             $financaila=Financial_statements::create([
                 'st_rental_date'=>$request->st_rental_date,
                 'annual_rent'=>$request->annual_rent,
@@ -234,8 +248,7 @@ class LeasesController extends Controller
      {
         $lease=Lease::where('id',$id)->first();
         $lease->update(['status'=>'expired']);
-        $unit=Units::where('id',$lease->unit_id)->update(['status'=>'empty']);
-        $tenant=Tenant::where('id',$lease->tenant_id)->update(['status'=>'archived']);
+
         return redirect()->route('effictive')->with([
             'message' => 'Realty edited successfully',
             'alert-type' => 'success',

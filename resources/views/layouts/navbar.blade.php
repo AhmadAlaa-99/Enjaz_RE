@@ -42,6 +42,37 @@
 							</ul>
 						</li>
                         @endcan
+                        @can('ادارة العقارات - الوسيط')
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="icon-home nav-icon"></i>
+								 ادارة العقارات
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="appsDropdown">
+							<li>
+									<a class="dropdown-item" href="{{ url('/' . $page='Admin/realties/create') }}" >اضافة منشأة عقارية</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{ url('/' . $page='Admin/realties') }}">المنشات العقارية</a>
+								</li>
+								<li>
+									<a class="dropdown-toggle sub-nav-link" href="#" id="layoutsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										 الوحدات الايجارية
+									</a>
+									<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="layoutsDropdown">
+										<li>
+
+
+											<a class="dropdown-item" href="{{ url('/' . $page='Admin/empty_units') }}">الشاغرة</a>
+										</li>
+										<li>
+											<a class="dropdown-item" href="{{ url('/' . $page='Admin/rented_units') }}">المؤجرة</a>
+										</li>
+                                    </ul>
+								</li>
+							</ul>
+						</li>
+                        @endcan
 @can( 'الوسيط العقاري -  ادارة المستأجرين'))
 
 						<li class="nav-item dropdown">
@@ -57,6 +88,28 @@
 									<a class="dropdown-item" href="{{ url('/' . $page='Admin/archive_tenants') }}">بيانات الارشيف</a>
 								</li>
 
+							</ul>
+						</li>
+                        @endcan
+                         @can('حركة التأجير - الوسيط العقاري')
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="icon-pencil nav-icon"></i>
+								   حركة التأجير
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="appsDropdown">
+                                          <li>
+										<a class="dropdown-item" href="{{ url('/' . $page='Admin/effictive') }}">العقود الجارية</a>
+										</li>
+										<li>
+											<a class="dropdown-item" href="{{ url('/' . $page='Admin/finished') }}">العقود المنتهية</a>
+										</li>
+                                        <li>
+                                        <a class="dropdown-item" href="{{ url('/' . $page='Admin/receives_reports') }}">تقارير التسليم</a>										</li>
+                                        <li>
+                                        <a class="dropdown-item" href="{{ url('/' . $page='Admin/receives_reports/create') }}">انشاء طلب تسليم</a>
+										</li>
 							</ul>
 						</li>
                         @endcan
@@ -128,37 +181,7 @@
 
 
 
-@can('ادارة العقارات - الوسيط')
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="icon-home nav-icon"></i>
-								 ادارة العقارات
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="appsDropdown">
-							<li>
-									<a class="dropdown-item" href="{{ url('/' . $page='Admin/realties/create') }}" >اضافة منشأة عقارية</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="{{ url('/' . $page='Admin/realties') }}">المنشات العقارية</a>
-								</li>
-								<li>
-									<a class="dropdown-toggle sub-nav-link" href="#" id="layoutsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										 الوحدات الايجارية
-									</a>
-									<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="layoutsDropdown">
-										<li>
 
-
-											<a class="dropdown-item" href="{{ url('/' . $page='Admin/empty_units') }}">الشاغرة</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="{{ url('/' . $page='Admin/rented_units') }}">الممتلئة</a>
-										</li>
-                                    </ul>
-								</li>
-							</ul>
-						</li>
-                        @endcan
                         @can('عقاراتي - المالك')
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -179,7 +202,7 @@
 											<a class="dropdown-item" href="{{ url('/' . $page='Owner/empty_units') }}">الشاغرة</a>
 										</li>
 										<li>
-											<a class="dropdown-item" href="{{ url('/' . $page='Owner/rented_units') }}">الممتلئة</a>
+											<a class="dropdown-item" href="{{ url('/' . $page='Owner/rented_units') }}">المؤجرة</a>
 										</li>
                                     </ul>
 								</li>
@@ -187,28 +210,7 @@
 						</li>
                         @endcan
 
-                        @can('حركة التأجير - الوسيط العقاري')
 
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="icon-pencil nav-icon"></i>
-								   حركة التأجير
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="appsDropdown">
-                                          <li>
-										<a class="dropdown-item" href="{{ url('/' . $page='Admin/effictive') }}">العقود الجارية</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="{{ url('/' . $page='Admin/finished') }}">العقود المنتهية</a>
-										</li>
-                                        <li>
-                                        <a class="dropdown-item" href="{{ url('/' . $page='Admin/receives_reports') }}">تقارير التسليم</a>										</li>
-                                        <li>
-                                        <a class="dropdown-item" href="{{ url('/' . $page='Admin/receives_reports/create') }}">انشاء طلب تسليم</a>
-										</li>
-							</ul>
-						</li>
-                        @endcan
 
                         @can('حركة التأجير- المالك')
 						<li class="nav-item dropdown">
@@ -229,6 +231,26 @@
 							</ul>
 						</li>
                         @endcan
+                         @can(' السجل المالي- الوسيط')
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="icon-attach_money nav-icon"></i>
+								    السجل المالي
+							</a>
+
+
+							<ul class="dropdown-menu" aria-labelledby="appsDropdown">
+                                    <li>
+                                             <a class="dropdown-item" href="{{ url('/' . $page='Admin/proceeds') }}">الواردات المالية</a>
+									</li>
+									<li>
+                                           <a class="dropdown-item" href="{{ url('/' . $page='Admin/receivables') }}">الذمم المالية</a>
+									</li>
+                                  <li>
+
+							</ul>
+						</li>
+                        @endcan
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="icon-sync nav-icon"></i>
@@ -246,6 +268,8 @@
                                 @endcan
                                 @can('الاعدادات المالك')
 								<a class="dropdown-item" href="{{ url('/' . $page='Owner/statistics') }}">الاحصائيات</a>
+
+
                                 @endcan
                                 @can('الاعدادات المستأجر')
                                 <a class="dropdown-item" href="{{ url('/' . $page='Tenant/leases') }}">بيانات العقد</a>

@@ -38,6 +38,8 @@
                         <tr>
                          <th>الرقم التسلسلي </th>
                           <th>الاسم </th>
+                                                    <th>الجنس </th>
+
                           <th>الجنسية</th>
                           <th>نوع الهوية</th>
                           <th> رقم الهوية </th>
@@ -58,6 +60,8 @@
                         <tr>
                            <td>{{$i}}</td>
                           <td><span class="badge badge-danger">{{$tenant->user->name}}</td>
+                                                    <td><span class="badge badge-success">{{$tenant->user->gender}}</td>
+
                           <td><span class="badge badge-success">{{$tenant->user->Nationality->Name}}</td>
                           <td>{{$tenant->user->ID_type}}</td>
                           <td>{{$tenant->user->ID_num}}</td>
@@ -72,7 +76,7 @@
 			                         {!!$tenants->links()!!}
                         </div>
 
-                    
+
             </div>
         </div>
 

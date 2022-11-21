@@ -42,10 +42,10 @@
 
                 <div class="row gutters">
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                    <div class="form-group">
-                            <label for="fullName"> تفاصيل </label>
-                            <input type="text" class="form-control" id="details" name="details" value="{{$unit->details}}"required>
-                        </div>
+                         <div class="form-group">
+                            <label for="fullName">عدد الغرف</label>
+                            <input type="text" class="form-control" id="rooms" name="rooms" value="{{$unit->rooms}}"required>
+                         </div>
 
                         <div class="form-group">
                             <label for="eMail">رقم الدور</label>
@@ -64,6 +64,10 @@
                         <div class="form-group">
                             <label for="website">رقم عداد المياه</label>
                             <input type="text" class="form-control" name="water_number" value="{{$unit->water_number}}"required>
+                        </div>
+                         <div class="form-group">
+                            <label for="fullName"> تفاصيل </label>
+                            <input type="text" class="form-control" id="details" name="details" value="{{$unit->details}}"required>
                         </div>
 
 

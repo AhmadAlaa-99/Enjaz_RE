@@ -23,6 +23,7 @@ class CreateRealtiesTable extends Migration
             $table->string('roles');
             $table->string('advantages');
             $table->string('units');
+            $table->string('rents')->default('0');
 
             $table->foreignId('owner_id')->constrained('organization')->cascadeOnDelete();
 
