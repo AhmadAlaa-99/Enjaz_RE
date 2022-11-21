@@ -37,7 +37,7 @@
   <div class="form-group">
     <h2 class="heading">بيانات العقد</h2>
       <div class="grid">
-        <div class="col-1-4">
+        <div class="col-1-3">
           <div class="controls">
              <input type="hidden"name="ownerId" id="ownerId" value="{{$owner->id}}">
                 <input type="hidden" value="{{$unit->id}}"name="unit_id">
@@ -46,19 +46,14 @@
            <label for="street">رقم سجل العقد - ID</label>
           </div>
         </div>
-        <div class="col-1-4">
+        <div class="col-1-3">
           <div class="controls">
            <input type="text" id="place" class="floatLabel" name="place"required>
            <label for="eMail"> مكان ابرام العقد</label>
           </div>
         </div>
-        <div class="col-1-4">
-          <div class="controls">
-           <input type="text" id="payment_channels" class="floatLabel" name="payment_channels"required>
-           <label for="eMail"> طريقة دفع رسوم العقد</label>
-          </div>
-        </div>
-        <div class="col-1-4">
+
+        <div class="col-1-3">
           <div class="controls">
            <select name="type_le"id="type_le"class="floatLabel" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
@@ -208,7 +203,7 @@
   <div class="form-group">
     <h2 class="heading">بيانات المستأجر</h2>
       <div class="grid">
-        <div class="col-1-3">
+        <div class="col-1-4">
           <div class="controls">
 
            <input type="text" name="t_name" class="floatLabel"required>
@@ -216,7 +211,7 @@
 
           </div>
         </div>
-        <div class="col-1-3">
+        <div class="col-1-4">
            <div class="controls">
                                 <select name="nationalitie_id" class="floatLabel" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
@@ -225,24 +220,27 @@
                                         <option value="{{$national->id }}"> {{ $national->Name }}</option>
                                     @endforeach
                                 </select>
-                                           <label for="street">حدد الجنسية</label>
+                                           <label for="street"> الجنسية</label>
 
                             </div>
         </div>
-          <div class="col-1-3">
+           <div class="col-1-4">
            <div class="controls">
-                            <label for="website"> الجنس</label>
-                            <div class="form-radio-item">
-                                <input type="radio" name="t_gender" value="male" id="male" checked="checked" />
-                                <label for="male">Male</label>
+                                <select name="t_gender" class="floatLabel" onclick="console.log($(this).val())"
+                                    onchange="console.log('change is firing')"required>
+                                    <!--placeholder-->
 
-                                <input type="radio" name="t_gender" value="female" id="female" />
-                                <label for="female">Female</label>
+                                        <option value="female">Female</option>
+                                        <option value="male">Male</option>
+
+                                </select>
+                                           <label for="street"> الجنس</label>
+
                             </div>
-                        </div>
-</div>
+        </div>
 
-        <div class="col-1-3">
+
+        <div class="col-1-4">
           <div class="controls">
            <input type="text" name="t_ID_num" class="floatLabel"required>
            <label for="eMail">رقم الهوية</label>
@@ -251,18 +249,23 @@
       </div>
       <div class="grid">
         <div class="col-1-4">
-          <div class="controls">
-            <select name="t_ID_type"  class="form-control SlectBox" onclick="console.log($(this).val())"
+           <div class="controls">
+                                <select name="t_ID_type" class="floatLabel" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
-                                    <option value="" selected disabled>حدد النوع</option>
 
                                         <option value="civilian">سجل مدني</option>
                                         <option value="stay">اقامة</option>
 
+                                        <option value="male">Male</option>
+
                                 </select>
-          </div>
+                                           <label for="street">نوع الهوية</label>
+
+                            </div>
         </div>
+
+
         <div class="col-1-4">
           <div class="controls">
            <input type="email"  name="t_email" class="floatLabel"required>
@@ -521,25 +524,20 @@
     <div class="form-group">
          <h2 class="heading">البيانات المالية</h2>
       <div class="grid">
-        <div class="col-1-4">
+
+       <div class="col-1-3">
           <div class="controls">
-           <input type="date" name="st_rental_date" class="floatLabel"required>
-           <label for="street">تاريخ بداية العقد </label>
+           <input type="text" id="payment_channels" class="floatLabel" name="payment_channels"required>
+           <label for="eMail"> طريقة دفع رسوم العقد</label>
           </div>
         </div>
-        <div class="col-1-4">
-          <div class="controls">
-           <input type="date" name="end_rental_date" class="floatLabel"required>
-           <label for="eMail"> تاريخ نهاية العقد </label>
-          </div>
-        </div>
-        <div class="col-1-4">
+        <div class="col-1-3">
           <div class="controls">
            <input type="text" name="annual_rent" class="floatLabel"required>
            <label for="street"> القيمة السنوية للايجار </label>
           </div>
         </div>
-        <div class="col-1-4">
+        <div class="col-1-3">
           <div class="controls">
            <input type="text" name="Total" class="floatLabel"required>
            <label for="eMail">اجمالي قيمة العقد</label>
