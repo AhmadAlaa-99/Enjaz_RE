@@ -114,25 +114,7 @@
 						</li>
                         @endcan
 
-@can('ادارة المستأجرين - المالك')
 
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="icon-people nav-icon"></i>
-								 ادارة المستأجرين
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="appsDropdown">
-								<li>
-									<a class="dropdown-item" href="{{ url('/' . $page='Owner/actived_tenants') }}">بيانات  المستأجرين</a>
-								</li>
-                                <li>
-									<a class="dropdown-item" href="{{ url('/' . $page='Owner/archive_tenants') }}">بيانات الارشيف</a>
-								</li>
-
-							</ul>
-						</li>
-
-@endcan
 
 
 
