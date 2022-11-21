@@ -83,7 +83,7 @@ class RealtiesController extends Controller
      {
         $owners=organization::get();
         $realty = Realty::where('id',$id)->first();
-        return view('Realties.edit',compact('realty','owners'));
+        return view('Admin.Realties.edit',compact('realty','owners'));
 
      }
      public function update(Request $request,$id)

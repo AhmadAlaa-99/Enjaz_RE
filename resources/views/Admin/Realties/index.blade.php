@@ -101,10 +101,10 @@
 															<i class="icon-add"></i>
 
 														</a>
-														<a href="{{route('realties.edit',$realty->id)}}"  class="icon green" data-toggle="tooltip" data-placement="top" title="edit Row">
+														<a href="{{route('realties.edit',$realty->id)}}"  class="icon green" data-toggle="tooltip" data-placement="top" title="edit">
 															<i class="icon-edit"></i>
 														</a>
-														<a href="{{route('realty.destroy',$realty->id)}}"  class="icon blue" data-toggle="tooltip" data-placement="top" title="Delete Row">
+														<a href="{{route('realty.destroy',$realty->id)}}"  class="icon blue" data-toggle="tooltip" data-placement="top" title="Delete">
 															<i class="icon-cancel"></i>
 														</a>
 													</div>
