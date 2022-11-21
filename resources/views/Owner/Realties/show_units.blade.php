@@ -7,13 +7,13 @@
 
 @endsection
 @section('title')
-المنشأت العقارية
+الوحدات الايجارية
 @stop
 @section('content')
 <div class="page-header">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">ادارة العقارات</li>
-        <li class="breadcrumb-item active">  المنشأت العقارية </li>
+        <li class="breadcrumb-item">ادارة العقارات </li>
+        <li class="breadcrumb-item active"> الوحدات الايجارية </li>
     </ol>
 
     <ul class="app-actions">
@@ -34,64 +34,64 @@
 
 
         <div class="table-container">
-            <div class="t-header">المنشأت العقارية</div>
+            <div class="t-header">الوحدات الايجارية</div>
             <div class="table-responsive">
                 <table id="copy-print-csv" class="table custom-table">
                     <thead>
                         <tr>
                         <th><a href="">الرقم التسلسلي </a></th>
-                          <th><a href="">مالك المنشأة </a></th>
-                          <th> <a href=""> اسم المنشأة</a> </th>
-                          <th>تاريخ الاضافة</th>
-                          <th> المنطقة  </th>
-                           <th> <a href="">نوع  العقار</a></th>
-                          <th>  <a href=""> نوع استخدام العقار</a></th>
-                          <th> المساحة  </th>
-                          <th> المميزات  </th>
-                          <th>عدد الأدوار </th>
-                          <th>عدد الوحدات الكلية</th>
-                          <th>عدد الوحدات المستأجرة</th>
-                         <th> الوحدات المضافة</th>
+                          <th><a href=""> اسم المنشأة </a></th>
+                          <th>نوع الوحدة</th>
+                          <th>رقم الوحدة</th>
+                          <th>الحالة</th>
 
-
+                          <th> <a href="">رقم الدور</a></th>
+                          <th> <a href="">المساحة </a></th>
+                          <th>  <a href=""> مؤثثة </a></th>
+                          <th>  <a href=""> عدد دورات المياه </a></th>
+                          <th>خزائن مطبخ مركبة</th>
+                          <th> عدد وحدات التكييف</th>
+                          <th>نوع التكييف </th>
+                          <th>رقم عداد المياه  </th>
+                          <th>رقم عداد الكهرباء </th>
                         </tr>
                     </thead>
-                    <tbody>
-                    @php
+                          <tbody>
+                           @php
                                 $i = 0;
                                 @endphp
-                                @forelse ($realties as $realty)
+                                @forelse ($units as $unit)
                                     @php
                                     $i++
                                     @endphp
-
                         <tr>
-                            <td>{{$i}}</td>
-                        <td><span class="badge badge-warning">{{$realty->organization->user->name}}</td>
-                          <td>{{$realty->realty_name}}</td>
-                          <td><span class="badge badge-danger">{{$realty->created_at}}</td>
-                          <td>{{$realty->address}}</td>
-                          <td>{{$realty->type}}</td>
-                          <td>{{$realty->use}}</td>
-                          <td>{{$realty->size}}</td>
-                          <td>{{$realty->advantages}}</td>
-                          <td><span class="badge badge-success">{{$realty->roles}}</td>
-                          <td><span class="badge badge-success">{{$realty->units}}</td>
-                          <td><span class="badge badge-success">{{$realty->rents}}</td>
-                     <td><span class="badge badge-danger"><a href="{{route('show_units_ow',$realty->id)}}" > تفاصيل </a></td>
+                          <td>{{$i}}</td>
+                          <td><a href=""><span class="badge badge-danger">{{$unit->realties->realty_name}}</a></td>
+                          <td>{{$unit->type}}</td>
+                          <td>{{$unit->number}}</td>
+                         <td><a href=""><span class="badge badge-success">{{$unit->status}}</a></td>
 
-
+                          <td>{{$unit->role_number}}</td>
+                          <td>{{$unit->size}}</td>
+                          <td>{{$unit->furnished_mode}}</td>
+                          <td>{{$unit->bathrooms}}</td>
+                          <td>{{$unit->kitchen_Cabinets}}</td>
+                          <td>{{$unit->condition_units}}</td>
+                          <td>{{$unit->condition_type}}</td>
+                          <td>{{$unit->water_number}}</td>
+                            <td>{{$unit->Elecrtricity_number}}</td>
 
 
                         </tr>
                         @empty
                         @endforelse  </tbody>   </table>
 								<div class="d-flex justify-content-center">
-			                         {!!$realties->links()!!}
+			                         {!!$units->links()!!}
                         </div>
 
             </div>
         </div>
+
 
 
 

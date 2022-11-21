@@ -174,6 +174,8 @@ Route::group([
     Route::get('/realties',[OwnerController::class,'all_realties']);
     Route::get('/empty_units',[OwnerController::class,'empty_units']);
     Route::get('/rented_units',[OwnerController::class,'rented_units']);
+        Route::get('/show_units/{id}',[OwnerController::class,'show_units'])->name('show_units_ow');
+
 
     Route::get('/expired_leases',[OwnerController::class,'expired_leases']);
     Route::get('/actived_leases',[OwnerController::class,'actived_leases']);

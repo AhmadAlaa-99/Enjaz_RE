@@ -257,7 +257,6 @@
                                         <option value="civilian">سجل مدني</option>
                                         <option value="stay">اقامة</option>
 
-                                        <option value="male">Male</option>
 
                                 </select>
                                            <label for="street">نوع الهوية</label>

@@ -48,7 +48,7 @@
                                     <!--placeholder-->
                                     <option value="" selected disabled>حدد المالك</option>
                                     @foreach ($owners as $owner)
-                                        <option value="{{$owner->id }}"> {{ $owner->company_name }}</option>
+                                        <option value="{{$owner->id }}"> {{ $owner->user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -175,19 +175,7 @@
 								<li>
 									<a class="dropdown-item" href="{{ url('/' . $page='Owner/realties') }}">المنشات العقارية</a>
 								</li>
-								<li>
-									<a class="dropdown-toggle sub-nav-link" href="#" id="layoutsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										 الوحدات الايجارية
-									</a>
-									<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="layoutsDropdown">
-										<li>
-											<a class="dropdown-item" href="{{ url('/' . $page='Owner/empty_units') }}">الشاغرة</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="{{ url('/' . $page='Owner/rented_units') }}">المؤجرة</a>
-										</li>
-                                    </ul>
-								</li>
+								
 							</ul>
 						</li>
                         @endcan

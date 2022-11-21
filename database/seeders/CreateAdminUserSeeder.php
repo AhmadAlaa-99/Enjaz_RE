@@ -32,7 +32,7 @@ public function run()
         'telephone'=>'6554334',
         'email'=>'ahmad@gmail.com',
         'role_name'=>'Admin',
-        'password'=>bcrypt('12345678'),
+        'password'=>bcrypt('21412123'),
            ]);
 $role = Role::create(['name' => 'Admin']);
  $role=Role::where('name','Admin')->first();

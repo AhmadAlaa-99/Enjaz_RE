@@ -61,7 +61,7 @@
                           <td>{{$maint->units->number}}</td>
                           <td>{{$maint->desc}}</td>
                           <td>{{$maint->request_date}}</td>
-                     <td>{{$maint->status}}</td>
+                     <td><span class="badge badge-success">{{$maint->status}}</td>
 
                         </tr>
                         @empty
@@ -70,7 +70,7 @@
 			                         {!!$maintenances->links()!!}
                         </div>
 
-                    
+
             </div>
         </div>
 

@@ -84,7 +84,7 @@
                           </td>
 -->
 
-                          <td>
+                                                    <td>
 													<div class="td-actions">
 														<a href="{{route('units.edit',$unit->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="Edit">
 															<i class="icon-edit"></i>
@@ -92,6 +92,8 @@
                                                         <a href="{{route('lease_un.details',$unit->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="Details">
 															<i class="icon-home"></i>
 														</a>
+
+
 
 													</div>
 												</td>
@@ -101,7 +103,7 @@
 								<div class="d-flex justify-content-center">
 			                         {!!$units->links()!!}
                         </div>
-                    
+
             </div>
         </div>
 

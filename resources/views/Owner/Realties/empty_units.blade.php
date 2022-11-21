@@ -52,8 +52,6 @@
                           <th>نوع التكييف </th>
                           <th>رقم عداد المياه  </th>
                           <th>رقم عداد الكهرباء </th>
-
-
                         </tr>
                     </thead>
                           <tbody>
@@ -84,7 +82,7 @@
 								<div class="d-flex justify-content-center">
 			                         {!!$units->links()!!}
                         </div>
-                    
+
             </div>
         </div>
 

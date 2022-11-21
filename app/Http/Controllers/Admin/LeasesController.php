@@ -172,7 +172,9 @@ class LeasesController extends Controller
                 'tn_email'=>$request->tn_email,
              */
             ]);
-            $realty=Realty::where('id','$request->realty_id')->first();
+           // return $request->realty_id;
+            $realty=Realty::where('id',$request->realty_id)->first();
+
             $realty->update([
                 'rents'=>$realty->rents+=1,
             ]);
