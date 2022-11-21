@@ -125,9 +125,16 @@
                                 </select>
                             </div>
                         <div class="form-group">
-                            <label for="sTate">نوع التكييف</label>
-                            <input type="text" class="form-control" name="condition_type" value="{{$unit->condition_type}}"required>
-                        </div>
+                                <label for="inputName" class="control-label">نوع التكييف</label>
+                                <select name="condition_type" class="form-control SlectBox" onclick="console.log($(this).val())"
+                                    onchange="console.log('change is firing')"required>
+                                    <!--placeholder-->
+                                    <option value="" selected disabled>حدد النوع</option>
+                                        <option value="سبليت">سبليت</option>
+                                        <option value="شباك">شباك</option>
+                                        <option value="مركزي"> مركزي</option>
+                                </select>
+                     </div>
                         <div class="form-group">
                             <label for="sTate"> عدد دورات المياه</label>
                             <input type="number" class="form-control" name="bathrooms" value="{{$unit->bathrooms}}"required>
