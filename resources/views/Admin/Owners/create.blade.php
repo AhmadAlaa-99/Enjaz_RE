@@ -46,7 +46,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                         <div class="form-group">
                             <label for="fullName">الاسم</label>
-                            <input type="text" class="form-control" name="name" placeholder="Full name"required>
+                            <input type="text" class="form-control"  value="{{old('name')}}"name="name" placeholder="Full name"required>
                         </div>
                            <div class="form-group">
                             <label for="website"> نوع الهوية</label>
@@ -66,17 +66,17 @@
 
                         <div class="form-group">
                             <label for="website">البريد الاكتروني</label>
-                            <input type="email" class="form-control" name="email" placeholder="email"required>
+                            <input type="email" class="form-control" name="email" value="{{old('email')}}"placeholder="email"required>
                         </div>
                         <div class="form-group">
                             <label for="addRess">تاريخ الاشتراك</label>
-                            <input type="date" class="form-control" name="record_date" placeholder="record_date">
+                            <input type="date" class="form-control" name="record_date"  value="{{old('record_date')}}"placeholder="record_date">
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
                             <label for="fullName">اسم الشركة</label>
-                            <input type="text" class="form-control" name="company_name" placeholder="company_name">
+                            <input type="text" class="form-control" value="{{old('company_name')}}"name="company_name" placeholder="company_name">
                     </div>
                        <div class="form-group">
                             <label for="website"> الجنس</label>
@@ -105,15 +105,25 @@
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
                             <label for="website">رقم الهوية</label>
-                            <input type="text" class="form-control" name="ID_num" placeholder="ID_num"required>
+                            <input type="text" class="form-control" name="ID_num" value="{{old('ID_num')}}"placeholder="ID_num"required>
+                        @error('ID_num')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         </div>
+
                          <div class="form-group">
                             <label for="eMail">رقم الجوال</label>
-                            <input type="tel" class="form-control" name="phone" placeholder="phone"required>
+                            <input type="tel" class="form-control" name="phone" value="{{old('phone')}}"placeholder="phone"required>
+                            @error('phone')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         </div>
                         <div class="form-group">
                             <label for="ciTy">رقم الهاتف</label>
-                            <input type="text" class="form-control" name="telephone" placeholder="telephone">
+                            <input type="text" class="form-control" name="telephone" value="{{old('telephone')}}"placeholder="telephone">
+                            @error('telephone')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         </div>
 
                     </div>

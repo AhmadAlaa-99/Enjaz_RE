@@ -86,7 +86,7 @@ class LeasesController extends Controller
 
     public function finished()
     {
-        $Lease=Lease::where('status','expired || received')->with('tenants','organization','realties','units','financial')
+        $Lease=Lease::where('status','received')->with('tenants','organization','realties','units','financial')
         /*->select('number','type','st_rental_date','end_rental_date')*/->latest()->paginate(5);
         /*
         foreach($Lease as $lease)
@@ -136,6 +136,11 @@ class LeasesController extends Controller
        $org=organization::where('email',$owner->email)->first();
 
     //    $pass='tenant'.random_int(1999999999,9999999999);
+         $request->validate([
+        'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|digits:10',
+        'ID_num' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|digits:10',
+        'telephone' => 'regex:/^([0-9\s\-\+\(\)]*)$/|digits:8',
+        ]);
     $pass='12345678';
            $user= User::create([
                'name'=>$request->t_name,

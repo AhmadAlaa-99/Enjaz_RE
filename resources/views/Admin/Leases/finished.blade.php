@@ -71,7 +71,7 @@
 
                           <td>{{$i}}</td>
                           <td>{{$lease->reco_number}}</td>
-                        <td>{{$lease->status}}</td>
+                        <td><span class="badge badge-success">{{$lease->status}}</td>
                           <td>{{$lease->tenants->user->name}}</td>
                           <td>{{$lease->organization->user->name}}</td>
                           <td>{{$lease->realties->realty_name}}</td>

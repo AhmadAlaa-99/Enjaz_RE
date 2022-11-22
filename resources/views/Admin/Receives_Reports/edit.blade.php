@@ -36,55 +36,52 @@
                 <div class="card-title">تعديل بيانات تقرير التسليم</div>
             </div>
             <div class="card-body">
-            <form action="{{ route('receives.update',$receive->id) }}" method="post" enctype="multipart/form-data"autocomplete="off">
+            <form action="{{ route('receives_reports.update',$receive->id) }}" method="post" enctype="multipart/form-data"autocomplete="off">
+             {{ method_field('patch') }}
+              {{ csrf_field() }}
 
                 <div class="row gutters">
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
                                 <label for="inputName" class="control-label"> رقم العقد </label>
-                                <select name="lease_id" value="{{$lease->number}}" class="form-control SlectBox" onclick="console.log($(this).val())"
-                                    onchange="console.log('change is firing')">
+                                <select name="lease_id"  class="form-control SlectBox" onclick="console.log($(this).val())"
+                                    onchange="console.log('change is firing')"required>
                                     <!--value-->
                                     <option value="" selected disabled>حدد رقم العقد المسجل</option>
                                     @foreach ($leases as $lease)
-                                        <option value="{{$lease->id }}"> {{ $lease->number }}</option>
+                                        <option value="{{$lease->id }}"> {{ $lease->reco_number }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        <div class="form-group">
-                            <label for="ciTy">تاريخ التسليم</label>
-                            <input type="name" class="form-control" name="receive_date" value="{{$receive->receive_date}}">
+                               <div class="form-group">
+                            <label for="ciTy">تصفية الفواتير</label>
+                            <textarea type="name" class="form-control" name="paymennts_status" value="{{$receive->paymennts_status}}"required></textarea>
                         </div>
+
+
                         <div class="form-group">
                             <label for="ciTy">حالة الوحدة</label>
-                            <input type="name" class="form-control" name="maint_status" value="{{$receive->maint_status}}">
+                            <textarea type="name" class="form-control" name="maint_status" value="{{$receive->maint_status}}"required></textarea>
                         </div>
 
 
 
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-
                         <div class="form-group">
-                            <label for="ciTy">تصفية الفواتير</label>
-                            <input type="name" class="form-control" name="paymennts_status" value="{{$receive->paymennts_status}}">
+                            <label for="ciTy">تاريخ التسليم</label>
+                            <input type="date" class="form-control" name="receive_date" value="{{$receive->receive_date}}"required>
                         </div>
                         <div class="form-group">
                             <label for="ciTy">ملاحظات</label>
-                            <input type="name" class="form-control" name="notes" value="{{$receive->notes}}">
+                            <textarea type="name" class="form-control" name="notes" value="{{$receive->notes}}"required></textarea>
                         </div>
-
-
-
                     </div>
-
-
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="text-right">
 
-                            <button type="button" name="submit" name="submit" class="btn btn-success">حفظ واضافة المزيد</button>
-                            <button type="button" name="submit" name="submit" class="btn btn-dark">حفظ</button>
+                            <button type="submit"  name="submit" class="btn btn-dark">حفظ</button>
                         </div>
                     </div>
 

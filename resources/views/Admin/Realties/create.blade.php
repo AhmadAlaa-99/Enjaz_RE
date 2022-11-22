@@ -55,11 +55,11 @@
 
                             <div class="form-group">
                                 <label for="eMail">المنطقة</label>
-                                <input type="text" class="form-control" name="address" placeholder="address"required>
+                                <input type="text" class="form-control"value="{{old('address')}}" name="address" placeholder="address"required>
                             </div>
                             <div class="form-group">
                                 <label for="phone"> عدد الوحدات</label>
-                                <input type="number" class="form-control" name="units" placeholder="units"required>
+                                <input type="number" class="form-control" value="{{old('units')}}"name="units" placeholder="units"required>
                             </div>
 
 
@@ -70,7 +70,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                             <div class="form-group">
                                 <label for="eMail">اسم المنشأة</label>
-                                <input type="text" class="form-control" name="realty_name" placeholder="realty_name"required>
+                                <input type="text" class="form-control" value="{{old('realty_name')}}"name="realty_name" placeholder="realty_name"required>
                             </div>
 
 
@@ -90,7 +90,7 @@
 
                             <div class="form-group">
                                 <label for="phone"> عدد الأدوار</label>
-                                <input type="number" class="form-control" name="roles" placeholder="roles"required>
+                                <input type="number" class="form-control" name="roles" value="{{old('roles')}}"placeholder="roles"required>
                             </div>
 
 
@@ -98,7 +98,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                             <div class="form-group">
                                 <label for="phone"> المساحة</label>
-                                <input type="text" class="form-control" name="size" placeholder="size"required>
+                                <input type="text" class="form-control" name="size"value="{{old('size')}}" placeholder="size"required>
                             </div>
 
 
@@ -118,7 +118,7 @@
 
                             <div class="form-group">
                                 <label for="phone"> المميزات </label>
-                                <input type="text" class="form-control" name="advantages" placeholder="advantages"required>
+                                <input type="text" class="form-control" value="{{old('advantages')}}"name="advantages" placeholder="advantages"required>
                             </div>
 
 

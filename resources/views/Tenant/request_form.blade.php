@@ -40,7 +40,7 @@
 										<div class="row gutters">
 											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 												<div class="form-group">
-													<textarea class="form-control" id="message" name="desc"placeholder="details" maxlength="140" rows="3"></textarea>
+													<textarea class="form-control" id="message" value="{{old('desc')}}"name="desc"placeholder="details" maxlength="140" rows="3"></textarea>
 													<div class="form-text text-muted"><p id="characterLeft" class="help-block ">لا يحب ان يتجاوز 140 حرف</p></div>
 												</div>
 											</div>

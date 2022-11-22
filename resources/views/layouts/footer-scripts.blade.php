@@ -37,3 +37,11 @@
 
     setInterval(clock, 1000);
 </script>
+<script>
+    CKEDITOR
+        .create( document.querySelector( '#editor1' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+<script src="https://cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>

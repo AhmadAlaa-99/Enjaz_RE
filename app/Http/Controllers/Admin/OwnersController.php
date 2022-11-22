@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\organization;
 use App\Models\User;
 use App\Models\Nationalitie;
+use Validator;
 
 class OwnersController extends Controller
 {
@@ -34,6 +35,13 @@ class OwnersController extends Controller
         //org_envoies : organization_id name Nationality   ID_type ID_num phone email representation_document_no re_do_type release_date expire_date
 
             $pass='owner'.random_int(1999999999,9999999999);
+            $request->validate([
+        'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|digits:10',
+        'ID_num' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|digits:10',
+        'telephone' => 'regex:/^([0-9\s\-\+\(\)]*)$/|digits:8',
+        ]);
+
+
             $user= User::create([
                 'name'=>$request->name,
                 'nationalitie_id'=>$request->nationalitie_id,

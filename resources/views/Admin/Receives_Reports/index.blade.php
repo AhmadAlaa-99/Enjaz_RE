@@ -7,7 +7,7 @@
 
 @endsection
 @section('title')
-المنشأت العقارية
+ تقارير التسليم
 @stop
 @section('content')
 <div class="page-header">
@@ -91,7 +91,7 @@
 								<div class="d-flex justify-content-center">
 			                         {!!$receives->links()!!}
                         </div>
-                    
+
             </div>
         </div>
 

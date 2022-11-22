@@ -43,16 +43,16 @@
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
                             <label for="fullName"> عدد الغرف </label>
-                            <input type="number" class="form-control" id="rooms" name="rooms" placeholder="rooms"required>
+                            <input type="number" class="form-control" id="rooms" name="rooms" value="{{old('rooms')}}"placeholder="rooms"required>
                         </div>
 
                         <div class="form-group">
                             <label for="eMail">رقم الدور</label>
-                            <input type="number" class="form-control" name="role_number" placeholder="role_number"required>
+                            <input type="number" class="form-control" name="role_number" value="{{old('role_number')}}"placeholder="role_number"required>
                         </div>
                         <div class="form-group">
                                 <label for="inputName" class="control-label"> خزائن مطبخ مركبة </label>
-                                <select name="kitchen_Cabinets" class="form-control SlectBox" onclick="console.log($(this).val())"
+                                <select name="kitchen_Cabinets"value="{{old('kitchen_Cabinets')}}" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
                                     <option value="" selected disabled>مركبة؟؟</option>
@@ -63,19 +63,19 @@
 
                         <div class="form-group">
                             <label for="website">رقم عداد المياه</label>
-                            <input type="text" class="form-control" name="water_number" placeholder="water_number"required>
+                            <input type="text" class="form-control" name="water_number"value="{{old('water_number')}}" placeholder="water_number"required>
                         </div>
 
                          <div class="form-group">
                             <label for="fullName"> تفاصيل </label>
-                            <input type="text" class="form-control" id="details" name="details" placeholder="details"required>
+                            <textarea type="textarea" class="form-control" id="details" name="details"value="{{old('details')}}" placeholder="details"required></textarea>
                         </div>
 
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
                                 <label for="inputName" class="control-label">نوع الوحدة</label>
-                                <select name="type" class="form-control SlectBox" onclick="console.log($(this).val())"
+                                <select name="type"value="{{old('type')}}" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
                                     <option value="" selected disabled>حدد النوع</option>
@@ -94,16 +94,16 @@
                      </div>
                         <div class="form-group">
                             <label for="ciTy">مساحة الوحدة</label>
-                            <input type="name" class="form-control" name="size" placeholder="size"required>
+                            <input type="name" class="form-control" name="size"value="{{old('size')}}" placeholder="size"required>
                         </div>
                         <div class="form-group">
                             <label for="sTate">عدد وحدات التكييف</label>
-                            <input type="number" class="form-control" name="condition_units" placeholder="condition_units"required>
+                            <input type="number" class="form-control" name="condition_units"value="{{old('condition_units')}}" placeholder="condition_units"required>
 
                         </div>
                         <div class="form-group">
                             <label for="zIp">رقم عداد الكهرباء</label>
-                            <input type="text" class="form-control" name="electricity_number" placeholder="electricity_number"required>
+                            <input type="text" class="form-control" name="electricity_number"value="{{old('electricity_number')}}" placeholder="electricity_number"required>
                         </div>
 
 
@@ -111,11 +111,11 @@
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                         <div class="form-group">
                             <label for="addRess">رقم الوحدة</label>
-                            <input type="text" class="form-control" name="number" placeholder="number"required>
+                            <input type="text" class="form-control" name="number" value="{{old('number')}}"placeholder="number"required>
                         </div>
                         <div class="form-group">
                                 <label for="inputName" class="control-label">حالة الأثاث </label>
-                                <select name="furnished_mode" class="form-control SlectBox" onclick="console.log($(this).val())"
+                                <select name="furnished_mode" value="{{old('furnished_mode')}}"class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
                                     <option value="" selected disabled>حدد الحالة</option>
@@ -126,7 +126,7 @@
                             </div>
                               <div class="form-group">
                                 <label for="inputName" class="control-label">نوع التكييف</label>
-                                <select name="condition_type" class="form-control SlectBox" onclick="console.log($(this).val())"
+                                <select name="condition_type" value="{{old('condition_type')}}"class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
                                     <option value="" selected disabled>حدد النوع</option>
@@ -139,7 +139,7 @@
 
                         <div class="form-group">
                             <label for="sTate"> عدد دورات المياه</label>
-                            <input type="number" class="form-control" name="bathrooms" placeholder="bathrooms"required>
+                            <input type="number" class="form-control"value="{{old('bathrooms')}}" name="bathrooms" placeholder="bathrooms"required>
                         </div>
 
 

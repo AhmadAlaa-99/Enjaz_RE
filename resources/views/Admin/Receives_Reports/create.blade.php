@@ -53,26 +53,28 @@
                                 @endforeach
                                  </select>
                      </div>
-                        <div class="form-group">
-                            <label for="ciTy">تاريخ التسليم</label>
-                            <input type="date" class="form-control" name="receive_date" >
+                      <div class="form-group">
+                            <label for="ciTy">تصفية الفواتير</label>
+                            <textarea type="textarea" class="form-control" value="{{old('paymennts_status')}}"name="paymennts_status"></textarea>
                         </div>
+
                         <div class="form-group">
                             <label for="ciTy">حالة الوحدة</label>
-                            <input type="text" class="form-control" name="maint_status" >
+                            <textarea type="text" class="form-control" value="{{old('maint_status')}}"name="maint_status" ></textarea>
                         </div>
 
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-
-                        <div class="form-group">
-                            <label for="ciTy">تصفية الفواتير</label>
-                            <input type="textarea" class="form-control" name="paymennts_status">
+                         <div class="form-group">
+                            <label for="ciTy">تاريخ التسليم</label>
+                            <input type="date" class="form-control"value="{{old('receive_date')}}" name="receive_date" >
                         </div>
+
+
                         <div class="form-group">
                             <label for="ciTy">ملاحظات</label>
 
-                            <input type="textarea" class="form-control" name="notes">
+                            <textarea type="textarea" class="form-control" value="{{old('notes')}}"name="notes"></textarea>
                         </div>
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">

@@ -42,13 +42,13 @@
              <input type="hidden"name="ownerId" id="ownerId" value="{{$owner->id}}">
                 <input type="hidden" value="{{$unit->id}}"name="unit_id">
                  <input type="hidden" value="{{$realty->id}}"name="realty_id">
-           <input type="text" id="reco_number" class="floatLabel" name="reco_number"required>
+           <input type="text" id="reco_number" class="floatLabel" value="{{old('reco_number')}}"name="reco_number"required>
            <label for="street">رقم سجل العقد - ID</label>
           </div>
         </div>
         <div class="col-1-3">
           <div class="controls">
-           <input type="text" id="place" class="floatLabel" name="place"required>
+           <input type="text" id="place" class="floatLabel" value="{{old('place')}}"name="place"required>
            <label for="eMail"> مكان ابرام العقد</label>
           </div>
         </div>
@@ -70,7 +70,7 @@
       <div class="grid">
       <div class="col-1-3">
           <div class="controls">
-            <input type="date" id="le_date" class="floatLabel" name="le_date"required>
+            <input type="date" id="le_date" class="floatLabel"value="{{old('le_date')}}" name="le_date"required>
             <label for="phone">تاريخ ابرام العقد</label>
           </div>
         </div>
@@ -78,14 +78,14 @@
         <div class="col-1-3">
 
           <div class="controls">
-            <input type="date" id="st_rental_date" class="floatLabel" name="st_rental_date"required>
+            <input type="date" id="st_rental_date" class="floatLabel" value="{{old('st_rental_date')}}"name="st_rental_date"required>
             <label for="eMail">تاريخ بداية مدة الايجار</label>
           </div>
         </div>
 
         <div class="col-1-3">
           <div class="controls">
-            <input type="date" id="end_rental_date" class="floatLabel" name="end_rental_date"required>
+            <input type="date" id="end_rental_date" class="floatLabel" value="{{old('end_rental_date')}}"name="end_rental_date"required>
             <label for="phone">تاريخ نهاية مدة الايجار</label>
           </div>
         </div>
@@ -206,7 +206,7 @@
         <div class="col-1-4">
           <div class="controls">
 
-           <input type="text" name="t_name" class="floatLabel"required>
+           <input type="text" name="t_name" value="{{old('t_name')}}"class="floatLabel"required>
            <label for="street">الاسم الكامل</label>
 
           </div>
@@ -242,8 +242,11 @@
 
         <div class="col-1-4">
           <div class="controls">
-           <input type="text" name="t_ID_num" class="floatLabel"required>
+           <input type="text" name="t_ID_num" value="{{old('t_ID_num')}}"class="floatLabel"required>
            <label for="eMail">رقم الهوية</label>
+           @error('t_ID_num')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
           </div>
         </div>
       </div>
@@ -267,20 +270,30 @@
 
         <div class="col-1-4">
           <div class="controls">
-           <input type="email"  name="t_email" class="floatLabel"required>
+           <input type="email"  name="t_email" value="{{old('t_email')}}"class="floatLabel"required>
            <label for="eMail"> البريد الالكتروني</label>
           </div>
         </div>
         <div class="col-1-4">
           <div class="controls">
-           <input type="text" name="t_phone" class="floatLabel"required>
+           <input type="text" name="t_phone" value="{{old('t_phone')}}"class="floatLabel"required>
            <label for="eMail">رقم الجوال</label>
+
           </div>
+
         </div>
+        @error('t_phone')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
         <div class="col-1-4">
           <div class="controls">
-           <input type="text" name="t_telephone" class="floatLabel">
+             @error('t_telephone')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+           <input type="text" name="t_telephone" value="{{old('t_telephone')}}"class="floatLabel">
+
            <label for="eMail">رقم الهاتف</label>
+
           </div>
         </div>
   </div>
@@ -526,19 +539,19 @@
 
        <div class="col-1-3">
           <div class="controls">
-           <input type="text" id="payment_channels" class="floatLabel" name="payment_channels"required>
+           <input type="text" id="payment_channels" class="floatLabel" value="{{old('payment_channels')}}"name="payment_channels"required>
            <label for="eMail"> طريقة دفع رسوم العقد</label>
           </div>
         </div>
         <div class="col-1-3">
           <div class="controls">
-           <input type="text" name="annual_rent" class="floatLabel"required>
+           <input type="text" name="annual_rent" class="floatLabel"value="{{old('annual_rent')}}"required>
            <label for="street"> القيمة السنوية للايجار </label>
           </div>
         </div>
         <div class="col-1-3">
           <div class="controls">
-           <input type="text" name="Total" class="floatLabel"required>
+           <input type="text" name="Total" class="floatLabel"value="{{old('Total')}}"required>
            <label for="eMail">اجمالي قيمة العقد</label>
           </div>
         </div>
@@ -564,13 +577,13 @@
         </div>
         <div class="col-1-3">
           <div class="controls">
-           <input type="text" name="last_rent_payment" class="floatLabel"required>
+           <input type="text" name="last_rent_payment" value="{{old('last_rent_payment')}}"class="floatLabel"required>
            <label for="eMail">دفعة الايجار الأخيرة</label>
           </div>
         </div>
         <div class="col-1-3">
           <div class="controls">
-           <input type="text" name="recurring_rent_payment" class="floatLabel"required>
+           <input type="text" name="recurring_rent_payment" value="{{old('recurring_rent_payment')}}"class="floatLabel"required>
            <label for="eMail">  دفعة الايجار الدورية</label>
           </div>
         </div>
@@ -635,8 +648,8 @@
     </div>
 
 
-    <!-- التزامات الأطراف -->
-    <div class="form-group">
+   
+     <div class="form-group">
          <h2 class="heading">التزامات الأطراف</h2>
          <div class="row gutters">
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -647,14 +660,19 @@
 								</div>
 
 
-                                       <textarea name="desc"cols="30"rows="10"required></textarea>
+                                       <textarea class="ckeditor"id="editor1"name="desk"cols="30"rows="10"value="{{old('desc')}}"required></textarea>
+                                       <script>
+                                        CKEDITOR.replace('editor1');
+                                       </script>
 									<!--<div class="summernote"></div>-->
+
 
 							</div>
 						</div>
 					</div>
 
     </div>
+
   <!-- التزامات الأطراف -->
     <div class="form-group">
          <h2 class="heading"> مرفقات العقد</h2>
