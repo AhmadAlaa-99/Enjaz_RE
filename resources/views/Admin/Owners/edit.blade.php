@@ -55,10 +55,11 @@
                         <div class="form-group">
                             <label for="website"> نوع الهوية</label>
                             <div class="form-radio-item">
-                                <input type="radio" name="ID_type" value="civilian" id="male" checked="checked" />
+
+                                <input type="radio" name="ID_type" value="civilian" id="civilian" <?php if("{{old('ID_type')}}"=='civilian'){echo 'checked="checked"';}?> />
                                 <label for="civilian">سجل مدني</label>
 
-                                <input type="radio" name="ID_type" value="stay" id="female" />
+                                <input type="radio" name="ID_type" value="stay" id="stay"<?php if("{{old('ID_type')}}"=='stay'){echo 'checked="checked"';}?> />
                                 <label for="stay">اقامة</label>
                             </div>
 </div>
@@ -69,7 +70,7 @@
                         </div>
                          <div class="form-group">
                             <label for="addRess">تاريخ الاشتراك</label>
-                            <input type="date" class="form-control" name="record_date" value="{{$owner->record_date}}">
+                            <input type="date" class="form-control" name="record_date" value="{{old('record_date',date('Y-m-d'))}}">
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
@@ -80,10 +81,10 @@
                     <div class="form-group">
                             <label for="website"> الجنس</label>
                             <div class="form-radio-item">
-                                <input type="radio" name="gender" value="male" id="male" checked="checked" />
+                                <input type="radio" name="gender" value="male" id="male" <?php if("{{old('gender')}}"=="male"){echo 'checked="checked"';}?> />
                                 <label for="male">Male</label>
 
-                                <input type="radio" name="gender" value="female" id="female" />
+                                <input type="radio" name="gender" value="female" id="female"<?php if("{{old('gender')}}"=="female"){echo 'checked="checked"';}?> />
                                 <label for="female">Female</label>
                             </div>
                         </div>
@@ -93,9 +94,13 @@
                                 <select name="nationalitie_id" value="{{$owner->Nationality->Name}}"class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
-                                    <option value="" selected disabled>حدد الجنسية</option>
                                     @foreach ($nationals as $national)
+
+                                    @if("{{old('nationalitie_id')}}"==$national->id)
+                                    <option value="{{$national->id }}"selected>{{ $national->Name }}</option>
+                                    @else
                                         <option value="{{$national->id }}"> {{ $national->Name }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>

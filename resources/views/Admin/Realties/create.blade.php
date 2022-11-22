@@ -46,10 +46,16 @@
                                 <select name="owner_id" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
-                                    <option value="" selected disabled>حدد المالك</option>
                                     @foreach ($owners as $owner)
+
+                                    @if("{{old('owner_id')}}"==$owner->id)
+                                    <option value="{{$owner->id }}"selected>{{ $owner->user->name }}</option>
+                                    @else
                                         <option value="{{$owner->id }}"> {{ $owner->user->name }}</option>
+                                        @endif
                                     @endforeach
+
+
                                 </select>
                             </div>
 
@@ -81,8 +87,11 @@
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
                                     <option value="" selected disabled>حدد النوع</option>
-                                        <option value="building"> بناء</option>
-                                        <option value="villa"> فيلا</option>
+
+                                    <option value="villa"selected> فيلا</option>
+                                    <option value="building">بناء</option>
+
+
                                 </select>
                             </div>
 

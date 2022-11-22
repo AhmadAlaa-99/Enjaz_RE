@@ -80,9 +80,9 @@
                                 <select name="type" value="{{$realty->type}}"id="type" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--value-->
-                                    <option value="" selected disabled>حدد النوع</option>
-                                        <option value="building"> بناء</option>
-                                        <option value="villa"> فيلا</option>
+                                    <option value="building">بناء</option>
+                                    <option value="villa"> فيلا</option>
+
                                 </select>
                             </div>
 
