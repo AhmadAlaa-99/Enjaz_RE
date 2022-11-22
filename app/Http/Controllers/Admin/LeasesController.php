@@ -86,7 +86,7 @@ class LeasesController extends Controller
 
     public function finished()
     {
-        $Lease=Lease::where('status','received')->with('tenants','organization','realties','units','financial')
+        $Lease=Lease::where('status','received')->orWhere('status','expired')->with('tenants','organization','realties','units','financial')
         /*->select('number','type','st_rental_date','end_rental_date')*/->latest()->paginate(5);
         /*
         foreach($Lease as $lease)

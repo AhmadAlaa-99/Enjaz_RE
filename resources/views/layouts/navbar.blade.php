@@ -107,9 +107,7 @@
 										</li>
                                         <li>
                                         <a class="dropdown-item" href="{{ url('/' . $page='Admin/receives_reports') }}">تقارير التسليم</a>										</li>
-                                        <li>
-                                        <a class="dropdown-item" href="{{ url('/' . $page='Admin/receives_reports/create') }}">انشاء طلب تسليم</a>
-										</li>
+                                        
 							</ul>
 						</li>
                         @endcan
@@ -175,7 +173,7 @@
 								<li>
 									<a class="dropdown-item" href="{{ url('/' . $page='Owner/realties') }}">المنشات العقارية</a>
 								</li>
-								
+
 							</ul>
 						</li>
                         @endcan

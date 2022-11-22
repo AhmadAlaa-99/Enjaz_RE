@@ -17,13 +17,11 @@ class receive_reports extends Controller
         return view('Admin.Receives_Reports.index',compact('receives'));
     }
 
-    public function create()
+    public function create($id)
     {
 
-        $leases=Lease::where('status','expired')->get();
-        return view('Admin.Receives_Reports.create',compact('leases'));
-
-
+        $lease=Lease::where('id',$id)->first();
+        return view('Admin.Receives_Reports.create',compact('lease'));
     }
     public function details($id)
     {
@@ -55,23 +53,27 @@ class receive_reports extends Controller
 
     public function edit($id)
     {
-            $receive=receives::where('id',$id)->first();
-                $leases=Lease::where('status','expired')->get();
-
-        return view('Admin.Receives_Reports.edit',compact('receive','leases'));
+        $receive=receives::where('id',$id)->first();
+        return view('Admin.Receives_Reports.edit',compact('receive'));
     }
     public function update(Request $request,$id)
     {
         $receive=receives::where('id',$id)->first();
         $unit=Lease::where('id',$request->lease_id)->first();
         $receive->update([
-             'unit_id'=>$unit->unit_id,
+            'unit_id'=>$unit->unit_id,
             'lease_id'=>$request->lease_id,
             'receive_date'=>$request->receive_date,
             'paymennts_status'=>$request->paymennts_status,
             'maint_status'=>$request->maint_status,
             'notes'=>$request->notes,
         ]);
+         return redirect()->route('receives_reports.index')->with([
+            'message' => 'receives_reports created successfully',
+            'alert-type' => 'success',
+        ]);
+
+
     }
 
     public function destroy($id)

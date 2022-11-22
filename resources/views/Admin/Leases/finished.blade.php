@@ -91,6 +91,7 @@
                                                             <a class="dropdown-item" href="{{route('payments.details',$lease->id)}}"><i style="color:green" class="icon-details"></i>&nbsp;سداد الدفعات</a>
                                                             <a class="dropdown-item" href="{{route('lease.details',$lease->id)}}"><i style="color:green" class="icon-details"></i>&nbsp;تفاصيل العقد</a>
                                                             <a class="dropdown-item" href="{{route('down.file',$lease->id)}}"><i style="color:green" class="icon-download"></i>&nbsp;  تحميل المرفقات&nbsp;</a>
+                                                            @if($lease->status=='expired') <a class="dropdown-item" href="{{route('receive.add',$lease->id)}}"><i style="color:green" class="icon-download"></i>&nbsp; انشاء طلب تسليم &nbsp;</a>@endif
                                                         </div>
                                                     </div>
                                                 </td>

@@ -43,21 +43,12 @@
 
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                    <div class="form-group">
-                              <label for="inputName" class="control-label"> رقم العقد </label>
-                                <select name="lease_id"class="form-control SlectBox" onclick="console.log($(this).val())"
-                                    onchange="console.log('change is firing')"required>
-                               <option selected disabled>حدد رقم العقد المسجل</option>
-                                @foreach ($leases as $lease)
-                             <option value="{{ $lease->id }}">{{ $lease->reco_number }}</option>
-                                @endforeach
-                                 </select>
-                     </div>
                       <div class="form-group">
-                            <label for="ciTy">تصفية الفواتير</label>
-                            <textarea type="textarea" class="form-control" value="{{old('paymennts_status')}}"name="paymennts_status"></textarea>
-                        </div>
+                            <label for="ciTy">تاريخ التسليم</label>
+                            <input type="date" class="form-control"value="{{old('receive_date')}}" name="receive_date" >
+                            <input type="hidden"value="{{$lease->id}}" name="lease_id" >
 
+                        </div>
                         <div class="form-group">
                             <label for="ciTy">حالة الوحدة</label>
                             <textarea type="text" class="form-control" value="{{old('maint_status')}}"name="maint_status" ></textarea>
@@ -65,9 +56,9 @@
 
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                         <div class="form-group">
-                            <label for="ciTy">تاريخ التسليم</label>
-                            <input type="date" class="form-control"value="{{old('receive_date')}}" name="receive_date" >
+                   <div class="form-group">
+                            <label for="ciTy">تصفية الفواتير</label>
+                            <textarea type="textarea" class="form-control" value="{{old('paymennts_status')}}"name="paymennts_status"></textarea>
                         </div>
 
 

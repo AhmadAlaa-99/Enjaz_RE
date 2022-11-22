@@ -43,21 +43,13 @@
                 <div class="row gutters">
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                    <div class="form-group">
-                                <label for="inputName" class="control-label"> رقم العقد </label>
-                                <select name="lease_id"  class="form-control SlectBox" onclick="console.log($(this).val())"
-                                    onchange="console.log('change is firing')"required>
-                                    <!--value-->
-                                    <option value="" selected disabled>حدد رقم العقد المسجل</option>
-                                    @foreach ($leases as $lease)
-                                        <option value="{{$lease->id }}"> {{ $lease->reco_number }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                               <div class="form-group">
-                            <label for="ciTy">تصفية الفواتير</label>
-                            <textarea type="name" class="form-control" name="paymennts_status" value="{{$receive->paymennts_status}}"required></textarea>
+              <div class="form-group">
+                            <label for="ciTy">تاريخ التسليم</label>
+                            <input type="date" class="form-control" name="receive_date" value="{{$receive->receive_date}}"required>
+                            <input type="hidden"  name="lease_id" value="{{$receive->lease_id}}"required>
+
                         </div>
+
 
 
                         <div class="form-group">
@@ -69,9 +61,9 @@
 
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                        <div class="form-group">
-                            <label for="ciTy">تاريخ التسليم</label>
-                            <input type="date" class="form-control" name="receive_date" value="{{$receive->receive_date}}"required>
+                     <div class="form-group">
+                            <label for="ciTy">تصفية الفواتير</label>
+                            <textarea type="name" class="form-control" name="paymennts_status" value="{{$receive->paymennts_status}}"required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="ciTy">ملاحظات</label>

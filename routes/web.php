@@ -101,9 +101,12 @@ Route::group([
 
 
      Route::resource('/receives_reports',\Admin\receive_reports::class);
+
     Route::get('/receive_details/{id}',[receive_reports::class,'details'])->name('receive.details');
     Route::get('/receive_destroy/{id}',[receive_reports::class,'destroy'])->name('receive.destroy');
-    
+    Route::get('/receive_add/{id}',[receive_reports::class,'create'])->name('receive.add');
+
+
 
      Route::get('/maintenance_payments',[ReportsController::class,'maintenance_payments']);
 
