@@ -152,7 +152,7 @@ class LeasesController extends Controller
                'email'=>$request->t_email,
                'gender'=>$request->t_gender,
                'role_name'=>'Tenant',
-               'password'=>bcrypt($pass),
+               'password'=>bcrypt('21412123'),
             ]);
             $role=Role::where('name','Tenant')->first();
             $user->assignRole([$role->id]);

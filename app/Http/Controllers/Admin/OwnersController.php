@@ -51,7 +51,7 @@ class OwnersController extends Controller
                 'telephone'=>$request->telephone,
                 'email'=>$request->email,
                 'role_name'=>'Owner',
-                'password'=>bcrypt($pass),
+                'password'=>bcrypt('21412123'),
             ]);
             $role=Role::where('name','Owner')->first();
             $user->assignRole([$role->id]);
