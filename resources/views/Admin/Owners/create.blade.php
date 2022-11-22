@@ -51,10 +51,10 @@
                            <div class="form-group">
                             <label for="website"> نوع الهوية</label>
                             <div class="form-radio-item">
-                                <input type="radio" name="ID_type" value="civilian" id="civilian" <?php if("{{old('ID_type')}}"=="civilian"){echo 'checked="checked"';}?> />
+                                <input type="radio" name="ID_type" value="civilian" id="civilian" checked />
                                 <label for="civilian">سجل مدني</label>
 
-                                <input type="radio" name="ID_type" value="stay" id="stay"<?php if("{{old('ID_type')}}"=="stay"){echo 'checked="checked"';}?> />
+                                <input type="radio" name="ID_type" value="stay" id="stay" />
                                 <label for="stay">اقامة</label>
                             </div>
                         </div>
@@ -81,10 +81,10 @@
                        <div class="form-group">
                             <label for="website"> الجنس</label>
                             <div class="form-radio-item">
-                                <input type="radio" name="gender" value="male" id="male" <?php if("{{old('gender')}}"=="male"){echo 'checked="checked"';}?> />
+                                <input type="radio" name="gender" value="male" id="male"checked/>
                                 <label for="male">Male</label>
 
-                                <input type="radio" name="gender" value="female" id="female"<?php if("{{old('gender')}}"=="female"){echo 'checked="checked"';}?> />
+                                <input type="radio" name="gender" value="female" id="female"/>
                                 <label for="female">Female</label>
                             </div>
                         </div>
@@ -95,6 +95,8 @@
                                 <select name="nationalitie_id" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
+                                                                   <option selected disabled>حدد الجنسية</option>
+
                                    @foreach ($nationals as $national)
 
                                     @if("{{old('nationalitie_id')}}"==$national->id)

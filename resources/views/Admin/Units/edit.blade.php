@@ -57,8 +57,8 @@
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
                                     <option value="" selected disabled>مركبة؟؟</option>
-                                        <option value="yes"> نعم</option>
-                                        <option value="no"> لا</option>
+                                        <option value="yes"{{($unit->kitchen_Cabinets) == 'yes' ? 'selected' : '' }}> نعم</option>
+                                        <option value="no"{{($unit->kitchen_Cabinets) == 'no' ? 'selected' : '' }}> لا</option>
                                 </select>
                             </div>
                         <div class="form-group">
@@ -84,11 +84,11 @@
 
 
 
-                                        <option value="villa">فيلا</option>
-                                        <option value="apartment">شقة</option>
-                                        <option value="two-floor">شقة ثنائية الدور</option>
-                                        <option value="small">شقة صغيرة</option>
-                                        <option value="annexe">ملحق</option>
+                                        <option value="villa"{{($unit->type) == 'villa' ? 'selected' : '' }}>فيلا</option>
+                                        <option value="apartment"{{($unit->type) == 'apartment' ? 'selected' : '' }}>شقة</option>
+                                        <option value="two-floor"{{($unit->type) == 'two-floor' ? 'selected' : '' }}>شقة ثنائية الدور</option>
+                                        <option value="small"{{($unit->type) == 'small' ? 'selected' : '' }}>شقة صغيرة</option>
+                                        <option value="annexe"{{($unit->type) == 'annexe' ? 'selected' : '' }}>ملحق</option>
 
                                 </select>
                      </div>
@@ -119,9 +119,9 @@
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
                                     <option value="" selected disabled>حدد الحالة</option>
-                                        <option value="unfurnished"> غير مؤثثة</option>
-                                        <option value="newfn"> مؤثثة جديد</option>
-                                        <option value="usedfn"> مؤثثة مستعمل</option>
+                                        <option value="unfurnished"{{($unit->furnished_mode) == 'unfurnished' ? 'selected' : '' }}> غير مؤثثة</option>
+                                        <option value="newfn"{{($unit->furnished_mode) == 'newfn' ? 'selected' : '' }}> مؤثثة جديد</option>
+                                        <option value="usedfn"{{($unit->furnished_mode) == 'usedfn' ? 'selected' : '' }}> مؤثثة مستعمل</option>
                                 </select>
                             </div>
                         <div class="form-group">
@@ -130,9 +130,9 @@
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
                                     <option value="" selected disabled>حدد النوع</option>
-                                        <option value="سبليت">سبليت</option>
-                                        <option value="شباك">شباك</option>
-                                        <option value="مركزي"> مركزي</option>
+                                        <option value="سبليت"{{($unit->condition_type) == 'سبليت' ? 'selected' : '' }}>سبليت</option>
+                                        <option value="شباك"{{($unit->condition_type) == 'شباك' ? 'selected' : '' }}>شباك</option>
+                                        <option value="مركزي"{{($unit->condition_type) == 'مركزي' ? 'selected' : '' }}> مركزي</option>
                                 </select>
                      </div>
                         <div class="form-group">

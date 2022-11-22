@@ -46,6 +46,8 @@
                                 <select name="owner_id" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
+                                                                   <option selected disabled>حدد اسم المالك</option>
+
                                     @foreach ($owners as $owner)
 
                                     @if("{{old('owner_id')}}"==$owner->id)

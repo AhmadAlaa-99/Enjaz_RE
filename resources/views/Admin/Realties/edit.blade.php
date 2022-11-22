@@ -47,10 +47,17 @@
                                 <select name="owner_id" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--value-->
-                                    <option value="" selected disabled>حدد المالك</option>
                                     @foreach ($owners as $owner)
-                                        <option value="{{$owner->id }}"> {{ $owner->company_name }}</option>
+
+                                    @if("{{old('owner_id')}}"==$owner->id)
+                                    <option value="{{$owner->id }}"selected>{{  $owner->company_name }}</option>
+                                    @else
+                                        <option value="{{$owner->id }}"> {{  $owner->company_name}}</option>
+                                        @endif
                                     @endforeach
+
+
+                                    
                                 </select>
                             </div>
 
@@ -80,8 +87,8 @@
                                 <select name="type" value="{{$realty->type}}"id="type" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--value-->
-                                    <option value="building">بناء</option>
-                                    <option value="villa"> فيلا</option>
+                                    <option value="building"{{($realty->type) == 'building' ? 'selected' : '' }}>بناء</option>
+                                    <option value="villa"{{($realty->type) == 'villa' ? 'selected' : '' }}> فيلا</option>
 
                                 </select>
                             </div>
@@ -106,9 +113,8 @@
                                 <select name="use" value="{{$realty->use}}"id="use" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
                                     <!--value-->
-                                    <option value="" selected disabled>حدد النوع</option>
-                                        <option value="family"> عائلي</option>
-                                        <option value="individually"> افراد</option>
+                                        <option value="family" {{($realty->use) == 'family' ? 'selected' : '' }}  > عائلي</option>
+                                        <option value="individually" {{($realty->use) == 'individually' ? 'selected' : '' }}> افراد</option>
                                 </select>
                             </div>
 
