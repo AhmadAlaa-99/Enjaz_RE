@@ -110,7 +110,7 @@
                                                  <thead>
                                             <tr>
                                                 <th >  اسم المنشأة :</br></br> {{$realty->name}}</th>
-                                                 <th >   المنطقة  : </br></br> {{$realty->address}}</th>
+                                                 <th >   المنطقة  : </br></br> {{$realty->quarter}}</th>
                                                   <th >   نوع العقار : </br> </br>{{$realty->type}}</th>
                                                    <th >   الوحدات :</br> </br>{{$realty->units}}</th>
                                                     <th >   الادوار  :  </br></br>{{$realty->roles}}</th>
@@ -215,8 +215,9 @@
           </div>
         </div>
         <div class="col-1-3">
-          <div class="controls">
-           <input type="text" name="last_rent_payment" value="{{old('last_rent_payment')}}"class="floatLabel"required>
+          <div class="controls">                
+
+           <input type="text" name="num_rental_payments" value="{{old('num_rental_payments')}}"class="floatLabel"required>
            <label for="eMail">عدد دفعات الايجار</label>
           </div>
         </div>

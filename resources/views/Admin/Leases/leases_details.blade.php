@@ -97,7 +97,6 @@
                           <th> مكان ابرام العقد</th>
                           <th> تاريخ بداية مدة الايجار</th>
                           <th>تاريخ نهاية مدة الايجار</th>
-                          <th> طريقة دفع رسوم العقد</th>
 
 
                         </tr>
@@ -112,7 +111,6 @@
                           <td>{{$lease->place}}</td>
                           <td>{{$lease->st_rental_date}}</td>
                           <td>{{$lease->end_rental_date}}</td>
-                          <td>{{$lease->payment_channels}}</td>
                         </tr>
 
                     </tbody>
@@ -184,7 +182,7 @@
 											<tbody>
 												<tr>
 
-													<td>{{$lease->realties->address}}</td>
+													<td>{{$lease->realties->quarter}}</td>
 													<td>{{$lease->realties->type}}</td>
                                                     <td>{{$lease->realties->units}}</td>
                                                     <td>{{$lease->realties->shopsNo}}</td>
@@ -260,28 +258,28 @@
 
 
 												<tr>
-													<th> تاريخ بداية العقد</th>
-                                                    <th>  تاريخ نهاية العقد</th>
-													<th>  الكلفة السنوية للايجار </th>
-													<th> اجمالي قيمة العقد </th>
-													<th>  دورة سداد الايجار</th>
-													<th>   عدد دفعات الايجار  </th>
+													<th>قيمة العقد</th>
+                                                    <th>دورة سداد الايجار</th>
+                                                    	<th>   عدد دفعات الايجار  </th>
                                                     <th>  دفعة الايجار الدورية </th>
-                                                    <th> عدد دفعات الايجار </th>
+                                                 <th> نسبة الضريبة </th>
+                                                    <th>  مبلغ الضريبة </th>
+                                                    <th>   اجمالي قيمة العقد </th>
+
+
+
 
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
-
-													<td>{{$lease->financial->st_rental_date}}</td>
-                                                    <td>{{$lease->financial->end_rental_date}}</td>
-                                                    <td>{{$lease->financial->annual_rent}}</td>
-                                                    <td>{{$lease->financial->Total}}</td>
+													<td>{{$lease->financial->ejar_cost}}</td>
                                                     <td>{{$lease->financial->payment_cycle}}</td>
-                                                    <td>{{$lease->financial->last_rent_payment}}</td>
-                                                    <td>{{$lease->financial->recurring_rent_payment}}</td>
                                                     <td>{{$lease->financial->num_rental_payments}}</td>
+                                                    <td>{{$lease->financial->recurring_rent_payment}}</td>
+                                                    <td>{{$lease->financial->tax}}</td>
+                                                    <td>{{$lease->financial->tax_ammount}}</td>
+                                                    <td>{{$lease->financial->rent_value}}</td>
 
 
 												</tr>

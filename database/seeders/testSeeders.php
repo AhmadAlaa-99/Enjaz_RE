@@ -44,11 +44,10 @@ class testSeeders extends Seeder
         'attribute_name'=>'aliAli',
        ]);
        $owner=Owner::latest()->first();
-       $quarter=quarter::create(['name'=>'جدة']);
         Realty::create([
                 'realty_name'=>'عمارة الشفاء',
                 'owner_id'=>$owner->id,
-                  'quarter_id'=>'1',
+                  'quarter'=>'جدة',
                  'agency_name'=>'Ali mohammed',
                 'shopsNo'=>'3',
                 'agency_mobile'=>'09432432432',
@@ -184,7 +183,6 @@ for ($i = 0; $i <2; $i++)
             Financial_statements::create([
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
                 'recurring_rent_payment'=>'432423',
-              //  'last_rent_payment'=>'0',
                 'num_rental_payments'=>'3',
                 'payment_channels'=>'كاش',
                 'tax'=>'15%',
@@ -237,7 +235,6 @@ for ($i = 0; $i <2; $i++)
              Financial_statements::create([
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
                 'recurring_rent_payment'=>'432423',
-              //  'last_rent_payment'=>'0',
                 'num_rental_payments'=>'3',
                 'payment_channels'=>'كاش',
                 'notes'=>'not found',

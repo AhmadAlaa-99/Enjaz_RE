@@ -81,7 +81,7 @@
 
                           <td>{{$lease->st_rental_date}}</td>
                           <td>{{$lease->end_rental_date}}</td>
-                          <td>{{$lease->financial->Total}}</td>
+                          <td>{{$lease->financial->rent_value}}</td>
                           <td>{{$lease->financial->payment_cycle}}</td>
                           <td>{{$lease->financial->num_rental_payments}}</td>
                         <td>

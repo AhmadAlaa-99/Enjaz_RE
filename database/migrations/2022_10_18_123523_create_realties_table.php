@@ -16,8 +16,9 @@ class CreateRealtiesTable extends Migration
         Schema::create('realties', function (Blueprint $table) {
             $table->id();
             $table->foreignId('owner_id')->constrained('owners')->cascadeOnDelete();
-            $table->foreignId('quarter_id')->constrained('quarters')->cascadeOnDelete();
+
             $table->string('realty_name');
+             $table->string('quarter');
             $table->string('agency_name');
             $table->string('shopsNo');
             $table->string('agency_mobile');

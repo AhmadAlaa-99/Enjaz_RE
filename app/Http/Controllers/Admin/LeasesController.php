@@ -76,8 +76,7 @@ public function leases_renew_store(Request $request)
                 'annual_rent'=>$request->annual_rent,
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
                 'recurring_rent_payment'=>$request->recurring_rent_payment,
-              //  'last_rent_payment'=>'0',
-                'num_rental_payments'=>'0',
+                'num_rental_payments'=>$request->num_rental_payments,
                 'end_rental_date'=>$request->end_rental_date,
                 'Total'=>$request->Total,
                 'payment_channels'=>$request->payment_channels,
@@ -265,7 +264,7 @@ public function leases_renew_store(Request $request)
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
                 'recurring_rent_payment'=>$request->recurring_rent_payment,
               //  'last_rent_payment'=>'0',
-                'num_rental_payments'=>'0',
+                'num_rental_payments'=>$request->num_rental_payments,
                 'payment_channels'=>$request->payment_channels,
                 'tax'=>$request->tax,
                 'tax_ammount'=>$request->tax_ammount,
@@ -317,8 +316,8 @@ public function leases_renew_store(Request $request)
 
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
                 'recurring_rent_payment'=>$request->recurring_rent_payment,
-              //  'last_rent_payment'=>'0',
-                'num_rental_payments'=>'0',
+
+                'num_rental_payments'=>$request->num_rental_payments,
                 'payment_channels'=>$request->payment_channels,
 
                 'notes'=>$request->notes,

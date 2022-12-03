@@ -171,7 +171,7 @@
                                                      <td>{{$realty->realty_name}}</td>
                                                      <td>{{$realty->agency_name}}</td>
                                                      <td>{{$realty->agency_mobile}}</td>
-													<td>{{$realty->quarter_id}}</td>
+													<td>{{$realty->quarter}}</td>
 													<td>{{$realty->type}}</td>
                                                     <td>{{$realty->units}}</td>
                                                     <td>{{$realty->elevator}}</td>

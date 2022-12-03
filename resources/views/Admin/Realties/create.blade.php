@@ -45,7 +45,7 @@
 
                             <div class="form-group">
                                 <label for="eMail">المنطقة</label>
-                                <input type="text" class="form-control"value="{{old('address')}}" name="address" placeholder="address"required>
+                                <input type="text" class="form-control"value="{{old('quarter')}}" name="quarter" placeholder="quarter"required>
                             </div>
                             <div class="form-group">
                                 <label for="phone"> عدد الوحدات</label>

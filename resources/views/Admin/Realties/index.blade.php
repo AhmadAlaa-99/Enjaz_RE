@@ -82,7 +82,7 @@
                             <td>{{$i}}</td>
                           <td>{{$realty->realty_name}}</td>
                           <td><span class="badge badge-danger">{{$realty->created_at}}</td>
-                          <td>{{$realty->address}}</td>
+                          <td>{{$realty->quarter}}</td>
                           <td>{{$realty->type}}</td>
                           <td>{{$realty->use}}</td>
                           <td>{{$realty->size}}</td>

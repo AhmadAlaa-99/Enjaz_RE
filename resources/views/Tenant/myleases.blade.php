@@ -77,7 +77,7 @@
 
                           <td>{{$lease->st_rental_date}}</td>
                           <td>{{$lease->end_rental_date}}</td>
-                          <td>{{$lease->financial->Total}}</td>
+                          <td>{{$lease->financial->rent_value}}</td>
                           <td><span class="badge badge-success"><a href="{{route('tn_lease.details',$lease->id) }}">معاينة</a></td>
                           <td><span class="badge badge-danger">{{$lease->status}}</td>
                         </tr>

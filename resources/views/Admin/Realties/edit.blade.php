@@ -46,7 +46,7 @@
 
                             <div class="form-group">
                                 <label for="eMail">المنطقة</label>
-                                <input type="text" class="form-control" name="address" value="{{$realty->address}}"required>
+                                <input type="text" class="form-control" name="quarter" value="{{$realty->quarter}}"required>
                             </div>
                             <div class="form-group">
                                 <label for="phone">  عدد الوحدات السكنية</label>

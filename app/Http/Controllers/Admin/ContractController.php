@@ -157,11 +157,10 @@ public function finish_contract($id)
         'attribute_name'=>$request->attribute_name,
        ]);
        $owner=Owner::latest()->first();
-       $quarter=quarter::create(['name'=>$request->quarter]);
         Realty::create([
                 'realty_name'=>$request->realty_name,
                 'owner_id'=>$owner->id,
-                'quarter_id'=>$quarter->id,
+                'quarter'=>$request->quarter,
                 'agency_name'=>$request->agency_name,
                 'shopsNo'=>$request->shopsNo,
                 'agency_mobile'=>$request->agency_mobile,

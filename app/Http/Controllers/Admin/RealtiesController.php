@@ -85,7 +85,7 @@ class RealtiesController extends Controller
         $Realty=Realty::where('id',$id)->first();
         $Realty->update([
             'realty_name'=> $request->realty_name,
-            'address'=> $request->address,
+            'quarter'=> $request->quarter,
             'type'=> $request->type,
             'use'=> $request->use,
             'roles'=> $request->roles,
