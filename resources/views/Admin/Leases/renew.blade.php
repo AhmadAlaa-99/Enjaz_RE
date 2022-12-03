@@ -178,18 +178,17 @@
 							</div>
 						</div>
     </div>
-   <!--  البيانات المالية -->
+      <!--  البيانات المالية -->
     <div class="form-group">
          <h2 class="heading">البيانات المالية</h2>
-
-      <div class="grid">
-         <div class="col-1-4">
+<div class="grid">
+         <div class="col-1-3">
           <div class="controls">
            <input type="text" name="ejar_cost" class="floatLabel"value="{{old('ejar_cost')}}"required>
            <label for="eMail"> قيمة العقد</label>
           </div>
         </div>
-      <div class="col-1-4">
+      <div class="col-1-3">
           <div class="controls">
            <select name="payment_cycle"id="payment_cycle"class="floatLabel" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
@@ -203,18 +202,45 @@
            <label for="fruit">دورة سداد الايجارٍ</label>
           </div>
         </div>
-        <div class="col-1-4">
+        <div class="col-1-3">
           <div class="controls">
            <input type="text" name="num_rental_payments" value="{{old('num_rental_payments')}}"class="floatLabel"required>
            <label for="eMail">عدد دفعات الايجار</label>
           </div>
         </div>
-        <div class="col-1-4">
+
+
+
+
+      <div class="grid">
+
+
+           <div class="col-1-3">
+          <div class="controls">
+            <select name="payment_channels"id="payment_channels"class="floatLabel" onclick="console.log($(this).val())"
+                                    onchange="console.log('change is firing')"required>
+                                    <!--placeholder-->
+                                        <option value="كاش" >كاش</option>
+                                        <option value="فيزا " >فيزا</option>
+                                        <option value="بنك" >بنك</option>
+                        </select>
+           <label for="eMail">طريقة دفع الرسوم</label>
+          </div>
+        </div>
+  <div class="col-1-3">
           <div class="controls">
            <input type="text" name="recurring_rent_payment" value="{{old('recurring_rent_payment')}}"class="floatLabel"required>
            <label for="eMail">  دفعة الايجار الدورية</label>
           </div>
         </div>
+         <div class="col-1-3">
+          <div class="controls">
+           <input type="text" name="notes" value="{{old('notes')}}"class="floatLabel"required>
+           <label for="eMail"> ملاحظات </label>
+          </div>
+        </div>
+      </div>
+
       </div>
       @if($unit->type=="محل تجاري")
          <div class="grid">
@@ -252,6 +278,7 @@
                                                 <th >تاريخ الاصدار</th>
                                                 <th >تاريخ الاستحقاق</th>
                                                 <th >اجمالي القيمة</th>
+
                                                 <th></th>
                                             </tr>
                                         </thead>

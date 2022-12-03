@@ -74,6 +74,8 @@
                           <td>{{$unit->bathrooms}}</td>
                           <td>{{$unit->kitchen_Cabinets}}</td>
                           <td>{{$unit->condition_units}}</td>
+                         <td>{{$unit->condition_type}}</td>
+
 
 
                           <td>

@@ -91,7 +91,10 @@ Route::group([
      Route::resource('/units',\Admin\UnitsController::class);
 
      Route::resource('/leases',\Admin\LeasesController::class);
+
      Route::get('/unit_rent/{id}',[AdminLeasesController::class,'create'])->name('unit.rent');
+    Route::post('/lease_store',[AdminLeasesController::class,'store'])->name('leases.store');
+
 
 
 

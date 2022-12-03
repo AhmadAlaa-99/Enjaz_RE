@@ -90,7 +90,7 @@ public function leases_renew_store(Request $request)
 
 
         // /   $input['desc']=$request->files;
-            Commitments::create(['desc'=>$request->desc]);
+            Commitments::create(['desc'=>'de']);
            $commit=Commitments::latest()->first();
             $fin=Financial_statements::latest()->first();
             $ten=Tenant::latest()->first();
@@ -133,7 +133,7 @@ public function leases_renew_store(Request $request)
 
 
         // /   $input['desc']=$request->files;
-            Commitments::create(['desc'=>$request->desc]);
+            Commitments::create(['desc'=>'de']);
            $commit=Commitments::latest()->first();
             $fin=Financial_statements::latest()->first();
             $ten=Tenant::latest()->first();
@@ -261,14 +261,17 @@ public function leases_renew_store(Request $request)
      {
 
 
+
     //    $pass='tenant'.random_int(1999999999,9999999999);
+    /*
          $request->validate([
         'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|digits:10',
         'ID_num' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|digits:10',
         'telephone' => 'regex:/^([0-9\s\-\+\(\)]*)$/|digits:8',
         ]);
-    $pass='12345678';
-           $user= User::create([
+        */
+          $pass='12345678';
+            $user= User::create([
                'name'=>$request->t_name,
               'nationalitie_id'=>$request->nationalitie_id,
                'ID_type'=>$request->t_ID_type,
@@ -283,31 +286,26 @@ public function leases_renew_store(Request $request)
             $role=Role::where('name','Tenant')->first();
             $user->assignRole([$role->id]);
 
-            $unit_id=Units::where('id',$request->unit_id)->update(['status'=>'rented']);
+            $unit=Units::where('id',$request->unit_id)->first();
+           $unit->update(['status'=>'rented']);
 
             //sendNotify
        //     Notification::send($user, new \App\Notifications\NewTenantNotify($user,$pass));
        $us=User::latest()->first();
+
             Tenant::create([
-                //one to one
+
                 'user_id'=>$us->id,
-                //one to one
+
                 'unit_id'=>$request->unit_id,
-            /*
-                'tn_name'=>$request->tn_name,
-                'tn_nationality'=>$request->tn_nationality,
-                'tn_ID_type'=>$request->tn_ID_type,
-                'tn_ID_num'=>$request->tn_ID_num,
-                'tn_phone'=>$request->tn_phone,
-                'tn_telephone'=>$request->tn_telephone,
-                'tn_email'=>$request->tn_email,
-             */
+
             ]);
            // return $request->realty_id;
             $realty=Realty::where('id',$request->realty_id)->first();
             $realty->update([
                 'rents'=>$realty->rents+=1,
             ]);
+
     if($unit->type=="محل تجاري")
     {
 
@@ -328,7 +326,7 @@ public function leases_renew_store(Request $request)
 
 
         // /   $input['desc']=$request->files;
-            Commitments::create(['desc'=>$request->desc]);
+            Commitments::create(['desc'=>'a']);
            $commit=Commitments::latest()->first();
             $fin=Financial_statements::latest()->first();
             $ten=Tenant::latest()->first();
@@ -356,16 +354,6 @@ public function leases_renew_store(Request $request)
         {
 
             $financaila=Financial_statements::create([
-
-
-
-
-
-
-
-
-
-
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
                 'recurring_rent_payment'=>$request->recurring_rent_payment,
 
@@ -380,7 +368,7 @@ public function leases_renew_store(Request $request)
 
 
         // /   $input['desc']=$request->files;
-            Commitments::create(['desc'=>$request->desc]);
+            Commitments::create(['desc'=>'d']);
            $commit=Commitments::latest()->first();
             $fin=Financial_statements::latest()->first();
             $ten=Tenant::latest()->first();
