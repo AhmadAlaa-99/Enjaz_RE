@@ -26,7 +26,6 @@ class CreateFinancialStatementsTable extends Migration
 
         Schema::create('financial_statements', function (Blueprint $table) {
             $table->id();
-            $table->string('lease_ammount');
             $table->string('recurring_rent_payment');
              $table->string('ejar_cost');
              $table->string('tax')->default('0');

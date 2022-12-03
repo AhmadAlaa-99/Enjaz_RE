@@ -96,7 +96,6 @@ public function leases_renew_store(Request $request)
                 'reco_number'=>$request->reco_number,
                 'le_date'=>$request->le_date,
                 'st_rental_date'=>$request->st_rental_date,
-                'payment_method'=>$request->payment_channels,
                 'type'=>'renew',//$request->type_le,
                 'place'=>$request->place,
                 'end_rental_date'=>$request->end_rental_date,
@@ -263,17 +262,15 @@ public function leases_renew_store(Request $request)
 
 
             $financaila=Financial_statements::create([
-                'st_rental_date'=>$request->st_rental_date,
-                'annual_rent'=>$request->annual_rent,
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
                 'recurring_rent_payment'=>$request->recurring_rent_payment,
               //  'last_rent_payment'=>'0',
                 'num_rental_payments'=>'0',
-                'end_rental_date'=>$request->end_rental_date,
                 'payment_channels'=>$request->payment_channels,
-                'ejar_cost'=>$request->ejar_cost,
                 'tax'=>$request->tax,
                 'tax_ammount'=>$request->tax_ammount,
+                'notes'=>$request->notes,
+                'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->rent_value,
             ]);
           //  return 'tete';
@@ -292,7 +289,6 @@ public function leases_renew_store(Request $request)
                 'reco_number'=>$request->reco_number,
                 'le_date'=>$request->le_date,
                 'st_rental_date'=>$request->st_rental_date,
-                'payment_method'=>$request->payment_channels,
                 'type'=>'new',//$request->type_le,
                 'place'=>$request->place,
                 'end_rental_date'=>$request->end_rental_date,
@@ -307,16 +303,25 @@ public function leases_renew_store(Request $request)
         }
         else
         {
-             
+
             $financaila=Financial_statements::create([
-                'st_rental_date'=>$request->st_rental_date,
-                'annual_rent'=>$request->annual_rent,
+
+
+
+
+
+
+
+
+
+
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
                 'recurring_rent_payment'=>$request->recurring_rent_payment,
               //  'last_rent_payment'=>'0',
                 'num_rental_payments'=>'0',
-                'end_rental_date'=>$request->end_rental_date,
                 'payment_channels'=>$request->payment_channels,
+
+                'notes'=>$request->notes,
                 'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->ejar_cost,
             ]);
@@ -336,7 +341,6 @@ public function leases_renew_store(Request $request)
                 'reco_number'=>$request->reco_number,
                 'le_date'=>$request->le_date,
                 'st_rental_date'=>$request->st_rental_date,
-                'payment_method'=>$request->payment_channels,
                 'type'=>'new',//$request->type_le,
                 'place'=>$request->place,
                 'end_rental_date'=>$request->end_rental_date,

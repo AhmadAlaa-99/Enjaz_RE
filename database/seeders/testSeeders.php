@@ -9,6 +9,7 @@ use App\Models\Financial_statements;
 use App\Models\Owner_deeds;
 use App\Models\Payments;
 use App\Models\Commitments;
+use App\Models\quarter;
 use App\Models\Lease;
 use App\Models\User;
 use App\Models\Realty;
@@ -32,6 +33,10 @@ class testSeeders extends Seeder
      */
     public function run()
     {
+
+
+        ////////////////////////// //////////Start Contract///////////////////////////////////////
+
          Owner::create([
         'name'=>'Ahmad Alaa',
         'email'=>'Ahmad@gmail.com',
@@ -39,10 +44,16 @@ class testSeeders extends Seeder
         'attribute_name'=>'aliAli',
        ]);
        $owner=Owner::latest()->first();
+       $quarter=quarter::create(['name'=>'جدة']);
         Realty::create([
                 'realty_name'=>'عمارة الشفاء',
                 'owner_id'=>$owner->id,
-                'address'=>'السعودية - جدة',
+                  'quarter_id'=>'1',
+                 'agency_name'=>'Ali mohammed',
+                'shopsNo'=>'3',
+                'agency_mobile'=>'09432432432',
+                'elevator'=>'نعم',
+                 'parking'=>'لا',
                 'type'=>'building',
                 'use'=>'family',
                 'roles'=>'1',
@@ -50,6 +61,7 @@ class testSeeders extends Seeder
                 'size'=> '43',
                 'advantages'=> 'not found',
                 ]);
+
                 $realty=Realty::latest()->first();
                 $image_name='doc-gf.jpg';
                 contract::create([
@@ -57,11 +69,14 @@ class testSeeders extends Seeder
                 'contactNo'=>'435',
                 'start_date'=>'10/10/2020',
                 'end_date'=>'10/10/2022',
-                'rent_value'=>'100000',
-                'contract_file'=>$image_name,
+                'ejar_cost'=>'800000',
+                'tax'=>'15%',
+                'tax_amount'=>'100000',
+                'rent_value'=>'110000',
+                'contract_file'=>'fd.jpg',
                 'type'=>'تجاري',
                 'note'=>'not found',
-                'status'=>'عقد جاري',
+                'status'=>'جديد',
             ]);
             $contract=contract::latest()->first();
             ensollments::create([
@@ -72,9 +87,9 @@ class testSeeders extends Seeder
                    'amount'=>'3243',
                    'payment_type'=>'cash',
                    'refrenceNo'=>'3424',
-                    'note'=>'not found',
             ]);
             $faker = Factory::create();
+            ////////////////////////////////////End Contract///////////////////////////////////////
 /*
 
         $realty_type=['villa','building'];
@@ -96,13 +111,32 @@ for ($i = 0; $i <5; $i++)
             ]);
         }
 */
-        $unit_type=['villa','apartment','two-floor','small','annexe'];
-        $furnished=['unfurnished', 'newfn','usedfn'];
-        $kitshen=['yes','no'];
-        for ($i = 0; $i <2; $i++)
+//////////////////////////////////////////////////Leases//////////////////////////////////////////////////////
+   //     $unit_type=['شقة','محل تجاري'];
+       $furnished=['unfurnished', 'newfn','usedfn'];
+     $kitshen=['yes','no'];
+
             Units::create([
                 'realty_id'=>'1',
-                'type'=>Arr::random($unit_type),
+                'type'=>'شقة',
+                'role_number'=>'1',
+                'number'=>$faker->numerify('kh-###'),
+                'size'=>'80',
+                'furnished_mode'=>Arr::random($furnished),
+                'kitchen_Cabinets'=>Arr::random($kitshen),
+                'condition_units'=> '2',
+                'condition_type'=> 'شباك',
+                'rooms'=>'3',
+                'details'=>'not found',
+                'bathrooms'=>'2',
+                //'status'=>$request->status,
+                //start_date
+                //end_date
+                //name_tenant
+            ]);
+              Units::create([
+                'realty_id'=>'1',
+                'type'=>'محل تجاري',
                 'role_number'=>rand(1,2),
                 'number'=>$faker->numerify('kh-###'),
                 'size'=>'80',
@@ -148,14 +182,17 @@ for ($i = 0; $i <2; $i++)
 
 
             Financial_statements::create([
-                'st_rental_date'=>Carbon::now(),
-                'annual_rent'=>'50000',
-                'payment_cycle'=>'midterm',
-                'recurring_rent_payment'=>'25000',
-                'num_rental_payments'=>'2',
-                'end_rental_date'=>Carbon::now()->addYear(),
-                'Total'=>'50000',
-                'payment_channels'=>'cash',
+                'payment_cycle'=>'monthly',//$request->payment_cycle,
+                'recurring_rent_payment'=>'432423',
+              //  'last_rent_payment'=>'0',
+                'num_rental_payments'=>'3',
+                'payment_channels'=>'كاش',
+                'tax'=>'15%',
+                'tax_ammount'=>'32113',
+                'notes'=>'not found',
+                'ejar_cost'=>'4234243',
+                'rent_value'=>'654235',
+
             ]);
             Commitments::create(['desc'=>'التزام بتسليم العقار في الوقت المحدد']);
 
@@ -171,7 +208,6 @@ for ($i = 0; $i <2; $i++)
                 'reco_number'=>'543-GH',
                 'le_date'=>Carbon::now(),
                 'st_rental_date'=>Carbon::now(),
-                'payment_method'=>'cash',
                 'type'=>'new',
                 'place'=>'saudia',
                 'end_rental_date'=>Carbon::now()->addYear(),
@@ -180,6 +216,8 @@ for ($i = 0; $i <2; $i++)
                 'tenant_id'=>'1', //many to one
                 'unit_id'=>'1',   //many to one
                 'docFile'=>'doc-34545.jpg',
+                 'lease_type'=>"تجاري",
+
             ]);
             Payments::create([
                  'lease_id'=>'1',
@@ -196,26 +234,15 @@ for ($i = 0; $i <2; $i++)
                 'remain'=>'25000',
             ]);
             Units::where('id','1')->update(['status'=>'rented']);
-
-
-
-
-
-
-
-
-
-
-
              Financial_statements::create([
-                'st_rental_date'=>Carbon::now(),
-                'annual_rent'=>'48000',
-                'payment_cycle'=>'quarterly',
-                'recurring_rent_payment'=>'12000',
-                'num_rental_payments'=>'2',
-                'end_rental_date'=>Carbon::now()->addMonths(6),
-                'Total'=>'24000',
-                'payment_channels'=>'cash',
+                'payment_cycle'=>'monthly',//$request->payment_cycle,
+                'recurring_rent_payment'=>'432423',
+              //  'last_rent_payment'=>'0',
+                'num_rental_payments'=>'3',
+                'payment_channels'=>'كاش',
+                'notes'=>'not found',
+                'ejar_cost'=>'4234243',
+                'rent_value'=>'4234243',
             ]);
             Commitments::create(['desc'=>'التزام بتسليم العقار في الوقت المحدد']);
             $tenant=Tenant::where('id',2)->first();
@@ -230,7 +257,6 @@ for ($i = 0; $i <2; $i++)
                 'reco_number'=>'543-GH',
                 'le_date'=>Carbon::now(),
                 'st_rental_date'=>Carbon::now(),
-                'payment_method'=>'cash',
                 'type'=>'new',
                 'place'=>'saudia',
                 'end_rental_date'=>Carbon::now()->addMonths(6),
@@ -239,9 +265,12 @@ for ($i = 0; $i <2; $i++)
                 'tenant_id'=>'2', //many to one
                 'unit_id'=>'2',   //many to one
                 'docFile'=>'doc-34545.jpg',
+                'lease_type'=>"سكني",
+
+
             ]);
             Payments::create([
-                 'lease_id'=>'2',
+                'lease_id'=>'2',
                 'release_date'=>Carbon::now()->addMonths(3),
                 'due_date'=>Carbon::now()->addMonths(3),
                 'total'=>'12000',
@@ -257,6 +286,7 @@ for ($i = 0; $i <2; $i++)
             Units::where('id','2')->update(['status'=>'rented']);
 
 
+//////////////////////////////////////////////////Leases//////////////////////////////////////////////////////
 
 
 
