@@ -70,17 +70,25 @@ public function leases_renew_store(Request $request)
             //sendNotify to renew lease
        //     Notification::send($user, new \App\Notifications\NewTenantNotify($user,$pass));
             $realty=Realty::where('id',$request->realty_id)->first();
+            $lease=Lease::where('id',$request->lease_id)->first();
+            if($lease->lease_type=="تجاري")
+          {
+
+
             $financaila=Financial_statements::create([
-                'st_rental_date'=>$request->st_rental_date,
-                'annual_rent'=>$request->annual_rent,
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
                 'recurring_rent_payment'=>$request->recurring_rent_payment,
                 'num_rental_payments'=>$request->num_rental_payments,
-                'end_rental_date'=>$request->end_rental_date,
-                'Total'=>$request->Total,
                 'payment_channels'=>$request->payment_channels,
+                'tax'=>$request->tax,
+                'tax_ammount'=>$request->tax_ammount,
+                'notes'=>$request->notes,
+                'ejar_cost'=>$request->ejar_cost,
+                'rent_value'=>$request->rent_value,
             ]);
           //  return 'tete';
+
+
         // /   $input['desc']=$request->files;
             Commitments::create(['desc'=>$request->desc]);
            $commit=Commitments::latest()->first();
@@ -102,8 +110,53 @@ public function leases_renew_store(Request $request)
                 'tenant_id'=>$ten->id, //many to one
                 'unit_id'=>$request->unit_id,   //many to one
                 'docFile'=>$image_name,
+                'lease_type'=>"تجاري",
 
             ]);
+        }
+        else
+        {
+
+            $financaila=Financial_statements::create([
+
+                'payment_cycle'=>'monthly',//$request->payment_cycle,
+                'recurring_rent_payment'=>$request->recurring_rent_payment,
+
+                'num_rental_payments'=>$request->num_rental_payments,
+                'payment_channels'=>$request->payment_channels,
+
+                'notes'=>$request->notes,
+                'ejar_cost'=>$request->ejar_cost,
+                'rent_value'=>$request->ejar_cost,
+            ]);
+          //  return 'tete';
+
+
+        // /   $input['desc']=$request->files;
+            Commitments::create(['desc'=>$request->desc]);
+           $commit=Commitments::latest()->first();
+            $fin=Financial_statements::latest()->first();
+            $ten=Tenant::latest()->first();
+            $image_name='doc-'.time().'.'.$request->docFile->extension();
+            $request->docFile->storeAs('public/Documents',$image_name);
+            Lease::create([
+                'realty_id'=>$request->realty_id,
+                //payments one to many
+                'reco_number'=>$request->reco_number,
+                'le_date'=>$request->le_date,
+                'st_rental_date'=>$request->st_rental_date,
+                'type'=>'renew',//$request->type_le,
+                'place'=>$request->place,
+                'end_rental_date'=>$request->end_rental_date,
+                'commitment_id'=>$commit->id, //one to one
+                'financial_id'=>$fin->id,  //one to one
+                'tenant_id'=>$ten->id, //many to one
+                'unit_id'=>$request->unit_id,   //many to one
+                'docFile'=>$image_name,
+                'lease_type'=>"سكني",
+
+            ]);
+        }
             $les=Lease::latest()->first();
             foreach($request->release_date as $key=>$items )
             {
