@@ -50,7 +50,9 @@ class ContractController extends Controller
 
 public function renew_contract($id)
 {
+
     $contract=contract::where('id',$id)->first();
+    
     return view('Admin.Leases.contract_renew')->with([
         'contract'=>$contract,
     ]);

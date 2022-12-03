@@ -69,7 +69,6 @@ public function leases_renew_store(Request $request)
         ]);
             //sendNotify to renew lease
        //     Notification::send($user, new \App\Notifications\NewTenantNotify($user,$pass));
-        return 'f';
             $realty=Realty::where('id',$request->realty_id)->first();
             $financaila=Financial_statements::create([
                 'st_rental_date'=>$request->st_rental_date,

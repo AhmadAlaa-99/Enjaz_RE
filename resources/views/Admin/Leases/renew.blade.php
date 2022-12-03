@@ -32,7 +32,6 @@
 <div class="content-wrapper">
 <form action="{{ route('leases.renew.store') }}" method="post" enctype="multipart/form-data"autocomplete="off">
        {{ csrf_field() }}
-  <!--  بيانات العقد -->
   <div class="form-group">
     <h2 class="heading">بيانات العقد</h2>
       <div class="grid">
@@ -50,7 +49,10 @@
            <label for="eMail"> مكان ابرام العقد</label>
           </div>
         </div>
+
+
       </div>
+
       <div class="grid">
       <div class="col-1-3">
           <div class="controls">
@@ -58,12 +60,15 @@
             <label for="phone">تاريخ ابرام العقد</label>
           </div>
         </div>
+
         <div class="col-1-3">
+
           <div class="controls">
             <input type="date" id="st_rental_date" class="floatLabel" value="{{old('st_rental_date')}}"name="st_rental_date"required>
             <label for="eMail">تاريخ بداية مدة الايجار</label>
           </div>
         </div>
+
         <div class="col-1-3">
           <div class="controls">
             <input type="date" id="end_rental_date" class="floatLabel" value="{{old('end_rental_date')}}"name="end_rental_date"required>
@@ -71,6 +76,7 @@
           </div>
         </div>
       </div>
+
   </div>
  <!--  بيانات المستأجر -->
  <div class="form-group">
@@ -109,10 +115,12 @@
 										<table class="table table-bordered table-dark m-0">
                                                  <thead>
                                             <tr>
-                                                <th >  اسم المنشأة :</br></br> {{$realty->name}}</th>
+                                                <th >  اسم المنشأة :</br></br> {{$realty->realty_name}}</th>
                                                  <th >   المنطقة  : </br></br> {{$realty->quarter}}</th>
                                                   <th >   نوع العقار : </br> </br>{{$realty->type}}</th>
-                                                   <th >   الوحدات :</br> </br>{{$realty->units}}</th>
+                                                   <th >   الوحدات السكنية :</br> </br>{{$realty->units}}</th>
+                                                 <th >   الوحدات التجارية :</br> </br>{{$realty->shopsNo}}</th>
+
                                                     <th >   الادوار  :  </br></br>{{$realty->roles}}</th>
                                                      <th >  المساحة :  </br></br>{{$realty->size}}</th>
                                                       <th >   الاستخدام : </br> </br>{{$realty->use}}</th>
@@ -170,37 +178,18 @@
 							</div>
 						</div>
     </div>
-    <!--  البيانات المالية -->
+   <!--  البيانات المالية -->
     <div class="form-group">
          <h2 class="heading">البيانات المالية</h2>
-      <div class="grid">
-       <div class="col-1-3">
-          <div class="controls">
- <select name="payment_channels"id="payment_channels"value="{{old('payment_channels')}}"class="floatLabel" onclick="console.log($(this).val())"
-                                    onchange="console.log('change is firing')"required>
-                                    <!--placeholder-->
-                                    <option value="نقد" >نقد</option>
-                                        <option value="تحويل" >تحويل</option>
-                                        <option value="شيك" >شيك</option>
 
-                        </select>           <label for="eMail"> طريقة دفع رسوم العقد</label>
-          </div>
-        </div>
-        <div class="col-1-3">
-          <div class="controls">
-           <input type="text" name="annual_rent" class="floatLabel"value="{{old('annual_rent')}}"required>
-           <label for="street"> القيمة السنوية للايجار </label>
-          </div>
-        </div>
-        <div class="col-1-3">
-          <div class="controls">
-           <input type="text" name="Total" class="floatLabel"value="{{old('Total')}}"required>
-           <label for="eMail">اجمالي قيمة العقد</label>
-          </div>
-        </div>
-      </div>
       <div class="grid">
-      <div class="col-1-3">
+         <div class="col-1-4">
+          <div class="controls">
+           <input type="text" name="ejar_cost" class="floatLabel"value="{{old('ejar_cost')}}"required>
+           <label for="eMail"> قيمة العقد</label>
+          </div>
+        </div>
+      <div class="col-1-4">
           <div class="controls">
            <select name="payment_cycle"id="payment_cycle"class="floatLabel" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
@@ -214,21 +203,42 @@
            <label for="fruit">دورة سداد الايجارٍ</label>
           </div>
         </div>
-        <div class="col-1-3">
-          <div class="controls">                
-
+        <div class="col-1-4">
+          <div class="controls">
            <input type="text" name="num_rental_payments" value="{{old('num_rental_payments')}}"class="floatLabel"required>
            <label for="eMail">عدد دفعات الايجار</label>
           </div>
         </div>
-        <div class="col-1-3">
+        <div class="col-1-4">
           <div class="controls">
            <input type="text" name="recurring_rent_payment" value="{{old('recurring_rent_payment')}}"class="floatLabel"required>
            <label for="eMail">  دفعة الايجار الدورية</label>
           </div>
         </div>
       </div>
+      @if($unit->type=="محل تجاري")
+         <div class="grid">
+        <div class="col-1-3">
+          <div class="controls">
+           <input type="text" name="tax" class="floatLabel"value="{{old('tax')}}"required>
+           <label for="street">نسبة الضريبة </label>
+          </div>
+        </div>
+        <div class="col-1-3">
+          <div class="controls">
+           <input type="text" name="tax_ammount" class="floatLabel"value="{{old('tax_ammount')}}"required>
+           <label for="eMail">مبلغ الضريبة</label>
+          </div>
+        </div>
+         <div class="col-1-3">
+          <div class="controls">
+           <input type="text" name="rent_value" class="floatLabel"value="{{old('rent_value')}}"required>
+           <label for="eMail">اجمالي قيمة العقد</label>
+          </div>
+        </div>
+      </div>
     </div>
+    @endif
     <!--   جدول سداد الدفعات -->
     <div class="form-group">
          <h2 class="heading">جدول سداد الدفعات</h2>
