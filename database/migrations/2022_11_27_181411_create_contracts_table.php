@@ -25,8 +25,8 @@ return new class extends Migration
             $table->enum('type',['سكني','تجاري']);
             $table->enum('type_s',['جاري','منتهي'])->default('جاري');
             $table->string('ejar_cost');
-             $table->string('tax_amount')->default('0');;
-            $table->string('tax')->default('0');
+             $table->string('tax_amount')->nullable();
+            $table->string('tax')->nullable();
             $table->string('note');
             $table->timestamps();
         });

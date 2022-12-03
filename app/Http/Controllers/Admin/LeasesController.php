@@ -48,11 +48,12 @@ class LeasesController extends Controller
 public function leases_renew($id)
 {
     $lease=Lease::where('id',$id)->first();
+
     $unit=Units::where('id',$lease->unit_id)->first();
     $realty=Realty::where('id',$unit->realty_id)->first();
     $broker=User::where('role_name','Admin')->first();
     $tenant=Tenant::where('id',$lease->tenant_id)->first();
-    return view('Admin.Leases.renew',compact('tenant','unit','realty','broker'));
+    return view('Admin.Leases.renew',compact('tenant','unit','realty','broker','lease'));
 }
 public function previous_leases($id)
 {
@@ -62,18 +63,22 @@ public function leases_renew_store(Request $request)
 {
 
     //    $pass='tenant'.random_int(1999999999,9999999999);
+    /*
          $request->validate([
         'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|digits:10',
         'ID_num' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|digits:10',
         'telephone' => 'regex:/^([0-9\s\-\+\(\)]*)$/|digits:8',
+
         ]);
+        */
             //sendNotify to renew lease
        //     Notification::send($user, new \App\Notifications\NewTenantNotify($user,$pass));
+
             $realty=Realty::where('id',$request->realty_id)->first();
             $lease=Lease::where('id',$request->lease_id)->first();
-            if($lease->lease_type=="تجاري")
+      //  return $lease;
+            if($lease->lease_type=='سكني')
           {
-
 
             $financaila=Financial_statements::create([
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
@@ -86,7 +91,7 @@ public function leases_renew_store(Request $request)
                 'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->rent_value,
             ]);
-          //  return 'tete';
+
 
 
         // /   $input['desc']=$request->files;
@@ -117,6 +122,7 @@ public function leases_renew_store(Request $request)
         else
         {
 
+
             $financaila=Financial_statements::create([
 
                 'payment_cycle'=>'monthly',//$request->payment_cycle,
@@ -124,7 +130,8 @@ public function leases_renew_store(Request $request)
 
                 'num_rental_payments'=>$request->num_rental_payments,
                 'payment_channels'=>$request->payment_channels,
-
+'tax'=>'0',
+                'tax_ammount'=>'0',
                 'notes'=>$request->notes,
                 'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->ejar_cost,
@@ -306,7 +313,7 @@ public function leases_renew_store(Request $request)
                 'rents'=>$realty->rents+=1,
             ]);
 
-    if($unit->type=="محل تجاري")
+    if($unit->type=='محل تجاري')
     {
 
 
@@ -359,7 +366,8 @@ public function leases_renew_store(Request $request)
 
                 'num_rental_payments'=>$request->num_rental_payments,
                 'payment_channels'=>$request->payment_channels,
-
+  'tax'=>'0',
+                'tax_ammount'=>'0',
                 'notes'=>$request->notes,
                 'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->ejar_cost,

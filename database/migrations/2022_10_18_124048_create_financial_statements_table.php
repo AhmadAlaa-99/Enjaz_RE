@@ -28,8 +28,8 @@ class CreateFinancialStatementsTable extends Migration
             $table->id();
             $table->string('recurring_rent_payment');
              $table->string('ejar_cost');
-             $table->string('tax')->default('0');
-            $table->string('tax_ammount')->default('0');;
+             $table->string('tax')->nullable();
+            $table->string('tax_ammount')->nullable();
             $table->string('rent_value');
             $table->string('num_rental_payments');
             $table->enum('payment_cycle',['monthly','annual','quarterly','midterm']);

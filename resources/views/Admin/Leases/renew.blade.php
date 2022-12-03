@@ -39,6 +39,8 @@
           <div class="controls">
                 <input type="hidden" value="{{$unit->id}}"name="unit_id">
                  <input type="hidden" value="{{$realty->id}}"name="realty_id">
+                 <input type="hidden" value="{{$lease->id}}"name="lease_id">
+
            <input type="text" id="reco_number" class="floatLabel" value="{{old('reco_number')}}"name="reco_number"required>
            <label for="street">رقم سجل العقد - ID</label>
           </div>

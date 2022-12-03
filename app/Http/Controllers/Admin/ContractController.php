@@ -52,7 +52,7 @@ public function renew_contract($id)
 {
 
     $contract=contract::where('id',$id)->first();
-    
+
     return view('Admin.Leases.contract_renew')->with([
         'contract'=>$contract,
     ]);
@@ -63,7 +63,7 @@ public function renew_contracted(Request $request)
     $image_name='doc-'.time().'.'.$request->contract_file->extension();
 
                 $request->contract_file->storeAs('public/Contracts',$image_name);
-    if($contract->type=="تجاري")
+    if($contract->type=='تجاري')
                 {
                 $contract->update([
                 'contactNo'=>$request->contactNo,
@@ -89,6 +89,8 @@ public function renew_contracted(Request $request)
                 'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->ejar_cost,
                 'contract_file'=>$image_name,
+                  'tax'=>'0',
+                'tax_ammount'=>'0',
                 'type'=>"سكني",//تجاري - سكني
                 'note'=>$request->note,
                 'status'=>"مجدد",
@@ -179,7 +181,7 @@ public function finish_contract($id)
                 $image_name='doc-'.time().'.'.$request->contract_file->extension();
 
                 $request->contract_file->storeAs('public/Contracts',$image_name);
-                if($request->type_sc=="تجاري")
+                if($request->type_sc=='تجاري')
                 {
                 contract::create([
                 'realty_id'=>$realty->id,
@@ -205,6 +207,8 @@ public function finish_contract($id)
                 'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->ejar_cost,
                 'contract_file'=>$image_name,
+                  'tax'=>'0',
+                'tax_ammount'=>'0',
                 'type'=>$request->type_sc,//تجاري - سكني
                 'note'=>$request->note,
              ]);
