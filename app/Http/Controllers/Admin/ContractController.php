@@ -62,7 +62,7 @@ public function renew_contracted(Request $request)
     $contract=contract::where('id',$request->contract_id)->first();
     $image_name='doc-'.time().'.'.$request->contract_file->extension();
 
-                $request->contract_file->storeAs('public/Contracts',$image_name);
+                $request->contract_file->storeAs('storage/Contracts',$image_name);
     if($contract->type=='تجاري')
                 {
                 $contract->update([
@@ -82,14 +82,13 @@ public function renew_contracted(Request $request)
         else
         {
                  $contract->update([
-                'realty_id'=>$realty->id,
                 'contactNo'=>$request->contactNo,
                 'start_date'=>$request->start_date,
                 'end_date'=>$request->end_date,
                 'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->ejar_cost,
                 'contract_file'=>$image_name,
-                  'tax'=>'0',
+                'tax'=>'0',
                 'tax_amount'=>'0',
                 'type'=>"سكني",//تجاري - سكني
                 'note'=>$request->note,
@@ -134,7 +133,7 @@ public function finish_contract($id)
       $file_name=contract::select('contract_file')->where('id',$id)->latest()->paginate(5);
         foreach($file_name as $file)
         {
-            $path=public_path().'/storage/Contracts/'.$file->contract_file;
+            $path=storage_path().'/storage/Contracts/'.$file->contract_file;
         }
 
          return Response::download($path);
@@ -214,7 +213,6 @@ public function finish_contract($id)
              ]);
         }
             $contract=contract::latest()->first();
-
             foreach($request->installmentNo as $key=>$items )
             {
                 $input['contract_id']=$contract->id;
