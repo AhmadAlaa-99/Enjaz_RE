@@ -48,6 +48,7 @@
                           <th>قيمة الايجار</th>
                           <th>القيمة الكلية ' بعد احتساب الضريبة' </th>
                           <th> النوع</th>
+                          <th> الحالة</th>
                           <th>ملاحظات</th>
                           <th>العمليات</th>
 
@@ -72,6 +73,8 @@
                           <td><span class="badge badge-danger">{{$contract->ejar_cost}}</td>
                           <td><span class="badge badge-warning">{{$contract->rent_value}}</td>
                           <td><span class="badge badge-danger">{{$contract->type}}</td>
+                                                    <td><span class="badge badge-danger">{{$contract->status}}</td>
+
                           <td>{{$contract->note}}</td>
 
                           <!--

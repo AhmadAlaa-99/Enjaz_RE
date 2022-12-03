@@ -90,7 +90,7 @@ public function renew_contracted(Request $request)
                 'rent_value'=>$request->ejar_cost,
                 'contract_file'=>$image_name,
                   'tax'=>'0',
-                'tax_ammount'=>'0',
+                'tax_amount'=>'0',
                 'type'=>"سكني",//تجاري - سكني
                 'note'=>$request->note,
                 'status'=>"مجدد",
@@ -208,7 +208,7 @@ public function finish_contract($id)
                 'rent_value'=>$request->ejar_cost,
                 'contract_file'=>$image_name,
                   'tax'=>'0',
-                'tax_ammount'=>'0',
+                'tax_amount'=>'0',
                 'type'=>$request->type_sc,//تجاري - سكني
                 'note'=>$request->note,
              ]);

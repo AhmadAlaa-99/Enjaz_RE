@@ -248,7 +248,7 @@
          <div class="grid">
         <div class="col-1-3">
           <div class="controls">
-           <input type="text" name="tax" class="floatLabel"value="{{old('tax')}}"required>
+           <input type="text" name="tax" class="floatLabel"value="15%"name="tax"readonly>
            <label for="street">نسبة الضريبة </label>
           </div>
         </div>

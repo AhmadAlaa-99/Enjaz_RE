@@ -67,7 +67,7 @@
 <div class="grid">
         <div class="col-1-3">
           <div class="controls">
-            <input type="text" id="tax" class="floatLabel" value="{{old('tax')}}"name="tax"required>
+            <input type="text" id="tax" class="floatLabel" value="15%"name="tax"readonly>
             <label for="phone">نسبة الضريبة</label>
           </div>
         </div>
