@@ -22,71 +22,22 @@
                 <div class="invoice-container">
                     <div class="invoice-header">
 
-                        <!-- Row start -->
-                        <div class="row gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                <div class="custom-actions-btns mb-5">
-                                    <a href="#" class="btn btn-primary">
-                                        <i class="icon-export"></i> Export
-                                    </a>
-                                    <a href="#" class="btn btn-dark">
-                                        <i class="icon-printer"></i> Print
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Row end -->
 
-                        <!-- Row start -->
-                        <div class="row gutters">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <a href="index.html" class="invoice-logo">
-                                <img src="{{asset('assets/img/fav.png')}}" alt="Enjaz" />
-                                </a>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <address class="text-right">
-                                    Enjaz company saudia Arabia <br />
-                                    Riyadh, Kingdom Street.<br />
-                                    00966484374
-                                </address>
-                            </div>
-                        </div>
-                        <!-- Row end -->
 
-                        <!-- Row start -->
-                        <div class="row gutters">
-                            <div class="col-xl-9 col-lg-9 col-md-9 col-sm-8 col-12">
-                                <div class="invoice-details">
-                                    <address>
-                                         Receipt of monthly rent payment<br />
-                                         Tenant name : Ali Mohammed
-                                         Lessor's name : ALaa Ahmad
 
-                                    </address>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-4 col-12">
-                                <div class="invoice-details">
-                                    <div class="invoice-num">
-                                        <div>Invoice - #009</div>
-                                        <div>January 10th 2020</div>
-                                    </div>
-                                </div>
-                            </div>
-                         </div>
-                        <!-- Row end -->
 
-                    </div>
+
 
                     <div class="invoice-body">
 
                         <!-- Row start -->
-                        <h3>بيانات العقد </h3>
-                        <div class="row gutters">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
+                    <div class="form-group">
+         <h2 class="heading"> بيانات  العقد</h2>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-dark m-0">
                                     <thead>
                         <tr>
                           <th>رقم سجل العقد</th>
@@ -121,16 +72,18 @@
                         <!-- Row end -->
 
                     </div>
+</div>
                     <div class="invoice-body">
 
 <!-- Row start -->
 
-
-<div class="row gutters">
-    <h3>بيانات  المستأجر </h3>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="table-responsive">
-            <table class="table table-bordered">
+ <div class="form-group">
+         <h2 class="heading"> بيانات المستأجر</h2>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-dark m-0">
             <thead>
             <tr>
                                                     <th> الاسم الكامل</th>
@@ -161,11 +114,15 @@
         </div>
     </div>
 </div>
-<div class="row gutters">
- <h3>بيانات المنشأة العقارية </h3>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="table-responsive">
-            <table class="table table-bordered">
+</div>
+</div>
+ <div class="form-group">
+         <h2 class="heading"> بيانات المنشأة العقارية</h2>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-dark m-0">
             <thead>
 												<tr>
 													<th> المنطقة</th>
@@ -199,13 +156,16 @@
         </div>
     </div>
 </div>
+</div>
+</div>
 
-
-<div class="row gutters">
-    <h3>بيانات  الوحدة الايجارية </h3>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="table-responsive">
-            <table class="table table-bordered">
+ <div class="form-group">
+         <h2 class="heading"> بيانات الوحدة الايجارية</h2>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-dark m-0">
             <thead>
 												<tr>
 													<th> رقم الوحدة</th>
@@ -242,21 +202,17 @@
         </div>
     </div>
 </div>
+</div>
+</div>
 
-<div class="row gutters">
-    <h3> البيانات المالية </h3>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="table-responsive">
-            <table class="table table-bordered">
+ <div class="form-group">
+         <h2 class="heading"> البيانات المالية </h2>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-dark m-0">
             <thead>
-
-
-
-
-
-
-
-
 												<tr>
 													<th>قيمة العقد</th>
                                                     <th>دورة سداد الايجار</th>
@@ -289,12 +245,15 @@
         </div>
     </div>
 </div>
-
-<div class="row gutters">
-    <h3>  تفاصيل سداد الدفعات </h3>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="table-responsive">
-            <table class="table table-bordered">
+</div>
+</div>
+ <div class="form-group">
+         <h2 class="heading">تفاصيل سداد الدفعات</h2>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-dark m-0">
             <thead>
 
 
@@ -339,12 +298,16 @@
         </div>
     </div>
 </div>
+</div>
+</div>
 
-<div class="row gutters">
-    <h3> بيانات المطور العقاري </h3>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="table-responsive">
-            <table class="table table-bordered">
+ <div class="form-group">
+         <h2 class="heading"> بيانات المطور</h2>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-dark m-0">
             <thead>
 
             <tr>
@@ -370,11 +333,15 @@
         </div>
     </div>
 </div>
-<div class="row gutters">
-    <h3>  التزامات الأطراف </h3>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="table-responsive">
-            <table class="table table-bordered">
+</div>
+</div>
+ <div class="form-group">
+         <h2 class="heading">التزامات الأطراف</h2>
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-dark m-0">
             <thead>
 
             <tr>
@@ -394,13 +361,14 @@
         </div>
     </div>
 </div>
-
+</div>
+</div>
 
 <!-- Row end -->
 </div>
 
                     <div class="invoice-footer">
-                        Thank you for your Business.
+                        COMPANY ENJAZ
                     </div>
 
                 </div>
