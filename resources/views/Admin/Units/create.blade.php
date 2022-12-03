@@ -61,10 +61,7 @@
                                 </select>
                             </div>
 
-                        <div class="form-group">
-                            <label for="website">رقم عداد المياه</label>
-                            <input type="text" class="form-control" name="water_number"value="{{old('water_number')}}" placeholder="water_number"required>
-                        </div>
+
 
                          <div class="form-group">
                             <label for="fullName"> تفاصيل </label>
@@ -79,18 +76,13 @@
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
                                     <option value="" selected disabled>حدد النوع</option>
-
-
-
-
-
-                                        <option value="villa">فيلا</option>
-                                        <option value="apartment">شقة</option>
-                                        <option value="two-floor">شقة ثنائية الدور</option>
-                                        <option value="small">شقة صغيرة</option>
-                                        <option value="annexe">ملحق</option>
-
-                                </select>
+                                        <option value="فيلا">فيلا</option>
+                                        <option value="شقة">شقة</option>
+                                        <option value="شقة ثنائية الدور">شقة ثنائية الدور</option>
+                                        <option value="شقة صغيرة">شقة صغيرة</option>
+                                        <option value="ملحق">ملحق</option>
+                                        <option value="محل تجاري">محل تجاري</option>
+                                      </select>
                      </div>
                         <div class="form-group">
                             <label for="ciTy">مساحة الوحدة</label>
@@ -101,10 +93,7 @@
                             <input type="number" class="form-control" name="condition_units"value="{{old('condition_units')}}" placeholder="condition_units"required>
 
                         </div>
-                        <div class="form-group">
-                            <label for="zIp">رقم عداد الكهرباء</label>
-                            <input type="text" class="form-control" name="electricity_number"value="{{old('electricity_number')}}" placeholder="electricity_number"required>
-                        </div>
+
 
 
                     </div>

@@ -49,9 +49,7 @@
                           <th>  <a href=""> عدد دورات المياه </a></th>
                           <th>خزائن مطبخ مركبة</th>
                           <th> عدد وحدات التكييف</th>
-                          <th>نوع التكييف </th>
-                          <th>رقم عداد المياه  </th>
-                          <th>رقم عداد الكهرباء </th>
+
                           <th> العمليات</th>
                         </tr>
                     </thead>
@@ -75,8 +73,7 @@
                           <td>{{$unit->kitchen_Cabinets}}</td>
                           <td>{{$unit->condition_units}}</td>
                           <td>{{$unit->condition_type}}</td>
-                          <td>{{$unit->water_number}}</td>
-                          <td><a href=""> <span class="badge badge-danger">{{$unit->Elecrtricity_number}}</a></td>
+
                           <!--
                           <td>
                             <a class="btn btn-secondary" href="{{route('lease_un.details',$unit->id) }}" role="button">تفاصيل العقد</a>

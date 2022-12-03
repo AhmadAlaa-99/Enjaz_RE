@@ -41,25 +41,7 @@
             {{ csrf_field() }}
             <div class="row gutters">
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                        <div class="form-group">
-                                <label for="inputName" class="control-label">مالك المنشأة العقارية </label>
-                                <select name="owner_id" class="form-control SlectBox" onclick="console.log($(this).val())"
-                                    onchange="console.log('change is firing')"required>
-                                    <!--placeholder-->
-                                                                   <option selected disabled>حدد اسم المالك</option>
 
-                                    @foreach ($owners as $owner)
-
-                                    @if("{{old('owner_id')}}"==$owner->id)
-                                    <option value="{{$owner->id }}"selected>{{ $owner->user->name }}</option>
-                                    @else
-                                        <option value="{{$owner->id }}"> {{ $owner->user->name }}</option>
-                                        @endif
-                                    @endforeach
-
-
-                                </select>
-                            </div>
 
                             <div class="form-group">
                                 <label for="eMail">المنطقة</label>
@@ -89,7 +71,6 @@
                                     onchange="console.log('change is firing')"required>
                                     <!--placeholder-->
                                     <option value="" selected disabled>حدد النوع</option>
-
                                     <option value="villa"selected> فيلا</option>
                                     <option value="building">بناء</option>
 

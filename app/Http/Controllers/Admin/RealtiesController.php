@@ -5,7 +5,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Realty;
 use App\Models\Units;
 use App\Models\User;
-use App\Models\organization;
 
 use Illuminate\Http\Request;
 
@@ -17,8 +16,8 @@ class RealtiesController extends Controller
 
     public function index()
     {
-       // return 'k';
-        $realties = Realty::with('organization')->latest()->paginate(5);
+
+        $realties = Realty::latest()->paginate(5);
         if($realties->count()>0)
         {
         foreach($realties as $realty)
@@ -44,10 +43,7 @@ class RealtiesController extends Controller
 //        $owners=User::where('role_name','Owner')->with('organization')->latest()->paginate(5);
 
        // $owners=User::where('role_name','Owner')->latest()->paginate(5);
-        $owners=organization::get();
-        return view('Admin.Realties.create')->with([
-            'owners'=>$owners,
-        ]);
+        return view('Admin.Realties.create');
 
      }
      public function store(Request $request)
@@ -63,7 +59,6 @@ class RealtiesController extends Controller
                 'roles'=> $request->roles,
                 'units'=> $request->units,
                 'size'=> $request->size,
-                'owner_id'=> $request->owner_id,
                 'advantages'=> $request->advantages,
                 ]);
                // return dd($realty);
@@ -81,15 +76,13 @@ class RealtiesController extends Controller
      }
      public function edit($id)
      {
-        $owners=organization::get();
         $realty = Realty::where('id',$id)->first();
-        return view('Admin.Realties.edit',compact('realty','owners'));
+        return view('Admin.Realties.edit',compact('realty'));
 
      }
      public function update(Request $request,$id)
      {
-        $Realty=Realty::where('id',$id)->with('organization')->first();
-
+        $Realty=Realty::where('id',$id)->first();
         $Realty->update([
             'realty_name'=> $request->realty_name,
             'address'=> $request->address,
@@ -98,7 +91,6 @@ class RealtiesController extends Controller
             'roles'=> $request->roles,
             'units'=> $request->units,
             'size'=> $request->size,
-            'owner_id'=> $request->owner_id,
             'advantages'=> $request->advantages,
         ]);
         return redirect()->route('realties.index')->with([
@@ -108,10 +100,7 @@ class RealtiesController extends Controller
     }
      public function destroy($id)
      {
-
-
             Realty::destroy($id);
-
             return redirect()->route('realties.index')->with([
                 'message' => 'Realty clean successfully',
                 'alert-type' => 'success',

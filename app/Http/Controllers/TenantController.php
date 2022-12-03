@@ -16,7 +16,7 @@ class TenantController extends Controller
     public function leases()
     {
         $tenant=Tenant::where('user_id',Auth::user()->id)->first();
-        $leases=Lease::where('tenant_id',$tenant->id)->with('tenants','organization','realties','units','financial')
+        $leases=Lease::where('tenant_id',$tenant->id)->with('tenants','realties','units','financial')
         /*->select('number','type','st_rental_date','end_rental_date')*/->latest()->paginate(5);
          return view('Tenant.myleases',compact('leases'));
     }
@@ -24,7 +24,7 @@ class TenantController extends Controller
     public function tn_lease_details($id)
     {
         $tenant=Tenant::where('user_id',Auth::user()->id)->first();
-        $lease=Lease::where('tenant_id',$tenant->id)->with('organization','units','realties','financial')->where('id',$id)->first();
+        $lease=Lease::where('tenant_id',$tenant->id)->with('units','realties','financial')->where('id',$id)->first();
         $tenant=Tenant::where('id',$tenant->id)->with('user')->first();
         $payments=Payments::where('lease_id',$lease->id)->latest()->paginate(5);
         $broker=User::first();

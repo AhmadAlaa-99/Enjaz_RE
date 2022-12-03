@@ -54,7 +54,6 @@
                     <thead>
                         <tr>
                         <th><a href="">الرقم التسلسلي </a></th>
-                          <th><a href="">مالك المنشأة </a></th>
                           <th> <a href=""> اسم المنشأة</a> </th>
                           <th>تاريخ الاضافة</th>
                           <th> المنطقة  </th>
@@ -63,7 +62,9 @@
                           <th> المساحة  </th>
                           <th> المميزات  </th>
                           <th>عدد الأدوار </th>
-                          <th>عدد الوحدات الكلية</th>
+                          <th>عدد الوحدات السكنية</th>
+                             <th>عدد الوحدات التجارية</th>
+
                           <th>عدد الوحدات المستأجرة</th>
                           <th>العمليات</th>
                         </tr>
@@ -79,7 +80,6 @@
 
                         <tr>
                             <td>{{$i}}</td>
-                        <td><span class="badge badge-warning">{{$realty->organization->user->name}}</td>
                           <td>{{$realty->realty_name}}</td>
                           <td><span class="badge badge-danger">{{$realty->created_at}}</td>
                           <td>{{$realty->address}}</td>
@@ -89,6 +89,7 @@
                           <td>{{$realty->advantages}}</td>
                           <td><span class="badge badge-success">{{$realty->roles}}</td>
                           <td><span class="badge badge-success">{{$realty->units}}</td>
+                          <td><span class="badge badge-success">{{$realty->shopsNo}}</td>
                           <td><span class="badge badge-success">{{$realty->rents}}</td>
                           <td>
 													<div class="td-actions">

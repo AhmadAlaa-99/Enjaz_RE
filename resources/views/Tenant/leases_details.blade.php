@@ -91,6 +91,8 @@
                         <tr>
                           <th>رقم سجل العقد</th>
                           <th> نوع العقد</th>
+                                                    <th> نوع العقد</th>
+
                           <th>تاريخ ابرام العقد</th>
                           <th> مكان ابرام العقد</th>
                           <th> تاريخ بداية مدة الايجار</th>
@@ -104,6 +106,8 @@
                         <tr>
                           <td>{{$lease->reco_number}}</td>
                           <td>{{$lease->type}}</td>
+                                                                                                        <td>{{$lease->lease_type}}</td>
+
                           <td>{{$lease->le_date}}</td>
                           <td>{{$lease->place}}</td>
                           <td>{{$lease->st_rental_date}}</td>
@@ -123,46 +127,6 @@
 
 <!-- Row start -->
 
-<div class="row gutters">
-    <h3>بيانات المؤجر </h3>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="table-responsive">
-            <table class="table table-bordered">
-            <thead>
-												<tr>
-                                                    <th> الاسم الكامل</th>
-                                                    <th>اسم الشركة</th>
-													<th> رقم الهوية </th>
-													<th>  نوع الهوية </th>
-													<th> رقم  الجوال</th>
-													<th>  الجنسية</th>
-                                                    <th>  رقم الهاتف </th>
-                                                    <th>  البريد الالكتروني</th>
-                                                    <th>   تاريخ التسجيل</th>
-
-
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>{{$lease->organization->user->name}}</td>
-													<td>{{$lease->organization->company_name}}</td>
-                                                    <td>{{$lease->organization->user->ID_num}}</td>
-                                                    <td>{{$lease->organization->user->ID_type}}</td>
-                                                    <td>{{$lease->organization->user->phone}}</td>
-                                                    <td>{{$lease->organization->user->Nationality->Name}}</td>
-                                                    <td>{{$lease->organization->user->telephone}}</td>
-                                                    <td>{{$lease->organization->email}}</td>
-                                                    <td>{{$lease->organization->record_date}}</td>
-
-
-												</tr>
-
-											</tbody>
-            </table>
-        </div>
-    </div>
-</div>
 
 <div class="row gutters">
     <h3>بيانات  المستأجر </h3>
@@ -208,7 +172,9 @@
 												<tr>
 													<th> المنطقة</th>
 													<th> النوع</th>
-													<th>  عدد الوحدات </th>
+													<th>  عدد الوحدات السكنية</th>
+                                                <th>  عدد الوحدات التجارية</th>
+
 													<th>  عدد الأدوار </th>
 													<th>   المساحة</th>
 													<th>  رقم سند التمثيل </th>
@@ -222,6 +188,8 @@
 													<td>{{$lease->realties->address}}</td>
 													<td>{{$lease->realties->type}}</td>
                                                     <td>{{$lease->realties->units}}</td>
+                                                     <td>{{$lease->realties->shopsNo}}</td>
+
                                                     <td>{{$lease->realties->roles}}</td>
                                                     <td>{{$lease->realties->size}}</td>
                                                     <td>{{$lease->realties->use}}</td>
@@ -252,8 +220,7 @@
                                                     <th> نوع التكييف </th>
                                                     <th> عدد وحدات التكييف </th>
                                                     <th> عدد  دورات المياه </th>
-                                                    <th>رقم عداد الكهرباء </th>
-                                                    <th>رقم عداد المياه  </th>
+
 												</tr>
 											</thead>
 											<tbody>
@@ -267,8 +234,7 @@
                                                     <td>{{$lease->units->kitchen_Cabinets}}</td>
                                                     <td>{{$lease->units->condition_type}}</td>
                                                     <td>{{$lease->units->condition_units}}</td>
-                                                    <td>{{$lease->units->water_number}}</td>
-                                                    <td>{{$lease->units->Elecrtricity_number}}</td>
+
                                                     <td>{{$lease->units->bathrooms}}</td>
                                                     <td>{{$lease->units->details}}</td>
 
@@ -301,7 +267,7 @@
 													<th>  الكلفة السنوية للايجار </th>
 													<th> اجمالي قيمة العقد </th>
 													<th>  دورة سداد الايجار</th>
-													<th>   دفعة الايجار الأخيرة  </th>
+													<th>   عدد دفعات الايجار  </th>
                                                     <th>  دفعة الايجار الدورية </th>
                                                     <th> عدد دفعات الايجار </th>
 

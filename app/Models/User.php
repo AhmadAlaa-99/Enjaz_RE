@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Broker;
-use App\Models\organization;
 use App\Models\Nationalitie;
 
 
@@ -26,10 +25,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Nationalitie::class, 'nationalitie_id');
     }
-    public function organization()
-    {
-        return $this->hasOne(organization::class,'email','email');
-    }
+  
     public function broker()
     {
         return $this->belongsTo(Broker::class,'email','email');

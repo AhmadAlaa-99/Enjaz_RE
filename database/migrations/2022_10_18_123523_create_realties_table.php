@@ -15,17 +15,24 @@ class CreateRealtiesTable extends Migration
     {
         Schema::create('realties', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('owner_id')->constrained('owners')->cascadeOnDelete();
+            $table->foreignId('quarter_id')->constrained('quarters')->cascadeOnDelete();
             $table->string('realty_name');
-            $table->string('address');
+            $table->string('agency_name');
+            $table->string('shopsNo');
+            $table->string('agency_mobile');
             $table->string('size');
             $table->enum('type', ['villa', 'building']);
             $table->enum('use', ['family', 'individually']);
             $table->string('roles');
+            $table->string('elevator');
+            $table->string('parking');
             $table->string('advantages');
             $table->string('units');
             $table->string('rents')->default('0');
+            $table->string('tax_amount')->default('0');
 
-            $table->foreignId('owner_id')->constrained('organization')->cascadeOnDelete();
+
 
             $table->timestamps();
         });

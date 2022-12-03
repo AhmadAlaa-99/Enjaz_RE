@@ -16,7 +16,7 @@ class CreateUnitsTable extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->foreignId('realty_id')->constrained('realties')->cascadeOnDelete();
-            $table->enum('type', ['villa', 'apartment','two-floor','small','annexe']);
+            $table->enum('type', ['فيلا', 'شقة','شقة ثنائية الدور','شقة صغيرة','ملحق','محل تجاري']);
             $table->string('number')->unique();
             $table->string('size');
             $table->string('details');
@@ -27,8 +27,6 @@ class CreateUnitsTable extends Migration
             $table->integer('bathrooms');
             $table->integer('rooms');
             $table->string('condition_type');
-            $table->string('Elecrtricity_number');
-            $table->string('water_number');
             $table->string('maint_cost')->default('0');
             $table->enum('status', ['rented', 'empty'])->default('empty');
             $table->timestamps();

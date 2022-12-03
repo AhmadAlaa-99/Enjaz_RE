@@ -4,7 +4,7 @@
     <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4-custom.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/vendor/datatables/buttons.bs.css')}}" rel="stylesheet">
-       
+
 @endsection
 @section('title')
 
@@ -16,8 +16,8 @@
 <!-- Row start -->
 <div class="row gutters">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        
-    
+
+
 
         <div class="table-container">
             <div class="t-header">مدفوعات العقود</div>
@@ -27,7 +27,6 @@
                         <tr>
                           <th>رقم العقد</th>
                           <th>اسم المستأجر</th>
-                          <th>اسم المؤجر</th>
                           <th>اسم المنشأة</th>
                           <th>رقم الوحدة</th>
                           <th>تاريخ بداية العقد</th>
@@ -56,16 +55,16 @@
                           <td>2008/11/28</td>
                           <td>$162,700</td>
                           <td>$162,700</td>
-                          
-                          <td><a href="{{ url('/' . $page='Admin/invoice_details') }}"> print </a></td> 
+
+                          <td><a href="{{ url('/' . $page='Admin/invoice_details') }}"> print </a></td>
                         </tr>
-                     
+
                     </tbody>
             </table>
             </div>
         </div>
 
-    
+
 
     </div>
 
@@ -80,8 +79,8 @@
     <script src="{{URL::asset('assets/vendor/datatables/dataTables.min.js')}}"></script>
     <script src="{{URL::asset('assets/vendor/datatables/dataTables.bootstrap.min.js')}}"></script>
 
-      
-		
+
+
 		<!-- Custom Data tables -->
         <script src="{{URL::asset('assets/vendor/datatables/custom/custom-datatables.js')}}"></script>
         <script src="{{URL::asset('assets/vendor/datatables/custom/fixedHeader.js')}}"></script>

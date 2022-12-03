@@ -92,7 +92,6 @@
 												<tr>
                                                    <th> رقم سجل العقد </th>
                                                    <th> اسم المستأجر </th>
-                                                   <th> اسم المؤجر </th>
                                                    <th> رقم الوحدة </th>
                                                     <th> اسم المنشأة </th>
 													<th>تاريخ الاصدار </th>
@@ -106,7 +105,6 @@
 												<tr>
                                                     <td>{{$lease->reco_number}}</td>
                                                     <td>{{$lease->tenants->user->name}}</td>
-                                                    <td>{{$lease->organization->user->name}}</td>
                                                     <td>{{$lease->realties->realty_name}}</td>
                                                     <td>{{$lease->units->number}}</td>
 													<td>{{$payment->release_date}}</td>

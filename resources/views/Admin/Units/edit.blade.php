@@ -61,10 +61,7 @@
                                         <option value="no"{{($unit->kitchen_Cabinets) == 'no' ? 'selected' : '' }}> لا</option>
                                 </select>
                             </div>
-                        <div class="form-group">
-                            <label for="website">رقم عداد المياه</label>
-                            <input type="text" class="form-control" name="water_number" value="{{$unit->water_number}}"required>
-                        </div>
+
                          <div class="form-group">
                             <label for="fullName"> تفاصيل </label>
                             <input type="text" class="form-control" id="details" name="details" value="{{$unit->details}}"required>
@@ -84,11 +81,13 @@
 
 
 
-                                        <option value="villa"{{($unit->type) == 'villa' ? 'selected' : '' }}>فيلا</option>
-                                        <option value="apartment"{{($unit->type) == 'apartment' ? 'selected' : '' }}>شقة</option>
-                                        <option value="two-floor"{{($unit->type) == 'two-floor' ? 'selected' : '' }}>شقة ثنائية الدور</option>
-                                        <option value="small"{{($unit->type) == 'small' ? 'selected' : '' }}>شقة صغيرة</option>
-                                        <option value="annexe"{{($unit->type) == 'annexe' ? 'selected' : '' }}>ملحق</option>
+                                        <option value="فيلا"{{($unit->type) == 'فيلا' ? 'selected' : '' }}>فيلا</option>
+                                        <option value="شقة"{{($unit->type) == 'شقة' ? 'selected' : '' }}>شقة</option>
+                                        <option value="شقة ثنائية الدور"{{($unit->type) == 'شقة ثناشبة الدور' ? 'selected' : '' }}>شقة ثنائية الدور</option>
+                                        <option value="شقة صغيرة"{{($unit->type) == 'شقة صغيرة' ? 'selected' : '' }}>شقة صغيرة</option>
+                                        <option value="ملحق"{{($unit->type) == 'ملحق' ? 'selected' : '' }}>ملحق</option>
+                                    <option value="مجل تجاري"{{($unit->type) == 'محل تجاري' ? 'selected' : '' }}>محل تجاري</option>
+
 
                                 </select>
                      </div>
@@ -101,10 +100,7 @@
                             <input type="number" class="form-control" name="condition_units" value="{{$unit->condition_units}}"required>
 
                         </div>
-                        <div class="form-group">
-                            <label for="zIp">رقم عداد الكهرباء</label>
-                            <input type="text" class="form-control" name="electricity_number" value="{{$unit->Elecrtricity_number}}"required>
-                        </div>
+
 
 
                     </div>

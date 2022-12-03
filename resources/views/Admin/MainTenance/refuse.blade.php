@@ -73,7 +73,7 @@
 			                         {!!$maints->links()!!}
                         </div>
 
-                   
+
             </div>
         </div>
 

@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\organization;
 use Carbon\Carbon;
+use App\Models\Broker;
 use Faker\Factory;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -23,7 +24,7 @@ public function run()
     $faker = Factory::create();
 
     $user = User::create([
-        'name'=>'Ahmad Alaa',
+        'name'=>'Enjaz Company',
         'nationalitie_id'=>'1',
         'ID_type'=>'gpt432',
         'ID_num'=>'14040024',
@@ -32,71 +33,45 @@ public function run()
         'telephone'=>'6554334',
         'email'=>'ahmad@gmail.com',
         'role_name'=>'Admin',
-        'password'=>bcrypt('21412123'),
+        'password'=>bcrypt('12345678'),
            ]);
+        Broker::create([
+            'email'=>'ahmad@gmail.com',
+            'date_founded'=>'2020/10/10',
+            'about'=>'شركة انجاز المستقلة',
+            'vision'=>'نتطلع ل مستقبل أفضل في العقارات',
+            'mission'=>'معا أفضل',
+        ]);
 $role = Role::create(['name' => 'Admin']);
  $role=Role::where('name','Admin')->first();
+ /*
+
+*/
 $role->syncPermissions(
-    'الوسيط العقاري -  ملاك العقارات',
-'الوسيط العقاري -  ادارة المستأجرين',
-'طلبات الصيانة - الوسيط- المالك',
-'الوسيط- المالك - مدفوعات الصيانة',
 'ادارة العقارات - الوسيط',
+ 'ادارة الاستئجار - الوسيط',
+
+'الوسيط العقاري -  ادارة المستأجرين',
+
+'طلبات الصيانة - الوسيط',
+
 'حركة التأجير - الوسيط العقاري',
+
 'الاعدادات  - الوسيط',
+
 ' السجل المالي- الوسيط',
+
 );
  $user->assignRole([$role->id]);
  ///////////////////////////////////////////////////////////////
-$role = Role::create(['name' => 'Owner']);
-$role=Role::where('name','Owner')->first();
-$role->syncPermissions(
-'ادارة المستأجرين - المالك',
-'عقاراتي - المالك',
-'حركة التأجير- المالك',
-'الاعدادات المالك',);
-
-
-$id_type=['civilian','stay'];
-$gender=['male','female'];
-for ($i = 0; $i < 3; $i++)
-{
- $user= User::create([
-    'name'=>$faker->sentence(mt_rand(1,2), true),
-    'nationalitie_id'=>rand(1,10),
-    'ID_type'=>Arr::random($id_type),
-    'ID_num'=>$faker->numerify('##########'),
-    'phone'=>$faker->numerify('9669########'),
-     'gender'=>Arr::random($gender),
-    'telephone'=>$faker->numerify('########'),
-    'email'=>$faker->email,
-    'role_name'=>'Owner',
-    'password'=>bcrypt('21412123'),
-]);
-organization::create([
-    'email'=>$user->email,
-    'company_name'=> $user->name,
-    'record_date'=>$faker->date,
-]);
-
-
-$user->assignRole([$role->id]);
-}
 
 
 $role = Role::create(['name' => 'Tenant']);
 $role->syncPermissions(
-    'الاعدادات المستأجر',
-    'الصيانة - المستأجر',);
+    ' المستأجر -   البيانات الايجارية',
+'الصيانة - المستأجر',
+'الاعدادات المستأجر',
 
-
-
-
-
-
-
-
-
-
+);
 }
 }

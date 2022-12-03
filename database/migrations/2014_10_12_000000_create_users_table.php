@@ -18,8 +18,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
               $table->bigInteger('nationalitie_id')->unsigned();
             $table->foreign('nationalitie_id')->references('id')->on('nationalities')->onDelete('cascade');
-
-
             $table->date('date_birth')->nullable()->defsult('00/00/0000');
             $table->string('ID_type');
             $table->enum('gender',['male','female']);
@@ -27,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('phone');
             $table->string('telephone')->nullable()->default(00000);
             $table->string('email');
-            $table->timestamp('email_verified_at');
+            $table->string('address')->nullable();
             $table->text('role_name');
             $table->string('password');
             $table->rememberToken();

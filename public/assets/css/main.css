@@ -3907,7 +3907,8 @@ ul.user-messages li {
   margin: 0;
   border-top: 0;
   width: inherit;
-  padding: 3px; }
+  padding: 3px;
+}
   .bootstrap-select .dropdown-menu.inner li.selected {
     background: #1a538e; }
     .bootstrap-select .dropdown-menu.inner li.selected a {

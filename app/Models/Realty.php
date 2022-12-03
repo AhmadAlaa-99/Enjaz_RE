@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Models;
 use App\Models\Units;
-use App\Models\Organization;
+use App\Models\Owner;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,10 +11,7 @@ class Realty extends Model
     protected $guarded=[];
 
     use HasFactory;
-    public function organization()
-    {
-        return $this->belongsTo(Organization::class,'owner_id','id');
-    }
+
     /*
     public function units_tn()
     {
@@ -26,5 +22,9 @@ class Realty extends Model
            return $this->hasMany(Units::class);
     }
     */
+      public function owner()
+    {
+        return $this->belongsTo(Owner::class,'owner_id','id');
+    }
 
 }

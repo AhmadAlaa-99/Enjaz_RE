@@ -4,7 +4,7 @@
     <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4-custom.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/vendor/datatables/buttons.bs.css')}}" rel="stylesheet">
-       
+
 @endsection
 @section('title')
 الطلبات المنجزة
@@ -16,8 +16,8 @@
 <!-- Row start -->
 <div class="row gutters">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        
-    
+
+
 
         <div class="table-container">
             <div class="t-header">مدفوعات العقود</div>
@@ -26,7 +26,6 @@
                 <thead>
                         <tr>
                             <th>اسم المستأجر</th>
-                            <th>اسم المؤجر</th>
                             <th>اسم المنشأة</th>
                             <th>رقم الوحدة</th>
                             <th>رقم الدورة</th>
@@ -34,12 +33,11 @@
                             <th>تاريخ الاستحقاق </th>
                             <th>اجمالي القيمة </th>
                             <th>الحالة</th>
-                          
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                          <td>Accountant</td>
                           <td>Accountant</td>
                           <td>Tokyo</td>
                           <td>33</td>
@@ -49,13 +47,13 @@
                           <td>$162,700</td>
                           <td>$162,700</td>
                         </tr>
-                     
+
                     </tbody>
             </table>
             </div>
         </div>
 
-    
+
 
     </div>
 
@@ -70,8 +68,8 @@
     <script src="{{URL::asset('assets/vendor/datatables/dataTables.min.js')}}"></script>
     <script src="{{URL::asset('assets/vendor/datatables/dataTables.bootstrap.min.js')}}"></script>
 
-      
-		
+
+
 		<!-- Custom Data tables -->
         <script src="{{URL::asset('assets/vendor/datatables/custom/custom-datatables.js')}}"></script>
         <script src="{{URL::asset('assets/vendor/datatables/custom/fixedHeader.js')}}"></script>

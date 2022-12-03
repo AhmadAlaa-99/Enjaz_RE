@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBrokersTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateBrokersTable extends Migration
      */
     public function up()
     {
-        Schema::create('brokers', function (Blueprint $table) {
+        Schema::create('quarters', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
-            $table->date('date_founded');
-            $table->string('about');
-            $table->string('vision');
-            $table->string('mission');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreateBrokersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brokers');
+        Schema::dropIfExists('quarters');
     }
-}
+};

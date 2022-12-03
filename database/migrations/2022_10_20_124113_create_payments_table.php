@@ -15,17 +15,18 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->enum('payment_method',['cash','visa','bank']);
+            $table->string('account_number');
             $table->foreignId('lease_id')->constrained('leases')->cascadeOnDelete();
             $table->date('release_date');
             $table->date('due_date');
             $table->string('total');
+            $table->string('refrenceNo');
             $table->string('paid')->default('0');
             $table->string('remain');
-
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

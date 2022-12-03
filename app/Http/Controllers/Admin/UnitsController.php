@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Realty;
 use App\Models\Units;
-use App\Models\org_envoices;
 use Illuminate\Http\Request;
 
 
@@ -37,12 +36,13 @@ class UnitsController extends Controller
     {
          $realty=Realty::where('id',$id)->first();
         $units_count=Units::where('realty_id',$id)->get();
-        if($units_count->count() < $realty->units)
+        if($units_count->count() < $realty->units+$realty->shopsNo)
         {
         $realty=Realty::where('id',$id)->first();
         return view('Admin.Units.create',compact('realty'));
         }
-        else{
+        else
+        {
                     session()->flash('max', 'عذرا, لقد بلغت الحد الأقصى للوحدات الايجارية في هذه المنشأة');
         return back();
         }
@@ -65,8 +65,6 @@ class UnitsController extends Controller
                     'kitchen_Cabinets'=> $request->kitchen_Cabinets,
                     'condition_units'=> $request->condition_units,
                     'condition_type'=> $request->condition_type,
-                    'water_number'=> $request->water_number,
-                    'Elecrtricity_number'=>$request->electricity_number,
                     'details'=>$request->details,
                     'bathrooms'=>$request->bathrooms,
                     'rooms'=>$request->rooms,
@@ -134,8 +132,6 @@ class UnitsController extends Controller
                     'kitchen_Cabinets'=> $request->kitchen_Cabinets,
                     'condition_units'=> $request->condition_units,
                     'condition_type'=> $request->condition_type,
-                    'water_number'=> $request->water_number,
-                    'electricity_number'=>$request->electricity_number,
                     'details'=>$request->details,
                     'bathrooms'=>$request->bathrooms,
                     // 'tenant_id'=> $request->tenant_id,
@@ -178,8 +174,6 @@ class UnitsController extends Controller
             'kitchen_Cabinets'=> $request->kitchen_Cabinets,
             'condition_units'=> $request->condition_units,
             'condition_type'=> $request->condition_type,
-            'water_number'=> $request->water_number,
-            'Elecrtricity_number'=>$request->electricity_number,
             'details'=>$request->details,
             'bathrooms'=>$request->bathrooms,
             //'status'=>$request->status,

@@ -43,10 +43,11 @@
 
                           <th>رقم العقد </th>
                           <th>اسم المستأجر</th>
-                          <th>اسم المؤجر</th>
                           <th>اسم المنشأة</th>
                           <th>رقم الوحدة</th>
                           <th>نوع العقد</th>
+                                                    <th>نوع العقد</th>
+
                           <th>تاريخ بداية العقد</th>
                           <th>تاريخ نهاية العقد</th>
                           <th> الكلفة الاجمالية للعقد</th>
@@ -69,10 +70,11 @@
                           <td>{{$i}}</td>
                           <td>{{$lease->reco_number}}</td>
                           <td>{{$lease->tenants->user->name}}</td>
-                          <td>{{$lease->organization->user->name}}</td>
                           <td>{{$lease->realties->realty_name}}</td>
                           <td>{{$lease->units->number}}</td>
                           <td>{{$lease->type}}</td>
+                                                                                                                                  <td>{{$lease->lease_type}}</td>
+
                           <td>{{$lease->st_rental_date}}</td>
                           <td>{{$lease->end_rental_date}}</td>
                           <td>{{$lease->financial->Total}}</td>

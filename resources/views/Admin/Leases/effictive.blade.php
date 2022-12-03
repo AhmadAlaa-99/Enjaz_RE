@@ -42,10 +42,11 @@
                         <th>الرقم التسلسلي</th>
                           <th>رقم العقد </th>
                           <th>اسم المستأجر</th>
-                          <th>اسم المؤجر</th>
                           <th>اسم المنشأة</th>
                           <th>رقم الوحدة</th>
                           <th>نوع العقد</th>
+                         <th>نوع العقد</th>
+
                           <th>تاريخ بداية العقد</th>
                           <th>تاريخ نهاية العقد</th>
                           <th> الكلفة الاجمالية للعقد</th>
@@ -70,10 +71,11 @@
                           <td>{{$i}}</td>
                           <td>{{$lease->reco_number}}</td>
                           <td>{{$lease->tenants->user->name}}</td>
-                          <td>{{$lease->organization->user->name}}</td>
                           <td>{{$lease->realties->realty_name}}</td>
                           <td>{{$lease->units->number}}</td>
                           <td>{{$lease->type}}</td>
+                          <td>{{$lease->lease_type}}</td>
+
                           <td>{{$lease->st_rental_date}}</td>
                           <td>{{$lease->end_rental_date}}</td>
                           <td>{{$lease->financial->Total}}</td>
@@ -90,6 +92,7 @@
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                             <a class="dropdown-item" href="{{route('payments.details',$lease->id)}}"><i style="color:green" class="icon-details"></i>&nbsp;سداد الدفعات</a>
                                                             <a class="dropdown-item" href="{{route('lease.details',$lease->id)}}"><i style="color:green" class="icon-details"></i>&nbsp;تفاصيل العقد</a>
+                                                            <a class="dropdown-item" href="{{route('leases.renew.show',$lease->id)}}"><i style="color:green" class="icon-details"></i>&nbsp; تجديد العقد</a>
                                                             <a class="dropdown-item" href="{{route('down.file',$lease->id)}}"><i style="color:green" class="icon-download"></i>&nbsp;  تحميل المرفقات&nbsp;</a>
                                                             <a class="dropdown-item" href="{{route('move_le.archive',$lease->id)}}"><i style="color:green" class="icon-delete"></i>&nbsp; &nbsp; انهاء العقد</a>
                                                         </div>

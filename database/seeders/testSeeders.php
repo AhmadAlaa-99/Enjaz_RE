@@ -14,10 +14,12 @@ use App\Models\User;
 use App\Models\Realty;
 use App\Models\Units;
 use Carbon\Carbon;
+use App\Models\contract;
+use App\Models\ensollments;
+use App\Models\Owner;
 use Faker\Factory;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use App\Models\organization;
 use Spatie\Permission\Models\Role;
 
 
@@ -30,7 +32,51 @@ class testSeeders extends Seeder
      */
     public function run()
     {
-        $faker = Factory::create();
+         Owner::create([
+        'name'=>'Ahmad Alaa',
+        'email'=>'Ahmad@gmail.com',
+        'mobile'=>'9664324324',
+        'attribute_name'=>'aliAli',
+       ]);
+       $owner=Owner::latest()->first();
+        Realty::create([
+                'realty_name'=>'عمارة الشفاء',
+                'owner_id'=>$owner->id,
+                'address'=>'السعودية - جدة',
+                'type'=>'building',
+                'use'=>'family',
+                'roles'=>'1',
+                'units'=> '3',
+                'size'=> '43',
+                'advantages'=> 'not found',
+                ]);
+                $realty=Realty::latest()->first();
+                $image_name='doc-gf.jpg';
+                contract::create([
+                'realty_id'=>$realty->id,
+                'contactNo'=>'435',
+                'start_date'=>'10/10/2020',
+                'end_date'=>'10/10/2022',
+                'rent_value'=>'100000',
+                'contract_file'=>$image_name,
+                'type'=>'تجاري',
+                'note'=>'not found',
+                'status'=>'عقد جاري',
+            ]);
+            $contract=contract::latest()->first();
+            ensollments::create([
+                'contract_id'=>$contract->id,
+                'installmentNo'=>'42423',
+                 'installment_date'=>'11/11/2020',
+                 'payment_date'=>'11/11/2020',
+                   'amount'=>'3243',
+                   'payment_type'=>'cash',
+                   'refrenceNo'=>'3424',
+                    'note'=>'not found',
+            ]);
+            $faker = Factory::create();
+/*
+
         $realty_type=['villa','building'];
         $realty_use=['family','individually'];
 
@@ -38,6 +84,7 @@ for ($i = 0; $i <5; $i++)
 
 {
         $realty= Realty::create([
+
             'realty_name'=>$faker->sentence(mt_rand(1,2), true),
             'address'=>'saudia',
             'type'=> Arr::random($realty_type),
@@ -45,17 +92,16 @@ for ($i = 0; $i <5; $i++)
             'roles'=>'2',
             'units'=>'3',
             'size'=>'500',
-            'owner_id'=>rand(1,3),
             'advantages'=> 'يمتلك مصعد و حديقة عامة',
             ]);
         }
-
+*/
         $unit_type=['villa','apartment','two-floor','small','annexe'];
         $furnished=['unfurnished', 'newfn','usedfn'];
         $kitshen=['yes','no'];
-        for ($i = 0; $i <10; $i++)
+        for ($i = 0; $i <2; $i++)
             Units::create([
-                'realty_id'=>rand(1,5),
+                'realty_id'=>'1',
                 'type'=>Arr::random($unit_type),
                 'role_number'=>rand(1,2),
                 'number'=>$faker->numerify('kh-###'),
@@ -65,8 +111,6 @@ for ($i = 0; $i <5; $i++)
                 'condition_units'=> '2',
                 'condition_type'=> 'شباك',
                 'rooms'=>'3',
-                'water_number'=> $faker->numerify('#####'),
-                'Elecrtricity_number'=>$faker->numerify('#####'),
                 'details'=>'not found',
                 'bathrooms'=>'2',
                 //'status'=>$request->status,
@@ -78,7 +122,8 @@ for ($i = 0; $i <5; $i++)
 $name = $faker->sentence(mt_rand(3, 6), true);
 $id_type=['civilian','stay'];
 $gender=['male','female'];
-for ($i = 0; $i <3; $i++)
+
+for ($i = 0; $i <2; $i++)
 {
  $user= User::create([
     'name'=>$faker->sentence(mt_rand(1,2), true),
@@ -92,19 +137,15 @@ for ($i = 0; $i <3; $i++)
     'role_name'=>'Tenant',
     'password'=>bcrypt('21412123'),
 ]);
-
-
-
             $role=Role::where('name','Tenant')->first();
             $user->assignRole([$role->id]);
-
-
             Tenant::create([
                 'user_id'=>$user->id,
-                'unit_id'=>rand(1,10),
+                'unit_id'=>rand(1,2),
 
             ]);
         }
+
 
             Financial_statements::create([
                 'st_rental_date'=>Carbon::now(),
@@ -118,14 +159,14 @@ for ($i = 0; $i <3; $i++)
             ]);
             Commitments::create(['desc'=>'التزام بتسليم العقار في الوقت المحدد']);
 
-            $tenant=Tenant::where('id',1)->first();
+          $tenant=Tenant::where('id',1)->first();
             $unit=Units::where('id',$tenant->unit_id)->first();
             $realty=Realty::where('id',$unit->realty_id)->first();
              $realty->update([
                 'rents'=>$realty->rents+=1,
             ]);
             Lease::create([
-                'realty_id'=>$realty->id,
+                'realty_id'=>'1',
                 //payments one to many
                 'reco_number'=>'543-GH',
                 'le_date'=>Carbon::now(),
@@ -134,11 +175,10 @@ for ($i = 0; $i <3; $i++)
                 'type'=>'new',
                 'place'=>'saudia',
                 'end_rental_date'=>Carbon::now()->addYear(),
-                'org_id'=>$realty->organization->id,
                 'commitment_id'=>'1', //one to one
                 'financial_id'=>'1',  //one to one
                 'tenant_id'=>'1', //many to one
-                'unit_id'=>$unit->id,   //many to one
+                'unit_id'=>'1',   //many to one
                 'docFile'=>'doc-34545.jpg',
             ]);
             Payments::create([
@@ -155,7 +195,7 @@ for ($i = 0; $i <3; $i++)
                 'total'=>'25000',
                 'remain'=>'25000',
             ]);
-            Units::where('id',$unit->id)->update(['status'=>'rented']);
+            Units::where('id','1')->update(['status'=>'rented']);
 
 
 
@@ -185,7 +225,7 @@ for ($i = 0; $i <3; $i++)
                 'rents'=>$realty->rents+=1,
             ]);
             Lease::create([
-                'realty_id'=>$realty->id,
+                'realty_id'=>'1',
                 //payments one to many
                 'reco_number'=>'543-GH',
                 'le_date'=>Carbon::now(),
@@ -194,11 +234,10 @@ for ($i = 0; $i <3; $i++)
                 'type'=>'new',
                 'place'=>'saudia',
                 'end_rental_date'=>Carbon::now()->addMonths(6),
-                'org_id'=>$realty->organization->id,
                 'commitment_id'=>'2', //one to one
                 'financial_id'=>'2',  //one to one
                 'tenant_id'=>'2', //many to one
-                'unit_id'=>$unit->id,   //many to one
+                'unit_id'=>'2',   //many to one
                 'docFile'=>'doc-34545.jpg',
             ]);
             Payments::create([
@@ -215,7 +254,7 @@ for ($i = 0; $i <3; $i++)
                 'total'=>'12000',
                 'remain'=>'12000',
             ]);
-            Units::where('id',$unit->id)->update(['status'=>'rented']);
+            Units::where('id','2')->update(['status'=>'rented']);
 
 
 
@@ -231,7 +270,7 @@ for ($i = 0; $i <3; $i++)
 
 
 
-
+/*
              Financial_statements::create([
                 'st_rental_date'=>Carbon::now(),
                 'annual_rent'=>'60000',
@@ -249,6 +288,7 @@ for ($i = 0; $i <3; $i++)
              $realty->update([
                 'rents'=>$realty->rents+=1,
             ]);
+
             Lease::create([
                 'realty_id'=>'3',
                 //payments one to many
@@ -259,7 +299,6 @@ for ($i = 0; $i <3; $i++)
                 'type'=>'new',
                 'place'=>'saudia',
                 'end_rental_date'=>Carbon::now()->addMonths(3),
-                'org_id'=>$realty->organization->id,
                 'commitment_id'=>'3', //one to one
                 'financial_id'=>'3',  //one to one
                 'tenant_id'=>'3', //many to one
@@ -290,7 +329,7 @@ for ($i = 0; $i <3; $i++)
             Units::where('id',$unit->id)->update(['status'=>'rented']);
 
 
-
+*/
 
 
 

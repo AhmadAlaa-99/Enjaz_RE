@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Tenant;
-use App\Models\organization;
 use App\Models\Units;
 
 
@@ -16,11 +15,6 @@ class Lease extends Model
     public function tenants()
     {
         return $this->belongsTo(Tenant::class,'tenant_id');
-    }
-
-    public function organization()
-    {
-        return $this->belongsTo(organization::class,'org_id');
     }
 
     public function units()

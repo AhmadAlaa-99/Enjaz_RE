@@ -13,6 +13,7 @@ use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\receive_reports;
+use App\Http\Controllers\Admin\ContractController;
 
 
 
@@ -55,6 +56,7 @@ Route::get('/test', function () {
    Route::get('/downFile/{id}',[AdminLeasesController::class, 'downFile'])->name('down.file');
 
 
+
 //Admin
 
 Route::group([
@@ -66,6 +68,11 @@ Route::group([
      Route::get('/', [SettingsController::class,'statistics']);
      Route::resource('/owners',\Admin\OwnersController::class);
     Route::get('/owner_destroy/{id}',[AdminOwnersController::class,'destroy'])->name('owner.destroy');
+
+    Route::get('/leases_renew/{id}',[AdminLeasesController::class,'leases_renew'])->name('leases.renew.show');
+    Route::post('/leases_renew_store',[AdminLeasesController::class,'leases_renew_store'])->name('leases.renew.store');
+   Route::get('/previous_leases/{id}',[AdminLeasesController::class,'previous_leases'])->name('previous.leases');
+
 
      Route::get('/tenants',[AdminTenantController::class,'index']);
      Route::get('/accept_requests',[AdminMainTenancesController::class,'accept_requests']);
@@ -87,7 +94,32 @@ Route::group([
      Route::get('/unit_rent/{id}',[AdminLeasesController::class,'create'])->name('unit.rent');
 
 
-     Route::get('/effictive',[AdminLeasesController::class,'effictive'])->name('effictive');;
+
+          Route::get('contract_residential',[ContractController::class,'contract_residential'])->name('contract_residential');
+          Route::get('contract_commercial',[ContractController::class,'contract_commercial'])->name('contract_commercial');
+
+              Route::get('/renew_contract/{id}',[ContractController::class,'renew_contract'])->name('renew.contract');
+               Route::post('/renew_contracted',[ContractController::class,'renew_contracted'])->name('renew.contracted');
+                Route::get('/finish_contract/{id}',[ContractController::class,'finish_contract'])->name('finish.contract');
+
+
+
+
+
+          Route::post('contract_store',[ContractController::class,'contract_store'])->name('rent_contract_store');
+
+
+
+           Route::get('contract_effictive',[ContractController::class,'contract_effictive'])->name('contract_effictive');
+           Route::get('contract_finished',[ContractController::class,'contract_finished'])->name('contract_finished');
+
+
+         Route::get('contract_details/{id}',[ContractController::class,'details'])->name('contract_details');
+          Route::get('/down_contract_file/{id}',[ContractController::class, 'down_contract_file'])->name('down.contract_file');
+
+
+
+     Route::get('/effictive',[AdminLeasesController::class,'effictive'])->name('effictive');
      Route::get('/finished',[AdminLeasesController::class,'finished'])->name('finished');;
      Route::get('/lease_details/{id}',[AdminLeasesController::class,'details'])->name('lease.details');
      Route::get('/lease_un.details/{id}',[AdminLeasesController::class,'lease_un_details'])->name('lease_un.details');

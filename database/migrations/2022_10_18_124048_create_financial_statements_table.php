@@ -26,13 +26,15 @@ class CreateFinancialStatementsTable extends Migration
 
         Schema::create('financial_statements', function (Blueprint $table) {
             $table->id();
-            $table->date('st_rental_date');
-            $table->string('annual_rent');
+            $table->string('lease_ammount');
             $table->string('recurring_rent_payment');
+             $table->string('ejar_cost');
+             $table->string('tax')->default('0');
+            $table->string('tax_ammount')->default('0');;
+            $table->string('rent_value');
             $table->string('num_rental_payments');
-            $table->date('end_rental_date');
             $table->enum('payment_cycle',['monthly','annual','quarterly','midterm']);
-            $table->string('Total');
+            $table->string('notes');
             $table->string('payment_channels');
             $table->timestamps();
         });

@@ -108,16 +108,4 @@ response_date*/
         return view('Admin.Tenant.MainTenance.index,',compact('maintenance'));
 
     }
-    public function ownerRequest()  //Owner
-    {        //get id real_state
-         $user=Auth::user()->id;
-         $owner=owners::where('email',$user->email)-first();
-         $real=Realty::where('envoy_id',$owner->id)->first();
-         $maintenances=Maintenance::where('real_id',$real->id)->latest()->paginate(5);
-         return view('Admin.Tenant.MainTenance.index,',compact('maintenances'));
-
-
-
-
-    }
 }

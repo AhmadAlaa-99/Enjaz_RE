@@ -40,7 +40,7 @@
 										<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 											<div class="goal-card">
 												<h5>عدد المنشأت العقارية</h5>
-												<p class="percentage">يمكن للمالك امتلاكه اكثر من منشأة</p>
+												<p class="percentage"></p>
 												<div class="progress progress-dot">
 													<div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="107" aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
@@ -50,7 +50,7 @@
 										<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 											<div class="goal-card">
 												<h5>عدد الوحدات الايجارية</h5>
-												<p class="percentage">يتم حساب الوحدات كلها الشاغرة والمؤجرة</p>
+												<p class="percentage">يتم حساب الوحدات السكنية والتجارية كلها الشاغرة والمؤجرة</p>
 												<div class="progress progress-dot">
 													<div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="107" aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
