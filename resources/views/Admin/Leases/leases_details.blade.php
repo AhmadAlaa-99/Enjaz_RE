@@ -125,7 +125,7 @@
 										<table class="table table-bordered table-dark m-0">
             <thead>
 												<tr>
-													<th> المنطقة</th>
+													<th> الحي</th>
 													<th> النوع</th>
 													<th> عدد الوحدات السكنية  </th>
                                                     <th>  عدد الوحدات التجارية </th>

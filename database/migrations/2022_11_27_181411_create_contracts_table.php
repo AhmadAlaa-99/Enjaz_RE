@@ -21,13 +21,20 @@ return new class extends Migration
             $table->string('end_date');
             $table->string('rent_value');
             $table->string('contract_file');
-            $table->enum('status',['جديد','مجدد'])->default('جديد');
+            $table->enum('status',['جديد','مجدد','منتهي'])->default('جديد');
             $table->enum('type',['سكني','تجاري']);
             $table->enum('type_s',['جاري','منتهي'])->default('جاري');
             $table->string('ejar_cost');
              $table->string('tax_amount')->nullable();
             $table->string('tax')->nullable();
             $table->string('note');
+            $table->string('remain');
+            $table->string('paid')->default('0');
+             $table->string('ensollments_total');
+            $table->string('ensollments_paid')->default('0');
+
+
+
             $table->timestamps();
         });
     }

@@ -59,7 +59,7 @@
         </div>
          <div class="col-1-2">
           <div class="controls">
-            <input type="text" id="attribute_name" class="floatLabel" value="{{old('attribute_name')}}"name="attribute_name"required>
+            <input type="text" id="attribute_name" class="floatLabel" value="{{old('attribute_name')}}"name="attribute_name">
             <label for="eMail">اسم الوسيط</label>
           </div>
         </div>
@@ -70,30 +70,42 @@
   <h2 class="heading">بيانات العقد</h2>
 <input type="hidden" id="type" class="floatLabel" value="{{$type}}"name="type_sc"required>
    <div class="grid">
-        <div class="col-1-4">
+        <div class="col-1-3">
           <div class="controls">
            <input type="text" id="contactNo" class="floatLabel" value="{{old('contactNo')}}"name="contactNo"required>
            <label for="street">رقم سجل العقد - ID</label>
           </div>
         </div>
-         <div class="col-1-4">
-          <div class="controls">
-            <input type="date" id="start_date" class="floatLabel" value="{{old('start_date')}}"name="start_date"required>
-            <label for="eMail">تاريخ بداية مدة الاستئجار</label>
-          </div>
-        </div>
-        <div class="col-1-4">
-          <div class="controls">
-            <input type="date" id="end_date" class="floatLabel" value="{{old('end_date')}}"name="end_date"required>
-            <label for="phone">تاريخ نهاية مدة الاستئجار</label>
-          </div>
-        </div>
-           <div class="col-1-4">
-          <div class="controls">
+         <div class="col-1-3">
+         <div class="controls">
            <input type="text" id="ejar_cost" class="floatLabel" value="{{old('ejar_cost')}}"name="ejar_cost"required>
            <label for="street"> كلفة  الاستئجار</label>
           </div>
         </div>
+        <div class="col-1-3">
+             <div class="controls">
+           <input type="number" id="ensollments_total" class="floatLabel" value="{{old('ensollments_total')}}"name="ensollments_total"required>
+           <label for="street">عدد الأقساط</label>
+          </div>
+
+        </div>
+</div>
+ <div class="grid">
+        <div class="col-1-2">
+            <div class="controls">
+            <input type="date" id="start_date" class="floatLabel" value="{{old('start_date')}}"name="start_date"required>
+            <label for="eMail">تاريخ بداية مدة الاستئجار</label>
+          </div>
+
+        </div>
+         <div class="col-1-2">
+            <div class="controls">
+            <input type="date" id="end_date" class="floatLabel" value="{{old('end_date')}}"name="end_date"required>
+            <label for="phone">تاريخ نهاية مدة الاستئجار</label>
+          </div>
+
+        </div>
+
 </div>
 @if($type=="تجاري")
 <div class="grid">
@@ -135,7 +147,7 @@
           <div class="controls">
 
            <input type="text" value="" name="quarter" class="floatLabel"placeholder=""required>
-           <label for="street">المنطقة</label>
+           <label for="street">الحي</label>
           </div>
         </div>
          <div class="col-1-4">
@@ -146,7 +158,7 @@
         </div>
          <div class="col-1-4">
           <div class="controls">
-            <input type="text" class="floatLabel"name="agency_name" value="{{old('agency_name')}}"placeholder=""required>
+            <input type="text" class="floatLabel"name="agency_name" value="{{old('agency_name')}}"placeholder="">
             <label for="eMail">اسم الوكيل</label>
           </div>
         </div>
@@ -250,7 +262,7 @@
 
      <!--   جدول سداد الدفعات -->
     <div class="form-group">
-         <h2 class="heading">جدول سداد الدفعات</h2>
+         <h2 class="heading">جدول سداد الأقساط</h2>
          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 							<div class="card">
 								<div class="card-body">
@@ -258,8 +270,8 @@
 										<table class="table table-bordered table-dark m-0" id="tableEstimate">
                                                  <thead>
                                             <tr>
-                                                <th>رقم الاستمارة</th>
-                                                <th>تاريخ الاستمارة</th>
+                                                <th>رقم القسط</th>
+                                                <th>تاريخ الاصدار</th>
                                                 <th>رقم المرجع</th>
                                                 <th>تاريخ الدفع</th>
                                                 <th> المبلغ</th>
@@ -269,11 +281,11 @@
                                         </thead>
                                         <tbody class="add">
                                         <tr>
-                                            <td><input class="form-control" type="text" id="installmentNo" name="installmentNo[]"required></td>
+                                            <td><input class="form-control" type="number" id="installmentNo" name="installmentNo[]"required></td>
                                             <td><input class="form-control" type="date" id="installment_date" name="installment_date[]"required></td>
-                                            <td><input class="form-control unit_price"  type="text" id="refrenceNo" name="refrenceNo[]"required></td>
+                                            <td><input class="form-control unit_price"  type="number" id="refrenceNo" name="refrenceNo[]"required></td>
                                             <td><input class="form-control unit_price"  type="date" id="payment_date" name="payment_date[]"required></td>
-                                            <td><input class="form-control unit_price"  type="text" id="amount" name="amount[]"required></td>
+                                            <td><input class="form-control unit_price"  type="number" id="amount" name="amount[]"required></td>
                                            <td><input class="form-control unit_price"  type="text" id="payment_type" name="payment_type[]"required></td>
                                            <td><button type="button" class="btn btn-primary" id="add_btn">	<i class="icon-add"></i></button></td>
                                         </tr>

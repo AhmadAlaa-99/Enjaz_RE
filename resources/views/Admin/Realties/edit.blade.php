@@ -45,7 +45,7 @@
 
 
                             <div class="form-group">
-                                <label for="eMail">المنطقة</label>
+                                <label for="eMail">الحي</label>
                                 <input type="text" class="form-control" name="quarter" value="{{$realty->quarter}}"required>
                             </div>
                             <div class="form-group">

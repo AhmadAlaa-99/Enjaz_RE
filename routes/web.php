@@ -33,11 +33,14 @@ Route::get('/storage', function () {
     Artisan::call('storage:link');
 });
 Route::get('/clear', function() {
+    /*
 	$exitCode = Artisan::call('cache:clear');
 	$exitCode = Artisan::call('route:cache');
     $exitCode = Artisan::call('route:clear');
 	$exitCode = Artisan::call('config:cache');
     $exitCode = Artisan::call('view:clear');
+    */
+    $exitCode = Artisan::call('migrate');
     return 'All routes cache has just been removed';
 });
 Route::get('/owner_autocomplete',[AdminLeasesController::class,'fetchownerdata']);
@@ -94,7 +97,7 @@ Route::group([
 
      Route::get('/unit_rent/{id}',[AdminLeasesController::class,'create'])->name('unit.rent');
     Route::post('/lease_store',[AdminLeasesController::class,'store'])->name('leases.store');
-
+    Route::post('/payment_add/{id}',[ContractController::class,'payment_add'])->name('payment_contract.add');
 
 
 

@@ -168,7 +168,7 @@
             <table class="table table-bordered">
             <thead>
 												<tr>
-													<th> المنطقة</th>
+													<th> الحي</th>
 													<th> النوع</th>
 													<th>  عدد الوحدات السكنية</th>
                                                 <th>  عدد الوحدات التجارية</th>

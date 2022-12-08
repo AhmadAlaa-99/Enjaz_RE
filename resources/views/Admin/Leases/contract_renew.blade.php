@@ -37,30 +37,43 @@
   <div class="form-group">
   <h2 class="heading">بيانات العقد</h2>
    <div class="grid">
-        <div class="col-1-4">
+        <div class="col-1-3">
           <div class="controls">
            <input type="text" id="contactNo" class="floatLabel" value="{{old('contactNo')}}"name="contactNo"required>
 
            <label for="street">رقم سجل العقد - ID</label>
           </div>
         </div>
-         <div class="col-1-4">
+         <div class="col-1-3">
+            <div class="controls">
+           <input type="text" id="ejar_cost" class="floatLabel" value="{{old('ejar_cost')}}"name="ejar_cost"required>
+           <label for="street"> كلفة  الاستئجار</label>
+          </div>
+
+
+        </div>
+        <div class="col-1-3">
+            <div class="controls">
+           <input type="number" id="ensollments_total" class="floatLabel" value="{{old('ensollments_total')}}"name="ensollments_total"required>
+           <label for="street">عدد الأقساط</label>
+          </div>
+
+
+        </div>
+</div>
+   <div class="grid">
+           <div class="col-1-2">
           <div class="controls">
             <input type="date" id="start_date" class="floatLabel" value="{{old('start_date')}}"name="start_date"required>
             <label for="eMail">تاريخ بداية مدة الاستئجار</label>
           </div>
         </div>
-        <div class="col-1-4">
-          <div class="controls">
+         <div class="col-1-2">
+             <div class="controls">
             <input type="date" id="end_date" class="floatLabel" value="{{old('end_date')}}"name="end_date"required>
             <label for="phone">تاريخ نهاية مدة الاستئجار</label>
           </div>
-        </div>
-           <div class="col-1-4">
-          <div class="controls">
-           <input type="text" id="ejar_cost" class="floatLabel" value="{{old('ejar_cost')}}"name="ejar_cost"required>
-           <label for="street"> كلفة  الاستئجار</label>
-          </div>
+
         </div>
 </div>
 @if($contract->type=="تجاري")
@@ -116,11 +129,11 @@
                                         </thead>
                                         <tbody class="add">
                                         <tr>
-                                            <td><input class="form-control" type="text" id="installmentNo" name="installmentNo[]"required></td>
+                                            <td><input class="form-control" type="number" id="installmentNo" name="installmentNo[]"required></td>
                                             <td><input class="form-control" type="date" id="installment_date" name="installment_date[]"required></td>
-                                            <td><input class="form-control unit_price"  type="text" id="refrenceNo" name="refrenceNo[]"required></td>
+                                            <td><input class="form-control unit_price"  type="number" id="refrenceNo" name="refrenceNo[]"required></td>
                                             <td><input class="form-control unit_price"  type="date" id="payment_date" name="payment_date[]"required></td>
-                                            <td><input class="form-control unit_price"  type="text" id="amount" name="amount[]"required></td>
+                                            <td><input class="form-control unit_price"  type="number" id="amount" name="amount[]"required></td>
                                            <td><input class="form-control unit_price"  type="text" id="payment_type" name="payment_type[]"required></td>
                                            <td><button type="button" class="btn btn-primary" id="add_btn">	<i class="icon-add"></i></button></td>
                                         </tr>
@@ -166,11 +179,11 @@
         {
        var html='';
         html+='<tr>';
-        html+='<td><input class="form-control" type="text" id="installmentNo" name="installmentNo[]"required></td>';
+        html+='<td><input class="form-control" type="number" id="installmentNo" name="installmentNo[]"required></td>';
         html+='<td><input class="form-control" type="date" id="installment_date" name="installment_date[]"required></td>';
-        html+='<td><input class="form-control unit_price"  type="text" id="refrenceNo" name="refrenceNo[]"required></td>';
+        html+='<td><input class="form-control unit_price"  type="number" id="refrenceNo" name="refrenceNo[]"required></td>';
          html+='<td><input class="form-control unit_price"  type="date" id="payment_date" name="payment_date[]"required></td>';
-        html+='<td><input class="form-control unit_price"  type="text" id="amount" name="amount[]"required></td>';
+        html+='<td><input class="form-control unit_price"  type="number" id="amount" name="amount[]"required></td>';
         html+='<td><input class="form-control unit_price"  type="text" id="payment_type" name="payment_type[]"required></td>';
         html+='<td><button type="button" class="btn btn-primary" id="remove"><i class="icon-remove"></button></td>';
         html+='</tr>';

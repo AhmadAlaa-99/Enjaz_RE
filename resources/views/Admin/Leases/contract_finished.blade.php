@@ -46,10 +46,13 @@
                           <th>تاريخ نهاية العقد</th>
                           <th>قيمة الايجار</th>
                           <th>القيمة الكلية 'مع احتسب الضريبة'</th>
+                          <th>المبلغ المدفوع</th>
+                                                     <th>المبلغ المتبقي</th>
+                                                    <th>الأقساط الكلية</th>
+                                                 <th>الأقساط المدفوعة</th>
                           <th> النوع</th>
                                                     <th> الحالة</th>
 
-                          <th>ملاحظات</th>
                           <th>العمليات</th>
 
                         </tr>
@@ -71,10 +74,13 @@
                           <td>{{$contract->end_date}}</td>
                                 <td><span class="badge badge-danger">{{$contract->ejar_cost}}</td>
                           <td><span class="badge badge-warning">{{$contract->rent_value}}</td>
+                          <td><span class="badge badge-warning">{{$contract->paid}}</td>
+                          <td><span class="badge badge-warning">{{$contract->remain}}</td>
+                          <td><span class="badge badge-warning">{{$contract->ensollments_total}}</td>
+                          <td><span class="badge badge-warning">{{$contract->ensollments_paid}}</td>
                           <td><span class="badge badge-danger">{{$contract->type}}</td>
                                                                               <td><span class="badge badge-danger">{{$contract->status}}</td>
 
-                          <td>{{$contract->note}}</td>
 
                           <!--
     <input class="btn btn-primary" type="button" value="Input">

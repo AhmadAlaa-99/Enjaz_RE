@@ -100,7 +100,8 @@ public function leases_renew_store(Request $request)
             $fin=Financial_statements::latest()->first();
             $ten=Tenant::latest()->first();
             $image_name='doc-'.time().'.'.$request->docFile->extension();
-            $request->docFile->storeAs('public/Documents',$image_name);
+            $request->docFile->move(public_path('leases'),$image_name);
+
             Lease::create([
                 'realty_id'=>$request->realty_id,
                 //payments one to many
@@ -145,7 +146,7 @@ public function leases_renew_store(Request $request)
             $fin=Financial_statements::latest()->first();
             $ten=Tenant::latest()->first();
             $image_name='doc-'.time().'.'.$request->docFile->extension();
-            $request->docFile->storeAs('public/Documents',$image_name);
+            $request->docFile->move(public_path('leases'),$image_name);
             Lease::create([
                 'realty_id'=>$request->realty_id,
                 //payments one to many
@@ -338,7 +339,7 @@ public function leases_renew_store(Request $request)
             $fin=Financial_statements::latest()->first();
             $ten=Tenant::latest()->first();
             $image_name='doc-'.time().'.'.$request->docFile->extension();
-            $request->docFile->storeAs('public/Documents',$image_name);
+            $request->docFile->move(public_path('leases'),$image_name);
             Lease::create([
                 'realty_id'=>$request->realty_id,
                 //payments one to many
@@ -381,7 +382,7 @@ public function leases_renew_store(Request $request)
             $fin=Financial_statements::latest()->first();
             $ten=Tenant::latest()->first();
             $image_name='doc-'.time().'.'.$request->docFile->extension();
-            $request->docFile->storeAs('public/Documents',$image_name);
+            $request->docFile->move(public_path('leases'),$image_name);
             Lease::create([
                 'realty_id'=>$request->realty_id,
                 //payments one to many
@@ -486,7 +487,7 @@ public function leases_renew_store(Request $request)
         $file_name=Lease::select('docFile')->where('id',$id)->latest()->paginate(5);
         foreach($file_name as $file)
         {
-            $path=public_path().'/storage/Documents/'.$file->docFile;
+            $path=public_path().'/leases/'.$file->contract_file;
         }
          return Response::download($path);
     }

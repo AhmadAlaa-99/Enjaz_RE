@@ -47,7 +47,7 @@ class testSeeders extends Seeder
         Realty::create([
                 'realty_name'=>'عمارة الشفاء',
                 'owner_id'=>$owner->id,
-                  'quarter'=>'جدة',
+                  'quarter'=>'النسيم الغربي',
                  'agency_name'=>'Ali mohammed',
                 'shopsNo'=>'3',
                 'agency_mobile'=>'09432432432',
@@ -70,9 +70,11 @@ class testSeeders extends Seeder
                 'end_date'=>'10/10/2022',
                 'ejar_cost'=>'800000',
                 'tax'=>'15%',
+                'remain'=>'110000',
+                'ensollments_total'=>'10',
                 'tax_amount'=>'100000',
                 'rent_value'=>'110000',
-                'contract_file'=>'fd.jpg',
+                'contract_file'=>'1.pdf',
                 'type'=>'تجاري',
                 'note'=>'not found',
                 'status'=>'جديد',
@@ -213,7 +215,7 @@ for ($i = 0; $i <2; $i++)
                 'financial_id'=>'1',  //one to one
                 'tenant_id'=>'1', //many to one
                 'unit_id'=>'1',   //many to one
-                'docFile'=>'doc-34545.jpg',
+                'docFile'=>'2.pdf',
                  'lease_type'=>"تجاري",
 
             ]);
@@ -261,7 +263,7 @@ for ($i = 0; $i <2; $i++)
                 'financial_id'=>'2',  //one to one
                 'tenant_id'=>'2', //many to one
                 'unit_id'=>'2',   //many to one
-                'docFile'=>'doc-34545.jpg',
+                'docFile'=>'3.pdf',
                 'lease_type'=>"سكني",
 
 

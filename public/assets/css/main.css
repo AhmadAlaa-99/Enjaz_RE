@@ -1369,7 +1369,8 @@ figure.user-card {
 	************************************************
 ************************************************/
 .invoice-container {
-  padding: 2rem; }
+  padding: 2rem;
+    background-color: #a1acbb;}
   .invoice-container .invoice-header .invoice-logo {
     margin: .8rem 0 0 0;
     display: inline-block; }

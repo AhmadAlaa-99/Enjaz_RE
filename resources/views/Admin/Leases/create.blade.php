@@ -193,7 +193,7 @@
                                                  <thead>
                                             <tr>
                                                 <th >  اسم المنشأة :</br></br> {{$realty->realty_name}}</th>
-                                                 <th >   المنطقة  : </br></br> {{$realty->quarter}}</th>
+                                                 <th >   الحي  : </br></br> {{$realty->quarter}}</th>
                                                   <th >   نوع العقار : </br> </br>{{$realty->type}}</th>
                                                    <th >الوحدات السكنية</br> </br>{{$realty->units}}</th>
                                                      <th >   الوحدات التجارية :</br> </br>{{$realty->shopsNo}}</th>

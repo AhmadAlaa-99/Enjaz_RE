@@ -22,13 +22,90 @@
                 <div class="invoice-container">
                     <div class="invoice-header">
 
-                        <!-- Row start -->
-                        <div class="row gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
-                            </div>
-                        </div>
+                             <div class="modal" id="add_payment{{$contract->id}}" tabindex="-1" role="dialog" aria-labelledby="customModalTwoLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="customModalTwoLabel">تعديل حالة الدفع</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+                                                <form action="{{ route('payment_contract.add',$contract->id) }}" method="post">
+                                                         {{ csrf_field() }}
+														<div class="form-group">
+															<label for="recipient-name" class="col-form-label">رقم القسط</label>
+															<input type="number" name="installmentNo" class="form-control" id="recipient-name"required>
+														</div>
+                                                        <div class="form-group">
+															<label for="recipient-name" class="col-form-label">تاريخ القسط</label>
+															<input type="date" name="installment_date" class="form-control" id="recipient-name"required>
+														</div>
+                                                        <div class="form-group">
+															<label for="recipient-name" class="col-form-label">المبلغ</label>
+															<input type="number" name="amount" class="form-control" id="recipient-name"required>
+														</div>
+                                                         <div class="form-group">
+															<label for="recipient-name" class="col-form-label">تاريخ الدفع</label>
+															<input type="date" name="payment_date" class="form-control" id="recipient-name"required>
+														</div>
+                                                         <div class="form-group">
+															<label for="recipient-name" class="col-form-label">طريقة الدفع</label>
+															<input type="text" name="payment_type" class="form-control" id="recipient-name"required>
+														</div>
+                                                          <div class="form-group">
+															<label for="recipient-name" class="col-form-label">الرقم المرجعي</label>
+															<input type="number" name="refrenceNo" class="form-control" id="recipient-name"required>
+														</div>
+
+
+												</div>
+												<div class="modal-footer custom">
+													<div class="left-side">
+                                                    <button type="submit" class="btn btn-link success">حفظ</button>
+
+													</div>
+													<div class="divider"></div>
+													<div class="right-side">
+                                                    <button type="button" class="btn btn-link danger" data-dismiss="modal">اغلاق</button>
+													</div>
+                                                    </form>
+												</div>
+											</div>
+										</div>
+									</div>
+                        <!-- Row start -->
+                       	<div class="row gutters">
+												<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+													<div class="custom-actions-btns mb-5">
+														<a data-toggle="modal" href="" data-target="#add_payment{{ $contract->id }}"href="#" class="btn btn-primary">
+															<i class="icon-add"></i> اضاقة قسط جديد
+														</a>
+														<a href="{{route('down.contract_file',$contract->id)}}" class="btn btn-dark">
+															<i class="icon-printer"></i> تحميل مرفقات العقد
+														</a>
+													</div>
+												</div>
+											</div>
                         <!-- Row end -->
+                        @if (session()->has('max_rent'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('max_rent') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if (session()->has('max_count'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('max_count') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 
                         <!-- Row start -->
                         <div class="row gutters">
@@ -57,7 +134,7 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="table-responsive">
-										<table class="table table-bordered table-dark m-0">
+										<table class="table table-bordered table-striped">
                                     <thead>
                         <tr>
                           <th>رقم سجل العقد</th>
@@ -110,7 +187,7 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="table-responsive">
-										<table class="table table-bordered table-dark m-0">
+										<table class="table table-bordered table-striped m-0">
             <thead>
             <tr>
                                                     <th> الاسم الكامل</th>
@@ -139,22 +216,13 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="table-responsive">
-										<table class="table table-bordered table-dark m-0">
+										<table class="table table-bordered table-striped m-0">
             <thead>
-
-
-
-
-
-
-
-
-
 												<tr>
                                                     <th> اسم المنشأة</th>
                                                     <th> اسم الوكيل</th>
                                                     <th> رقم الوكيل</th>
-													<th> المنطقة</th>
+													<th> الحي</th>
 													<th> النوع</th>
 													<th>   عدد الوحدات السكنية </th>
                                                     <th>   عدد الوحدات التجارية </th>
@@ -193,21 +261,21 @@
 </div>
 
    <div class="form-group">
-         <h2 class="heading">الاستمارات المالية</h2>
+         <h2 class="heading">الأقساط المدفوعة</h2>
          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 							<div class="card">
 								<div class="card-body">
 									<div class="table-responsive">
-										<table class="table table-bordered table-dark m-0">
+										<table class="table table-bordered table-striped m-0">
             <thead>
 
 												<tr>
-													<th>رقم الاستمارة</th>
-                                                    <th>  تاريخ  الاستمارة</th>
+													<th>رقم القسط</th>
+                                                    <th>  تاريخ  الاصدار</th>
 													<th>  المبلغ الاجمالي </th>
                                                     <th>  تاريخ الدقع </th>
 													<th>  طريقة الدفع </th>
-													<th>   رقم المرجع</th>
+													<th>  رقم المرجع</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -229,8 +297,39 @@
 </div>
    </div>
 </div>
-<!-- Row end -->
+   <div class="form-group">
+         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-striped m-0">
+            <thead>
+
+												<tr>
+													<th>القيمة الاجمالية </th>
+                                                    <th>القيمة المدفوعة حتى الان </th>
+													<th>القيمة المتبقية </th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>{{$contract->rent_value}}</td>
+                                                    <td>{{$contract->paid}}</td>
+                                                    <td>{{$contract->remain}}</td>
+												</tr>
+
+											</tbody>
+            </table>
+        </div>
+    </div>
 </div>
+   </div>
+</div>
+<!-- Row end -->
+
+</div>
+
+
 
                     <div class="invoice-footer">
                       COMPANY ENJAZ

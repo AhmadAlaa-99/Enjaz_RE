@@ -44,7 +44,7 @@
 
 
                             <div class="form-group">
-                                <label for="eMail">المنطقة</label>
+                                <label for="eMail">الحي</label>
                                 <input type="text" class="form-control"value="{{old('quarter')}}" name="quarter" placeholder="quarter"required>
                             </div>
                             <div class="form-group">
