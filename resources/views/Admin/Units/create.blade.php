@@ -60,13 +60,14 @@
                                         <option value="no"> لا</option>
                                 </select>
                             </div>
-
-
-
-                         <div class="form-group">
-                            <label for="fullName"> تفاصيل </label>
-                            <textarea type="textarea" class="form-control" id="details" name="details"value="{{old('details')}}" placeholder="details"required></textarea>
+                             <div class="form-group">
+                            <label for="sTate"> عدد دورات المياه</label>
+                            <input type="number" class="form-control"value="{{old('bathrooms')}}" name="bathrooms" placeholder="bathrooms"required>
                         </div>
+
+
+
+
 
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
@@ -92,6 +93,10 @@
                             <label for="sTate">عدد وحدات التكييف</label>
                             <input type="number" class="form-control" name="condition_units"value="{{old('condition_units')}}" placeholder="condition_units"required>
 
+                        </div>
+                         <div class="form-group">
+                            <label for="fullName"> تفاصيل </label>
+                            <textarea type="textarea" class="form-control" id="details" name="details"value="{{old('details')}}" placeholder="details"required></textarea>
                         </div>
 
 
@@ -126,10 +131,7 @@
                      </div>
 
 
-                        <div class="form-group">
-                            <label for="sTate"> عدد دورات المياه</label>
-                            <input type="number" class="form-control"value="{{old('bathrooms')}}" name="bathrooms" placeholder="bathrooms"required>
-                        </div>
+
 
 
                     </div>

@@ -61,11 +61,12 @@
                                         <option value="no"{{($unit->kitchen_Cabinets) == 'no' ? 'selected' : '' }}> لا</option>
                                 </select>
                             </div>
-
-                         <div class="form-group">
-                            <label for="fullName"> تفاصيل </label>
-                            <input type="text" class="form-control" id="details" name="details" value="{{$unit->details}}"required>
+                             <div class="form-group">
+                            <label for="sTate"> عدد دورات المياه</label>
+                            <input type="number" class="form-control" name="bathrooms" value="{{$unit->bathrooms}}"required>
                         </div>
+
+
 
 
                     </div>
@@ -100,6 +101,10 @@
                             <input type="number" class="form-control" name="condition_units" value="{{$unit->condition_units}}"required>
 
                         </div>
+                        <div class="form-group">
+                            <label for="fullName"> تفاصيل </label>
+                            <input type="text" class="form-control" id="details" name="details" value="{{$unit->details}}"required>
+                        </div>
 
 
 
@@ -131,13 +136,11 @@
                                         <option value="مركزي"{{($unit->condition_type) == 'مركزي' ? 'selected' : '' }}> مركزي</option>
                                 </select>
                      </div>
-                        <div class="form-group">
-                            <label for="sTate"> عدد دورات المياه</label>
-                            <input type="number" class="form-control" name="bathrooms" value="{{$unit->bathrooms}}"required>
-                        </div>
+
 
 
                     </div>
+
 
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="text-right">
