@@ -50,6 +50,9 @@
                           <th>تاريخ بداية العقد</th>
                           <th>تاريخ نهاية العقد</th>
                           <th> الكلفة الاجمالية للعقد</th>
+                       <th>تاريخ اصدار القسط القادم</th>
+
+
                           <th> دورة الدفع</th>
                           <th>عدد دورات الدفع</th>
                                                     <th>  العمليات</th>
@@ -71,14 +74,15 @@
                           <td>{{$i}}</td>
                           <td>{{$lease->reco_number}}</td>
                           <td>{{$lease->tenants->user->name}}</td>
-                          <td>{{$lease->realties->realty_name}}</td>
+                          <td><span class="badge badge-success">{{$lease->realties->realty_name}}</td>
                           <td>{{$lease->units->number}}</td>
-                          <td>{{$lease->type}}</td>
-                          <td>{{$lease->lease_type}}</td>
+                          <td><span class="badge badge-warning">{{$lease->type}}</td>
+                          <td><span class="badge badge-warning">{{$lease->lease_type}}</td>
 
-                          <td>{{$lease->st_rental_date}}</td>
-                          <td>{{$lease->end_rental_date}}</td>
-                          <td>{{$lease->financial->rent_value}}</td>
+                          <td><span class="badge badge-danger">{{$lease->st_rental_date}}</td>
+                          <td><span class="badge badge-danger">{{$lease->end_rental_date}}</td>
+                          <td><span class="badge badge-warning">{{$lease->financial->rent_value}}</td>
+                          <td><span class="badge badge-danger">{{$lease->financial->next_payment}}</td>
                           <td>{{$lease->financial->payment_cycle}}</td>
                           <td>{{$lease->financial->num_rental_payments}}</td>
                           <!--
@@ -94,6 +98,8 @@
                                                             <a class="dropdown-item" href="{{route('lease.details',$lease->id)}}"><i style="color:green" class="icon-details"></i>&nbsp;تفاصيل العقد</a>
                                                             <a class="dropdown-item" href="{{route('leases.renew.show',$lease->id)}}"><i style="color:green" class="icon-details"></i>&nbsp; تجديد العقد</a>
                                                             <a class="dropdown-item" href="{{route('down.file',$lease->id)}}"><i style="color:green" class="icon-download"></i>&nbsp;  تحميل المرفقات&nbsp;</a>
+                                                                                                                        <a class="dropdown-item" href="{{route('lease_edit',$lease->id)}}"><i style="color:green" class="icon-download"></i>&nbsp;تعديل بيانات العقد&nbsp;</a>
+
                                                             <a class="dropdown-item" href="{{route('move_le.archive',$lease->id)}}"><i style="color:green" class="icon-delete"></i>&nbsp; &nbsp; انهاء العقد</a>
                                                         </div>
                                                     </div>

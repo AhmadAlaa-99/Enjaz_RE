@@ -78,8 +78,10 @@ Route::group([
 
 
      Route::get('/tenants',[AdminTenantController::class,'index']);
-     Route::get('/accept_requests',[AdminMainTenancesController::class,'accept_requests']);
+     Route::get('/accept_requests',[AdminMainTenancesController::class,'accept_requests'])->name('accept_requests');
      Route::get('/wait_request',[AdminMainTenancesController::class,'wait_request'])->name('wait_request');
+          Route::post('/request_accept/{id}',[AdminMainTenancesController::class,'accept'])->name('request_accept');
+
      Route::post('/maint_response/{id}',[AdminMainTenancesController::class,'maint_response'])->name('maint_response');
      Route::resource('/realties',\Admin\RealtiesController::class);
 
@@ -92,6 +94,7 @@ Route::group([
      Route::get('/unit_destroy/{id}',[AdminUnitsController::class,'destroy'])->name('unit.destroy');
      Route::get('/rented_units',[AdminUnitsController::class,'rented_units'])->name('rented_units');
      Route::resource('/units',\Admin\UnitsController::class);
+
 
      Route::resource('/leases',\Admin\LeasesController::class);
 
@@ -112,7 +115,12 @@ Route::group([
 
 
 
-          Route::post('contract_store',[ContractController::class,'contract_store'])->name('rent_contract_store');
+        Route::post('contract_store',[ContractController::class,'contract_store'])->name('rent_contract_store');
+        Route::get('contract_edit/{id}',[ContractController::class,'contract_edit'])->name('contract_edit');
+        Route::post('contract_update',[ContractController::class,'contract_update'])->name('contract_update');
+
+        Route::get('contract_payments',[ContractController::class,'contract_payments'])->name('contract_payments');
+
 
 
 
@@ -129,6 +137,11 @@ Route::group([
      Route::get('/finished',[AdminLeasesController::class,'finished'])->name('finished');;
      Route::get('/lease_details/{id}',[AdminLeasesController::class,'details'])->name('lease.details');
      Route::get('/lease_un.details/{id}',[AdminLeasesController::class,'lease_un_details'])->name('lease_un.details');
+
+     Route::post('/payment_lease_add/{id}',[AdminLeasesController::class,'payment_add'])->name('payment_lease_add');
+
+     Route::get('/lease_edit/{id}',[AdminLeasesController::class,'lease_edit'])->name('lease_edit');
+     Route::post('/lease_update',[AdminLeasesController::class,'lease_update'])->name('lease_update');
 
 
      Route::post('/payments_edit/{id}',[AdminLeasesController::class,'payments_edit'])->name('payment.edit');
@@ -153,6 +166,8 @@ Route::group([
      Route::post('/proceeds_date',[ReportsController::class,'proceeds_date'])->name('proceeds_date');
 
      Route::get('/receivables',[ReportsController::class,'receivables'])->name('receivables');
+          Route::get('/realties_proceeds',[ReportsController::class,'realties_proceeds'])->name('realties_proceeds');
+
      Route::post('/receivables_date',[ReportsController::class,'receivables_date'])->name('receivables_date');
 
 
@@ -199,7 +214,7 @@ Route::group([
      Route::get('/leases',[TenantController::class,'leases']);
      Route::get('/request_form',[TenantController::class,'request_form']);
      Route::post('/request_send',[TenantController::class,'request_send'])->name('request_send');
-     Route::get('/maints_requests',[TenantController::class,'maints_requests']);
+     Route::get('/maints_requests',[TenantController::class,'maints_requests'])->name('maints_requests');
      Route::get('/tn_lease.details/{id}',[TenantController::class,'tn_lease_details'])->name('tn_lease.details');
 
   });

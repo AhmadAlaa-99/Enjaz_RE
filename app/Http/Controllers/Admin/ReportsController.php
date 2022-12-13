@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Units;
+use App\Models\Realty;
+use App\Models\Lease;
 use App\Models\Payments;
 use App\Models\Maintenance;
 use DB;
@@ -19,7 +21,7 @@ class ReportsController extends Controller
 
     public function maintenance_payments()
     {
-         $payments=Maintenance::with('units')->latest()->paginate(5);
+         $payments=Maintenance::where('status','completed')->with('units')->latest()->paginate(5);
          return view('Admin.Reports.maintenance_payments',compact('payments'));
     }
 
@@ -158,6 +160,13 @@ class ReportsController extends Controller
     public function maintenance_details()
     {
         return view('Admin.maintenance_details');
+
+    }
+
+    public function realties_proceeds()
+    {
+        $realties=Realty::all();
+        return view('Admin.Reports.realties_proceeds',compact('realties'));
 
     }
 

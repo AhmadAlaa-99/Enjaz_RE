@@ -62,7 +62,7 @@ class TenantController extends Controller
         //$owner_id=Reality::where('id',$real_id)->pluck('owner_id');
        // $owner=User::where('id',$owner_id)->first();
       //  Notification::send($owner, new \App\Notifications\OwnerMaints($user));
-        return redirect()->back();
+        return redirect()->route('maints_requests');
     }
 
     public function maints_requests()

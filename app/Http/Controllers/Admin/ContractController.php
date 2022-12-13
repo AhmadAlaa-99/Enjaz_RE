@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use File;
-use Carbon;
+use Carbon\Carbon;
 
 class ContractController extends Controller
 {
@@ -68,8 +68,24 @@ class ContractController extends Controller
                 'ensollments_paid'=>$contract->ensollments_paid++,
 
             ]);
+        $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
+           foreach($enso as $ens)
+           {
+           // return Carbon::now();
+           $ins=$ens->installment_date;
+            if($ins>=Carbon::now())
+            {
+                $next_payment=$ens->installment_date;
+                $contract->update(['next_payment'=>$next_payment,]);
+                break;
+            }
+            continue;
+           }
+
+
             return redirect()->back();
         }
+
 
   }
 
@@ -90,11 +106,11 @@ public function renew_contract($id)
 {
 
     $contract=contract::where('id',$id)->first();
-
     return view('Admin.Leases.contract_renew')->with([
         'contract'=>$contract,
     ]);
 }
+
 public function renew_contracted(Request $request)
 {
     $contract=contract::where('id',$request->contract_id)->first();
@@ -157,6 +173,19 @@ public function renew_contracted(Request $request)
                 $count++;
                 ensollments::create($input);
             }
+            $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
+           foreach($enso as $ens)
+           {
+           // return Carbon::now();
+           $ins=$ens->installment_date;
+            if($ins>=Carbon::now())
+            {
+                $next_payment=$ens->installment_date;
+                $contract->update(['next_payment'=>$next_payment,]);
+                break;
+            }
+            continue;
+           }
             $contract->update([
                 'paid'=>$total,
                 'remain'=>$contract->rent_value-$total,
@@ -194,7 +223,7 @@ public function finish_contract($id)
 
    public function contract_residential()
    {
-     $type="سكني";
+      $type="سكني";
       return view('Admin.Leases.contract_create')->with(['type'=>$type,]);
    }
      public function contract_commercial()
@@ -287,15 +316,173 @@ public function finish_contract($id)
                 $count++;
                 ensollments::create($input);
             }
+           $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
+           foreach($enso as $ens)
+           {
+           // return Carbon::now();
+           $ins=$ens->installment_date;
+            if($ins>=Carbon::now())
+            {
+                $next_payment=$ens->installment_date;
+                $contract->update(['next_payment'=>$next_payment,]);
+                break;
+            }
+            continue;
+           }
             $contract->update([
                 'paid'=>$total,
                 'remain'=>$contract->rent_value-$total,
-                'ensollments_paid'=>$count
+                'ensollments_paid'=>$count,
             ]);
             return redirect()->route('contract_effictive')->with([
                 'message' => 'Realty edited successfully',
                 'alert-type' => 'success',
             ]);
     }
+     public function contract_edit(Request $request,$id)
+     {
+        // contract:realty_id realty:owner_id  ensoll:contract_id    owner
+    $contract= DB::table('contracts')
+          ->join('realties', 'realties.id', '=', 'contracts.realty_id')
+          ->where('contracts.id', $id)
+          ->first();
+          $realty=Realty::where('id',$contract->realty_id)->first();
+    $ensollments=ensollments::where('contract_id',$id)->get();
+    $owner=owner::where('id',$contract->realty_id)->first();
+        return view('Admin.Leases.contract_edit')->with([
+            'contract'=>$contract,
+            'owner'=>$owner,
+            'ensollments'=>$ensollments,
+            'realty'=>$realty,
+        ]);
+     }
+
+    public function contract_update(Request $request)
+    {
+        $contract= DB::table('contracts')
+          ->join('realties', 'realties.id', '=', 'contracts.realty_id')
+          ->where('contracts.id', $request->contract_id)
+          ->first();
+          $owner=owner::where('id',$contract->realty_id)->update([
+        'name'=>$request->name,
+        'email'=>$request->email,
+        'mobile'=>$request->mobile,
+        'attribute_name'=>$request->attribute_name,
+       ]);
+       $owner=Owner::latest()->first();
+
+        Realty::where('id',$contract->realty_id)->update([
+                'realty_name'=>$request->realty_name,
+                'owner_id'=>$owner->id,
+                'quarter'=>$request->quarter,
+                'agency_name'=>$request->agency_name,
+                'shopsNo'=>$request->shopsNo,
+                'agency_mobile'=>$request->agency_mobile,
+                  'elevator'=>$request->elevator,
+                 'parking'=>$request->parking,
+                'type'=> $request->type,
+                'use'=> $request->use,
+                'roles'=> $request->roles,
+                'units'=> $request->units,
+                'size'=> $request->size,
+                'advantages'=> $request->advantages,
+
+                ]);
+                $realty=Realty::latest()->first();
+
+                if($request->hasfile('contract_file'))
+                {
+                $image_name='doc-'.time().'.'.$request->contract_file->extension();
+
+                $request->contract_file->move(public_path('contracts'),$image_name);
+
+                }
+                else{
+                    $image_name=$contract->contract_file;
+                }
+
+
+                if($contract->type=='تجاري')
+            {
+        contract::where('id',$request->contract_id)->update([
+                'realty_id'=>$realty->id,
+                'contactNo'=>$request->contactNo,
+                'start_date'=>$request->start_date,
+                'end_date'=>$request->end_date,
+                'ejar_cost'=>$request->ejar_cost,
+                'rent_value'=>$request->rent_value,
+                'contract_file'=>$image_name,
+                'type'=>'تجاري',//تجاري - سكني
+                'note'=>$request->note,
+                'tax'=>$request->tax,
+                'tax_amount'=>$request->tax_amount,
+                'ensollments_total'=>$request->ensollments_total,
+                'remain'=>$request->rent_value,
+            ]);
+        }
+        else
+        {
+            contract::where('id',$request->contract_id)->update([
+                'realty_id'=>$realty->id,
+                'contactNo'=>$request->contactNo,
+                'start_date'=>$request->start_date,
+                'end_date'=>$request->end_date,
+                'ejar_cost'=>$request->ejar_cost,
+                'rent_value'=>$request->ejar_cost,
+                'contract_file'=>$image_name,
+                  'tax'=>'0',
+                'tax_amount'=>'0',
+                'type'=>'سكني',//تجاري - سكني
+                'note'=>$request->note,
+                 'ensollments_total'=>$request->ensollments_total,
+                'remain'=>$request->ejar_cost,
+
+             ]);
+        }
+
+           $contract=contract::latest()->first();
+
+            $count=0;
+            $total=0;
+            foreach($request->installmentNo as $key=>$items )
+            {
+                $input['contract_id']=$contract->id;
+                $input['installmentNo']=$request->installmentNo[$key];
+                $input['installment_date']=$request->installment_date[$key];
+                $input['refrenceNo']=$request->refrenceNo[$key];
+                $input['payment_date']=$request->payment_date[$key];
+                $input['amount']=$request->amount[$key];
+                $input['payment_type']=$request->payment_type[$key];
+                $total+=$input['amount'];
+                $count++;
+                ensollments::where('refrenceNo',$request->refrenceNo[$key])->update($input);
+            }
+           $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
+           foreach($enso as $ens)
+           {
+           // return Carbon::now();
+           $ins=$ens->installment_date;
+            if($ins>=Carbon::now())
+            {
+                $next_payment=$ens->installment_date;
+                $contract->update(['next_payment'=>$next_payment,]);
+                break;
+            }
+            continue;
+           }
+            $contract->update([
+                'paid'=>$total,
+                'remain'=>$contract->rent_value-$total,
+                'ensollments_paid'=>$count,
+            ]);
+            return redirect()->route('contract_effictive')->with([
+                'message' => 'Realty edited successfully',
+                'alert-type' => 'success',
+            ]);
+}
+public function contract_payments()
+{
+    return 'test';
+}
 
 }

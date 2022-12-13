@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Lease_units;
 use App\Models\receives;
 use App\Models\Lease;
+use App\Models\Realty;
 use App\Models\Units;
 use App\Models\Tenant;
 use App\Http\Controllers\Controller;
@@ -30,7 +31,10 @@ class receive_reports extends Controller
     }
     public function store(Request $request)
     {
+
         $unit=Lease::where('id',$request->lease_id)->first();
+        $realty=Realty::where('id',$unit->realty_id)->first();
+
         receives::create([
             //'lease_number'=>$request->lease_number,
             'unit_id'=>$unit->unit_id,
@@ -42,6 +46,9 @@ class receive_reports extends Controller
         ]);
         $unit=Units::where('id',$unit->unit_id)->update(['status'=>'empty']);
         $lease=Lease::where('id',$request->lease_id)->first();
+          $realty->update([
+            'total_proc'=>$realty->total_proc+=$lease->rent_value,
+        ]);
         $lease->update(['status'=>'received']);
         $tenant=Tenant::where('id',$lease->tenant_id)->update(['status'=>'archived']);
         return redirect()->route('receives_reports.index')->with([

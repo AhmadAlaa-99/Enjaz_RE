@@ -93,11 +93,10 @@
                           <td><span class="badge badge-success">{{$realty->rents}}</td>
                           <td>
 													<div class="td-actions">
-                                                        <!--
+                                                    
 														<a href="{{route('realty_units_show',$realty->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="show units">
 															<i class="icon-cloud"></i>
 														</a>
--->
                                                         <a href="{{route('realty_units_add',$realty->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="Add units">
 															<i class="icon-add"></i>
 
@@ -108,6 +107,7 @@
 														<a href="{{route('realty.destroy',$realty->id)}}"  class="icon blue" data-toggle="tooltip" data-placement="top" title="Delete">
 															<i class="icon-cancel"></i>
 														</a>
+
 													</div>
 												</td>
                         </tr>

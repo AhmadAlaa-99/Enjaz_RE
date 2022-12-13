@@ -28,7 +28,7 @@ class UnitsController extends Controller
 
 
         $units=Units::where('realty_id',$id)->latest()->paginate(5);
-        return view('Admin.Units.empty_units',compact('units'));
+        return view('Admin.Units.realty_units',compact('units'));
 
 
     }

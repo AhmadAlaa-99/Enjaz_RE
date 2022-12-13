@@ -33,7 +33,8 @@ class CreateFinancialStatementsTable extends Migration
             $table->string('rent_value');
             $table->string('num_rental_payments');
             $table->enum('payment_cycle',['monthly','annual','quarterly','midterm']);
-            $table->string('notes');
+            $table->string('notes')->nullable('-');
+            $table->string('next_payment')->nullable();
             $table->string('payment_channels');
             $table->timestamps();
         });

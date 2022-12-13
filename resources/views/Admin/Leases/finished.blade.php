@@ -71,17 +71,17 @@
 
 
                           <td>{{$i}}</td>
-                          <td>{{$lease->reco_number}}</td>
+                          <td><span class="badge badge-success">{{$lease->reco_number}}</td>
                         <td><span class="badge badge-success">{{$lease->status}}</td>
                           <td>{{$lease->tenants->user->name}}</td>
-                          <td>{{$lease->realties->realty_name}}</td>
+                          <td><span class="badge badge-warning">{{$lease->realties->realty_name}}</td>
                           <td>{{$lease->units->number}}</td>
-                          <td>{{$lease->type}}</td>
+                          <td><span class="badge badge-warning">{{$lease->type}}</td>
                                                     <td>{{$lease->lease_type}}</td>
 
-                          <td>{{$lease->st_rental_date}}</td>
-                          <td>{{$lease->end_rental_date}}</td>
-                          <td>{{$lease->financial->rent_value}}</td>
+                          <td><span class="badge badge-danger">{{$lease->st_rental_date}}</td>
+                          <td><span class="badge badge-danger">{{$lease->end_rental_date}}</td>
+                          <td><span class="badge badge-success">{{$lease->financial->rent_value}}</td>
                           <td>{{$lease->financial->payment_cycle}}</td>
                           <td>{{$lease->financial->num_rental_payments}}</td>
                         <td>

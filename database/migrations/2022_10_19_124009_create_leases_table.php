@@ -30,6 +30,7 @@ class CreateLeasesTable extends Migration
             $table->foreignId('unit_id')->constrained('units')->cascadeOnDelete();
             $table->foreignId('commitment_id')->constrained('commitments')->cascadeOnDelete();
             $table->foreignId('realty_id')->constrained('realties')->cascadeOnDelete();
+            $table->date('next_payment')->nullable();
 
             $table->timestamps();
 

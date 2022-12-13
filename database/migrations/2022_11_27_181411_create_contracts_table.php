@@ -27,9 +27,11 @@ return new class extends Migration
             $table->string('ejar_cost');
              $table->string('tax_amount')->nullable();
             $table->string('tax')->nullable();
-            $table->string('note');
+            $table->string('note')->nullable('-');
             $table->string('remain');
             $table->string('paid')->default('0');
+            $table->date('next_payment')->nullable();
+
              $table->string('ensollments_total');
             $table->string('ensollments_paid')->default('0');
 

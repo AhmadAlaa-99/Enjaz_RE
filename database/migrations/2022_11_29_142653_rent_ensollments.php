@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
        $table->foreignId('contract_id')->constrained('contracts')->cascadeOnDelete();
        $table->string('installmentNo');
-       $table->string('installment_date');
+       $table->date('installment_date');
        $table->string('payment_date');
        $table->string('amount');
        $table->string('payment_type');

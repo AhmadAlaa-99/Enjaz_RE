@@ -9,7 +9,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="ENJAZAdminNavbar">
 					<ul class="navbar-nav">
-
+<!--
                     @can(' المستأجر -   البيانات الايجارية')
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -18,14 +18,15 @@
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="appsDropdown">
 								<li>
-									<a class="dropdown-item" href="{{ url('/' . $page='Admin/owners/create') }}" > بيانات الوحدة</a>
+									<a class="dropdown-item" href="{{ url('/' . $page='Tenant/owners/create') }}" > بيانات الوحدة</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="{{ url('/' . $page='Admin/owners') }}">بيانات العقد</a>
+									<a class="dropdown-item" href="{{ url('/' . $page='Tenant/leases') }}">بيانات العقد</a>
 								</li>
 							</ul>
 						</li>
                          @endcan
+                    -->
  @can('ادارة الاستئجار - الوسيط')
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,7 +72,7 @@
 								 ادارة العقارات
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="appsDropdown">
-							
+
 								<li>
 									<a class="dropdown-item" href="{{ url('/' . $page='Admin/realties') }}">المنشات العقارية</a>
 								</li>
@@ -144,14 +145,12 @@
 								  طلبات الصيانة
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="appsDropdown">
+                                <li>
+									<a class="dropdown-item" href="{{ url('/' . $page='Admin/wait_request') }}">الطلبات الجديدة</a>
+								</li>
 								<li>
 									<a class="dropdown-item"  href="{{ url('/' . $page='Admin/accept_requests') }}">الطلبات المنجزة </a>
 								</li>
-
-								<li>
-									<a class="dropdown-item" href="{{ url('/' . $page='Admin/wait_request') }}">  الطلبات المعلقة</a>
-								</li>
-
                                 <li>
                                 <a class="dropdown-item" href="{{ url('/' . $page='Admin/maintenance_payments') }}">مدفوعات الصيانة</a>
 								</li>
@@ -192,6 +191,9 @@
 									</li>
 									<li>
                                            <a class="dropdown-item" href="{{ url('/' . $page='Admin/receivables') }}">الذمم المالية</a>
+									</li>
+                                    <li>
+                                           <a class="dropdown-item" href="{{ url('/' . $page='Admin/realties_proceeds') }}">المنشأت العقارية</a>
 									</li>
                                   <li>
 

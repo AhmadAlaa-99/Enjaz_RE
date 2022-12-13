@@ -30,16 +30,18 @@ response_date*/
     {
 
     }
-    public function accept($id)
+    public function accept(Request $request,$id)
     {
-        Maintenance::where('id',$id)->update([
+       $m=Maintenance::where('id',$id)->update([
             'status'=>'0',
             'cost'=>$request->cost,
+         'notes'=>$request->notes,
             'response_date'=>Carbon::now(),
+            'status'=>'completed',
         ]);
         //send notify TenantMail
-        Notification::send($owner,new \App\Notifications\MaintAcceptNotify($user));
-
+      //  Notification::send($owner,new \App\Notifications\MaintAcceptNotify($user));
+      return redirect()->route('accept_requests');
     }
     public function refuse($id)
     {
@@ -72,6 +74,7 @@ response_date*/
 
         return view('Admin.MainTenance.refuse',compact('maints'));
     }
+
     public function wait_request() //0
     {
          $maints=Maintenance::where('status','progress')->with('units')->latest()->paginate(5);

@@ -46,14 +46,11 @@
                           <th>تاريخ نهاية العقد</th>
                           <th>قيمة الايجار</th>
                           <th>القيمة الكلية ' بعد احتساب الضريبة' </th>
-                                                    <th>المبلغ المدفوع</th>
-                                                     <th>المبلغ المتبقي</th>
-                                                    <th>الأقساط الكلية</th>
-                                                 <th>الأقساط المدفوعة</th>
-
-
-
-
+                         <th>المبلغ المدفوع</th>
+                          <th>المبلغ المتبقي</th>
+                         <th>الأقساط الكلية</th>
+                         <th>الأقساط المدفوعة</th>
+                         <th>تاريخ اصدار القسط القادم</th>
                           <th> النوع</th>
                           <th> الحالة</th>
                           <th>العمليات</th>
@@ -82,6 +79,7 @@
                           <td><span class="badge badge-warning">{{$contract->remain}}</td>
                           <td><span class="badge badge-warning">{{$contract->ensollments_total}}</td>
                           <td><span class="badge badge-warning">{{$contract->ensollments_paid}}</td>
+                            <td><span class="badge badge-warning">{{$contract->next_payment}}</td>
 
                           <td><span class="badge badge-danger">{{$contract->type}}</td>
                                                     <td><span class="badge badge-danger">{{$contract->status}}</td>
@@ -98,6 +96,8 @@
                                                             <a class="dropdown-item" href="{{route('contract_details',$contract->id)}}"><i style="color:green" class="icon-details"></i>&nbsp;تفاصيل العقد</a>
                                                             <a class="dropdown-item" href="{{route('down.contract_file',$contract->id)}}"><i style="color:green" class="icon-download"></i>&nbsp; تحميل المرفقات&nbsp;</a>
                                                             <a class="dropdown-item" href="{{route('renew.contract',$contract->id)}}"><i style="color:green" class="icon-details"></i>&nbsp;تجديدالعقد&nbsp;</a>
+                                                                                                                        <a class="dropdown-item" href="{{route('contract_edit',$contract->id)}}"><i style="color:green" class="icon-details"></i>&nbsp;تعديل بيانات العقد&nbsp;</a>
+
                                                             <a class="dropdown-item" href="{{route('finish.contract',$contract->id)}}"><i style="color:green" class="icon-details"></i>&nbsp; انهاء العقد&nbsp;</a>
 
 

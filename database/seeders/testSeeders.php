@@ -81,11 +81,11 @@ class testSeeders extends Seeder
             ]);
             $contract=contract::latest()->first();
             ensollments::create([
-                'contract_id'=>$contract->id,
-                'installmentNo'=>'42423',
-                 'installment_date'=>'11/11/2020',
-                 'payment_date'=>'11/11/2020',
-                   'amount'=>'3243',
+                  'contract_id'=>$contract->id,
+                  'installmentNo'=>'42423',
+                  'installment_date'=>'2020/10/10',
+                  'payment_date'=>'11/11/2020',
+                    'amount'=>'3243',
                    'payment_type'=>'cash',
                    'refrenceNo'=>'3424',
             ]);

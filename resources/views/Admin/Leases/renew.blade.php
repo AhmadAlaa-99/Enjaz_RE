@@ -244,7 +244,7 @@
       </div>
 
       </div>
-      @if($unit->type=="محل تجاري")
+      @if($unit->type=='محل تجاري')
          <div class="grid">
         <div class="col-1-3">
           <div class="controls">

@@ -31,8 +31,6 @@
 <div class="row gutters">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-
-
         <div class="table-container">
             <div class="t-header">الوحدات الايجارية - الفارغة</div>
             <div class="table-responsive">
@@ -50,8 +48,6 @@
                           <th>خزائن مطبخ مركبة</th>
                           <th> عدد وحدات التكييف</th>
                           <th>نوع التكييف </th>
-
-
                           <th> العمليات</th>
                         </tr>
                     </thead>

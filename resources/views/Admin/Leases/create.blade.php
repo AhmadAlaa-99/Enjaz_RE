@@ -383,7 +383,7 @@
       <div class="grid">
 
 
-           <div class="col-1-3">
+           <div class="col-1-2">
           <div class="controls">
             <select name="payment_channels"id="payment_channels"class="floatLabel" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')"required>
@@ -395,21 +395,20 @@
            <label for="eMail">طريقة دفع الرسوم</label>
           </div>
         </div>
-  <div class="col-1-3">
+  <div class="col-1-2">
           <div class="controls">
            <input type="text" name="recurring_rent_payment" value="{{old('recurring_rent_payment')}}"class="floatLabel"required>
            <label for="eMail">  دفعة الايجار الدورية</label>
           </div>
         </div>
       </div>
-       <div class="col-1-3">
+      <div class="grid">
+       <div class="col-2-3">
           <div class="controls">
            <input type="text" name="notes" value="{{old('notes')}}"class="floatLabel"required>
            <label for="eMail"> ملاحظات </label>
           </div>
         </div>
-      </div>
-
       </div>
       @if($unit->type=="محل تجاري")
          <div class="grid">

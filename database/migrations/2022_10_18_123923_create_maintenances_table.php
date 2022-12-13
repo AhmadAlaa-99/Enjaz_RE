@@ -17,11 +17,11 @@ class CreateMaintenancesTable extends Migration
             $table->id();
             $table->foreignId('unit_id')->constrained('units')->cascadeOnDelete();
             $table->foreignId('tenant_id')->constrained('tenants')->cascadeOnDelete();
-            $table->string('notes')->nullable();
+            $table->string('notes')->nullable('0');
             $table->string('desc');
             $table->enum('status',['progress','completed'])->default('progress');
-            $table->string('cost')->default('0');
-            $table->string('total')->default('0');
+            $table->string('cost')->nullable('0');
+            $table->string('total')->nullable('0');
             $table->date('request_date');
             $table->date('response_date')->nullable();
 

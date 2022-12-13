@@ -76,18 +76,13 @@
                           <td>{{$unit->condition_units}}</td>
                           <td>{{$unit->condition_type}}</td>
 
-                          <!--
-                          <td>
-                            <a class="btn btn-secondary" href="{{route('lease_un.details',$unit->id) }}" role="button">تفاصيل العقد</a>
-
-                          </td>
--->
 
                                                     <td>
 													<div class="td-actions">
 														<a href="{{route('units.edit',$unit->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="Edit">
 															<i class="icon-edit"></i>
 														</a>
+                                                    
                                                         <a href="{{route('lease_un.details',$unit->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="Details">
 															<i class="icon-home"></i>
 														</a>

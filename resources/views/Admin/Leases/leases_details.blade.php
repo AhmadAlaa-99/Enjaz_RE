@@ -21,7 +21,97 @@
             <div class="card-body p-0">
                 <div class="invoice-container">
                     <div class="invoice-header">
+                        <div class="modal" id="add_payment{{$lease->id}}" tabindex="-1" role="dialog" aria-labelledby="customModalTwoLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="customModalTwoLabel">تعديل حالة الدفع</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+                                                <form action="{{ route('payment_lease_add',$lease->id) }}" method="post">
+                                                         {{ csrf_field() }}
+														<div class="form-group">
 
+
+
+															<label for="recipient-name" class="col-form-label">تاريخ الاصدار</label>
+															<input type="date" name="release_date" class="form-control" id="recipient-name"required>
+														</div>
+                                                        <div class="form-group">
+															<label for="recipient-name" class="col-form-label">تاريخ الاستحقاق</label>
+															<input type="date" name="due_date" class="form-control" id="recipient-name"required>
+														</div>
+                                                        <div class="form-group">
+															<label for="recipient-name" class="col-form-label">المبلغ</label>
+															<input type="number" name="total" class="form-control" id="recipient-name"required>
+														</div>
+
+
+
+
+												</div>
+												<div class="modal-footer custom">
+													<div class="left-side">
+                                                    <button type="submit" class="btn btn-link success">حفظ</button>
+
+													</div>
+													<div class="divider"></div>
+													<div class="right-side">
+                                                    <button type="button" class="btn btn-link danger" data-dismiss="modal">اغلاق</button>
+													</div>
+                                                    </form>
+												</div>
+											</div>
+										</div>
+									</div>
+      	<div class="row gutters">
+												<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+													<div class="custom-actions-btns mb-5">
+														<a data-toggle="modal" href="" data-target="#add_payment{{ $lease->id }}"href="#" class="btn btn-primary">
+															<i class="icon-add"></i> اضاقة قسط جديد
+														</a>
+														<a href="{{route('down.file',$lease->id)}}" class="btn btn-dark">
+															<i class="icon-printer"></i> تحميل مرفقات العقد
+														</a>
+													</div>
+												</div>
+											</div>
+                        <!-- Row end -->
+                        @if (session()->has('max_rent'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('max_rent') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if (session()->has('max_count'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('max_count') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+                        <!-- Row start -->
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                <a href="index.html" class="invoice-logo">
+                                <img src="{{asset('assets/img/fav.png')}}" alt="Enjaz" />
+                                </a>
+                            </div>
+
+                        </div>
+                        <!-- Row end -->
+
+
+                        <!-- Row end -->
+
+                    </div>
 
 
 
