@@ -15,7 +15,7 @@
 
                     <div class="card">
                       <div class="card-body">
-                                                                                    <h3 class="page-title">تعديل طلب تسليم - رقم العقد </h3>
+                                                                                    <h3 class="page-title">تعديل طلب تسليم  </h3>
 
                         <form action="{{ route('receives_reports.update', $receive->id) }}" method="post"
                             enctype="multipart/form-data"autocomplete="off">

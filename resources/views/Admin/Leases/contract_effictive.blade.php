@@ -130,7 +130,6 @@
                                                 <th>المبلغ المتبقي</th>
                                                 <th>الأقساط الكلية</th>
                                                 <th>الأقساط المدفوعة</th>
-                                                <th>تاريخ اصدار القسط القادم</th>
                                                 <th> النوع</th>
                                                 <th> الحالة</th>
                                                 <th>العمليات</th>
@@ -180,9 +179,7 @@
                                                     <td><span
                                                             class="badge bg-danger-light">{{ $contract->ensollments_paid }}</span>
                                                     </td>
-                                                    <td><span
-                                                            class="badge bg-danger-light">{{ $contract->next_payment }}</span>
-                                                    </td>
+
 
                                                     <td><span class="badge bg-warning-light">{{ $contract->type }}</span>
                                                     </td>
@@ -233,7 +230,7 @@
                                         </tbody>
                                     </table>
                                     <div class="d-flex justify-content-center">
-                                        {!! $units->links() !!}
+                                        {!! $contracts->links() !!}
                                     </div>
 
 

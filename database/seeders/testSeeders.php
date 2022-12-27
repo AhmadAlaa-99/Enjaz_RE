@@ -128,6 +128,7 @@ for ($i = 0; $i <5; $i++)
        $furnished=['unfurnished', 'newfn','usedfn'];
      $kitshen=['yes','no'];
      $type=['فيلا', 'شقة','شقة ثنائية الدور','شقة صغيرة','ملحق','محل تجاري'];
+     $realty=Realty::where('id','1')->first();
 for ($i = 0; $i <10; $i++)
 {
             Units::create([
@@ -145,7 +146,9 @@ for ($i = 0; $i <10; $i++)
                 'details'=>'not found',
                 'bathrooms'=>'2',
                 'rent_cost'=>'25000',
-                'main_show'=>'احجز شقتك الان واستفد من الخصومات'
+                'main_show'=>'احجز شقتك الان واستفد من الخصومات',
+                'address'=>$realty->address,
+                'quarter'=>'الرياض',
                 //'status'=>$request->status,
                 //start_date
                 //end_date

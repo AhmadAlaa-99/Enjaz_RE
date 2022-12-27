@@ -15,7 +15,7 @@
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">الوحدات الايجارية الخاصة ب المنشأة العقارية
+                            <h3 class="page-title">الوحدات الايجارية الخاصة ب المنشأة العقارية - {{ $realty->realty_name}}
                             </h3>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">لوحة التحكم</a></li>
@@ -23,12 +23,15 @@
                             </ul>
                         </div>
                         <div class="col-auto">
-                            <a href="invoices.html" class="invoices-links active">
-                                <i data-feather="list"></i>
-                            </a>
-                            <a href="invoice-grid.html" class="invoices-links">
-                                <i data-feather="grid"></i>
-                            </a>
+   <div class="col-lg-4 col-md-4">
+                                    <div class="invoices-settings-btn">
+                                        <a href="invoices-settings.html" class="invoices-settings-icon">
+                                        </a>
+                                        <a   href="{{ route('realty_units_add', $realty->id) }}" class="btn">
+                                            <i data-feather="plus-circle"></i> اضافة وحدة ايجارية
+                                        </a>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -54,9 +57,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4">
                                     <div class="invoices-settings-btn">
-                                        <a href="invoices-settings.html" class="invoices-settings-icon">
-                                            <i data-feather="settings"></i>
-                                        </a>
+
 
                                     </div>
                                 </div>
@@ -73,14 +74,14 @@
                                     <table id="copy-print-csv" class="table custom-table">
                                               <thead>
                         <tr>
-                        <th><a href="">الرقم التسلسلي </a></th>
-                          <th><a href=""> اسم المنشأة </a></th>
+                        <th>الرقم التسلسلي </th>
+                          <th> اسم المنشأة </th>
                           <th>نوع الوحدة</th>
                           <th>رقم الوحدة</th>
-                          <th> <a href="">رقم الدور</a></th>
-                          <th> <a href="">المساحة </a></th>
-                          <th>  <a href=""> مؤثثة </a></th>
-                          <th>  <a href=""> عدد دورات المياه </a></th>
+                          <th>رقم الدور</th>
+                          <th> المساحة </th>
+                          <th>  مؤثثة </a></th>
+                          <th>  عدد دورات المياه </a></th>
                           <th>خزائن مطبخ مركبة</th>
                           <th> عدد وحدات التكييف</th>
                          <th>  نوع التكييف</th>
@@ -135,7 +136,7 @@
                                                             href="{{ route('unit.rent', $unit->id) }}"><i
                                                                 class="far fa-paper-plane me-1"></i>تأجير الوحدة</a>
                                                                   <a class="dropdown-item"title="حذف الوحدة "
-                                                            href="{{ route('units.destroy', $unit->id) }}"><i
+                                                            href="{{ route('unit.destroy', $unit->id) }}"><i
                                                                 class="far fa-trash-alt me-1"></i>حذف الوحدة</a>
 
  @endif

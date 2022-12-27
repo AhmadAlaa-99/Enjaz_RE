@@ -39,13 +39,14 @@
                                         <div class="form-group">
                                             <label class="active" for="inputName" class="control-label"> خزائن مطبخ مركبة
                                             </label>
-                                            <select name="kitchen_Cabinets"value="{{ old('kitchen_Cabinets') }}"
+                                            <select name="kitchen_Cabinets" value="{{ $unit->kitchen_Cabinets }}"
                                                 class="form-control SlectBox" onclick="console.log($(this).val())"
                                                 onchange="console.log('change is firing')"required>
                                                 <!--placeholder-->
-                                                <option value="" selected disabled>مركبة؟؟</option>
-                                                <option value="yes"> نعم</option>
-                                                <option value="no"> لا</option>
+                                               <option value="yes"{{ $unit->kitchen_Cabinets == 'yes' ? 'selected' : '' }}> نعم
+                                    </option>
+                                    <option value="no"{{ $unit->kitchen_Cabinets == 'no' ? 'selected' : '' }}>لا
+                                    </option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -68,17 +69,20 @@
                                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                                         <div class="form-group">
                                             <label class="active" for="inputName" class="control-label">نوع الوحدة</label>
-                                            <select name="type"value="{{ old('type') }}" class="form-control SlectBox"
+                                            <select name="type"value="{{ $unit->type }}" class="form-control SlectBox"
                                                 onclick="console.log($(this).val())"
                                                 onchange="console.log('change is firing')"required>
                                                 <!--placeholder-->
-                                                <option value="" selected disabled>حدد النوع</option>
-                                                <option value="فيلا">فيلا</option>
-                                                <option value="شقة">شقة</option>
-                                                <option value="شقة ثنائية الدور">شقة ثنائية الدور</option>
-                                                <option value="شقة صغيرة">شقة صغيرة</option>
-                                                <option value="ملحق">ملحق</option>
-                                                <option value="محل تجاري">محل تجاري</option>
+                                                  <option value="فيلا"{{ $unit->type == 'فيلا' ? 'selected' : '' }}>فيلا</option>
+                                                <option value="شقة"{{ $unit->type == 'شقة' ? 'selected' : '' }}>شقة</option>
+                                                <option value="شقة ثنائية الدور"{{ $unit->type == 'شقة ثنائية الدور' ? 'selected' : '' }}>شقة ثنائية الدور </option>
+
+                                                  <option value="شقة صغيرة"{{ $unit->type == 'شقة صغيرة' ? 'selected' : '' }}>شقة صغيرة</option>
+                                                <option value="ملحق"{{ $unit->type == 'ملحق' ? 'selected' : '' }}>ملحق</option>
+                                                <option value="محل تجاري"{{ $unit->type == 'محل تجاري' ? 'selected' : '' }}>محل تجاري </option>
+
+
+
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -112,39 +116,40 @@
                                         <div class="form-group">
                                             <label class="active" for="addRess">رقم الوحدة</label>
                                             <input type="text" class="form-control" name="number"
-                                                value="{{ old('number') }}"placeholder="number"required>
+                                                value="{{ $unit->number }}"placeholder="number"required>
                                         </div>
                                         <div class="form-group">
                                             <label class="active" for="inputName" class="control-label">حالة الأثاث
                                             </label>
                                             <select name="furnished_mode"
-                                                value="{{ old('furnished_mode') }}"class="form-control SlectBox"
+                                                value="{{ $unit->furnished_mode }}"class="form-control SlectBox"
                                                 onclick="console.log($(this).val())"
                                                 onchange="console.log('change is firing')"required>
                                                 <!--placeholder-->
-                                                <option value="" selected disabled>حدد الحالة</option>
-                                                <option value="unfurnished"> غير مؤثثة</option>
-                                                <option value="newfn"> مؤثثة جديد</option>
-                                                <option value="usedfn"> مؤثثة مستعمل</option>
+                                                <option value="unfurnished"{{ $unit->furnished_mode == 'unfurnished' ? 'selected' : '' }}>غير مؤثثة</option>
+                                                <option value="newfn"{{ $unit->furnished_mode == 'newfn' ? 'selected' : '' }}>مؤثثة جديد</option>
+                                                <option value="usedfn"{{ $unit->furnished_mode == 'usedfn' ? 'selected' : '' }}>مؤثثة مستعملة </option>
+
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label class="active" for="inputName" class="control-label">نوع
                                                 التكييف</label>
                                             <select name="condition_type"
-                                                value="{{ old('condition_type') }}"class="form-control SlectBox"
+                                                value="{{ $unit->condition_type  }}"class="form-control SlectBox"
                                                 onclick="console.log($(this).val())"
                                                 onchange="console.log('change is firing')"required>
                                                 <!--placeholder-->
-                                                <option value="" selected disabled>حدد النوع</option>
-                                                <option value="سبليت">سبليت</option>
-                                                <option value="شباك">شباك</option>
-                                                <option value="مركزي"> مركزي</option>
+                                                <option value="سبليت"{{ $unit->condition_type == 'سبليت' ? 'selected' : '' }}>سبليت</option>
+                                                <option value="شباك"{{ $unit->condition_type == 'شباك' ? 'selected' : '' }}>شباك</option>
+                                                <option value="مركزي"{{ $unit->condition_type == 'مركزي' ? 'selected' : '' }}>مركزي </option>
+
+
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label class="active" for="addRess">رفع صورة للعرض</label>
-                                            <input type="file" class="form-control" name="img" required>
+                                            <input type="file" value="{{ $unit->img }}"class="form-control" name="img" required>
                                         </div>
 
 

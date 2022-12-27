@@ -22,10 +22,7 @@
                                         enctype="multipart/form-data"autocomplete="off">
                                         {{ csrf_field() }}
                                         <div class="card m-0">
-                                             <div class="card-header">
-                                                <h3>انشاء طلب تسليم </h3>
-                                                <h2>رقم العقد</h2>
-                                            </div>
+
                                               <div class="card-body">
 
                                                 <div class="row gutters">
@@ -61,7 +58,7 @@
                                                 <div class=" blog-categories-btn pt-0">
                                                     <div class="bank-details-btn ">
                                                         <button type="submit" id="submit" name="submit"
-                                                            class="btn btn-primary float-right">ارسال الطلب </button>
+                                                            class="btn btn-primary float-right">اكمال الطلب </button>
                                                     </div>
                                                 </div>
 

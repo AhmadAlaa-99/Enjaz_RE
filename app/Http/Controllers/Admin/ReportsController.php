@@ -172,7 +172,10 @@ class ReportsController extends Controller
     {
 
        $payments= Payments::where('lease_id',$id)->latest()->paginate(5);
-       return view('Admin.Reports.payments_details',compact('payments'));
+
+               $lease=Lease::where('id',$id)->first();
+
+       return view('Admin.Reports.payments_details',compact('payments','lease'));
 
     }
 

@@ -4792,7 +4792,8 @@ table.table-inbox tbody tr.checked {
 .modal-footer {
     border-top: 0;
     padding-top: 0;
-    padding-bottom: .75rem
+    padding-bottom: .75rem;
+        direction: ltr;
 }
 
 .add-remove i {

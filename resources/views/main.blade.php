@@ -59,9 +59,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-
-
-
+                       <a href="{{ route('enjaz') }}" class="nav-item nav-link active">الصفحة الرئيسية</a>
+                        <a href="{{ route('all_units') }}" class="nav-item nav-link">الوحدات الايجارية</a>
                     </div>
                     <a href="#contact" class="btn btn-primary px-3 d-none d-lg-flex">اتصل بنا</a>
                 </div>
@@ -118,22 +117,23 @@
         Header End -->
 
 
+
         <!-- Search Start -->
         <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
             <div class="container">
-                <form action="{{ route('property_search') }}" method="post">
-                    {{ csrf_field() }}
+                <form action="{{ route('property_search') }}" method="get">
+
 
                     <div class="row g-2">
                         <div class="col-md-10">
                             <div class="row g-2">
                                 <div class="col-md-4">
-                                    <input value="" name="cost"type="text"
-                                        class="form-control border-0 py-3" placeholder="تكلفة الايجار">
+                                    <input name="cost"type="text" class="form-control border-0 py-3"
+                                        autocomplete="off"placeholder="تكلفة الايجار">
                                 </div>
                                 <div class="col-md-4">
-                                    <select value="" name="type" class="form-select border-0 py-3">
-                                        <option selected>نوع العقار</option>
+                                    <select name="type" class="form-select border-0 py-3">
+                                        <option placeholder="" value="">حدد النوع</option>
                                         <option value="محل تجاري">محل تجاري</option>
                                         <option value="ملحق">ملحق</option>
                                         <option value="شقة صغيرة">شقة صغيرة</option>
@@ -143,9 +143,10 @@
 
                                     </select>
                                 </div>
+
                                 <div class="col-md-4">
-                                    <select value="" name="location" class="form-select border-0 py-3">
-                                        <option selected>المنطقة </option>
+                                    <select name="location" class="form-select border-0 py-3">
+                                        <option placeholder="" value="">حدد المنطقة</option>
                                         @foreach ($quarters as $quarter)
                                             <option value="{{ $quarter->name }}">{{ $quarter->name }}</option>
                                         @endforeach
@@ -175,74 +176,81 @@
                 </div>
                 <div class="row g-3">
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="{{ route('categories', ['key' =>'محل تجاري']) }}">
+                        <a class="cat-item d-block bg-light text-center rounded p-3"
+                            href="{{ route('categories', ['key' => 'محل تجاري']) }}">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
                                     <img class="img-fluid" src="{{ asset('home/img/icon-apartment.png') }}"
                                         alt="Icon">
                                 </div>
                                 <h6>محل تجاري</h6>
-                                <span>{{ App\Models\Units::where('type','محل تجاري')->count() }} وحدة ايجارية</span>
+                                <span>{{ App\Models\Units::where('type', 'محل تجاري')->count() }} وحدة ايجارية</span>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="{{ route('categories', ['key' =>'فيلا']) }}">
+                        <a class="cat-item d-block bg-light text-center rounded p-3"
+                            href="{{ route('categories', ['key' => 'فيلا']) }}">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
                                     <img class="img-fluid" src="{{ asset('home/img/icon-villa.png') }}"
                                         alt="Icon">
                                 </div>
                                 <h6>فيلا</h6>
-                                <span>{{ App\Models\Units::where('type','فيلا')->count() }} وحدة ايجارية</span>
+                                <span>{{ App\Models\Units::where('type', 'فيلا')->count() }} وحدة ايجارية</span>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="{{ route('categories', ['key' =>'شقة']) }}">
+                        <a class="cat-item d-block bg-light text-center rounded p-3"
+                            href="{{ route('categories', ['key' => 'شقة']) }}">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
                                     <img class="img-fluid" src="{{ asset('home/img/icon-house.png') }}"
                                         alt="Icon">
                                 </div>
                                 <h6>شقة</h6>
-                                <span>{{ App\Models\Units::where('type','شقة')->count() }} وحدة ايجارية</span>
+                                <span>{{ App\Models\Units::where('type', 'شقة')->count() }} وحدة ايجارية</span>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="{{ route('categories', ['key' =>'ملحق']) }}">
+                        <a class="cat-item d-block bg-light text-center rounded p-3"
+                            href="{{ route('categories', ['key' => 'ملحق']) }}">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
                                     <img class="img-fluid" src="{{ asset('home/img/icon-housing.png') }}"
                                         alt="Icon">
                                 </div>
                                 <h6>ملحق</h6>
-                                <span>{{ App\Models\Units::where('type','ملحق')->count() }} وحدة ايجارية</span>
+                                <span>{{ App\Models\Units::where('type', 'ملحق')->count() }} وحدة ايجارية</span>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="{{ route('categories', ['key' =>'شقة صغيرة']) }}">
+                        <a class="cat-item d-block bg-light text-center rounded p-3"
+                            href="{{ route('categories', ['key' => 'شقة صغيرة']) }}">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
                                     <img class="img-fluid" src="{{ asset('home/img/icon-building.png') }}"
                                         alt="Icon">
                                 </div>
                                 <h6>شقة صغيرة</h6>
-                                <span>{{ App\Models\Units::where('type','شقة صغيرة')->count() }} وحدة ايجارية</span>
+                                <span>{{ App\Models\Units::where('type', 'شقة صغيرة')->count() }} وحدة ايجارية</span>
                             </div>
                         </a>
                     </div>
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="{{ route('categories', ['key' =>'شقة ثنائية الدور']) }}">
+                        <a class="cat-item d-block bg-light text-center rounded p-3"
+                            href="{{ route('categories', ['key' => 'شقة ثنائية الدور']) }}">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
                                     <img class="img-fluid" src="{{ asset('home/img/icon-neighborhood.png') }}"
                                         alt="Icon">
                                 </div>
                                 <h6>شقة ثتائية الدور</h6>
-                                <span>{{ App\Models\Units::where('type','شقة ثنائية الدور')->count() }} وحدة ايجارية</span>
+                                <span>{{ App\Models\Units::where('type', 'شقة ثنائية الدور')->count() }} وحدة
+                                    ايجارية</span>
                             </div>
                         </a>
                     </div>
@@ -277,21 +285,23 @@
                                                 For Rent</div>
                                             <div
                                                 class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                                {{ $unit->unit_type }}</div>
+                                                {{ $unit->type }}</div>
                                         </div>
                                         <div class="p-4 pb-0">
-                                            <h5 class="text-primary mb-3">{{ $unit->rent_cost }}/ <span>شهريا</span></h5>
+                                            <h5 class="text-primary mb-3">{{ $unit->rent_cost }}/ <span>شهريا</span>
+                                            </h5>
                                             <a class="d-block h5 mb-2" href="">{{ $unit->main_show }}</a>
-                                            <p><i
-                                                    class="fa fa-map-marker-alt text-primary me-2"></i>  {{ $unit->address }}
+                                            <p><i class="fa fa-map-marker-alt text-primary me-2"></i>
+                                                {{ $unit->address }}
                                             </p>
                                         </div>
                                         <div class="d-flex border-top">
                                             <small class="flex-fill text-center border-end py-2"><i
                                                     class="fa fa-ruler-combined text-primary me-2"></i>
-                                                {{ $unit->unit_size }} مساحة</small>
+                                                {{ $unit->size }} مساحة</small>
                                             <small class="flex-fill text-center border-end py-2"><i
-                                                    class="fa fa-bed text-primary me-2"></i> {{ $unit->rooms }} عدد الغرف</small>
+                                                    class="fa fa-bed text-primary me-2"></i> {{ $unit->rooms }} عدد
+                                                الغرف</small>
                                             <small class="flex-fill text-center py-2"><i
                                                     class="fa fa-bath text-primary me-2"></i>
                                                 {{ $unit->bathrooms }} دورات المياه</small>
@@ -301,106 +311,116 @@
                             @empty
                             @endforelse
                         </div>
-
                     </div>
-                </br>
-                      <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                                <a class="btn btn-primary py-3 px-5" href="{{route('all_units')}}">تصفح كافة العقارات </a>
-                            </div>
+                    </br>
+                    <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="btn btn-primary py-3 px-5" href="{{ route('all_units') }}">تصفح كافة العقارات </a>
+                    </div>
                 </div>
 
             </div>
             <!-- Property List End -->
 
 
-             <!-- Contact Start -->
-        <div id="contact" class="container-xxl py-5">
-            <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h1 class="mb-3">Contact Us</h1>
-                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-12">
-                        <div class="row gy-4">
-                            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                                <div class="bg-light rounded p-3">
-                                    <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
-                                        <div class="icon me-3" style="width: 45px; height: 45px;">
-                                            <i class="fa fa-map-marker-alt text-primary"></i>
+            <!-- Contact Start -->
+            <div id="contact" class="container-xxl py-5">
+                <div class="container">
+                    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s"
+                        style="max-width: 600px;">
+                        <h1 class="mb-3">Contact Us</h1>
+                        <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum
+                            sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="row gy-4">
+                                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                                    <div class="bg-light rounded p-3">
+                                        <div class="d-flex align-items-center bg-white rounded p-3"
+                                            style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                            <div class="icon me-3" style="width: 45px; height: 45px;">
+                                                <i class="fa fa-map-marker-alt text-primary"></i>
+                                            </div>
+                                            <span> {{ $company->contact_address }} </span>
                                         </div>
-                                        <span> {{ $company->contact_address }} </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                                <div class="bg-light rounded p-3">
-                                    <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
-                                        <div class="icon me-3" style="width: 45px; height: 45px;">
-                                            <i class="fa fa-envelope-open text-primary"> </i>
+                                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                                    <div class="bg-light rounded p-3">
+                                        <div class="d-flex align-items-center bg-white rounded p-3"
+                                            style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                            <div class="icon me-3" style="width: 45px; height: 45px;">
+                                                <i class="fa fa-envelope-open text-primary"> </i>
+                                            </div>
+                                            <span> {{ $company->contact_email }} </span>
                                         </div>
-                                        <span>    {{  $company->contact_email }}     </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                                <div class="bg-light rounded p-3">
-                                    <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
-                                        <div class="icon me-3" style="width: 45px; height: 45px;">
-                                            <i class="fa fa-phone-alt text-primary"></i>
+                                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
+                                    <div class="bg-light rounded p-3">
+                                        <div class="d-flex align-items-center bg-white rounded p-3"
+                                            style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                            <div class="icon me-3" style="width: 45px; height: 45px;">
+                                                <i class="fa fa-phone-alt text-primary"></i>
+                                            </div>
+                                            <span> {{ $company->contact_mobile }} </span>
                                         </div>
-                                        <span> {{ $company->contact_mobile }} </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <iframe class="position-relative rounded w-100 h-100"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-                            frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
-                            tabindex="0"></iframe>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="wow fadeInUp" data-wow-delay="0.5s">
-                            <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                            <form>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="يرجى ادخال الاسم">
-                                            <label for="name">الاسم الكامل</label>
+                        <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <iframe class="position-relative rounded w-100 h-100"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+                                frameborder="0" style="min-height: 400px; border:0;" allowfullscreen=""
+                                aria-hidden="false" tabindex="0"></iframe>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="wow fadeInUp" data-wow-delay="0.5s">
+                                <p class="mb-4">The contact form is currently inactive. Get a functional and working
+                                    contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a
+                                    little code and you're done. <a href="https://htmlcodex.com/contact-form">Download
+                                        Now</a>.</p>
+                                <form>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="name"
+                                                    placeholder="يرجى ادخال الاسم">
+                                                <label for="name">الاسم الكامل</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="email" class="form-control" id="email"
+                                                    placeholder="يرجى ادخال البريد الاكتروني">
+                                                <label for="email">البريد الالكتروني</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="subject"
+                                                    placeholder="الموضوع">
+                                                <label for="subject">الموضوع</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <textarea class="form-control" placeholder="تفاصيل الطلب" id="message" style="height: 150px"></textarea>
+                                                <label for="message">الرسالة</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100 py-3" type="submit">ارسال</button>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" placeholder="يرجى ادخال البريد الاكتروني">
-                                            <label for="email">البريد الالكتروني</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" placeholder="الموضوع">
-                                            <label for="subject">الموضوع</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <textarea class="form-control" placeholder="تفاصيل الطلب" id="message" style="height: 150px"></textarea>
-                                            <label for="message">الرسالة</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" type="submit">ارسال</button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Contact End -->
+            <!-- Contact End -->
 
 
             <!-- Footer Start -->

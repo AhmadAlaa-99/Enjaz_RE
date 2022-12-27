@@ -21,11 +21,72 @@
                             <li class="breadcrumb-item active">ادارة العقود</li>
                         </ul>
                     </div>
+   <div class="col-auto">
+   <div class="col-lg-4 col-md-4">
+                                    <div class="invoices-settings-btn">
+                                        <a href="invoices-settings.html" class="invoices-settings-icon">
+                                        </a>
 
+                              <a href="#" data-bs-toggle="modal" data-bs-target="#add_payment{{ $lease->id }}"
+                                class="btn delete-invoice-btn">
+                                اضافة قسط
+                            </a>
+                                    </div>
+                                </div>
+                        </div>
                 </div>
             </div>
 
+    <div class="modal custom-modal fade bank-details" id="add_payment{{ $lease->id }}" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="form-header text-start mb-0">
+                                    <h4 class="mb-0">اضافة قسط جديد</h4>
+                                </div>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('payment_lease_add', $lease->id) }}" method="post">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
 
+
+
+                                        <label class="active" for="recipient-name" class="col-form-label">تاريخ
+                                            الاصدار</label>
+                                        <input type="date" name="release_date" class="form-control"
+                                            id="recipient-name"required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="active" for="recipient-name" class="col-form-label">تاريخ
+                                            الاستحقاق</label>
+                                        <input type="date" name="due_date" class="form-control"
+                                            id="recipient-name"required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="active" for="recipient-name" class="col-form-label">المبلغ</label>
+                                        <input type="number" name="total" class="form-control"
+                                            id="recipient-name"required>
+                                    </div>
+
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <div class="bank-details-btn">
+                                    <button type="submit" class="btn bank-save-btn">اغلاق</button>
+
+                                    <button type="submit" class="btn bank-save-btn">حفظ</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
             <div class="card invoices-tabs-card">

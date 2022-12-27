@@ -219,7 +219,7 @@ public function leases_renew_store(Request $request)
 
         foreach($query as $proc)
         {   $leases_payments+=$proc->paid; }
-$finished=Lease::where('status','expired')->count();
+$finished=Lease::where('status','expired')->orwhere('status','received')->count();
 $effictive=Lease::where('status','active')->count();
 $rec_account=Lease::where('status','received')->count();
 
@@ -268,9 +268,9 @@ $rec_account=Lease::where('status','received')->count();
         foreach($query as $proc)
         {   $leases_payments+=$proc->paid; }
 
-        $finished=Lease::where('status','expired')->count();
-$effictive=Lease::where('status','active')->count();
-$rec_account=Lease::where('status','received')->count();
+        $finished=Lease::where('status','expired')->orwhere('status','received')->count();
+     $effictive=Lease::where('status','active')->count();
+     $rec_account=Lease::where('status','received')->count();
         $Lease=Lease::where('status','received')->orWhere('status','expired')->with('tenants','realties','units','financial')
         /*->select('number','type','st_rental_date','end_rental_date')*/->latest()->paginate(5);
         /*

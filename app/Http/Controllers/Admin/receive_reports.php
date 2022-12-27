@@ -19,7 +19,7 @@ class receive_reports extends Controller
 
         foreach($query as $proc)
         {   $leases_payments+=$proc->paid; }
-        $finished=Lease::where('status','expired')->count();
+        $finished=Lease::where('status','expired')->orwhere('status','received')->count();
 $effictive=Lease::where('status','active')->count();
 $rec_account=Lease::where('status','received')->count();
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Realty;
 use App\Models\Units;
+use App\Models\quarter;
 use Illuminate\Http\Request;
 
 
@@ -26,14 +27,15 @@ class UnitsController extends Controller
     public function realty_units_show($id)
     {
 
-
+        $realty=Realty::where('id',$id)->first();
         $units=Units::where('realty_id',$id)->latest()->paginate(5);
-        return view('Admin.Units.realty_units',compact('units'));
+        return view('Admin.Units.realty_units',compact('units','realty'));
 
 
     }
     public function realty_units_add($id)
     {
+
          $realty=Realty::where('id',$id)->first();
         $units_count=Units::where('realty_id',$id)->get();
         if($units_count->count() < $realty->units+$realty->shopsNo)
@@ -43,19 +45,21 @@ class UnitsController extends Controller
         }
         else
         {
-                    session()->flash('max', 'عذرا, لقد بلغت الحد الأقصى للوحدات الايجارية في هذه المنشأة');
+        session()->flash('max', 'عذرا, لقد بلغت الحد الأقصى للوحدات الايجارية في هذه المنشأة');
         return back();
         }
 
     }
     public function realty_units_store($id,Request $request)
     {
+
         $realty=Realty::where('id',$id)->first();
         $units_count=Units::where('realty_id',$id)->get();
         $image_name='doc-'.time().'.'.$request->img->extension();
 
 
          $request->img->move(public_path('units'),$image_name);
+
         if($units_count->count() < $realty->units)
         {
             Units::create([
@@ -76,6 +80,7 @@ class UnitsController extends Controller
                     'elect_number'=>$request->elect_number,
                     'img'=>$image_name,
                     'rent_cost'=>$request->rent_cost,
+                    'address'=>$realty->address,
 
                     //'status'=>$request->status,
                     //start_date
@@ -182,6 +187,7 @@ $count_units_rented=Units::where('status','rented')->count();
                     'elect_number'=>$request->elect_number,
                     'rent_cost'=>$request->rent_cost,
                     'img'=>$request->img,
+                    'address'=>$realty->address,
                     // 'tenant_id'=> $request->tenant_id,
                     //'status'=>$request->status,
                 ]);
@@ -235,6 +241,7 @@ $count_units_rented=Units::where('status','rented')->count();
                     'elect_number'=>$request->elect_number,
                     'img'=>$image_name,
                     'rent_cost'=>$request->rent_cost,
+                    'address'=>$realty->address,
             //'status'=>$request->status,
             //start_date
             //end_date
@@ -249,17 +256,34 @@ $count_units_rented=Units::where('status','rented')->count();
     }
      public function destroy($id)
      {
+
+
         try
         {
             Units::destroy($id);
 
-            return redirect()->back();
+             return redirect()->route('empty_units')->with([
+                'message' => 'Unit deleted successfully',
+                'alert-type' => 'success',
+            ]);
         }
 
         catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
 
+     }
+     public function site_units()
+     {
+        $count_units=Units::count();
+$count_units_added=Units::count();
+$count_units_rented=Units::where('status','rented')->count();
+  $count_realties = Realty::count();
+
+        $quarters=quarter::where('region_id','1')->get();
+        $units=Units::where('status','empty')
+        ->paginate(6);
+      return view ('Admin.Units.site_units')->with(['units'=>$units,'quarters'=>$quarters,'count_units'=>$count_units,'count_units_added'=>$count_units_added,'count_units_rented'=>$count_units_rented,'count_realties'=>$count_realties]);
      }
 
 }

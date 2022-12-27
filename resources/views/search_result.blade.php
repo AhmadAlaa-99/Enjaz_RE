@@ -58,7 +58,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-
+                        <a href="{{ route('enjaz') }}" class="nav-item nav-link ">الصفحة الرئيسية</a>
+                        <a href="{{ route('all_units') }}" class="nav-item nav-link active">الوحدات الايجارية</a>
 
 
                     </div>
@@ -77,13 +78,14 @@
                     <!--
                     <h5 class="display-5 animated fadeIn mb-4">تكلفة الايجار :{{ $s1 }}-النوع:{{ $s3 }}-المنطقة : {{ $s4 }}</h5>
                     -->
+
                     <nav aria-label="breadcrumb animated fadeIn">
                         <ol class="breadcrumb text-uppercase">
                         </ol>
                     </nav>
                 </div>
                 <div class="col-md-6 animated fadeIn">
-                    <img class="img-fluid" src="{{ asset('home/img/header.jpg') }}"  alt="">
+                    <img class="img-fluid" src="{{ asset('home/img/header.jpg') }}" alt="">
                 </div>
             </div>
         </div>
@@ -93,19 +95,17 @@
         <!-- Search Start -->
         <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
             <div class="container">
-                <form action="{{ route('property_search') }}" method="post">
-                    {{ csrf_field() }}
-
+                <form action="{{ route('property_search') }}" method="get">
                     <div class="row g-2">
                         <div class="col-md-10">
                             <div class="row g-2">
                                 <div class="col-md-4">
-                                    <input value="" name="cost"type="text"
-                                        class="form-control border-0 py-3" placeholder="تكلفة الايجار">
+                                    <input name="cost"type="text" class="form-control border-0 py-3"
+                                        autocomplete="off"placeholder="تكلفة الايجار">
                                 </div>
                                 <div class="col-md-4">
-                                    <select value="" name="type" class="form-select border-0 py-3">
-                                        <option selected>نوع العقار</option>
+                                    <select name="type" class="form-select border-0 py-3">
+                                        <option placeholder="" value="">حدد النوع</option>
                                         <option value="محل تجاري">محل تجاري</option>
                                         <option value="ملحق">ملحق</option>
                                         <option value="شقة صغيرة">شقة صغيرة</option>
@@ -115,9 +115,10 @@
 
                                     </select>
                                 </div>
+
                                 <div class="col-md-4">
-                                    <select value="" name="location" class="form-select border-0 py-3">
-                                        <option selected>المنطقة </option>
+                                    <select name="location" class="form-select border-0 py-3">
+                                        <option placeholder="" value="">حدد المنطقة</option>
                                         @foreach ($quarters as $quarter)
                                             <option value="{{ $quarter->name }}">{{ $quarter->name }}</option>
                                         @endforeach
@@ -164,7 +165,7 @@
                                                 For Rent</div>
                                             <div
                                                 class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                                {{ $unit->unit_type }}</div>
+                                                {{ $unit->type }}</div>
                                         </div>
                                         <div class="p-4 pb-0">
                                             <h5 class="text-primary mb-3">{{ $unit->rent_cost }} شهريا</h5>
@@ -176,7 +177,7 @@
                                         <div class="d-flex border-top">
                                             <small class="flex-fill text-center border-end py-2"><i
                                                     class="fa fa-ruler-combined text-primary me-2"></i>
-                                                {{ $unit->unit_size }} cm</small>
+                                                {{ $unit->size }} cm</small>
                                             <small class="flex-fill text-center border-end py-2"><i
                                                     class="fa fa-bed text-primary me-2"></i> {{ $unit->rooms }} عدد
                                                 الغرف</small>
@@ -186,21 +187,27 @@
                                         </div>
                                     </div>
                                 </div>
+
+
                             @empty
-                             <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                                <a class="btn btn-primary py-3 px-5" href="{{route('enjaz')}}">عودة الى الصفحة الرئيسية </a>
-                            </div>
+                                <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                                    <a class="btn btn-primary py-3 px-5" href="{{ route('enjaz') }}">عودة الى الصفحة
+                                        الرئيسية </a>
+                                </div>
                             @endforelse
+
+
+
+
                         </div>
                     </div>
-                       </br>
-                      <div class="d-flex justify-content-center">
-                                        {!! $units->links() !!}
-                                    </div>
-                </div>
+
                 </div>
             </div>
-            <!-- Property List End -->
+
+        </div>
+        <!-- Property List End -->
+
 
 
             <!-- Contact Start -->
@@ -222,7 +229,7 @@
                                             <div class="icon me-3" style="width: 45px; height: 45px;">
                                                 <i class="fa fa-map-marker-alt text-primary"></i>
                                             </div>
-                                            <span>123 Street, New York, USA</span>
+                                            <span> {{ $company->contact_address }} </span>
                                         </div>
                                     </div>
                                 </div>
@@ -231,9 +238,9 @@
                                         <div class="d-flex align-items-center bg-white rounded p-3"
                                             style="border: 1px dashed rgba(0, 185, 142, .3)">
                                             <div class="icon me-3" style="width: 45px; height: 45px;">
-                                                <i class="fa fa-envelope-open text-primary"></i>
+                                                <i class="fa fa-envelope-open text-primary"> </i>
                                             </div>
-                                            <span>info@example.com</span>
+                                            <span> {{ $company->contact_email }} </span>
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +251,7 @@
                                             <div class="icon me-3" style="width: 45px; height: 45px;">
                                                 <i class="fa fa-phone-alt text-primary"></i>
                                             </div>
-                                            <span>+012 345 6789</span>
+                                            <span> {{ $company->contact_mobile }} </span>
                                         </div>
                                     </div>
                                 </div>
@@ -267,33 +274,32 @@
                                         <div class="col-md-6">
                                             <div class="form-floating">
                                                 <input type="text" class="form-control" id="name"
-                                                    placeholder="Your Name">
-                                                <label for="name">Your Name</label>
+                                                    placeholder="يرجى ادخال الاسم">
+                                                <label for="name">الاسم الكامل</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
                                                 <input type="email" class="form-control" id="email"
-                                                    placeholder="Your Email">
-                                                <label for="email">Your Email</label>
+                                                    placeholder="يرجى ادخال البريد الاكتروني">
+                                                <label for="email">البريد الالكتروني</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-floating">
                                                 <input type="text" class="form-control" id="subject"
-                                                    placeholder="Subject">
-                                                <label for="subject">Subject</label>
+                                                    placeholder="الموضوع">
+                                                <label for="subject">الموضوع</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-floating">
-                                                <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                                <label for="message">Message</label>
+                                                <textarea class="form-control" placeholder="تفاصيل الطلب" id="message" style="height: 150px"></textarea>
+                                                <label for="message">الرسالة</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button class="btn btn-primary w-100 py-3" type="submit">Send
-                                                Message</button>
+                                            <button class="btn btn-primary w-100 py-3" type="submit">ارسال</button>
                                         </div>
                                     </div>
                                 </form>
@@ -305,56 +311,55 @@
             <!-- Contact End -->
 
 
-            <!-- Footer Start -->
-            <!-- Remove the container if you want to extend the Footer to full width. -->
-            <div class="container my-5">
+        <!-- Footer Start -->
+        <!-- Remove the container if you want to extend the Footer to full width. -->
+        <div class="container my-5">
 
-                <footer class="bg-dark text-center text-white">
+            <footer class="bg-dark text-center text-white">
 
 
-                    <!-- Copyright -->
-                    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                        © 2023 Copyright:
-                        <a class="text-white" href="">Enjaz Raoaa</a>
-                    </div>
-                    <!-- Copyright -->
-                </footer>
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    © 2023 Copyright:
+                    <a class="text-white" href="">Enjaz Raoaa</a>
+                </div>
+                <!-- Copyright -->
+            </footer>
 
-            </div>
-            <!-- End of .
+        </div>
+        <!-- End of .
             <!-- Footer End -->
 
 
-            <!-- Back to Top -->
-            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
-                    class="bi bi-arrow-up"></i></a>
-        </div>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script type="text/javascript">
-            var path = "{{ route('autocomplete') }}";
+    <script type="text/javascript">
+        var path = "{{ route('autocomplete') }}";
 
-            $('#search').typeahead({
-                source: function(query, process) {
-                    return $.get(path, {
-                        query: query
-                    }, function(data) {
-                        return process(data);
-                    });
-                }
-            });
-        </script>
-        <script src="{{ URL::asset('home/lib/wow/wow.min.js') }}"></script>
-        <script src="{{ URL::asset('home/lib/easing/easing.min.js') }}"></script>
+        $('#search').typeahead({
+            source: function(query, process) {
+                return $.get(path, {
+                    query: query
+                }, function(data) {
+                    return process(data);
+                });
+            }
+        });
+    </script>
+    <script src="{{ URL::asset('home/lib/wow/wow.min.js') }}"></script>
+    <script src="{{ URL::asset('home/lib/easing/easing.min.js') }}"></script>
 
-        <script src="{{ URL::asset('home/lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ URL::asset('home/lib/waypoints/waypoints.min.js') }}"></script>
 
-        <script src="{{ URL::asset('home/lib/owlcarousel/owl.carousel.min.j') }}"></script>
+    <script src="{{ URL::asset('home/lib/owlcarousel/owl.carousel.min.j') }}"></script>
 
-        <script src="{{ URL::asset('home/js/main.js') }}"></script>
+    <script src="{{ URL::asset('home/js/main.js') }}"></script>
 </body>
 
 </html>

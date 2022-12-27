@@ -26,6 +26,8 @@ class CreateUnitsTable extends Migration
             $table->integer('role_number');
             $table->integer('bathrooms');
             $table->integer('rooms');
+            $table->string('address');
+
             $table->string('quarter')->nullable('saudia');
             $table->string('main_show')->default('0');
             $table->string('elect_number')->default('0');

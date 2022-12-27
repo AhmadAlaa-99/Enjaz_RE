@@ -3,11 +3,11 @@
 
 @endsection
 @section('title')
-تفاصيل عقد الايجار
+    تفاصيل عقد الايجار
 @stop
 @section('content')
 
-   <div class="page-wrapper">
+    <div class="page-wrapper">
 
         <div class="content container-fluid">
             <div class="page-header invoices-page-header">
@@ -30,7 +30,7 @@
                     <div class="col-auto">
                         <div class="invoices-create-btn">
 
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#add_payment{{ $lease->id }}""
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#add_payment{{ $lease->id }}"
                                 class="btn delete-invoice-btn">
                                 اضافة قسط
                             </a>
@@ -94,6 +94,12 @@
                 <div class="row justify-content-center">
 
                     <div class="col-xl-10">
+                        @if (session()->has('max_rent'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session()->get('max_rent') }}</strong>
+
+                            </div>
+                        @endif
                         <div class="card invoice-info-card">
                             <div class="card-body">
                                 <div class="invoice-item invoice-item-one">
@@ -175,40 +181,40 @@
                                         </div>
                                     </div>
                                 </div>
-                                   <div class="invoice-item invoice-table-wrap">
+                                <div class="invoice-item invoice-table-wrap">
                                     <div class="row">
 
                                         <div class="col-md-12">
 
-                                            <strong class="customer-text-one">بيانات  المستأجر</strong>
+                                            <strong class="customer-text-one">بيانات المستأجر</strong>
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-striped m-0">
-                                                     <thead>
-                                                                <tr>
-                                                                    <th> الاسم الكامل</th>
-                                                                    <th> رقم الهوية </th>
-                                                                    <th> نوع الهوية </th>
-                                                                    <th> رقم الجوال</th>
-                                                                    <th> الجنسية</th>
-                                                                    <th> رقم الهاتف </th>
-                                                                    <th> البريد الالكتروني</th>
+                                                    <thead>
+                                                        <tr>
+                                                            <th> الاسم الكامل</th>
+                                                            <th> رقم الهوية </th>
+                                                            <th> نوع الهوية </th>
+                                                            <th> رقم الجوال</th>
+                                                            <th> الجنسية</th>
+                                                            <th> رقم الهاتف </th>
+                                                            <th> البريد الالكتروني</th>
 
 
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>{{ $tenant->user->name }}</td>
-                                                                    <td>{{ $tenant->user->ID_num }}</td>
-                                                                    <td>{{ $tenant->user->ID_type }}</td>
-                                                                    <td>{{ $tenant->user->phone }}</td>
-                                                                    <td>{{ $tenant->user->Nationality->Name }}</td>
-                                                                    <td>{{ $tenant->user->telephone }}</td>
-                                                                    <td>{{ $tenant->user->email }}</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{{ $tenant->user->name }}</td>
+                                                            <td>{{ $tenant->user->ID_num }}</td>
+                                                            <td>{{ $tenant->user->ID_type }}</td>
+                                                            <td>{{ $tenant->user->phone }}</td>
+                                                            <td>{{ $tenant->user->Nationality->Name }}</td>
+                                                            <td>{{ $tenant->user->telephone }}</td>
+                                                            <td>{{ $tenant->user->email }}</td>
 
-                                                                </tr>
+                                                        </tr>
 
-                                                            </tbody>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -480,7 +486,8 @@
                                                     <p> مبلغ الضريبة<span>{{ $lease->financial->tax_ammount }}</span></p>
                                                 </div>
                                                 <div class="invoice-total-footer">
-                                                    <h4>اجمالي قيمة العقد<span>{{ $lease->financial->rent_value }}</span></h4>
+                                                    <h4>اجمالي قيمة العقد<span>{{ $lease->financial->rent_value }}</span>
+                                                    </h4>
                                                 </div>
                                             </div>
                                         </div>

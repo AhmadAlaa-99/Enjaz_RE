@@ -58,6 +58,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
+                        <a href="{{ route('enjaz') }}" class="nav-item nav-link ">الصفحة الرئيسية</a>
+                        <a href="{{ route('all_units') }}" class="nav-item nav-link active">الوحدات الايجارية</a>
 
 
 
@@ -87,22 +89,22 @@
         <!-- Header End -->
 
 
-        <!-- Search Start -->
+      <!-- Search Start -->
         <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
             <div class="container">
-                <form action="{{ route('property_search') }}" method="post">
-                    {{ csrf_field() }}
+                <form action="{{ route('property_search') }}" method="get">
+
 
                     <div class="row g-2">
                         <div class="col-md-10">
                             <div class="row g-2">
                                 <div class="col-md-4">
-                                    <input value="" name="cost"type="text"
-                                        class="form-control border-0 py-3" placeholder="تكلفة الايجار">
+                                    <input name="cost"type="text" class="form-control border-0 py-3"
+                                        autocomplete="off"placeholder="تكلفة الايجار">
                                 </div>
                                 <div class="col-md-4">
-                                    <select value="" name="type" class="form-select border-0 py-3">
-                                        <option selected>نوع العقار</option>
+                                    <select name="type" class="form-select border-0 py-3">
+                                        <option placeholder="" value="">حدد النوع</option>
                                         <option value="محل تجاري">محل تجاري</option>
                                         <option value="ملحق">ملحق</option>
                                         <option value="شقة صغيرة">شقة صغيرة</option>
@@ -112,9 +114,10 @@
 
                                     </select>
                                 </div>
+
                                 <div class="col-md-4">
-                                    <select value="" name="location" class="form-select border-0 py-3">
-                                        <option selected>المنطقة </option>
+                                    <select name="location" class="form-select border-0 py-3">
+                                        <option placeholder="" value="">حدد المنطقة</option>
                                         @foreach ($quarters as $quarter)
                                             <option value="{{ $quarter->name }}">{{ $quarter->name }}</option>
                                         @endforeach
@@ -161,7 +164,7 @@
                                                 For Rent</div>
                                             <div
                                                 class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                                {{ $unit->unit_type }}</div>
+                                                {{ $unit->type }}</div>
                                         </div>
                                         <div class="p-4 pb-0">
                                             <h5 class="text-primary mb-3">{{ $unit->rent_cost }} شهريا</h5>
@@ -173,7 +176,7 @@
                                         <div class="d-flex border-top">
                                             <small class="flex-fill text-center border-end py-2"><i
                                                     class="fa fa-ruler-combined text-primary me-2"></i>
-                                                {{ $unit->unit_size }} cm</small>
+                                                {{ $unit->size }} cm</small>
                                             <small class="flex-fill text-center border-end py-2"><i
                                                     class="fa fa-bed text-primary me-2"></i> {{ $unit->rooms }} عدد
                                                 الغرف</small>
@@ -187,13 +190,13 @@
                             @endforelse
                         </div>
                     </div>
-                </br>
                      <div class="d-flex justify-content-center">
                                         {!! $units->links() !!}
                                     </div>
                 </div>
             </div>
             <!-- Property List End -->
+
 
 
             <!-- Contact Start -->
@@ -215,7 +218,7 @@
                                             <div class="icon me-3" style="width: 45px; height: 45px;">
                                                 <i class="fa fa-map-marker-alt text-primary"></i>
                                             </div>
-                                            <span>123 Street, New York, USA</span>
+                                            <span> {{ $company->contact_address }} </span>
                                         </div>
                                     </div>
                                 </div>
@@ -224,9 +227,9 @@
                                         <div class="d-flex align-items-center bg-white rounded p-3"
                                             style="border: 1px dashed rgba(0, 185, 142, .3)">
                                             <div class="icon me-3" style="width: 45px; height: 45px;">
-                                                <i class="fa fa-envelope-open text-primary"></i>
+                                                <i class="fa fa-envelope-open text-primary"> </i>
                                             </div>
-                                            <span>info@example.com</span>
+                                            <span> {{ $company->contact_email }} </span>
                                         </div>
                                     </div>
                                 </div>
@@ -237,7 +240,7 @@
                                             <div class="icon me-3" style="width: 45px; height: 45px;">
                                                 <i class="fa fa-phone-alt text-primary"></i>
                                             </div>
-                                            <span>+012 345 6789</span>
+                                            <span> {{ $company->contact_mobile }} </span>
                                         </div>
                                     </div>
                                 </div>
@@ -260,33 +263,32 @@
                                         <div class="col-md-6">
                                             <div class="form-floating">
                                                 <input type="text" class="form-control" id="name"
-                                                    placeholder="Your Name">
-                                                <label for="name">Your Name</label>
+                                                    placeholder="يرجى ادخال الاسم">
+                                                <label for="name">الاسم الكامل</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
                                                 <input type="email" class="form-control" id="email"
-                                                    placeholder="Your Email">
-                                                <label for="email">Your Email</label>
+                                                    placeholder="يرجى ادخال البريد الاكتروني">
+                                                <label for="email">البريد الالكتروني</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-floating">
                                                 <input type="text" class="form-control" id="subject"
-                                                    placeholder="Subject">
-                                                <label for="subject">Subject</label>
+                                                    placeholder="الموضوع">
+                                                <label for="subject">الموضوع</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-floating">
-                                                <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                                <label for="message">Message</label>
+                                                <textarea class="form-control" placeholder="تفاصيل الطلب" id="message" style="height: 150px"></textarea>
+                                                <label for="message">الرسالة</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button class="btn btn-primary w-100 py-3" type="submit">Send
-                                                Message</button>
+                                            <button class="btn btn-primary w-100 py-3" type="submit">ارسال</button>
                                         </div>
                                     </div>
                                 </form>

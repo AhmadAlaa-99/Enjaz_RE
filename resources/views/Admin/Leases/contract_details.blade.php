@@ -56,40 +56,63 @@
                             <div class="modal-body">
                                 <form action="{{ route('payment_contract.add', $contract->id) }}" method="post">
                                     {{ csrf_field() }}
-                                    <div class="form-group">
-                                        <label class="active" for="recipient-name" class="col-form-label">رقم القسط</label>
-                                        <input type="number" name="installmentNo" class="form-control"
-                                            id="recipient-name"required>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <label class="active" for="recipient-name" class="col-form-label">رقم
+                                                    القسط</label>
+                                                <input type="number" name="installmentNo" class="form-control"
+                                                    id="recipient-name"required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <label class="active" for="recipient-name" class="col-form-label">تاريخ
+                                                    القسط</label>
+                                                <input type="date" name="installment_date" class="form-control"
+                                                    id="recipient-name"required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <label class="active" for="recipient-name"
+                                                    class="col-form-label">المبلغ</label>
+                                                <input type="number" name="amount" class="form-control"
+                                                    id="recipient-name"required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <label class="active" for="recipient-name" class="col-form-label">تاريخ
+                                                    الدفع</label>
+                                                <input type="date" name="payment_date" class="form-control"
+                                                    id="recipient-name"required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <label class="active" for="recipient-name" class="col-form-label">طريقة
+                                                    الدفع</label>
+                                                <input type="text" name="payment_type" class="form-control"
+                                                    id="recipient-name"required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <label class="active" for="recipient-name" class="col-form-label">الرقم
+                                                    المرجعي</label>
+                                                <input type="number" name="refrenceNo" class="form-control"
+                                                    id="recipient-name"required>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="active" for="recipient-name" class="col-form-label">تاريخ
-                                            القسط</label>
-                                        <input type="date" name="installment_date" class="form-control"
-                                            id="recipient-name"required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="active" for="recipient-name" class="col-form-label">المبلغ</label>
-                                        <input type="number" name="amount" class="form-control"
-                                            id="recipient-name"required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="active" for="recipient-name" class="col-form-label">تاريخ
-                                            الدفع</label>
-                                        <input type="date" name="payment_date" class="form-control"
-                                            id="recipient-name"required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="active" for="recipient-name" class="col-form-label">طريقة
-                                            الدفع</label>
-                                        <input type="text" name="payment_type" class="form-control"
-                                            id="recipient-name"required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="active" for="recipient-name" class="col-form-label">الرقم
-                                            المرجعي</label>
-                                        <input type="number" name="refrenceNo" class="form-control"
-                                            id="recipient-name"required>
-                                    </div>
+
+
+
+
+
+
+
 
 
                             </div>
@@ -105,8 +128,19 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-
                     <div class="col-xl-10">
+                        @if (session()->has('max_count'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session()->get('max_count') }}</strong>
+
+                            </div>
+                        @endif
+                         @if (session()->has('max_rent'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session()->get('max_rent') }}</strong>
+
+                            </div>
+                        @endif
                         <div class="card invoice-info-card">
                             <div class="card-body">
                                 <div class="invoice-item invoice-item-one">

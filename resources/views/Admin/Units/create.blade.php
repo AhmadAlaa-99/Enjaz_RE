@@ -151,14 +151,15 @@
                                     </div>
 
 
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <div class="text-right">
+                                  <div class="modal-footer">
+                                <div class="bank-details-btn">
+                                    <a type="buttom" href="{{route('empty_units')}}" class="btn bank-save-btn">اغلاق</a>
 
-                                            <button type="submit" name="submit" name="submit"
-                                                class="btn btn-primary">حفظ
-                                                واضافة المزيد</button>
-                                        </div>
-                                    </div>
+                                    <button type="submit" class="btn bank-save-btn">حفظ واضافة المزيد</button>
+
+                                </div>
+                            </div>
+
 
 
                             </form>

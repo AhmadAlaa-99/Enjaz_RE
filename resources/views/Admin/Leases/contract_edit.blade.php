@@ -88,7 +88,7 @@
                         </div>
                         <div class="col-1-3">
                             <div class="controls">
-                                <input type="text" id="Amount_Commission" class="floatLabel"
+                                <input type="number" id="Amount_Commission" class="floatLabel"
                                     value="{{ $contract->ejar_cost }}"name="ejar_cost" onchange="myFunction()" required>
                                 <label class="active" for="street"> كلفة الاستئجار</label>
                             </div>
@@ -301,7 +301,7 @@
                         </div>
                     </div>
                     <div class="grid">
-                        <div class="col-2-3">
+                        <div class="col-1-2">
                             <div class="controls">
                                 <input type="text" width="100px"height="100px"id="st_rental_date"
                                     class="floatLabel" value="{{ $contract->advantages }}"name="advantages"
@@ -309,6 +309,14 @@
                                 <label class="active" for="eMail">المميزات</label>
                             </div>
                         </div>
+                          <div class="col-1-2">
+                                    <div class="controls">
+
+                                        <input type="text" value="{{ $contract->address }}" name="address"
+                                            class="floatLabel"placeholder=""required>
+                                        <label class="active" for="street">العنوان (يظهر في صفحة العرض)</label>
+                                    </div>
+                                </div>
                     </div>
                 </div>
 

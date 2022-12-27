@@ -53,7 +53,7 @@ Route::get('/statistics',[SettingsController::class,'statistics'])->name('statis
 Route::get('/categories/{key}', [HomeController::class,'categories'])->name('categories');
 
 Route::get('/enjaz', [HomeController::class,'enjaz'])->name('enjaz');
-Route::post('/property_search', [HomeController::class,'property_search'])->name('property_search');
+Route::get('/property_search', [HomeController::class,'property_search'])->name('property_search');
 
 Route::get('/all_units', [HomeController::class,'all_units'])->name('all_units');
 
@@ -100,6 +100,9 @@ Route::group([
    Route::get('/printl', function () {
     return view('lease_print');
 });
+
+     Route::get('/site_units',[AdminUnitsController::class,'site_units'])->name('site_units');
+
      Route::post('/units_add',[AdminUnitsController::class,'units_add'])->name('units_add');
      Route::get('/empty_units',[AdminUnitsController::class,'empty_units'])->name('empty_units');
      Route::get('/unit_destroy/{id}',[AdminUnitsController::class,'destroy'])->name('unit.destroy');

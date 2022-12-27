@@ -67,22 +67,24 @@ class ContractController extends Controller
 
    public function payment_add(Request $request,$id)
   {
+
     $ensollments=ensollments::where('contract_id',$id)->count();
     $contract=contract::where('id',$id)->first();
+
     $paid=$contract->paid+$request->amount;
     if($paid>$contract->rent_value)
     {
-        session()->flash('max_rent', 'خطأ,المبلغ المدفوع أكبر من المتبقي');
+
+        session()->flash('max_rent', 'حدث خطأ - المبلغ المدفوع أكبر من المتبقي');
         return back();
     }
     else if($ensollments>=$contract->ensollments_total)
     {
-        session()->flash('max_count', 'خطأ,تحقق من عدد الأقساط الكلية');
+        session()->flash('max_count', 'حدث خطأ - يرجى تحقق من عدد الأقساط الكلية');
         return back();
     }
     else
     {
-
                 $input['contract_id']=$id;
                 $input['installmentNo']=$request->installmentNo;
                 $input['installment_date']=$request->installment_date;
@@ -91,8 +93,8 @@ class ContractController extends Controller
                 $input['payment_type']=$request->payment_type;
                 $input['refrenceNo']=$request->refrenceNo;
                 ensollments::create($input);
-                $contract=contract::where('id',$id)->first();
 
+                $contract=contract::where('id',$id)->first();
 
                 $contract->update([
                 'paid'=>$paid,
@@ -100,6 +102,7 @@ class ContractController extends Controller
                 'ensollments_paid'=>$contract->ensollments_paid++,
 
             ]);
+
         $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
            foreach($enso as $ens)
            {
@@ -113,12 +116,8 @@ class ContractController extends Controller
             }
             continue;
            }
-
-
             return redirect()->back();
         }
-
-
   }
 
     public function details($id)
@@ -270,6 +269,7 @@ public function finish_contract($id)
    }
     public function contract_store(Request $request)
     {
+        
        Owner::create([
         'name'=>$request->name,
         'email'=>$request->email,
@@ -389,7 +389,7 @@ public function finish_contract($id)
           ->first();
           $realty=Realty::where('id',$contract->realty_id)->first();
     $ensollments=ensollments::where('contract_id',$id)->get();
-    $owner=owner::where('id',$contract->realty_id)->first();
+      $owner=owner::where('id',$realty->owner_id)->first();
         return view('Admin.Leases.contract_edit')->with([
             'contract'=>$contract,
             'owner'=>$owner,

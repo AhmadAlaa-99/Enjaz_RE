@@ -5621,9 +5621,11 @@ fieldset:disabled .btn {
 }
 
 .alert-success {
-    color: #0f5132;
-    background-color: #d1e7dd;
-    border-color: #badbcc
+    color: #ffffff;
+        background-color: #1b2559;
+        border-color: #ffffff;
+        border-radius: 112px;
+        margin: 10px 246px;
 }
 
 .alert-success .alert-link {

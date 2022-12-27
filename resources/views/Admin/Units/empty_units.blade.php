@@ -26,6 +26,8 @@
                                                     المؤجرة</a></li>
                                             <li><a href="{{ url('/' . ($page = 'Admin/empty_units')) }}"
                                                     class="active">الوحدات الشاغرة</a></li>
+                                                    <li><a href="{{ url('/' . ($page = 'Admin/site_units')) }}"
+                                                    class="active">الوحدات النشطة في الموقع</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -40,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-               <div class="row">
+                <div class="row">
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="card">
                             <div class="card-body">
@@ -178,7 +180,8 @@
                                                 @endphp
                                                 <tr>
                                                     <td>{{ $i }}</td>
-                                                    <td><span class="badge badge-danger">{{ $unit->realties->realty_name }}
+                                                    <td><span
+                                                            class="badge badge-danger">{{ $unit->realties->realty_name }}
                                                     </td>
                                                     <td><span class="badge badge-danger">{{ $unit->type }}</td>
                                                     <td><span class="badge badge-success">{{ $unit->number }}</td>
@@ -200,12 +203,14 @@
 
                                                                 <a class="dropdown-item"
                                                                     title=" تعديل بيانات الوحدة "href="{{ route('units.edit', $unit->id) }}"><i
-                                                                        class="far fa-edit me-1"></i>تعديل بيانات الوحدة</a>
+                                                                        class="far fa-edit me-1"></i>تعديل بيانات
+                                                                    الوحدة</a>
                                                                 <a class="dropdown-item"title="تأجير الوحدة"
                                                                     href="{{ route('unit.rent', $unit->id) }}"><i
-                                                                        class="far fa-paper-plane me-1"></i>تأجير الوحدة</a>
+                                                                        class="far fa-paper-plane me-1"></i>تأجير
+                                                                    الوحدة</a>
                                                                 <a class="dropdown-item"title="حذف الوحدة "
-                                                                    href="{{ route('units.destroy', $unit->id) }}"><i
+                                                                    href="{{ route('unit.destroy', $unit->id) }}"><i
                                                                         class="far fa-trash-alt me-1"></i>حذف الوحدة</a>
 
                                                             </div>

@@ -31,39 +31,29 @@ class HomeController extends Controller
     {
         $company=DB::table('brokers')->first();
         $quarters=quarter::where('region_id','1')->get();
-        $units=DB::table('units')->join('realties','realties.id','=','units.realty_id')
-        ->select('units.type as unit_type','rent_cost','main_show','img','units.size as unit_size','bathrooms','rooms','realties.address as address')
-        ->where('units.status','empty')
+        $units=Units::where('status','empty')
         ->take(3)->get();
       return view ('main')->with(['units'=>$units,'quarters'=>$quarters,'company'=>$company]);
     }
     public function property_search(Request $request)
     {
+        $company=DB::table('brokers')->first();
         $quarters=quarter::where('region_id','1')->get();
-        //type  address  rent_value
-
         $s1=$request->type;
         $s3=$request->location;
         $s4=$request->cost;
-       //return $s1;
         if($s1!=""){$s1=$request->type;}else{$s1="%";}
-        if($s3!=""){
-
-            $s3=$request->location; }else{$s3="%";}
+        if($s3!=""){$s3=$request->location; }else{$s3="%";}
         if($s4!=""){$s4=$request->cost;}else{$s4="%";}
         //return $request->month;
-        $units=DB::table('units')->join('realties','realties.id','=','units.realty_id')
-        ->select('units.type as unit_type','rent_cost','main_show','img','units.size as unit_size','bathrooms','rooms','realties.address as address')
-        ->where([
-              'units.status'=>'empty',
-               'units.type'=>$s1,
-              'units.quarter'=>$s3,
-              'units.rent_cost'=>$s4
-            ])
+
+        $units=Units::where('status','empty')->where([
+            ['type','LIKE',$s1],
+            ['quarter','LIKE',$s3],
+            ['rent_cost','LIKE',$s4],])
         ->paginate(6);
 
-      return view ('search_result')->with(['units'=>$units,'quarters'=>$quarters,'s1'=>$s1,'s3'=>$s3,'s4'=>$s4]);
-
+        return view ('search_result')->with(['units'=>$units,'quarters'=>$quarters,'s1'=>$s1,'s3'=>$s3,'s4'=>$s4,'company'=>$company]);
     }
       public function autocomplete(Request $request)
     {
@@ -75,9 +65,9 @@ class HomeController extends Controller
     }
     public function categories($key)
     {
+        $company=DB::table('brokers')->first();
         $quarters=quarter::where('region_id','1')->get();
-        $reaults=DB::table('units')->join('realties','realties.id','=','units.realty_id')
-        ->select('units.type as unit_type','rent_cost','main_show','img','units.size as unit_size','bathrooms','rooms','realties.address as address')
+        $units=Units::where('status','empty')
         ->where([
                'units.type'=>$key,
             ])
@@ -87,17 +77,16 @@ class HomeController extends Controller
         return view('categories')->with([
             'key'=>$key,
             'quarters'=>$quarters,
-            'units'=>$reaults,
+            'units'=>$units,
+            'company'=>$company,
         ]);
     }
     public function all_units()
     {
+        $company=DB::table('brokers')->first();
         $quarters=quarter::where('region_id','1')->get();
-        $units=DB::table('units')->join('realties','realties.id','=','units.realty_id')
-        ->select('units.type as unit_type','rent_cost','main_show','img','units.size as unit_size','bathrooms','rooms','realties.address as address')
-        ->where('units.status','empty')
-        ->paginate(6);
-      return view ('units')->with(['units'=>$units,'quarters'=>$quarters]);
+       $units=Units::where('status','empty')->paginate(6);
+      return view ('units')->with(['units'=>$units,'quarters'=>$quarters,'company'=>$company]);
 
     }
 }

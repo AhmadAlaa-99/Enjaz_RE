@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="col-1-3">
                                     <div class="controls">
-                                        <input type="text" id="Amount_Commission" class="floatLabel"
+                                        <input type="number" id="Amount_Commission" class="floatLabel"
                                             value="{{ old('ejar_cost') }}"name="ejar_cost" onchange="myFunction()" required>
                                         <label class="active" for="street"> كلفة الاستئجار</label>
                                     </div>
