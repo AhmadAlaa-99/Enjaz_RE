@@ -15,11 +15,13 @@ class CreateBrokersTable extends Migration
     {
         Schema::create('brokers', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
             $table->date('date_founded');
             $table->string('about');
             $table->string('vision');
             $table->string('mission');
+            $table->string('contact_email');
+            $table->string('contact_address');
+            $table->string('contact_mobile');
             $table->timestamps();
         });
     }

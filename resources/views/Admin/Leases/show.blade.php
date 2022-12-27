@@ -1,2 +1,13 @@
- يظهرمحتوى العقد تمام كما في ملف pdf 
- وان لم تستطع بيانات مرتبة
+@extends('layouts.master')
+@section('css')
+
+@endsection
+@section('title')
+
+@stop
+@section('content')
+
+@endsection
+@section('js')
+
+@endsection

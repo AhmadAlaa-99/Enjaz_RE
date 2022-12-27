@@ -8,29 +8,33 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/css/wizard.css') }}">
 @endsection
 @section('title')
-    تعديل عقد استئجار
+تعديل بيانات عقد الاستئجار
 @stop
 
 @section('content')
-    <div class="main-container">
-
+      <div class="page-wrapper">
+            <div class="content container-fluid">
+                   <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title"></h3>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html"></a></li>
+                   </ul>
+                        </div>
+                        <div class="col-auto">
+                            <a href="invoices.html" class="invoices-links active">
+                            </a>
+                            <a href="invoice-grid.html" class="invoices-links">
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
         <!-- Page header start -->
-        <div class="page-header">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">عقود الاستئجار </li>
-                <li class="breadcrumb-item active">تعديل</li>
-            </ol>
-            <ul class="app-actions">
-                <li>
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
-                        <span id="clock"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+
         <!-- Content wrapper start -->
-        <div class="content-wrapper">
+       <div class="row">
             <form action="{{ route('contract_update') }}" method="post" enctype="multipart/form-data"autocomplete="off">
                 {{ csrf_field() }}
                 <!--  بيانات العقد -->
@@ -84,8 +88,8 @@
                         </div>
                         <div class="col-1-3">
                             <div class="controls">
-                                <input type="text" id="ejar_cost" class="floatLabel"
-                                    value="{{ $contract->ejar_cost }}"name="ejar_cost"required>
+                                <input type="text" id="Amount_Commission" class="floatLabel"
+                                    value="{{ $contract->ejar_cost }}"name="ejar_cost" onchange="myFunction()" required>
                                 <label class="active" for="street"> كلفة الاستئجار</label>
                             </div>
                         </div>
@@ -102,7 +106,7 @@
                         <div class="col-1-2">
                             <div class="controls">
                                 <input type="date" id="start_date" class="floatLabel"
-                                    value="{{ $contract->start_date }}"name="start_date"required>
+                                    value="{{ old($contract->start_date) }}"name="start_date"required>
                                 <label class="active" for="eMail">تاريخ بداية مدة الاستئجار</label>
                             </div>
 
@@ -121,21 +125,21 @@
                         <div class="grid">
                             <div class="col-1-3">
                                 <div class="controls">
-                                    <input type="text" id="tax" class="floatLabel"
+                                    <input type="text" id="Rate_VAT" class="floatLabel"
                                         value="15%"name="tax"readonly>
                                     <label class="active" for="phone">نسبة الضريبة</label>
                                 </div>
                             </div>
                             <div class="col-1-3">
                                 <div class="controls">
-                                    <input type="text" id="tax_amount" class="floatLabel"
-                                        value="{{ $contract->tax_amount }}"name="tax_amount"required>
+                                    <input type="text" id="Value_VAT" class="floatLabel"
+                                        value="{{ $contract->tax_amount }}"name="tax_amount"readonly>
                                     <label class="active" for="phone">مبلغ الضريبة</label>
                                 </div>
                             </div>
                             <div class="col-1-3">
                                 <div class="controls">
-                                    <input type="text" id="rent_value" class="floatLabel"
+                                    <input type="text" id="Total" class="floatLabel"
                                         value="{{ $contract->rent_value }}"name="rent_value"required>
                                     <label class="active" for="phone">الكلفة الاجمالية للاستئجار</label>
                                 </div>
@@ -143,6 +147,13 @@
                         </div>
                     @endif
                     <div class="grid">
+                         <div class="col-1-3">
+                                    <div class="controls">
+                                        <input type="text" id="note" class="floatLabel"
+                                            value="{{ $contract->fee }}"name="fee"required>
+                                        <label class="active" for="phone">رسوم عقد الاستئجار(تدفع لمرة واحدة)</label>
+                                    </div>
+                                </div>
 
                         <div class="col-2-3">
                             <div class="controls">
@@ -158,13 +169,19 @@
                     <h2 class="heading">بيانات المنشأة العقارية</h2>
                     <div class="grid">
                         <div class="col-1-4">
-                            <div class="controls">
+                                    <div class="controls">
+                                        <select name="quarter" class="floatLabel" onclick="console.log($(this).val())"
+                                            onchange="console.log('change is firing')"required>
+                                            <!--placeholder-->
+                                            @foreach ($quarters as $qu)
+                                                <option value="{{ $qu->id }}"> {{ $qu->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <label class="active" for="street"> الحي</label>
+                                    </div>
+                                </div>
 
-                                <input type="text" value="{{ $contract->quarter }}" name="quarter"
-                                    class="floatLabel"placeholder=""required>
-                                <label class="active" for="street">الحي</label>
-                            </div>
-                        </div>
+
                         <div class="col-1-4">
                             <div class="controls">
                                 <input type="text" id="realty_name"
@@ -302,7 +319,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-dark m-0" id="tableEstimate">
+                                    <table class="table table-center add-table-items" id="tableEstimate">
                                         <thead>
                                             <tr>
                                                 <th>رقم القسط</th>
@@ -376,6 +393,7 @@
             <!-- Content wrapper end -->
         </div>
     </div>
+    </div>
 @endsection
 @section('js')
     <script type="text/javascript">
@@ -384,19 +402,19 @@
                 var html = '';
                 html += '<tr>';
                 html +=
-                    '<td><input class="form-control" type="text" id="installmentNo" name="installmentNo[]"required></td>';
+                    '<td><input class="form-control" type="number" id="installmentNo" name="installmentNo[]"required></td>';
                 html +=
                     '<td><input class="form-control" type="date" id="installment_date" name="installment_date[]"required></td>';
                 html +=
-                    '<td><input class="form-control unit_price"  type="text" id="refrenceNo" name="refrenceNo[]"required></td>';
+                    '<td><input class="form-control unit_price"  type="number" id="refrenceNo" name="refrenceNo[]"required></td>';
                 html +=
                     '<td><input class="form-control unit_price"  type="date" id="payment_date" name="payment_date[]"required></td>';
                 html +=
-                    '<td><input class="form-control unit_price"  type="text" id="amount" name="amount[]"required></td>';
+                    '<td><input class="form-control unit_price"  type="number" id="amount" name="amount[]"required></td>';
                 html +=
                     '<td><input class="form-control unit_price"  type="text" id="payment_type" name="payment_type[]"required></td>';
                 html +=
-                    '<td><button type="button" class="btn btn-primary" id="remove"><i class="icon-remove"></button></td>';
+                    '<td><button type="button" class="btn btn-danger" id="remove"><i class="fas fa-plus-circle"></button></td>';
                 html += '</tr>';
                 $('tbody').append(html);
             });
@@ -418,5 +436,37 @@
     <script src="{{ URL::asset('assets/vendor/summernote/summernote-bs4.js') }}"></script>
 
     <script src="{{ URL::asset('assets/js/wizard.js') }}"></script>
+     <script>
+        function myFunction() {
+
+            var Amount_Commission = parseFloat(document.getElementById("Amount_Commission").value);
+            var Rate_VAT = parseFloat(document.getElementById("Rate_VAT").value);
+            var Value_VAT = parseFloat(document.getElementById("Value_VAT").value);
+
+            var Amount_Commission2 = Amount_Commission;
+
+
+            if (typeof Amount_Commission === 'undefined' || !Amount_Commission) {
+
+
+            } else {
+                var intResults = Amount_Commission2 * Rate_VAT / 100;
+
+                var intResults2 = parseFloat(intResults + Amount_Commission2);
+
+                sumq = parseFloat(intResults).toFixed(2);
+
+                sumt = parseFloat(intResults2).toFixed(2);
+
+                document.getElementById("Value_VAT").value = sumq;
+
+                document.getElementById("Total").value = sumt;
+
+            }
+
+
+        }
+   </script>
 
 @endsection
+

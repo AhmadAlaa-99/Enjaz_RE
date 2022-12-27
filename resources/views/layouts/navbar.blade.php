@@ -55,7 +55,7 @@
 											<a class="dropdown-item" href="{{route('contract_effictive') }}">العقود الجارية</a>
 										</li>
 										<li>
-											<a class="dropdown-item" href="{{route('contract_finished') }}">العقود المنهية</a>
+											<a class="dropdown-item" href="{{route('contract_effictive') }}">العقود المنهية</a>
 										</li>
                                     </ul>
 								</li>

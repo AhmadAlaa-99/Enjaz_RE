@@ -3,6 +3,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionTableSeeder extends Seeder
 {
@@ -13,27 +14,58 @@ class PermissionTableSeeder extends Seeder
 */
 public function run()
 {
+
+
 $permissions = [
-        'ادارة العقارات - الوسيط',
-
-    ' المستأجر -   البيانات الايجارية',
-    'الوسيط العقاري -  ادارة المستأجرين',
-
-
-    'طلبات الصيانة - الوسيط',
-    'الصيانة - المستأجر',
-
-    'حركة التأجير - الوسيط العقاري',
-
-    'الاعدادات  - الوسيط',
-    'الاعدادات المستأجر',
-    ' السجل المالي- الوسيط',
-
-
- 'ادارة الاستئجار - الوسيط'
+        'صلاحيات المستأجر',
+    'الاحصائيات',
+    'اضافة عقد استئجار',
+    'حركة الاستئجار',
+    'ادارة العقارات',
+    'ادارة المستأجرين',
+    'حركة التأجير',
+    'طلبات الصيانة',
+    'السجل المالي',
+    'اعدادات الحساب',
+    'اعدادات الادمن',
 
 ];
 
 foreach ($permissions as $permission) {
 Permission::create(['name' => $permission]);
-}}}
+}
+$role_admin = Role::create(['name' => 'Admin']);
+$role_tenant = Role::create(['name' => 'Tenant']);
+$role_lease = Role::create(['name' => 'Leases Mangement']);
+$role_contract = Role::create(['name' => 'Contracts Management']);
+
+$role_admin->syncPermissions(
+    'الاحصائيات',
+    'اضافة عقد استئجار',
+    'حركة الاستئجار',
+    'ادارة العقارات',
+    'ادارة المستأجرين',
+    'حركة التأجير',
+    'طلبات الصيانة',
+    'السجل المالي',
+    'اعدادات الادمن',);
+$role_tenant->syncPermissions(
+    'صلاحيات المستأجر',
+        'اعدادات الحساب',
+
+    );
+$role_lease->syncPermissions(
+    'ادارة العقارات',
+    'ادارة المستأجرين',
+    'حركة التأجير',
+    'اعدادات الحساب',
+);
+$role_contract->syncPermissions(
+    'اضافة عقد استئجار',
+    'حركة الاستئجار',
+    'اعدادات الحساب',
+);
+
+
+
+}}

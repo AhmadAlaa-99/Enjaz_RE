@@ -32,18 +32,20 @@ class LeasesController extends Controller
     public function details($id)
     {
         $lease=Lease::with('units','realties','financial')->where('id',$id)->first();
+        $commitments=Commitments::where('id',$lease->commitment_id)->first();
         $tenant=Tenant::where('id',$lease->tenant_id)->with('user')->first();
         $payments=Payments::where('lease_id',$lease->id)->latest()->paginate(5);
         $broker=User::first();
-        return view('Admin.Leases.leases_details',compact('lease','tenant','payments','broker'));
+        return view('Admin.Leases.leases_details',compact('lease','tenant','payments','broker','commitments'));
     }
     public function lease_un_details($id)
     {
         $lease=Lease::with('units','realties','financial')->where(['unit_id'=>$id])->first();
+        $commitments=Commitments::where('id',$lease->commitment_id)->first();
         $tenant=Tenant::where('id',$lease->tenant_id)->with('user')->first();
         $payments=Payments::where('lease_id',$lease->id)->latest()->paginate(5);
         $broker=User::first();
-        return view('Admin.Leases.leases_details',compact('lease','tenant','payments','broker'));
+        return view('Admin.Leases.leases_details',compact('lease','tenant','payments','broker','commitments'));
     }
 
 
@@ -79,10 +81,10 @@ public function leases_renew_store(Request $request)
             $realty=Realty::where('id',$request->realty_id)->first();
               $realty->update([
                 'total_leases'=>$realty->total_leases+=1,
+                                'total_proc'=>$realty->total_proc+=$request->rent_value,
+
             ]);
-            $realty->update([
-                'total_leases'=>$realty->total_leases,
-            ]);
+
             $lease=Lease::where('id',$request->lease_id)->first();
       //  return $lease;
             if($lease->lease_type=='سكني')
@@ -124,6 +126,7 @@ public function leases_renew_store(Request $request)
                 'tenant_id'=>$ten->id, //many to one
                 'unit_id'=>$request->unit_id,   //many to one
                 'docFile'=>$image_name,
+                'fee'=>$request->fee,
                 'lease_type'=>"تجاري",
 
             ]);
@@ -163,6 +166,7 @@ public function leases_renew_store(Request $request)
                 'st_rental_date'=>$request->st_rental_date,
                 'type'=>'renew',//$request->type_le,
                 'place'=>$request->place,
+                 'fee'=>$request->fee,
                 'end_rental_date'=>$request->end_rental_date,
                 'commitment_id'=>$commit->id, //one to one
                 'financial_id'=>$fin->id,  //one to one
@@ -210,6 +214,15 @@ public function leases_renew_store(Request $request)
 
     public function effictive()
     {
+        $query=DB::table('payments')->get();
+         $leases_payments=0;
+
+        foreach($query as $proc)
+        {   $leases_payments+=$proc->paid; }
+$finished=Lease::where('status','expired')->count();
+$effictive=Lease::where('status','active')->count();
+$rec_account=Lease::where('status','received')->count();
+
         $Lease=Lease::where('status','active')->with('tenants','realties','units','financial')
         /*->select('number','type','st_rental_date','end_rental_date')*/->latest()->paginate(5);
         /*
@@ -219,10 +232,12 @@ public function leases_renew_store(Request $request)
                 $next_payments_date=$date_next;
       }
       */
-        return view('Admin.Leases.effictive')->with([/*'next_payments_date'=>$next_payments_date,*/'leases'=>$Lease]);
+        return view('Admin.Leases.effictive')->with(['leases'=>$Lease,'finished'=>$finished,
+        'effictive'=>$effictive,'rec_account'=>$rec_account,'leases_payments'=>$leases_payments]);
     }
     public function payments_edit(Request $request,$id)
     {
+
         $payment=Payments::where('id',$id)->first();
         if($request->paid<=$payment->remain)
         {
@@ -247,6 +262,15 @@ public function leases_renew_store(Request $request)
 
     public function finished()
     {
+         $query=DB::table('payments')->get();
+         $leases_payments=0;
+
+        foreach($query as $proc)
+        {   $leases_payments+=$proc->paid; }
+
+        $finished=Lease::where('status','expired')->count();
+$effictive=Lease::where('status','active')->count();
+$rec_account=Lease::where('status','received')->count();
         $Lease=Lease::where('status','received')->orWhere('status','expired')->with('tenants','realties','units','financial')
         /*->select('number','type','st_rental_date','end_rental_date')*/->latest()->paginate(5);
         /*
@@ -256,7 +280,8 @@ public function leases_renew_store(Request $request)
                 $next_payments_date=$date_next;
       }
       */
-        return view('Admin.Leases.finished')->with([/*'next_payments_date'=>$next_payments_date,*/'leases'=>$Lease]);
+        return view('Admin.Leases.finished')->with([/*'next_payments_date'=>$next_payments_date,*/'leases'=>$Lease,'finished'=>$finished,
+        'effictive'=>$effictive,'rec_account'=>$rec_account,'leases_payments'=>$leases_payments]);
     }
 
     public function archive()
@@ -292,6 +317,7 @@ public function leases_renew_store(Request $request)
          $realty=Realty::where('id',$request->realty_id)->first();
               $realty->update([
                 'total_leases'=>$realty->total_leases+=1,
+                'total_proc'=>$realty->total_proc+=$request->rent_value,
             ]);
 
 
@@ -374,6 +400,7 @@ public function leases_renew_store(Request $request)
                 'st_rental_date'=>$request->st_rental_date,
                 'type'=>'new',//$request->type_le,
                 'place'=>$request->place,
+                 'fee'=>$request->fee,
                 'end_rental_date'=>$request->end_rental_date,
                 'commitment_id'=>$commit->id, //one to one
                 'financial_id'=>$fin->id,  //one to one
@@ -417,6 +444,7 @@ public function leases_renew_store(Request $request)
                 'st_rental_date'=>$request->st_rental_date,
                 'type'=>'new',//$request->type_le,
                 'place'=>$request->place,
+                 'fee'=>$request->fee,
                 'end_rental_date'=>$request->end_rental_date,
                 'commitment_id'=>$commit->id, //one to one
                 'financial_id'=>$fin->id,  //one to one
@@ -452,7 +480,7 @@ public function leases_renew_store(Request $request)
             }
             continue;
            }
-          
+
 
             $financaila->update(['num_rental_payments'=>Payments::where('lease_id',$les->id)->count(),]);
             return redirect()->route('effictive')->with([
@@ -543,6 +571,7 @@ public function leases_renew_store(Request $request)
                 'le_date'=>$request->le_date,
                 'st_rental_date'=>$request->st_rental_date,
                 'type'=>'new',//$request->type_le,
+                 'fee'=>$request->fee,
                 'place'=>$request->place,
                 'end_rental_date'=>$request->end_rental_date,
                 'commitment_id'=>$commit->id, //one to one
@@ -585,6 +614,7 @@ public function leases_renew_store(Request $request)
                 'st_rental_date'=>$request->st_rental_date,
                 'type'=>'new',//$request->type_le,
                 'place'=>$request->place,
+                 'fee'=>$request->fee,
                 'end_rental_date'=>$request->end_rental_date,
                 'commitment_id'=>$commit->id, //one to one
                 'financial_id'=>$fin->id,  //one to one

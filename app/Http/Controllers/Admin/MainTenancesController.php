@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Maintenance;
+use App\Models\Units;
 use Auth;
 use Carbon\Carbon;
 
@@ -39,6 +40,12 @@ response_date*/
             'response_date'=>Carbon::now(),
             'status'=>'completed',
         ]);
+        $mn=Maintenance::where('id',$id)->first();
+        $unit=Units::where('id',$mn->unit_id)->update([
+          'maint_cost'=>$mn->cost,
+        ]);
+
+
         //send notify TenantMail
       //  Notification::send($owner,new \App\Notifications\MaintAcceptNotify($user));
       return redirect()->route('accept_requests');
@@ -77,7 +84,7 @@ response_date*/
 
     public function wait_request() //0
     {
-         $maints=Maintenance::where('status','progress')->with('units')->latest()->paginate(5);
+         $maints=Maintenance::where('status','progress')->with('units')->latest()->paginate(1);
         return view('Admin.MainTenance.wait',compact('maints'));
     }
     public function maint_response(Request $request,$id)

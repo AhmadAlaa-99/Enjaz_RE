@@ -43,52 +43,63 @@ class testSeeders extends Seeder
         'mobile'=>'9664324324',
         'attribute_name'=>'aliAli',
        ]);
-       $owner=Owner::latest()->first();
-        Realty::create([
-                'realty_name'=>'عمارة الشفاء',
+
+       $faker = Factory::create();
+       for ($i = 0;$i<10; $i++)
+
+{
+     $owner=Owner::latest()->first();
+                 Realty::create([
+                'realty_name'=>$faker->sentence(mt_rand(1,2), true),
                 'owner_id'=>$owner->id,
-                  'quarter'=>'النسيم الغربي',
-                 'agency_name'=>'Ali mohammed',
-                'shopsNo'=>'3',
+                'quarter_id'=>'1',
+                 'agency_name'=>$faker->sentence(mt_rand(1,2), true),
+                'shopsNo'=>'0',
                 'agency_mobile'=>'09432432432',
                 'elevator'=>'نعم',
                  'parking'=>'لا',
                 'type'=>'building',
                 'use'=>'family',
-                'roles'=>'1',
-                'units'=> '3',
+                'roles'=>rand(1,3),
+                'units'=>rand(10,15),
                 'size'=> '43',
+                'address'=>'تقاطع شارع التخصصي مع شارع البنك الأهلي',
                 'advantages'=> 'not found',
                 ]);
 
                 $realty=Realty::latest()->first();
-                $image_name='doc-gf.jpg';
+                $image_name='unit.jpg';
                 contract::create([
                 'realty_id'=>$realty->id,
-                'contactNo'=>'435',
-                'start_date'=>'10/10/2020',
-                'end_date'=>'10/10/2022',
+                'contactNo'=>$faker->numerify('cn-###'),
+                'start_date'=>'2023/10/10',
+                'end_date'=>'2024/10/10',
                 'ejar_cost'=>'800000',
-                'tax'=>'15%',
-                'remain'=>'110000',
-                'ensollments_total'=>'10',
-                'tax_amount'=>'100000',
-                'rent_value'=>'110000',
+                'tax'=>'0',
+                'remain'=>'800000',
+                'ensollments_total'=>'5',
+                'tax_amount'=>'0',
+                'rent_value'=>'800000',
                 'contract_file'=>'1.pdf',
-                'type'=>'تجاري',
+                'type'=>'سكني',
                 'note'=>'not found',
                 'status'=>'جديد',
             ]);
             $contract=contract::latest()->first();
+                for ($n = 0; $n <20; $n++)
+
+        {
             ensollments::create([
                   'contract_id'=>$contract->id,
-                  'installmentNo'=>'42423',
+                  'installmentNo'=>'0',
                   'installment_date'=>'2020/10/10',
-                  'payment_date'=>'11/11/2020',
-                    'amount'=>'3243',
+                  'payment_date'=>'2022/10/10',
+                   'amount'=>'3243',
                    'payment_type'=>'cash',
-                   'refrenceNo'=>'3424',
+                  'refrenceNo'=>$faker->numerify('cn-'.$contract->id.'-###'),
             ]);
+        }
+        }
             $faker = Factory::create();
             ////////////////////////////////////End Contract///////////////////////////////////////
 /*
@@ -116,10 +127,12 @@ for ($i = 0; $i <5; $i++)
    //     $unit_type=['شقة','محل تجاري'];
        $furnished=['unfurnished', 'newfn','usedfn'];
      $kitshen=['yes','no'];
-
+     $type=['فيلا', 'شقة','شقة ثنائية الدور','شقة صغيرة','ملحق','محل تجاري'];
+for ($i = 0; $i <10; $i++)
+{
             Units::create([
                 'realty_id'=>'1',
-                'type'=>'شقة',
+                'type'=>Arr::random($type),
                 'role_number'=>'1',
                 'number'=>$faker->numerify('kh-###'),
                 'size'=>'80',
@@ -128,39 +141,24 @@ for ($i = 0; $i <5; $i++)
                 'condition_units'=> '2',
                 'condition_type'=> 'شباك',
                 'rooms'=>'3',
+                'img'=>'unit.jpg',
                 'details'=>'not found',
                 'bathrooms'=>'2',
+                'rent_cost'=>'25000',
+                'main_show'=>'احجز شقتك الان واستفد من الخصومات'
                 //'status'=>$request->status,
                 //start_date
                 //end_date
                 //name_tenant
             ]);
-              Units::create([
-                'realty_id'=>'1',
-                'type'=>'محل تجاري',
-                'role_number'=>rand(1,2),
-                'number'=>$faker->numerify('kh-###'),
-                'size'=>'80',
-                'furnished_mode'=>Arr::random($furnished),
-                'kitchen_Cabinets'=>Arr::random($kitshen),
-                'condition_units'=> '2',
-                'condition_type'=> 'شباك',
-                'rooms'=>'3',
-                'details'=>'not found',
-                'bathrooms'=>'2',
-                //'status'=>$request->status,
-                //start_date
-                //end_date
-                //name_tenant
-            ]);
-
+        }
+/*
 $name = $faker->sentence(mt_rand(3, 6), true);
 $id_type=['civilian','stay'];
 $gender=['male','female'];
-
-for ($i = 0; $i <2; $i++)
+for ($i = 0; $i <5; $i++)
 {
- $user= User::create([
+    $user= User::create([
     'name'=>$faker->sentence(mt_rand(1,2), true),
     'nationalitie_id'=>rand(1,10),
     'ID_type'=>Arr::random($id_type),
@@ -170,7 +168,7 @@ for ($i = 0; $i <2; $i++)
     'telephone'=>$faker->numerify('########'),
     'email'=>$faker->email,
     'role_name'=>'Tenant',
-    'password'=>bcrypt('21412123'),
+    'password'=>bcrypt('12345678'),
 ]);
             $role=Role::where('name','Tenant')->first();
             $user->assignRole([$role->id]);
@@ -283,7 +281,7 @@ for ($i = 0; $i <2; $i++)
                 'remain'=>'12000',
             ]);
             Units::where('id','2')->update(['status'=>'rented']);
-
+*/
 
 //////////////////////////////////////////////////Leases//////////////////////////////////////////////////////
 

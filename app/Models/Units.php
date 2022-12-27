@@ -24,16 +24,10 @@ class Units extends Model
     }
     public function leases()
     {
-
         return $this->hasMany(Lease::class,'unit_id','id');
     }
-
-
     public function realties()
     {
         return $this->belongsTo(Realty::class,'realty_id','id');
     }
-
-
-
 }

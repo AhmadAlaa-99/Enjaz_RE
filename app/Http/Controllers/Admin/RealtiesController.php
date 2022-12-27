@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Realty;
 use App\Models\Units;
 use App\Models\User;
+use App\Models\quarter;
 
 use Illuminate\Http\Request;
 
@@ -16,6 +17,16 @@ class RealtiesController extends Controller
 
     public function index()
     {
+
+
+
+
+$count_realties = Realty::count();
+$count_units=Units::count();
+$count_units_added=Units::count();
+$count_units_rented=Units::where('status','rented')->count();
+
+
 
         $realties = Realty::latest()->paginate(5);
         if($realties->count()>0)
@@ -30,7 +41,14 @@ class RealtiesController extends Controller
     {
         $units_tn='0';
     }
-        return view('Admin.Realties.index',compact('realties','units_tn'));
+        return view('Admin.Realties.index')->with([
+                  'realties'=>$realties,
+                  'units_tn'=>$units_tn,
+                  'count_realties'=>$count_realties,
+                  'count_units'=>$count_units,
+                  'count_units_added'=>$count_units_added,
+                  'count_units_rented'=>$count_units_rented,
+        ]);
     }
 
 
@@ -76,22 +94,33 @@ class RealtiesController extends Controller
      }
      public function edit($id)
      {
+        $quarters=quarter::where('region_id','1')->get();
         $realty = Realty::where('id',$id)->first();
-        return view('Admin.Realties.edit',compact('realty'));
+        return view('Admin.Realties.edit')->with([
+            'quarters'=>$quarters,
+            'realty'=>$realty,
+        ]);
 
      }
      public function update(Request $request,$id)
      {
         $Realty=Realty::where('id',$id)->first();
+
         $Realty->update([
-            'realty_name'=> $request->realty_name,
-            'quarter'=> $request->quarter,
-            'type'=> $request->type,
-            'use'=> $request->use,
-            'roles'=> $request->roles,
-            'units'=> $request->units,
-            'size'=> $request->size,
-            'advantages'=> $request->advantages,
+               'realty_name'=>$request->realty_name,
+                'quarter_id'=>$request->quarter,
+                'address'=>$request->address,
+                'agency_name'=>$request->agency_name,
+                'shopsNo'=>$request->shopsNo,
+                'agency_mobile'=>$request->agency_mobile,
+                  'elevator'=>$request->elevator,
+                 'parking'=>$request->parking,
+                'type'=> $request->type,
+                'use'=> $request->use,
+                'roles'=> $request->roles,
+                'units'=> $request->units,
+                'size'=> $request->size,
+                'advantages'=> $request->advantages,
         ]);
         return redirect()->route('realties.index')->with([
             'message' => 'Realty edited successfully',

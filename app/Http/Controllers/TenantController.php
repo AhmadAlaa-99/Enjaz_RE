@@ -10,9 +10,39 @@ use App\Models\User;
 use App\Models\Maintenance;
 use Carbon\Carbon;
 use App\Models\Lease;
+use App\Models\commitments;
 use App\Models\Payments;
 class TenantController extends Controller
 {
+
+
+
+  public function settings()
+    {
+        $user=Auth::user();
+
+         return view('Tenant.settings.account',compact('user'));
+    }
+      public function privacy()
+    {
+
+         return view('Tenant.settings.privacy');
+    }
+      public function change_password()
+    {
+        $user=Auth::user();
+        $this->validate($request, [
+        'current_password'=>'required',
+        'new_password' => 'required|',
+        'confirm_password' => 'required|same:new_password',
+]);
+$input = $request->all();
+$input['new_password'] = Hash::make($input['new_password']);
+$user->update(['password'=>$input['new_password']]);
+         return view('Tenant.settings.privacy')->with('success','تم تغيير كلمة السر بنجاح');
+    }
+
+
     public function leases()
     {
         $tenant=Tenant::where('user_id',Auth::user()->id)->first();
@@ -25,10 +55,11 @@ class TenantController extends Controller
     {
         $tenant=Tenant::where('user_id',Auth::user()->id)->first();
         $lease=Lease::where('tenant_id',$tenant->id)->with('units','realties','financial')->where('id',$id)->first();
+        $commitments=Commitments::where('id',$lease->commitment_id)->first();
         $tenant=Tenant::where('id',$tenant->id)->with('user')->first();
         $payments=Payments::where('lease_id',$lease->id)->latest()->paginate(5);
         $broker=User::first();
-        return view('Tenant.leases_details',compact('lease','tenant','payments','broker'));
+        return view('Tenant.leases_details',compact('lease','tenant','payments','broker','commitments'));
     }
 
 
@@ -51,10 +82,12 @@ class TenantController extends Controller
             'desc'=>$request->desc,
             'tenant_id'=>$tenant->id,
             'unit_id'=>$tenant->units->id,
+            'type'=>$request->type,
 
-            //'notes'=>$request->notes,
+        'notes'=>'-',
             //'status'=> default(progress)
-            //'cost'=>$request->cost,
+            'cost'=>'0',
+            'total'=>'0',
             'request_date'=>Carbon::now(),
            'response_date'=>Carbon::now(),
         ]);

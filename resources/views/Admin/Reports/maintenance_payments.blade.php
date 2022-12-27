@@ -1,105 +1,103 @@
 @extends('layouts.master')
 @section('css')
-	<!-- Data Tables -->
-    <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4-custom.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('assets/vendor/datatables/buttons.bs.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet"href="{{ URL::asset('assets/plugins/datatables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}">
 @endsection
 @section('title')
-مدفوعات الصيانة الكلية للوحدات الايجارية
+    مدفوعات الصيانة
 @stop
 @section('content')
-<div class="page-header">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"> السجل المالي  </li>
-        <li class="breadcrumb-item active">مدفوعات الصيانة الكلية للوحدات الايجارية</li>
-    </ol>
+    <div class="page-wrapper">
+        <div class="content container-fluid">
 
-    <ul class="app-actions">
-       <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
-                <span id="clock"></span>
-            </a>
-        </li>
-    </ul>
-</div>
-	<!-- Content wrapper start -->
-    <div class="content-wrapper">
+            <div class="page-header">
+                <div class="card invoices-tabs-card">
+                    <div class="card-body card-body pt-0 pb-0">
+                        <div class="invoices-main-tabs">
+                            <div class="row align-items-center">
+                                <div class="col-lg-8 col-md-8">
+                                    <div class="invoices-tabs">
+                                        <ul>
+                                            <li><a href="{{ url('/' . ($page = 'Admin/wait_request')) }}">الطلبات
+                                                    الجديدة</a></li>
+                                            <li><a href="{{ url('/' . ($page = 'Admin/accept_requests')) }}">الطلبات
+                                                    المنجزة</a></li>
+                                            <li><a href="{{ url('/' . ($page = 'Admin/maintenance_payments')) }}"
+                                                    class="active">مدفوعات الصيانة</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="invoices-settings-btn">
+                                        <a href="invoices-settings.html" class="invoices-settings-icon">
+                                        </a>
 
-<!-- Row start -->
-<div class="row gutters">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-
-
-
-        <div class="table-container">
-            <div class="t-header">مدفوعات الصيانة الكلية للوحدات الايجارية</div>
-            <div class="table-responsive">
-                <table id="copy-print-csv" class="table custom-table">
-                    <thead>
-                        <tr>
-                                                      <th>الرقم التسلسلي</th>
-
-
-                          <th>رقم الوحدة</th>
-                          <th> اسم المنشأة</th>
-                          <th>التكلفة الاجمالية للصيانة</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @php
-                                $i = 0;
-                                @endphp
-                                @forelse ($payments as $payment)
-                                    @php
-                                    $i++
-                                    @endphp
-                         <tr>
-                          <td>{{$i}}</td>
-                          <td>{{$payment->units->number}}</td>
-                          <td>{{$payment->units->realties->realty_name}}</td>
-                          <td>{{$payment->total}}</td>
-                        </tr>
-                        @empty
-                        @endforelse  </tbody>   </table>
-								<div class="d-flex justify-content-center">
-			                         {!!$payments->links()!!}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="copy-print-csv" class="table custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th>الرقم التسلسلي</th>
 
 
-                   
+                                                <th>رقم الوحدة</th>
+                                                <th> اسم المنشأة</th>
+                                                <th>التكلفة الاجمالية للصيانة</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $i = 0;
+                                            @endphp
+                                            @forelse ($units as $unit)
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                                <tr>
+                                                    <td>{{ $i }}</td>
+                                                    <td>{{ $unit->number }}</td>
+                                                    <td>{{ $unit->realties->realty_name }}</td>
+                                                    <td>{{ $unit->maint_cost }}</td>
+                                                </tr>
+                                            @empty
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                    <div class="d-flex justify-content-center">
+                                        {!! $units->links() !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-
-
-    </div>
-
-</div>
-<!-- Row end -->
-
-</div>
-<!-- Content wrapper end -->
-@endsection
-@section('js')
-	<!-- Data Tables -->
-    <script src="{{URL::asset('assets/vendor/datatables/dataTables.min.js')}}"></script>
-    <script src="{{URL::asset('assets/vendor/datatables/dataTables.bootstrap.min.js')}}"></script>
+    @endsection
+    @section('js')
+        <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/datatables/datatables.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/moment/moment.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
 
 
 
-		<!-- Custom Data tables -->
-        <script src="{{URL::asset('assets/vendor/datatables/custom/custom-datatables.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/custom/fixedHeader.js')}}"></script>
 
 
-		<!-- Download / CSV / Copy / Print -->
-        <script src="{{URL::asset('assets/vendor/datatables/buttons.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/jszip.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/pdfmake.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/vfs_fonts.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/html5.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/buttons.print.min.js')}}"></script>
-@endsection
+
+
+    @endsection

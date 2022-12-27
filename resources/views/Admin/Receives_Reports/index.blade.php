@@ -1,127 +1,242 @@
 @extends('layouts.master')
 @section('css')
-	<!-- Data Tables -->
-    <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4-custom.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('assets/vendor/datatables/buttons.bs.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet"href="{{ URL::asset('assets/plugins/datatables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}">
 @endsection
 @section('title')
- تقارير التسليم
+    تقارير تسليم العقود
 @stop
 @section('content')
-<div class="page-header">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">ادارة العقارات</li>
-        <li class="breadcrumb-item active"> تقارير تسليم الوحدات الايجارية </li>
-    </ol>
 
-    <ul class="app-actions">
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
-                <span id="clock"></span>
-            </a>
-        </li>
-    </ul>
-</div>
-	<!-- Content wrapper start -->
-    <div class="content-wrapper">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
 
-<!-- Row start -->
-<div class="row gutters">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <div class="card invoices-tabs-card">
+                    <div class="card-body card-body pt-0 pb-0">
+                        <div class="invoices-main-tabs">
+                            <div class="row align-items-center">
+                                <div class="col-lg-8 col-md-8">
+                                    <div class="invoices-tabs">
+                                        <ul>
+                                            <li><a href="{{ url('/' . ($page = 'Admin/effictive')) }}">العقود الجارية</a>
+                                            </li>
+                                            <li><a href="{{ url('/' . ($page = 'Admin/finished')) }}">العقود المنتهية</a>
+                                            </li>
+                                            <li><a href="{{ url('/' . ($page = 'Admin/receives_reports')) }}"
+                                                    class="active">تقارير التسليم</a></li>
 
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="invoices-settings-btn">
+                                        <a href="invoices-settings.html" class="invoices-settings-icon">
+                                        </a>
 
-
-        <div class="table-container">
-            <div class="t-header">تقارير التسليم</div>
-            <div class="table-responsive">
-                <table id="copy-print-csv" class="table custom-table">
-                    <thead>
-                        <tr>
-                        <th><a href="">الرقم التسلسلي </a></th>
-                          <th><a href="">رقم الوحدة </a></th>
-                          <th> <a href="">رقم العقد</a> </th>
-                          <th>تاريخ الاستلام</th>
-                          <th> تصفية الفواتير </th>
-
-
-                          <th>حالة الوحدة ( الصيانة)</th>
-                          <th>ملاحظات</th>
-
-                          <th>العمليات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @php
-                                $i = 0;
-                                @endphp
-                                @forelse ($receives as $receive)
-                                    @php
-                                    $i++
-                                    @endphp
-
-                        <tr>
-                            <td>{{$i}}</td>
-                          <td><span class="badge badge-danger">{{$receive->lease->reco_number}}</td>
-                          <td>{{$receive->unit->number}}</td>
-                          <td>{{$receive->receive_date}}</td>
-                          <td>{{$receive->paymennts_status}}</td>
-                          <td>{{$receive->maint_status}}</td>
-                          <td>{{$receive->notes}}</td>
-                          <td>
-													<div class="td-actions">
-
-                                                        <a href="{{route('receives_reports.edit',$receive->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="Edit">
-															<i class="icon-edit"></i>
-														</a>
-														<a href="{{route('receive.destroy',$receive->id)}}"  class="icon green" data-toggle="tooltip" data-placement="top" title="Delete">
-															<i class="icon-delete"></i>
-														</a>
-                                                        <a href="{{route('receive.details',$receive->id)}}"  class="icon green" data-toggle="tooltip" data-placement="top" title="Print">
-															<i class="icon-print"></i>
-														</a>
-
-
-													</div>
-												</td>
-                        </tr>
-                        @empty
-                        @endforelse  </tbody>   </table>
-								<div class="d-flex justify-content-center">
-			                         {!!$receives->links()!!}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dash-widget-header">
+                                    <span class="dash-widget-icon bg-4">
+                                        <i class="far fa-file-alt"></i>
+                                    </span>
+                                    <div class="dash-count">
+                                        <div class="dash-title">العقود الجارية</div>
+                                        <div class="dash-counts">
+                                            <p>{{ $effictive }}</p>
+                                        </div>
+                                    </div>
 
+                                </div>
+                                <div class="progress progress-sm mt-3">
+                                    <div class="progress-bar bg-8" role="progressbar" style="width: 45%" aria-valuenow="75"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i
+                                            class="fas fa-check-circle"></i></span><a
+                                        href="{{ route('contract_effictive') }}"> حركة التأجير</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dash-widget-header">
+                                    <span class="dash-widget-icon bg-3">
+                                        <i class="fas fa-file-alt"></i>
+                                    </span>
+                                    <div class="dash-count">
+                                        <div class="dash-title"> العقود المنتهية</div>
+                                        <div class="dash-counts">
+                                            <p>{{ $finished }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress progress-sm mt-3">
+                                    <div class="progress-bar bg-7" role="progressbar" style="width: 85%" aria-valuenow="75"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i
+                                            class="fas fa-check-circle"></i></span><a
+                                        href="{{ url('/' . ($page = 'Admin/effictive')) }}"> حركة التأجير </a></p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dash-widget-header">
+                                    <span class="dash-widget-icon bg-2">
+                                        <i class="fas fa-home"></i>
+                                    </span>
+                                    <div class="dash-count">
+                                        <div class="dash-title">تقارير التسليم</div>
+                                        <div class="dash-counts">
+                                            <p>{{ $rec_account }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress progress-sm mt-3">
+                                    <div class="progress-bar bg-6" role="progressbar" style="width: 65%" aria-valuenow="75"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i
+                                            class="fas fa-check-circle"></i></span><a
+                                        href="{{ url('/' . ($page = 'Admin/realties')) }}">حركة التأجير</a></p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dash-widget-header">
+                                    <span class="dash-widget-icon bg-5">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </span>
+                                    <div class="dash-count">
+                                        <div class="dash-title">مدفوعات العقود</div>
+                                        <div class="dash-counts">
+                                            <p>{{ $leases_payments }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress progress-sm mt-3">
+                                    <div class="progress-bar bg-5" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i
+                                            class="fas fa-check-circle"></i></span><a
+                                        href="{{ url('/' . ($page = 'Admin/proceeds')) }}">للمزيد انتقل الى السجل
+                                        المالي</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="copy-print-csv" class="table custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th>الرقم التسلسلي </a></th>
+                                                <th>رقم الوحدة </a></th>
+                                                <th>رقم العقد</a> </th>
+                                                <th>تاريخ الاستلام</th>
+                                                <th> تصفية الفواتير </th>
+
+
+                                                <th>حالة الوحدة ( الصيانة)</th>
+                                                <th>ملاحظات</th>
+
+                                                <th>العمليات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $i = 0;
+                                            @endphp
+                                            @forelse ($receives as $receive)
+                                                @php
+                                                    $i++;
+                                                @endphp
+
+                                                <tr>
+                                                    <td>{{ $i }}</td>
+                                                    <td><span class="badge badge-danger">{{ $receive->lease->reco_number }}
+                                                    </td>
+                                                    <td><span class="badge badge-danger">{{ $receive->unit->number }}</td>
+                                                    <td><span class="badge badge-success">{{ $receive->receive_date }}</td>
+                                                    <td><span class="badge badge-success">{{ $receive->paymennts_status }}
+                                                    </td>
+                                                    <td><span class="badge badge-primary">{{ $receive->maint_status }}</td>
+                                                    <td><span class="badge badge-primary">{{ $receive->notes }}</td>
+                                                    <td class="text-end">
+                                                        <div class="dropdown dropdown-action">
+                                                            <a href="#" class="action-icon dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                                    class="fas fa-ellipsis-v"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+
+
+
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('receives_reports.edit', $receive->id) }}"><i
+                                                                        class="far fa-edit me-2"></i>
+                                                                    تعديل </a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('receive.destroy', $receive->id) }}"><i
+                                                                        class="far fa-trash-alt me-2"></i> حذف</a>
+
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+
+
+
+                                                </tr>
+                                            @empty
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                    <div class="d-flex justify-content-center">
+                                        {!! $receives->links() !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    @endsection
+    @section('js')
+        <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/datatables/datatables.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/moment/moment.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
 
 
 
-    </div>
-
-</div>
-<!-- Row end -->
-
-</div>
-<!-- Content wrapper end -->
-@endsection
-@section('js')
-	<!-- Data Tables -->
-    <script src="{{URL::asset('assets/vendor/datatables/dataTables.min.js')}}"></script>
-    <script src="{{URL::asset('assets/vendor/datatables/dataTables.bootstrap.min.js')}}"></script>
 
 
 
-		<!-- Custom Data tables -->
-        <script src="{{URL::asset('assets/vendor/datatables/custom/custom-datatables.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/custom/fixedHeader.js')}}"></script>
 
-
-		<!-- Download / CSV / Copy / Print -->
-        <script src="{{URL::asset('assets/vendor/datatables/buttons.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/jszip.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/pdfmake.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/vfs_fonts.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/html5.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/buttons.print.min.js')}}"></script>
-@endsection
+    @endsection

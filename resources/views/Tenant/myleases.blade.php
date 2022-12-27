@@ -1,121 +1,106 @@
 @extends('layouts.master')
 @section('css')
-	<!-- Data Tables -->
-    <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4-custom.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('assets/vendor/datatables/buttons.bs.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet"href="{{ URL::asset('assets/plugins/datatables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}">
 @endsection
 @section('title')
-بيانات العقد
+عقود الاجار
 @stop
 @section('content')
-<div class="page-header">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">ادارة العقود </li>
-        <li class="breadcrumb-item active">  بيانات العقد  </li>
-    </ol>
+    <div class="page-wrapper">
+        <div class="content container-fluid">
 
-    <ul class="app-actions">
-        <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
-                <span id="clock"></span>
-            </a>
-        </li>
-    </ul>
-</div>
-	<!-- Content wrapper start -->
-    <div class="content-wrapper">
+            <div class="page-header">
+                <div class="card invoices-tabs-card">
+                    <div class="card-body card-body pt-0 pb-0">
+                        <div class="invoices-main-tabs">
+                            <div class="row align-items-center">
+                                <div class="col-lg-8 col-md-8">
 
-<!-- Row start -->
-<div class="row gutters">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="copy-print-csv" class="table custom-table">
+                                          <thead>
+                                <tr>
+                                    <th>الرقم النسلسلي </th>
+                                    <th>رقم العقد </th>
+                                    <th>اسم المستأجر</th>
+                                    <th>اسم المنشأة</th>
+                                    <th>رقم الوحدة</th>
+                                    <th>حالة العقد</th>
+                                    <th>نوع العقد</th>
+                                    <th>تاريخ بداية العقد</th>
+                                    <th>تاريخ نهاية العقد</th>
+                                    <th> الكلفة الاجمالية للعقد</th>
+                                    <th>تفاصيل العقد </th>
+                                    <th> الحالة</th>
 
-        <div class="table-container">
-            <div class="t-header"> بيانات العقد</div>
-            <div class="table-responsive">
-                <table id="copy-print-csv" class="table custom-table">
-                    <thead>
-                        <tr>
-                                                      <th>الرقم النسلسلي </th>
+                                </tr>
+                            </thead>
 
-                          <th>رقم العقد </th>
-                          <th>اسم المستأجر</th>
-                          <th>اسم المنشأة</th>
-                          <th>رقم الوحدة</th>
-                          <th>حالة العقد</th>
-                                                    <th>نوع العقد</th>
-
-                          <th>تاريخ بداية العقد</th>
-                          <th>تاريخ نهاية العقد</th>
-                          <th> الكلفة الاجمالية للعقد</th>
-                          <th>تفاصيل العقد </th>
-                          <th> الحالة</th>
-
-                        </tr>
-                    </thead>
-
-                     <tbody>
-                          @php
-                                $i = 0;
+                            <tbody>
+                                @php
+                                    $i = 0;
                                 @endphp
                                 @forelse ($leases as $lease)
                                     @php
-                                    $i++
+                                        $i++;
                                     @endphp
 
-                        <tr>
-                          <td>{{$i}}</td>
-                          <td>{{$lease->reco_number}}</td>
-                          <td>{{$lease->tenants->user->name}}</td>
-                          <td>{{$lease->realties->realty_name}}</td>
-                          <td>{{$lease->units->number}}</td>
-                          <td>{{$lease->type}}</td>
-                                                                                                                                  <td>{{$lease->lease_type}}</td>
+                                    <tr>
+                                        <td>{{ $i }}</td>
+                                        <td><span class="badge bg-success-light">{{ $lease->reco_number }}</td>
+                                        <td><span class="badge bg-success-light">{{ $lease->tenants->user->name }}</td>
+                                        <td><span class="badge bg-success-dark">{{ $lease->realties->realty_name }}</td>
+                                        <td><span class="badge bg-success-dark">{{ $lease->units->number }}</td>
+                                        <td><span class="badge bg-danger-dark">{{ $lease->type }}</td>
+                                        <td><span class="badge bg-danger-dark">{{ $lease->lease_type }}</td>
 
-                          <td>{{$lease->st_rental_date}}</td>
-                          <td>{{$lease->end_rental_date}}</td>
-                          <td>{{$lease->financial->rent_value}}</td>
-                          <td><span class="badge badge-success"><a href="{{route('tn_lease.details',$lease->id) }}">معاينة</a></td>
-                          <td><span class="badge badge-danger">{{$lease->status}}</td>
-                        </tr>
-                        @empty
-                        @endforelse  </tbody>   </table>
-								<div class="d-flex justify-content-center">
-			                         {!!$leases->links()!!}
+                                        <td><span class="badge bg-danger-light">{{ $lease->st_rental_date }}</td>
+                                        <td><span class="badge bg-danger-light">{{ $lease->end_rental_date }}</td>
+                                        <td><span class="badge bg-danger-dark">{{ $lease->financial->rent_value }}</td>
+                                        <td><span class="badge badge-outline-info"><a
+                                                    href="{{ route('tn_lease.details', $lease->id) }}">معاينة</a></td>
+                                        <td><span class="badge bg-danger-dark">{{ $lease->status }}</td>
+                                    </tr>
+                                @empty
+                                @endforelse
+                            </tbody>
+                        </table>
+                        <div class="d-flex justify-content-center">
+                            {!! $leases->links() !!}
                         </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-
-
-    </div>
-
-</div>
-<!-- Row end -->
-
-</div>
-<!-- Content wrapper end -->
-@endsection
-@section('js')
-	<!-- Data Tables -->
-    <script src="{{URL::asset('assets/vendor/datatables/dataTables.min.js')}}"></script>
-    <script src="{{URL::asset('assets/vendor/datatables/dataTables.bootstrap.min.js')}}"></script>
+    @endsection
+    @section('js')
+        <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/datatables/datatables.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/moment/moment.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
 
 
 
-		<!-- Custom Data tables -->
-        <script src="{{URL::asset('assets/vendor/datatables/custom/custom-datatables.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/custom/fixedHeader.js')}}"></script>
 
 
-		<!-- Download / CSV / Copy / Print -->
-        <script src="{{URL::asset('assets/vendor/datatables/buttons.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/jszip.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/pdfmake.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/vfs_fonts.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/html5.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/buttons.print.min.js')}}"></script>
-@endsection
+
+
+    @endsection

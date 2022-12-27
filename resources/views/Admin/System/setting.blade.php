@@ -1,127 +1,106 @@
 @extends('layouts.master')
 @section('css')
 
-    <link href="{{ URL::asset('assets/vendor/datepicker/css/classic.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/vendor/datepicker/css/classic.date.css') }}" rel="stylesheet">
-
-
 @endsection
 @section('title')
-    اعدادات الحساب
+
 @stop
 @section('content')
-    <div class="page-header">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"> الاعدادات </li>
-            <li class="breadcrumb-item active">اعدادات الحساب</li>
-        </ol>
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row justify-content-lg-center">
+                <div class="col-lg-10">
 
-        <ul class="app-actions">
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
-                    <span id="clock"></span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- Content wrapper start -->
-    <div class="content-wrapper">
 
-        <!-- Row start -->
-        <div class="row gutters">
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="account-settings">
-                            <div class="user-profile">
+                    <div class="profile-cover">
+                        <div class="profile-cover-wrap">
+                            <img class="profile-cover-img" src="assets/img/profiles/avatar-02.jpg" alt="Profile Cover">
 
-                                <h5 class="user-name">{{ Auth::user()->name }} </h5>
-                                <h6 class="user-email">{{ Auth::user()->email }}</h6>
-                                <h6 class="user-email">{{ Auth::user()->role_name }}</h6>
+
+
+                        </div>
+                    </div>
+                    <div class="text-center mb-5">
+                        <label class="avatar avatar-xxl profile-cover-avatar" for="avatar_upload">
+                            <img class="avatar-img" src="assets/img/profiles/avatar-02.jpg" alt="Profile Image">
+                            <input type="file" id="avatar_upload">
+
+                        </label>
+                        <h2> <i class="fas fa-certificate text-primary small" data-toggle="tooltip" data-placement="top"
+                                title="" data-original-title="Verified"></i></h2>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <i class="far fa-building"></i> <span>Hafner Pvt Ltd.</span>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fas fa-map-marker-alt"></i> West Virginia, US
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="far fa-calendar-alt"></i> <span>Joined November 2017</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title d-flex justify-content-between">
+                                        <span>change password</span>
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="py-0">
+                                            <h6>About</h6>
+                                        </li>
+                                        <li>
+
+                                        </li>
+                                        <li>
+                                            Hafner Pvt Ltd.
+                                        </li>
+                                        <li class="pt-2 pb-0">
+                                            <h6>Contacts</h6>
+                                        </li>
+                                        <li>
+                                            <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                                data-cfemail="72111a13001e17011a13141c170032170a131f021e175c111d1f">[email&#160;protected]</a>
+                                        </li>
+                                        <li>
+                                            +1 (304) 499-13-66
+                                        </li>
+                                        <li class="pt-2 pb-0">
+                                            <h6>Address</h6>
+                                        </li>
+                                        <li>
+                                            4663 Agriculture Lane,<br>
+                                            Miami,<br>
+                                            Florida - 33165,<br>
+                                            United States.
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="setting-links">
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Profile</h5>
+                                </div>
+                                <div class="card-body card-body-height">
 
-
-
-
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <div class="card-title">Update Profile</div>
-                    </div>
-                    <div class="card-body">
-                        <form action="{{ route('Account_edit') }}" method="post"
-                            enctype="multipart/form-data"autocomplete="off">
-                            @csrf
-
-                            <div class="row gutters">
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="form-group">
-                                        <label class="active" for="fullName">Full Name</label>
-                                        <input type="text" class="form-control"name="name" value="{{ $user->name }}"
-                                            placeholder="Enter full name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="active" for="eMail">Email</label>
-                                        <input type="email" class="form-control" name="email"
-                                            value="{{ $user->email }}" placeholder="Enter email ID">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="active" for="phone">Phone</label>
-                                        <input type="text" class="form-control" name="phone"value="{{ $user->phone }}"
-                                            placeholder="Enter phone number">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="active" for="phone">Telephone</label>
-                                        <input type="text" class="form-control"
-                                            name="telephone"value="{{ $user->telephone }}" placeholder="Enter phone number">
-                                    </div>
-
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="form-group">
-                                        <label class="active" for="addRess">nationality</label>
-                                        <input type="text" class="form-control" name="nationality"
-                                            value="{{ $user->Nationality->Name }}" placeholder="Enter Address">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="active" for="ciTy">ID_type</label>
-                                        <input type="name" class="form-control"
-                                            name="ID_type"value="{{ $user->ID_type }}" placeholder="Enter City">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="active" for="sTate">ID_num</label>
-                                        <input type="text" class="form-control" name="ID_num"
-                                            value="{{ $user->ID_num }}" placeholder="Enter State">
-                                    </div>
-
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <div class="text-right">
-
-                                        <button type="submit" value="submit" name="submit" class="btn btn-success">حفظ
-                                            البيانات</button>
-                                    </div>
-                                </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-    <!-- Row end -->
 
-    </div>
-    <!-- Content wrapper end -->
+
 @endsection
 @section('js')
 
-    <script src="{{ URL::asset('assets/vendor/datepicker/js/picker.js') }}"></script>
-    <script src="{{ URL::asset('assets/vendor/datepicker/js/picker.date.js') }}"></script>
-    <script src="{{ URL::asset('assets/datepicker/js/custom-picker.js') }}"></script>
 @endsection

@@ -21,28 +21,29 @@ class ReportsController extends Controller
 
     public function maintenance_payments()
     {
-         $payments=Maintenance::where('status','completed')->with('units')->latest()->paginate(5);
-         return view('Admin.Reports.maintenance_payments',compact('payments'));
+        $units=Units::where('maint_cost','!=','0')->paginate('5');
+         return view('Admin.Reports.maintenance_payments',compact('units'));
     }
 
     public function receivables()
     {
-        $query=DB::table('payments')->join('leases','payments.lease_id','leases.id')->paginate('5');
-         $all_receivables=0;
-
-        foreach($query as $rec)
-        {
-              $all_receivables+=$rec->remain;
-        }
-
+       $query=DB::table('payments')->get();
+         $all_procced=0;
+         $rc=0;
+         $cnt=0;
+        foreach($query as $proc)
+        {   $all_procced+=$proc->paid;  $cnt+=$proc->remain; }
+        $contracts=DB::table('contracts')->get();
+         foreach($contracts as $con){  $rc+=$con->rent_value;}
+         $receivables=DB::table('payments')->join('leases','payments.lease_id','leases.id')->paginate(5);
         return view('Admin.System.receivables')->with([
-            'receivables'=>$query,
-            'all_receivables'=>$all_receivables,
+            'all_procced'=>$all_procced,'rc'=>$rc,'cnt'=>$cnt,'receivables'=>$receivables,
         ]);
     }
 
     public function receivables_date(Request $request)
     {
+
 
         $fromDate=$request->input('fromDate');
         $toDate=$request->input('toDate');
@@ -73,9 +74,20 @@ class ReportsController extends Controller
         {
               $all_receivables+=$rec->remain;
         }
+        $querys=DB::table('payments')->get();
+         $all_procced=0;
+         $rc=0;
+         $cnt=0;
+        foreach($querys as $proc)
+        {   $all_procced+=$proc->paid;  $cnt+=$proc->remain; }
+        $contracts=DB::table('contracts')->get();
+         foreach($contracts as $con){  $rc+=$con->rent_value;}
+
         return view('Admin.System.receivables')->with([
               'receivables'=>$query,
             'all_receivables'=>$all_receivables,
+            'rc'=>$rc,'cnt'=>$cnt,'all_procced'=>$all_procced
+
 
         ]);
 
@@ -83,22 +95,24 @@ class ReportsController extends Controller
 
     public function proceeds()
     {
-        $query=DB::table('payments')->join('leases','payments.lease_id','leases.id')->paginate('5');
+        $query=DB::table('payments')->get();
          $all_procced=0;
-
+         $rc=0;
+         $cnt=0;
         foreach($query as $proc)
-        {
-              $all_procced+=$proc->paid;
-        }
-
+        {   $all_procced+=$proc->paid;  $cnt+=$proc->remain; }
+        $contracts=DB::table('contracts')->get();
+         foreach($contracts as $con){  $rc+=$con->rent_value;}
+         $proceeds=DB::table('payments')->join('leases','payments.lease_id','leases.id')->paginate(5);
         return view('Admin.System.imports')->with([
-            'proceeds'=>$query,
-            'all_procced'=>$all_procced,
+            'all_procced'=>$all_procced,'rc'=>$rc,'cnt'=>$cnt,'proceeds'=>$proceeds,
         ]);
-    }
+
+      }
 
     public function proceeds_date(Request $request)
     {
+
 
         $fromDate=$request->input('fromDate');
         $toDate=$request->input('toDate');
@@ -123,15 +137,25 @@ class ReportsController extends Controller
         ->where('release_date','>=',$fromDate)
         ->where('release_date','<=',$toDate)->paginate('5');;
         }
-        $all_procced=0;
+        $all_procceds=0;
 
         foreach($query as $proc)
         {
-              $all_procced+=$proc->paid;
+              $all_procceds+=$proc->paid;
         }
+         $querys=DB::table('payments')->get();
+         $all_procced=0;
+         $rc=0;
+         $cnt=0;
+        foreach($querys as $proc)
+        {   $all_procced+=$proc->paid;  $cnt+=$proc->remain; }
+        $contracts=DB::table('contracts')->get();
+         foreach($contracts as $con){  $rc+=$con->rent_value;}
+
         return view('Admin.System.imports')->with([
              'proceeds'=>$query,
-            'all_procced'=>$all_procced,
+            'all_procceds'=>$all_procceds,
+            'rc'=>$rc,'cnt'=>$cnt,'all_procced'=>$all_procced
 
         ]);
 
@@ -163,11 +187,30 @@ class ReportsController extends Controller
 
     }
 
+
     public function realties_proceeds()
     {
-        $realties=Realty::all();
-        return view('Admin.Reports.realties_proceeds',compact('realties'));
+          $query=DB::table('payments')->get();
+         $all_procced=0;
+         $rc=0;
+         $cnt=0;
+        foreach($query as $proc)
+        {   $all_procced+=$proc->paid;  $cnt+=$proc->remain; }
+        $contracts=DB::table('contracts')->get();
+         foreach($contracts as $con){  $rc+=$con->rent_value;}
+         $realties=DB::table('realties')->paginate(5);
+        return view('Admin.Reports.realties_proceeds')->with([
+            'all_procced'=>$all_procced,'rc'=>$rc,'cnt'=>$cnt,'realties'=>$realties,
+        ]);
 
     }
+     public function realty_leases($id)
+    {
+
+         $Lease=Lease::where('realty_id',$id)->with('tenants','realties','units','financial')->get();
+        return view('Admin.Reports.realty_leases')->with(['leases'=>$Lease,]);
+
+    }
+
 
 }

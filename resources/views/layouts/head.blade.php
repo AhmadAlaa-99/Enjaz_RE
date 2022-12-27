@@ -1,12 +1,23 @@
 <!-- Title -->
-        <title>@yield("title")</title>
-        <link rel="shortcut icon" href="{{URL::asset('assets/img/fav.png')}}" />
-		<!-- Bootstrap css -->
-		<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-		<link href="{{URL::asset('assets/fonts/style.css')}}" rel="stylesheet">
-		<link href="{{URL::asset('assets/css/main.css')}}" rel="stylesheet">
-		<link href="{{URL::asset('assets/vendor/daterange/daterange.css')}}" rel="stylesheet">
-		<link href="{{URL::asset('assets/vendor/chartist/css/chartist.min.css')}}" rel="stylesheet">
-		<link href="{{URL::asset('assets/vendor/chartist/css/chartist-custom.css')}}" rel="stylesheet">
-		@yield('css')
-		
+
+<link rel="shortcut icon" href="{{ URL::asset('assets/img/favicon.png') }}" />
+<!-- Bootstrap css -->
+
+<link rel="stylesheet"href="{{ URL::asset('assets/img/favicon.png') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/plugins/fontawesome/css/all.min.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/css/style.css') }}">
+
+
+
+
+
+
+
+
+
+
+
+@yield('css')

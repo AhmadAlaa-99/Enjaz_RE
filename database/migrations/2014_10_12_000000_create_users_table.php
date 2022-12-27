@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
               $table->bigInteger('nationalitie_id')->unsigned();
             $table->foreign('nationalitie_id')->references('id')->on('nationalities')->onDelete('cascade');
-            $table->date('date_birth')->nullable()->defsult('00/00/0000');
+            $table->date('date_birth')->nullable();
             $table->string('ID_type');
             $table->enum('gender',['male','female']);
             $table->string('ID_num');

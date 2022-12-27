@@ -1,96 +1,127 @@
 @extends('layouts.master')
 @section('css')
 
-    <link href="{{ URL::asset('assets/vendor/datepicker/css/classic.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/vendor/datepicker/css/classic.date.css') }}" rel="stylesheet">
-
-
 @endsection
 @section('title')
-    اضافة تقرير تسليم
+طلب تسليم
 @stop
 @section('content')
-    <div class="page-header">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"> السجل المالي </li>
-            <li class="breadcrumb-item active"> تقارير التسليم</li>
-        </ol>
-
-        <ul class="app-actions">
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
-                    <span id="clock"></span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- Content wrapper start -->
-    <div class="content-wrapper">
-
-        <!-- Row start -->
-        <div class="row gutters">
-
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <div class="card-title">اضافة تقرير تسليم</div>
-                    </div>
-                    <div class="card-body">
-                        <form action="{{ route('receives_reports.store') }}" method="post"
-                            enctype="multipart/form-data"autocomplete="off">
-                            {{ csrf_field() }}
-                            <div class="row gutters">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-8 offset-xl-2">
 
 
 
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                                    <div class="form-group">
-                                        <label class="active" for="ciTy">تاريخ التسليم</label>
-                                        <input type="date" class="form-control"value="{{ old('receive_date') }}"
-                                            name="receive_date">
-                                        <input type="hidden"value="{{ $lease->id }}" name="lease_id">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="bank-inner-details">
+                                <div class="row">
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="active" for="ciTy">حالة الوحدة</label>
-                                        <textarea type="text" class="form-control" value="{{ old('maint_status') }}"name="maint_status"></textarea>
-                                    </div>
+                                    <form action="{{ route('receives_reports.store') }}" method="post"
+                                        enctype="multipart/form-data"autocomplete="off">
+                                        {{ csrf_field() }}
+                                        <div class="card m-0">
+                                             <div class="card-header">
+                                                <h3>انشاء طلب تسليم </h3>
+                                                <h2>رقم العقد</h2>
+                                            </div>
+                                              <div class="card-body">
 
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                                    <div class="form-group">
-                                        <label class="active" for="ciTy">تصفية الفواتير</label>
-                                        <textarea type="textarea" class="form-control" value="{{ old('paymennts_status') }}"name="paymennts_status"></textarea>
-                                    </div>
+                                                <div class="row gutters">
+                                                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                    <div class="form-group">
+                                                        <label class="active" for="ciTy">تاريخ التسليم</label>
+                                                        <input type="date"
+                                                            class="form-control"value="{{ old('receive_date') }}"
+                                                            name="receive_date">
+                                                        <input type="hidden"value="{{ $lease->id }}" name="lease_id">
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="active" for="ciTy">حالة الوحدة</label>
+                                                        <textarea type="text" class="form-control" value="{{ old('maint_status') }}"name="maint_status"></textarea>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                    <div class="form-group">
+                                                        <label class="active" for="ciTy">تصفية الفواتير</label>
+                                                        <textarea type="textarea" class="form-control" value="{{ old('paymennts_status') }}"name="paymennts_status"></textarea>
+                                                    </div>
 
 
-                                    <div class="form-group">
-                                        <label class="active" for="ciTy">ملاحظات</label>
+                                                    <div class="form-group">
+                                                        <label class="active" for="ciTy">ملاحظات</label>
 
-                                        <textarea type="textarea" class="form-control" value="{{ old('notes') }}"name="notes"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <div class="text-right">
+                                                        <textarea type="textarea" class="form-control" value="{{ old('notes') }}"name="notes"></textarea>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class=" blog-categories-btn pt-0">
+                                                    <div class="bank-details-btn ">
+                                                        <button type="submit" id="submit" name="submit"
+                                                            class="btn btn-primary float-right">ارسال الطلب </button>
+                                                    </div>
+                                                </div>
 
-                                        <button type="submit" name="submit" name="submit"
-                                            class="btn btn-dark">حفظ</button>
-                                    </div>
+                                            </div>
+                                            <!--
+                                            <div class="row gutters">
+
+
+
+                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                    <div class="form-group">
+                                                        <label class="active" for="ciTy">تاريخ التسليم</label>
+                                                        <input type="date"
+                                                            class="form-control"value="{{ old('receive_date') }}"
+                                                            name="receive_date">
+                                                        <input type="hidden"value="{{ $lease->id }}" name="lease_id">
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="active" for="ciTy">حالة الوحدة</label>
+                                                        <textarea type="text" class="form-control" value="{{ old('maint_status') }}"name="maint_status"></textarea>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                    <div class="form-group">
+                                                        <label class="active" for="ciTy">تصفية الفواتير</label>
+                                                        <textarea type="textarea" class="form-control" value="{{ old('paymennts_status') }}"name="paymennts_status"></textarea>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label class="active" for="ciTy">ملاحظات</label>
+
+                                                        <textarea type="textarea" class="form-control" value="{{ old('notes') }}"name="notes"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="text-right">
+
+                                                        <button type="submit" name="submit" name="submit"
+                                                            class="btn btn-dark">حفظ</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        -->
+                                        </div>
+                                    </form>
                                 </div>
 
                             </div>
-                        </form>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Row end -->
-
     </div>
-    <!-- Content wrapper end -->
 @endsection
 @section('js')
-    <script src="{{ URL::asset('assets/vendor/datepicker/js/picker.js') }}"></script>
-    <script src="{{ URL::asset('assets/vendor/datepicker/js/picker.date.js') }}"></script>
-    <script src="{{ URL::asset('assets/datepicker/js/custom-picker.js') }}"></script>
+
 @endsection

@@ -10,34 +10,37 @@
  ادارة المستخدمين
 @stop
 @section('content')
-<div class="page-header">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"> الاعدادات </li>
-        <li class="breadcrumb-item active"> ادارة المستخدمين </li>
-    </ol>
+     <div class="page-wrapper">
+        <div class="content container-fluid">
+             <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">ادارة المستخدمين</h3>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">لوحة التحكم</a></li>
+                                <li class="breadcrumb-item active">قائمة المستخدمين</li>
+                            </ul>
+                        </div>
+                        <div class="col-auto">
 
-    <ul class="app-actions">
-       <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
-                <span id="clock"></span>
-            </a>
-        </li>
-    </ul>
-</div>
+                        </div>
+                    </div>
 <!-- row opened -->
-<div class="row row-sm">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-header pb-0">
-                <div class="col-sm-1 col-md-2">
+ <div class="row row-sm">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <div class="d-flex justify-content-between">
+                                <div class="col-lg-12 margin-tb">
 
-                        <a class="btn btn-primary btn-sm" href="{{ route('users.create') }}">اضافة مستخدم</a>
+                                </div>
+                                <br>
+                            </div>
 
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive hoverable-table">
-                    <table class="table table-hover" id="example1" data-page-length='50' style=" text-align: center;">
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table mg-b-0 text-md-nowrap table-hover ">
                         <thead>
                             <tr>
                                 <th class="wd-10p border-bottom-0">#</th>
@@ -45,15 +48,14 @@
                                 <th class="wd-20p border-bottom-0">البريد الالكتروني</th>
                                 <th class="wd-15p border-bottom-0">حالة المستخدم</th>
                                 <th class="wd-15p border-bottom-0">نوع المستخدم</th>
-                                <th class="wd-10p border-bottom-0">العمليات</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($data as $key => $user)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
+                                    <td><span class="badge badge-success">{{ $user->name }}</td>
+                                    <td><span class="badge badge-danger">{{ $user->email }}</td>
                                     <td>
                                         @if ($user->Status == 'مفعل')
                                             <span class="label text-success d-flex">
@@ -74,18 +76,7 @@
                                         @endif
                                     </td>
 
-                                    <td>
 
-                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-info"
-                                                title="تعديل"><i class="icon-edit"></i></a>
-
-
-
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                data-user_id="{{ $user->id }}" data-username="{{ $user->name }}"
-                                                data-toggle="modal" href="#modaldemo8" title="حذف"><i class="icon-delete"></i></a>
-
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -120,6 +111,8 @@
             </form>
         </div>
     </div>
+</div>
+   </div>
 </div>
 
 </div>

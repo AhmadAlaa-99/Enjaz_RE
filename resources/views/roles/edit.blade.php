@@ -11,20 +11,21 @@
 الاعدادات - ادارة الصلاحيات
 @stop
 @section('content')
-<div class="page-header">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">  الصلاحيات </li>
-        <li class="breadcrumb-item active">تعديل نوع مستخدم</li>
-    </ol>
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+             <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">ادارة الصلاحيات</h3>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">لوحة التحكم</a></li>
+                                <li class="breadcrumb-item active">صلاحيات المستخدمين</li>
+                            </ul>
+                        </div>
+                        <div class="col-auto">
 
-    <ul class="app-actions">
-    <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
-                <span id="clock"></span>
-            </a>
-        </li>
-    </ul>
-</div>
+                        </div>
+                    </div>
 
 @if (count($errors) > 0)
 <div class="alert alert-danger">
@@ -72,12 +73,14 @@
                         </ul>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-main-primary">تحديث</button>
+                        <button type="submit" class="btn btn-primary">تحديث</button>
                     </div>
                     <!-- /col -->
                 </div>
             </div>
         </div>
+    </div>
+</div>
     </div>
 </div>
 <!-- row closed -->

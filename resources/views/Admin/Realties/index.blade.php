@@ -1,152 +1,253 @@
 @extends('layouts.master')
 @section('css')
-	<!-- Data Tables -->
-    <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('assets/vendor/datatables/dataTables.bs4-custom.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('assets/vendor/datatables/buttons.bs.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet"href="{{ URL::asset('assets/plugins/datatables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}">
 @endsection
 @section('title')
-المنشأت العقارية
+    المنشأت العقارية
 @stop
 @section('content')
 
-<div class="page-header">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">ادارة العقارات</li>
-        <li class="breadcrumb-item active">  المنشأت العقارية </li>
-    </ol>
+    <div class="page-wrapper">
+        <div class="content container-fluid">
 
-    <ul class="app-actions">
-      <li>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
-                <span id="clock"></span>
-            </a>
-        </li>
-    </ul>
-</div>
-	<!-- Content wrapper start -->
-    <div class="content-wrapper">
-
-<!-- Row start -->
-<div class="row gutters">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-
-
-
-        <div class="table-container">
-            <div class="t-header">المنشأت العقارية</div>
-</br>
-
-@if (session()->has('max'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('max') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-        <div class="table-responsive">
-
-
-
-                <table id="copy-print-csv" class="table custom-table">
-                    <thead>
-                        <tr>
-                        <th><a href="">الرقم التسلسلي </a></th>
-                          <th> <a href=""> اسم المنشأة</a> </th>
-                          <th>تاريخ الاضافة</th>
-                          <th> الحي  </th>
-                           <th> <a href="">نوع  العقار</a></th>
-                          <th>  <a href=""> نوع استخدام العقار</a></th>
-                          <th> المساحة  </th>
-                          <th> المميزات  </th>
-                          <th>عدد الأدوار </th>
-                          <th>عدد الوحدات السكنية</th>
-                             <th>عدد الوحدات التجارية</th>
-
-                          <th>عدد الوحدات المستأجرة</th>
-                          <th>العمليات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @php
-                                $i = 0;
-                                @endphp
-                                @forelse ($realties as $realty)
-                                    @php
-                                    $i++
-                                    @endphp
-
-                        <tr>
-                            <td>{{$i}}</td>
-                          <td>{{$realty->realty_name}}</td>
-                          <td><span class="badge badge-danger">{{$realty->created_at}}</td>
-                          <td>{{$realty->quarter}}</td>
-                          <td>{{$realty->type}}</td>
-                          <td>{{$realty->use}}</td>
-                          <td>{{$realty->size}}</td>
-                          <td>{{$realty->advantages}}</td>
-                          <td><span class="badge badge-success">{{$realty->roles}}</td>
-                          <td><span class="badge badge-success">{{$realty->units}}</td>
-                          <td><span class="badge badge-success">{{$realty->shopsNo}}</td>
-                          <td><span class="badge badge-success">{{$realty->rents}}</td>
-                          <td>
-													<div class="td-actions">
-                                                    
-														<a href="{{route('realty_units_show',$realty->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="show units">
-															<i class="icon-cloud"></i>
-														</a>
-                                                        <a href="{{route('realty_units_add',$realty->id)}}"   class="icon red" data-toggle="tooltip" data-placement="top" title="Add units">
-															<i class="icon-add"></i>
-
-														</a>
-														<a href="{{route('realties.edit',$realty->id)}}"  class="icon green" data-toggle="tooltip" data-placement="top" title="edit">
-															<i class="icon-edit"></i>
-														</a>
-														<a href="{{route('realty.destroy',$realty->id)}}"  class="icon blue" data-toggle="tooltip" data-placement="top" title="Delete">
-															<i class="icon-cancel"></i>
-														</a>
-
-													</div>
-												</td>
-                        </tr>
-                        @empty
-                        @endforelse  </tbody>   </table>
-								<div class="d-flex justify-content-center">
-			                         {!!$realties->links()!!}
+            <div class="page-header">
+                <div class="card invoices-tabs-card">
+                    <div class="card-body card-body pt-0 pb-0">
+                        <div class="invoices-main-tabs">
+                            <div class="row align-items-center">
+                                <div class="col-lg-8 col-md-8">
+                                    <div class="invoices-tabs">
+                                        <ul>
+                                            <li><a href="{{ url('/' . ($page = 'Admin/realties')) }}" class="active">المنشأت
+                                                    العقارية</a>
+                                            </li>
+                                            <li><a href="{{ url('/' . ($page = 'Admin/rented_units')) }}">الوحدات
+                                                    المؤجرة</a></li>
+                                            <li><a href="{{ url('/' . ($page = 'Admin/empty_units')) }}">الوحدات الشاغرة</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="invoices-settings-btn">
+                                        <a href="invoices-settings.html" class="invoices-settings-icon">
+                                        </a>
+                                        <a href="{{ route('contract_commercial') }}" class="btn">
+                                            <i data-feather="plus-circle"></i> اضافة عقد استئجار
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dash-widget-header">
+                                    <span class="dash-widget-icon bg-1">
+                                        <i class="fas fa-home"></i>
+                                    </span>
 
+                                    <div class="dash-count">
+                                        <div class="dash-title"> المنشأت العقارية</div>
+                                        <div class="dash-counts">
+                                            <p>{{ $count_realties }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress progress-sm mt-3">
+                                    <div class="progress-bar bg-5" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i
+                                            class="fas fa-check-circle"></i></span><a
+                                        href="{{ url('/' . ($page = 'Admin/realties')) }}">انتقل الى ادارة العقارات</a></p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dash-widget-header">
+                                    <span class="dash-widget-icon bg-2">
+                                        <i class="fas fa-home"></i>
+                                    </span>
+                                    <div class="dash-count">
+                                        <div class="dash-title"> الوحدات الكلية</div>
+                                        <div class="dash-counts">
+                                            <p>{{ $count_units }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress progress-sm mt-3">
+                                    <div class="progress-bar bg-6" role="progressbar" style="width: 65%" aria-valuenow="75"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i
+                                            class="fas fa-check-circle"></i></span><a
+                                        href="{{ url('/' . ($page = 'Admin/realties')) }}">انتقل الى ادارة العقارات</a></p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dash-widget-header">
+                                    <span class="dash-widget-icon bg-3">
+                                        <i class="fas fa-file-alt"></i>
+                                    </span>
+                                    <div class="dash-count">
+                                        <div class="dash-title">الوحدات المضافة</div>
+                                        <div class="dash-counts">
+                                            <p>{{ $count_units_added }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress progress-sm mt-3">
+                                    <div class="progress-bar bg-7" role="progressbar" style="width: 85%" aria-valuenow="75"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i
+                                            class="fas fa-check-circle"></i></span><a
+                                        href="{{ url('/' . ($page = 'Admin/effictive')) }}"> انتقل الى حركة التأجير </a>
+                                </p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dash-widget-header">
+                                    <span class="dash-widget-icon bg-4">
+                                        <i class="far fa-file-alt"></i>
+                                    </span>
+                                    <div class="dash-count">
+                                        <div class="dash-title">الوحدات المؤجرة</div>
+                                        <div class="dash-counts">
+                                            <p>{{ $count_units_rented }}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="progress progress-sm mt-3">
+                                    <div class="progress-bar bg-8" role="progressbar" style="width: 45%" aria-valuenow="75"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i
+                                            class="fas fa-check-circle"></i></span><a
+                                        href="{{ route('contract_effictive') }}">انتقل الى حركة الاستئجار</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="copy-print-csv" class="table custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th><a href="">الرقم التسلسلي </a></th>
+                                                <th> <a href=""> اسم المنشأة</a> </th>
+                                                <th>تاريخ الاضافة</th>
+                                                <th> الحي </th>
+                                                <th> نوع العقار</th>
+                                                <th> نوع استخدام العقار</th>
+                                                <th> المساحة </th>
+                                                <th> الأدوار </th>
+                                                <th> الوحدات السكنية</th>
+                                                <th> الوحدات التجارية</th>
+
+                                                <th> الوحدات المستأجرة</th>
+                                                <th>العمليات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $i = 0;
+                                            @endphp
+                                            @forelse ($realties as $realty)
+                                                @php
+                                                    $i++;
+                                                @endphp
+
+                                                <tr>
+                                                    <td>{{ $i }}</td>
+                                                    <td><span class="badge badge-danger">{{ $realty->realty_name }}</td>
+                                                    <td><span class="badge badge-danger">{{ $realty->created_at }}</td>
+                                                    <td><span class="badge badge-primary">{{ $realty->quarters->name }}
+                                                    </td>
+                                                    <td><span class="badge badge-primary">{{ $realty->type }}</td>
+                                                    <td><span class="badge badge-primary">{{ $realty->use }}</td>
+                                                    <td><span class="badge badge-success">{{ $realty->size }}</td>
+                                                    <td><span class="badge badge-success">{{ $realty->roles }}</td>
+                                                    <td><span class="badge badge-info">{{ $realty->units }}</td>
+                                                    <td><span class="badge badge-info">{{ $realty->shopsNo }}</td>
+                                                    <td><span class="badge badge-info">{{ $realty->rents }}</td>
+                                                    <td>
+                                                    <td class="text-end">
+                                                        <div class="dropdown dropdown-action">
+                                                            <a href="#" class="action-icon dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                                    class="fas fa-ellipsis-v"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+
+                                                                <a class="dropdown-item"
+                                                                    title=" تفاصيل "href="{{ route('realty_units_show', $realty->id) }}"><i
+                                                                        class="far fa-eye me-1"></i>اظهار وحدات المنشأة</a>
+                                                                <a class="dropdown-item"title="اضافة وحدة ايجارية"
+                                                                    href="{{ route('realty_units_add', $realty->id) }}"><i
+                                                                        class="far fa-paper-plane me-1"></i>اضافة وحدة
+                                                                    ايجارية</a>
+                                                                <a class="dropdown-item"title="تعديل بيانات المنشأة "
+                                                                    href="{{ route('realties.edit', $realty->id) }}"><i
+                                                                        class="far fa-edit me-1"></i>تعديل بيانات
+                                                                    المنشأة</a>
+                                                                <a class="dropdown-item"title="حذف "
+                                                                    href="{{ route('realty.destroy', $realty->id) }}"><i
+                                                                        class="far fa-trash-alt me-1"></i>حذف</a>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+
+                                            @empty
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                    <div class="d-flex justify-content-center">
+                                        {!! $realties->links() !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    @endsection
+    @section('js')
+        <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/datatables/datatables.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/moment/moment.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
 
 
 
-    </div>
-
-</div>
-<!-- Row end -->
-
-</div>
-<!-- Content wrapper end -->
-@endsection
-@section('js')
-	<!-- Data Tables -->
-    <script src="{{URL::asset('assets/vendor/datatables/dataTables.min.js')}}"></script>
-    <script src="{{URL::asset('assets/vendor/datatables/dataTables.bootstrap.min.js')}}"></script>
 
 
 
-		<!-- Custom Data tables -->
-        <script src="{{URL::asset('assets/vendor/datatables/custom/custom-datatables.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/custom/fixedHeader.js')}}"></script>
 
-
-		<!-- Download / CSV / Copy / Print -->
-        <script src="{{URL::asset('assets/vendor/datatables/buttons.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/jszip.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/pdfmake.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/vfs_fonts.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/html5.min.js')}}"></script>
-        <script src="{{URL::asset('assets/vendor/datatables/buttons.print.min.js')}}"></script>
-@endsection
+    @endsection

@@ -1,62 +1,102 @@
-	<!-- Header start -->
-    <header class="header">
-			<div class="logo-wrapper">
-				<a href="index.html" class="logo">
+<div class="header header-one">
 
-					<img src="{{asset('assets/img/fav.png')}}" alt="Enjaz" />
-				</a>
+   <div class="header-left header-left-one">
+        <a href="index.html" class="logo">
 
-			</div>
-			<div class="header-items">
-				<!-- Custom search start -->
+            <img src="{{asset('assets/img/logo.png')}}"
+        alt="Logo">
+        </a>
+        <a href="index.html" class="white-logo">
+            <img src="{{asset('assets/img/logo-white.png')}}"
+            alt="Logo">
+        </a>
+        <a href="index.html" class="logo logo-small">
+            <img src="{{asset('assets/img/logo-small.png')}}"
+        alt="Logo" width="30" height="30">
+        </a>
+    </div>
 
-				<!-- Custom search end -->
 
-				<!-- Header actions start -->
-				<ul class="header-actions">
-				<li class="dropdown">
-						<a href="#" id="notifications" data-toggle="dropdown" aria-haspopup="true">
-							<i class="icon-bell"></i>
-							<span class="count-label">0</span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right lrg" aria-labelledby="notifications">
-							<div class="dropdown-menu-header">
-								Notifications
-							</div>
+<a href="javascript:void(0);" id="toggle_btn">
+        <i class="fas fa-bars"></i>
+    </a>
 
-						</div>
-					</li>
+  <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="Search here">
+                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <!--
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="time">
+                <span id="clock"></span>
+            </a>
+        -->
 
-					<li class="dropdown">
-						<a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
-							<span class="user-name">{{Auth::user()->name}} </span>
-							<span class="avatar">EJ<span class="status busy"></span></span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userSettings">
-							<div class="header-profile-actions">
 
-								<div class="header-user-profile">
-                                <div class="header-user">
-										<img src="{{URL::asset('assets/img/profile.png')}}" alt="" />
-									</div>
+    <a class="mobile_btn" id="mobile_btn">
+        <i class="fas fa-bars"></i>
+    </a>
 
-									<h5>{{Auth::user()->email}} </h5>
-									<p>{{Auth::user()->role_name}} </p>
-								</div>
-								<a href="{{ url('/' . $page='profile') }}"><i class="icon-user1"></i> My Profile</a>
-                                <a
-                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
-                                class="icon-log-out1"></i>تسجيل خروج</a>
-                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+
+    <ul class="nav nav-tabs user-menu">
+ <li class="nav-item dropdown has-arrow flag-nav">
+                    <a class="nav-link " data-bs-toggle="dropdown" href="#" role="button">
+                        <img src="assets/img/flags/us.png" alt="" height="20"> <span>Arabic</span>
+                    </a>
+
+                </li>
+
+
+
+        <li class="nav-item dropdown">
+            <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                 <span class="badge rounded-pill">5</span>
+            </a>
+            <div class="dropdown-menu notifications">
+                <div class="topnav-dropdown-header">
+                    <span class="notification-title">Notifications</span>
+                    <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
+                </div>
+
+
+            </div>
+        </li>
+
+
+        <li class="nav-item dropdown has-arrow main-drop">
+            <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                <span class="user-img">
+                    <img src="{{asset('assets/img/profiles/avatar-01.jpg')}}"  alt="">
+                    <span class="status online"></span>
+                </span>
+                <span>{{ Auth::user()->role_name }}</span>
+            </a>
+            <div class="dropdown-menu">
+                <a  onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item" ><i data-feather="log-out" class="me-1"></i> Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
+            </div>
+        </li>
 
-							</div>
-						</div>
-					</li>
+    </ul>
 
-				</ul>
-				<!-- Header actions end -->
-			</div>
-		</header>
-		<!-- Header end -->
+</div>
+<script>
+     $(document).on('click', '#toggle_btn', function() {
+        if ($('body').hasClass('mini-sidebar')) {
+            $('body').removeClass('mini-sidebar');
+            $('.subdrop + ul').slideDown();
+        } else {
+            $('body').addClass('mini-sidebar');
+            $('.subdrop + ul').slideUp();
+        }
+        setTimeout(function() {
+            mA.redraw();
+            mL.redraw();
+        }, 300);
+        return false;
+    });
+</script>

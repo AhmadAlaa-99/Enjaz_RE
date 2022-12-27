@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('realty_id')->constrained('realties')->cascadeOnDelete();
             $table->string('contactNo');
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('rent_value');
             $table->string('contract_file');
             $table->enum('status',['جديد','مجدد','منتهي'])->default('جديد');
@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('note')->nullable('-');
             $table->string('remain');
             $table->string('paid')->default('0');
+                        $table->string('fee')->default('0');
+
             $table->date('next_payment')->nullable();
 
              $table->string('ensollments_total');

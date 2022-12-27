@@ -21,16 +21,48 @@ class ContractController extends Controller
 
     public function contract_effictive()
    {
+
+
+       $contract_active=contract::where('type_s','جاري')->count();
+              $contract_expired=contract::where('type_s','منتهي')->count();
+          $contracts=contract::all();
+              $contracts_cost=0;
+       foreach($contracts as $contract)
+       {
+             $contracts_cost+=$contract->rent_value;
+       }
+
+
     $contracts=contract::with('realty')->where('status','جديد')->orwhere('status','مجدد')->latest()->paginate(5);
 
-      return view('Admin.Leases.contract_effictive',compact('contracts'));
+      return view('Admin.Leases.contract_effictive')->with([
+        'contracts'=>$contracts,
+        'contract_active'=>$contract_active,
+        'contract_expired'=>$contract_expired,
+        'contracts_cost'=>$contracts_cost
+
+      ]);
    }
 
     public function contract_finished()
    {
+     $contract_active=contract::where('type_s','جاري')->count();
+              $contract_expired=contract::where('type_s','منتهي')->count();
+          $contracts=contract::all();
+              $contracts_cost=0;
+       foreach($contracts as $contract)
+       {
+             $contracts_cost+=$contract->rent_value;
+       }
     $contracts=contract::with('realty')->where('status','منتهي')->latest()->paginate(5);
 
-      return view('Admin.Leases.contract_finished',compact('contracts'));
+      return view('Admin.Leases.contract_finished')->with([
+        'contracts'=>$contracts,
+        'contract_active'=>$contract_active,
+        'contract_expired'=>$contract_expired,
+        'contracts_cost'=>$contracts_cost
+
+      ]);
    }
 
    public function payment_add(Request $request,$id)
@@ -123,6 +155,7 @@ public function renew_contracted(Request $request)
                 'contactNo'=>$request->contactNo,
                 'start_date'=>$request->start_date,
                 'end_date'=>$request->end_date,
+                'fee'=>$request->fee,
                 'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->rent_value,
                 'contract_file'=>$image_name,
@@ -141,6 +174,7 @@ public function renew_contracted(Request $request)
                 'contactNo'=>$request->contactNo,
                 'start_date'=>$request->start_date,
                 'end_date'=>$request->end_date,
+                'fee'=>$request->fee,
                 'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->ejar_cost,
                 'contract_file'=>$image_name,
@@ -224,13 +258,15 @@ public function finish_contract($id)
    public function contract_residential()
    {
       $type="سكني";
-      return view('Admin.Leases.contract_create')->with(['type'=>$type,]);
+      $quarter=quarter::where('region_id','1')->get();
+      return view('Admin.Leases.contract_create')->with(['type'=>$type,'quarters'=>$quarter]);
    }
      public function contract_commercial()
    {
 
-     $type="تجاري";
-      return view('Admin.Leases.contract_create')->with(['type'=>$type,]);
+      $type="تجاري";
+      $quarter=quarter::where('region_id','1')->get();
+      return view('Admin.Leases.contract_create')->with(['type'=>$type,'quarters'=>$quarter]);
    }
     public function contract_store(Request $request)
     {
@@ -244,7 +280,8 @@ public function finish_contract($id)
         Realty::create([
                 'realty_name'=>$request->realty_name,
                 'owner_id'=>$owner->id,
-                'quarter'=>$request->quarter,
+                'quarter_id'=>$request->quarter,
+                'address'=>$request->address,
                 'agency_name'=>$request->agency_name,
                 'shopsNo'=>$request->shopsNo,
                 'agency_mobile'=>$request->agency_mobile,
@@ -256,6 +293,7 @@ public function finish_contract($id)
                 'units'=> $request->units,
                 'size'=> $request->size,
                 'advantages'=> $request->advantages,
+                'contract_cost'=>$request->rent_value,
 
                 ]);
                 $realty=Realty::latest()->first();
@@ -267,6 +305,7 @@ public function finish_contract($id)
                 {
                 contract::create([
                 'realty_id'=>$realty->id,
+                'fee'=>$request->fee,
                 'contactNo'=>$request->contactNo,
                 'start_date'=>$request->start_date,
                 'end_date'=>$request->end_date,
@@ -288,6 +327,7 @@ public function finish_contract($id)
                 'contactNo'=>$request->contactNo,
                 'start_date'=>$request->start_date,
                 'end_date'=>$request->end_date,
+                'fee'=>$request->fee,
                 'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->ejar_cost,
                 'contract_file'=>$image_name,
@@ -342,6 +382,7 @@ public function finish_contract($id)
      public function contract_edit(Request $request,$id)
      {
         // contract:realty_id realty:owner_id  ensoll:contract_id    owner
+        $quarter=quarter::where('region_id','1')->get();
     $contract= DB::table('contracts')
           ->join('realties', 'realties.id', '=', 'contracts.realty_id')
           ->where('contracts.id', $id)
@@ -354,6 +395,7 @@ public function finish_contract($id)
             'owner'=>$owner,
             'ensollments'=>$ensollments,
             'realty'=>$realty,
+            'quarters'=>$quarter,
         ]);
      }
 
@@ -374,7 +416,8 @@ public function finish_contract($id)
         Realty::where('id',$contract->realty_id)->update([
                 'realty_name'=>$request->realty_name,
                 'owner_id'=>$owner->id,
-                'quarter'=>$request->quarter,
+                'quarter_id'=>$request->quarter,
+                'address'=>$request->address,
                 'agency_name'=>$request->agency_name,
                 'shopsNo'=>$request->shopsNo,
                 'agency_mobile'=>$request->agency_mobile,
@@ -386,6 +429,7 @@ public function finish_contract($id)
                 'units'=> $request->units,
                 'size'=> $request->size,
                 'advantages'=> $request->advantages,
+                 'contract_cost'=>$request->ejar_cost,
 
                 ]);
                 $realty=Realty::latest()->first();
@@ -409,6 +453,7 @@ public function finish_contract($id)
                 'contactNo'=>$request->contactNo,
                 'start_date'=>$request->start_date,
                 'end_date'=>$request->end_date,
+                'fee'=>$request->fee,
                 'ejar_cost'=>$request->ejar_cost,
                 'rent_value'=>$request->rent_value,
                 'contract_file'=>$image_name,
@@ -425,6 +470,7 @@ public function finish_contract($id)
             contract::where('id',$request->contract_id)->update([
                 'realty_id'=>$realty->id,
                 'contactNo'=>$request->contactNo,
+                'fee'=>$request->fee,
                 'start_date'=>$request->start_date,
                 'end_date'=>$request->end_date,
                 'ejar_cost'=>$request->ejar_cost,

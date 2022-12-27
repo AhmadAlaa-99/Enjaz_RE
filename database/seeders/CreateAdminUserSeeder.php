@@ -36,42 +36,55 @@ public function run()
         'password'=>bcrypt('12345678'),
            ]);
         Broker::create([
-            'email'=>'ahmad@gmail.com',
             'date_founded'=>'2020/10/10',
             'about'=>'شركة انجاز المستقلة',
             'vision'=>'نتطلع ل مستقبل أفضل في العقارات',
             'mission'=>'معا أفضل',
+            'contact_email'=>'wqe@gmail.com',
+'contact_address'=>'saudia',
+'contact_mobile'=>'093232232',
         ]);
-$role = Role::create(['name' => 'Admin']);
  $role=Role::where('name','Admin')->first();
- /*
-
-*/
-$role->syncPermissions(
-'ادارة العقارات - الوسيط',
- 'ادارة الاستئجار - الوسيط',
-
-'الوسيط العقاري -  ادارة المستأجرين',
-
-'طلبات الصيانة - الوسيط',
-
-'حركة التأجير - الوسيط العقاري',
-
-'الاعدادات  - الوسيط',
-
-' السجل المالي- الوسيط',
-
-);
  $user->assignRole([$role->id]);
- ///////////////////////////////////////////////////////////////
 
 
-$role = Role::create(['name' => 'Tenant']);
-$role->syncPermissions(
-    ' المستأجر -   البيانات الايجارية',
-'الصيانة - المستأجر',
-'الاعدادات المستأجر',
 
-);
+
+   $user = User::create([
+        'name'=>'Leases Mangement',
+        'nationalitie_id'=>'1',
+        'ID_type'=>'gpt4432',
+        'ID_num'=>'140440024',
+        'phone'=>'09376407234',
+         'gender'=>'male',
+        'telephone'=>'65544334',
+        'email'=>'alaa@gmail.com',
+        'role_name'=>'Leases Mangement',
+        'password'=>bcrypt('12345678'),
+           ]);
+
+ $role=Role::where('name','Leases Mangement')->first();
+ $user->assignRole([$role->id]);
+
+
+
+   $user = User::create([
+        'name'=>'Contracts Management',
+        'nationalitie_id'=>'1',
+        'ID_type'=>'gp43t4342',
+        'ID_num'=>'14044340024',
+        'phone'=>'093760437234',
+         'gender'=>'male',
+        'telephone'=>'655434334',
+        'email'=>'iyad@gmail.com',
+        'role_name'=>'Contracts Management',
+        'password'=>bcrypt('12345678'),
+           ]);
+
+ $role=Role::where('name','Contracts Management')->first();
+ $user->assignRole([$role->id]);
+
+
+
 }
 }

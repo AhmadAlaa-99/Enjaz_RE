@@ -8,14 +8,34 @@ use App\Models\Lease;
 use App\Models\Realty;
 use App\Models\Units;
 use App\Models\Tenant;
+use DB;
 use App\Http\Controllers\Controller;
 class receive_reports extends Controller
 {
     public function index()
     {
+        $query=DB::table('payments')->get();
+         $leases_payments=0;
+
+        foreach($query as $proc)
+        {   $leases_payments+=$proc->paid; }
+        $finished=Lease::where('status','expired')->count();
+$effictive=Lease::where('status','active')->count();
+$rec_account=Lease::where('status','received')->count();
+
         $receives=receives::with('unit','lease')->latest()->paginate(5);
 
-        return view('Admin.Receives_Reports.index',compact('receives'));
+        return view('Admin.Receives_Reports.index')->with([
+            'receives'=>$receives,
+            'finished'=>$finished,
+            'effictive'=>$effictive,
+            'rec_account'=>$rec_account,
+            'leases_payments'=>$leases_payments,
+
+
+
+
+        ]);
     }
 
     public function create($id)

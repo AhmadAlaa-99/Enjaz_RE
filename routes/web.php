@@ -14,7 +14,7 @@ use App\Http\Controllers\TenantController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\receive_reports;
 use App\Http\Controllers\Admin\ContractController;
-
+use App\Http\Controllers\HomeController;
 
 
 
@@ -28,18 +28,19 @@ use App\Http\Controllers\Admin\ContractController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+ Route::get('/autocomplete', [HomeController::class,'autocomplete'])->name('autocomplete');
 
 Route::get('/storage', function () {
     Artisan::call('storage:link');
 });
 Route::get('/clear', function() {
-    /*
+
 	$exitCode = Artisan::call('cache:clear');
-	$exitCode = Artisan::call('route:cache');
-    $exitCode = Artisan::call('route:clear');
+	//$exitCode = Artisan::call('route:cache');
+    //$exitCode = Artisan::call('route:clear');
 	$exitCode = Artisan::call('config:cache');
     $exitCode = Artisan::call('view:clear');
-    */
+
     $exitCode = Artisan::call('migrate');
     return 'All routes cache has just been removed';
 });
@@ -47,7 +48,15 @@ Route::get('/owner_autocomplete',[AdminLeasesController::class,'fetchownerdata']
 Route::get('/realty_autocomplete',[AdminLeasesController::class,'fetchrealtyrdata']);
 Route::get('/unit_autocomplete',[AdminLeasesController::class,'fetchunitdata']);
 Route::get('/getunits',[AdminUnitsController::class,'getunits']);
-Route::get('/profile',[SettingsController::class,'profile'])->name('profile');
+Route::get('/statistics',[SettingsController::class,'statistics'])->name('statistics');
+
+Route::get('/categories/{key}', [HomeController::class,'categories'])->name('categories');
+
+Route::get('/enjaz', [HomeController::class,'enjaz'])->name('enjaz');
+Route::post('/property_search', [HomeController::class,'property_search'])->name('property_search');
+
+Route::get('/all_units', [HomeController::class,'all_units'])->name('all_units');
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -68,7 +77,9 @@ Route::group([
   ],function()
 
   {
-     Route::get('/', [SettingsController::class,'statistics']);
+          Route::get('/site_setting', [SettingsController::class,'site_setting'])->name('site_setting');
+
+
      Route::resource('/owners',\Admin\OwnersController::class);
     Route::get('/owner_destroy/{id}',[AdminOwnersController::class,'destroy'])->name('owner.destroy');
 
@@ -156,27 +167,37 @@ Route::group([
     Route::get('/receive_details/{id}',[receive_reports::class,'details'])->name('receive.details');
     Route::get('/receive_destroy/{id}',[receive_reports::class,'destroy'])->name('receive.destroy');
     Route::get('/receive_add/{id}',[receive_reports::class,'create'])->name('receive.add');
-
-
-
      Route::get('/maintenance_payments',[ReportsController::class,'maintenance_payments']);
-
-
      Route::get('/proceeds',[ReportsController::class,'proceeds'])->name('proceeds');
      Route::post('/proceeds_date',[ReportsController::class,'proceeds_date'])->name('proceeds_date');
-
      Route::get('/receivables',[ReportsController::class,'receivables'])->name('receivables');
-          Route::get('/realties_proceeds',[ReportsController::class,'realties_proceeds'])->name('realties_proceeds');
-
+    Route::get('/realties_proceeds',[ReportsController::class,'realties_proceeds'])->name('realties_proceeds');
      Route::post('/receivables_date',[ReportsController::class,'receivables_date'])->name('receivables_date');
 
+         Route::get('/realty_leases/{id}',[ReportsController::class,'realty_leases'])->name('realty_leases');
 
-     Route::get('/Account_settings',[SettingsController::class,'Account_settings']);
+
+
+     Route::get('/Account_settings',[SettingsController::class,'Account_settings'])->name('account_settings');
      Route::post('/Account_edit',[SettingsController::class,'Account_edit'])->name('Account_edit');
+
+        Route::get('/company_settings',[SettingsController::class,'company_settings'])->name('company_settings');
+       Route::post('/company_settings',[SettingsController::class,'company_settings_store'])->name('company_settings_edit');
+
+       Route::get('/privacy_settings',[SettingsController::class,'privacy_settings'])->name('privacy_settings');
+     Route::post('/privacy_settings',[SettingsController::class,'privacy_settings_store'])->name('privacy_settings_edit');
+
+     Route::get('/notifications_settings',[SettingsController::class,'notifications_settings'])->name('notifications_settings');
+
+
+
+
+
+
+
 
      Route::resource('/roles',\UserManagement\RoleController::class);
      Route::resource('/users',\UserManagement\UserController::class);
-     Route::get('/statistics',[SettingsController::class,'statistics']);
 
      Route::get('/archive_leases',[AdminLeasesController::class,'archive'])->name('archive_leases');
      Route::get('/move_le_archive/{id}',[AdminLeasesController::class,'move_le_archive'])->name('move_le.archive');
@@ -203,6 +224,9 @@ Route::group([
      */
 
   });
+     Route::get('/User/settings',[TenantController::class,'settings'])->name('user_settings');
+     Route::get('/User/privacy',[TenantController::class,'privacy'])->name('user_privacy');
+     Route::get('/User/change_password',[TenantController::class,'change_password'])->name('user_change_password');
 
   Route::group([
     'prefix'=>'Tenant',
@@ -211,7 +235,9 @@ Route::group([
   {
 
 
-     Route::get('/leases',[TenantController::class,'leases']);
+
+
+     Route::get('/leases',[TenantController::class,'leases'])->name('leases_tenant');
      Route::get('/request_form',[TenantController::class,'request_form']);
      Route::post('/request_send',[TenantController::class,'request_send'])->name('request_send');
      Route::get('/maints_requests',[TenantController::class,'maints_requests'])->name('maints_requests');
@@ -237,6 +263,5 @@ Route::group([
     Route::get('/expired_leases',[OwnerController::class,'expired_leases']);
     Route::get('/actived_leases',[OwnerController::class,'actived_leases']);
     Route::get('/details_lease/{id}',[OwnerController::class,'details_lease'])->name('ow_lease.details');
-    Route::get('/statistics',[OwnerController::class,'statistics']);
 
   });

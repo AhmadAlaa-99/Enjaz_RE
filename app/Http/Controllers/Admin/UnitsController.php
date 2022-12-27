@@ -52,9 +52,12 @@ class UnitsController extends Controller
     {
         $realty=Realty::where('id',$id)->first();
         $units_count=Units::where('realty_id',$id)->get();
+        $image_name='doc-'.time().'.'.$request->img->extension();
+
+
+         $request->img->move(public_path('units'),$image_name);
         if($units_count->count() < $realty->units)
         {
-
             Units::create([
                     'realty_id'=> $id,
                     'type'=> $request->type,
@@ -65,9 +68,15 @@ class UnitsController extends Controller
                     'kitchen_Cabinets'=> $request->kitchen_Cabinets,
                     'condition_units'=> $request->condition_units,
                     'condition_type'=> $request->condition_type,
-                    'details'=>$request->details,
+                    'details'=>$request->main_show,
                     'bathrooms'=>$request->bathrooms,
                     'rooms'=>$request->rooms,
+                    'quarter'=>$realty->quarters->name,
+                    'main_show'=>$request->main_show,
+                    'elect_number'=>$request->elect_number,
+                    'img'=>$image_name,
+                    'rent_cost'=>$request->rent_cost,
+
                     //'status'=>$request->status,
                     //start_date
                     //end_date
@@ -94,16 +103,47 @@ class UnitsController extends Controller
          //lease - unit : many to many
          // unit - tenant : many to many
          // reality - unit :  one to many
+         $count_realties = Realty::count();
+$count_units=Units::count();
+$count_units_added=Units::count();
+$count_units_rented=Units::where('status','rented')->count();
          $units=Units::where('status','rented')->with('leases','tenants')->latest()->paginate(5);
-        return view('Admin.Units.rented_units',compact('units'));
+
+
+        return view('Admin.Units.rented_units')->with([
+                  'units'=>$units,
+                  'count_realties'=>$count_realties,
+                  'count_units'=>$count_units,
+                  'count_units_added'=>$count_units_added,
+                  'count_units_rented'=>$count_units_rented,
+
+
+
+
+        ]);
     }
     public function empty_units()
     {
          //lease - unit : many to many
          // unit - tenant : many to many
          // reality - unit :  one to many
+         $count_realties = Realty::count();
+$count_units=Units::count();
+$count_units_added=Units::count();
+$count_units_rented=Units::where('status','rented')->count();
          $units=Units::where('status','empty')->with('realties')->latest()->paginate(5);
-        return view('Admin.Units.empty_units',compact('units'));
+
+        return view('Admin.Units.empty_units')->with([
+                  'units'=>$units,
+                  'count_realties'=>$count_realties,
+                  'count_units'=>$count_units,
+                  'count_units_added'=>$count_units_added,
+                  'count_units_rented'=>$count_units_rented,
+
+
+
+
+        ]);
     }
     public function show($id)
     {
@@ -134,6 +174,14 @@ class UnitsController extends Controller
                     'condition_type'=> $request->condition_type,
                     'details'=>$request->details,
                     'bathrooms'=>$request->bathrooms,
+                    /*
+                     'address'=>$request->address,
+                    'quarter'=>$request->quarter,
+                    */
+                    'main_show'=>$request->main_show,
+                    'elect_number'=>$request->elect_number,
+                    'rent_cost'=>$request->rent_cost,
+                    'img'=>$request->img,
                     // 'tenant_id'=> $request->tenant_id,
                     //'status'=>$request->status,
                 ]);
@@ -164,18 +212,29 @@ class UnitsController extends Controller
      public function update(Request $request,$id)
      {
         $unit = Units::findorFail($id);
+        $realty=Realty::where('id',$unit->realty_id)->first();
+
+          $image_name='doc-'.time().'.'.$request->img->extension();
+
+         $request->img->move(public_path('units'),$image_name);
         $unit->update([
-            'realty_id'=> $id,
-            'type'=> $request->type,
-            'role_number'=> $request->role_number,
-            'number'=> $request->number,
-            'size'=> $request->size,
-            'furnished_mode'=> $request->furnished_mode,
-            'kitchen_Cabinets'=> $request->kitchen_Cabinets,
-            'condition_units'=> $request->condition_units,
-            'condition_type'=> $request->condition_type,
-            'details'=>$request->details,
-            'bathrooms'=>$request->bathrooms,
+
+                    'type'=> $request->type,
+                    'role_number'=> $request->role_number,
+                    'number'=> $request->number,
+                    'size'=> $request->size,
+                    'furnished_mode'=> $request->furnished_mode,
+                    'kitchen_Cabinets'=> $request->kitchen_Cabinets,
+                    'condition_units'=> $request->condition_units,
+                    'condition_type'=> $request->condition_type,
+                    'details'=>$request->main_show,
+                    'bathrooms'=>$request->bathrooms,
+                    'rooms'=>$request->rooms,
+                    'quarter'=>$realty->quarters->name,
+                    'main_show'=>$request->main_show,
+                    'elect_number'=>$request->elect_number,
+                    'img'=>$image_name,
+                    'rent_cost'=>$request->rent_cost,
             //'status'=>$request->status,
             //start_date
             //end_date

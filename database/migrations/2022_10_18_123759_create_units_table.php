@@ -26,8 +26,13 @@ class CreateUnitsTable extends Migration
             $table->integer('role_number');
             $table->integer('bathrooms');
             $table->integer('rooms');
+            $table->string('quarter')->nullable('saudia');
+            $table->string('main_show')->default('0');
+            $table->string('elect_number')->default('0');
             $table->string('condition_type');
+            $table->string('img')->default('s');
             $table->string('maint_cost')->default('0');
+            $table->string('rent_cost')->default('0');
             $table->enum('status', ['rented', 'empty'])->default('empty');
             $table->timestamps();
         });
