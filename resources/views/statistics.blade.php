@@ -224,7 +224,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title">اقساط الدفع القادمة</h5>
+                                    <h5 class="card-title">اقساط الدفع</h5>
                                 </div>
                                 <div class="col-auto">
                                     <a href="{{ url('/' . ($page = 'Admin/proceeds')) }}"

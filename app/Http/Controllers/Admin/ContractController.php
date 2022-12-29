@@ -17,8 +17,6 @@ use Carbon\Carbon;
 
 class ContractController extends Controller
 {
-
-
     public function contract_effictive()
    {
 
@@ -103,7 +101,7 @@ class ContractController extends Controller
 
             ]);
 
-        $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
+           $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
            foreach($enso as $ens)
            {
            // return Carbon::now();
@@ -269,7 +267,7 @@ public function finish_contract($id)
    }
     public function contract_store(Request $request)
     {
-        
+
        Owner::create([
         'name'=>$request->name,
         'email'=>$request->email,
@@ -340,6 +338,7 @@ public function finish_contract($id)
 
              ]);
         }
+
             $contract=contract::latest()->first();
             $count=0;
             $total=0;
@@ -356,6 +355,7 @@ public function finish_contract($id)
                 $count++;
                 ensollments::create($input);
             }
+
            $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
            foreach($enso as $ens)
            {
@@ -448,7 +448,7 @@ public function finish_contract($id)
 
                 if($contract->type=='تجاري')
             {
-        contract::where('id',$request->contract_id)->update([
+            contract::where('id',$request->contract_id)->update([
                 'realty_id'=>$realty->id,
                 'contactNo'=>$request->contactNo,
                 'start_date'=>$request->start_date,
@@ -503,7 +503,10 @@ public function finish_contract($id)
                 $count++;
                 ensollments::where('refrenceNo',$request->refrenceNo[$key])->update($input);
             }
+
+
            $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
+         
            foreach($enso as $ens)
            {
            // return Carbon::now();
