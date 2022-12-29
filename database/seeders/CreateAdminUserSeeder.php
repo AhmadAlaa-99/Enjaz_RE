@@ -78,7 +78,7 @@ public function run()
         'telephone'=>'655434334',
         'email'=>'iyad@gmail.com',
         'role_name'=>'Contracts Management',
-        'password'=>bcrypt('12345678'),
+        'password'=>bcrypt(' '),
            ]);
 
  $role=Role::where('name','Contracts Management')->first();

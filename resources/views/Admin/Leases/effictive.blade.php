@@ -203,7 +203,7 @@
                                                             class="badge badge-warning">{{ $lease->financial->rent_value }}
                                                     </td>
                                                     <td><span
-                                                            class="badge badge-danger">{{ $lease->financial->next_payment }}
+                                                            class="badge badge-danger">{{ $lease->next_payment }}
                                                     </td>
                                                     <td><span
                                                             class="badge badge-success">{{ $lease->financial->payment_cycle }}
