@@ -26,7 +26,7 @@ class UnitsController extends Controller
     }
     public function realty_units_show($id)
     {
-
+          
         $realty=Realty::where('id',$id)->first();
         $units=Units::where('realty_id',$id)->latest()->paginate(5);
         return view('Admin.Units.realty_units',compact('units','realty'));

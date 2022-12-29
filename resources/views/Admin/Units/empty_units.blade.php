@@ -27,7 +27,7 @@
                                             <li><a href="{{ url('/' . ($page = 'Admin/empty_units')) }}"
                                                     class="active">الوحدات الشاغرة</a></li>
                                                     <li><a href="{{ url('/' . ($page = 'Admin/site_units')) }}"
-                                                    class="active">الوحدات النشطة في الموقع</a></li>
+                                                    >الوحدات النشطة في الموقع</a></li>
                                         </ul>
                                     </div>
                                 </div>

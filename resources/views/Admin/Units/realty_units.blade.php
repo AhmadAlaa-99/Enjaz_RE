@@ -109,7 +109,7 @@
                                                     <td><span class="badge badge-info">{{ $unit->kitchen_Cabinets }}</td>
                                                     <td><span class="badge badge-info">{{ $unit->condition_units }}</td>
                                                     <td><span class="badge badge-info">{{ $unit->condition_type }}</td>
-                                                       <td><span class="badge badge-danger">{{$unit->status}}</td>
+                                                    <td><span class="badge badge-danger">{{$unit->status}}</td>
 
 
 
@@ -124,20 +124,19 @@
                                                                     title=" تعديل بيانات الوحدة "href="{{ route('units.edit', $unit->id) }}"><i
                                                                         class="far fa-edit me-1"></i>تعديل بيانات الوحدة</a>
 
-                                                                        @if("{{$unit->status='rented'}}")
+                                                                 @if($unit->status='rented')
 
                                                                 <a class="dropdown-item"title="تفاصيل العقد"
                                                                     href="{{ route('lease_un.details', $unit->id) }}"><i
                                                                         class="far fa-eye me-1"></i>تفاصيل العقد </a>
+                                                                @else
 
-                                                                      @else
-
-                                                                       <a class="dropdown-item"title="تأجير الوحدة"
-                                                            href="{{ route('unit.rent', $unit->id) }}"><i
-                                                                class="far fa-paper-plane me-1"></i>تأجير الوحدة</a>
-                                                                  <a class="dropdown-item"title="حذف الوحدة "
-                                                            href="{{ route('unit.destroy', $unit->id) }}"><i
-                                                                class="far fa-trash-alt me-1"></i>حذف الوحدة</a>
+                                                                    <a class="dropdown-item"title="تأجير الوحدة"
+                                                                    href="{{ route('unit.rent', $unit->id) }}"><i
+                                                                    class="far fa-paper-plane me-1"></i>تأجير الوحدة</a>
+                                                                    <a class="dropdown-item"title="حذف الوحدة "
+                                                                    href="{{ route('unit.destroy', $unit->id) }}"><i
+                                                                    class="far fa-trash-alt me-1"></i>حذف الوحدة</a>
 
  @endif
 

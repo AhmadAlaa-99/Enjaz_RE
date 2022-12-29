@@ -503,10 +503,6 @@ public function finish_contract($id)
                 $count++;
                 ensollments::where('refrenceNo',$request->refrenceNo[$key])->update($input);
             }
-
-
-           $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
-         
            foreach($enso as $ens)
            {
            // return Carbon::now();

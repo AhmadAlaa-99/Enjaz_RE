@@ -27,6 +27,8 @@
                                                     المؤجرة</a></li>
                                             <li><a href="{{ url('/' . ($page = 'Admin/empty_units')) }}">الوحدات الشاغرة</a>
                                             </li>
+                                             <li><a href="{{ url('/' . ($page = 'Admin/site_units')) }}"
+                                                    >الوحدات النشطة في الموقع</a></li>
                                         </ul>
                                     </div>
                                 </div>

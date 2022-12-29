@@ -25,7 +25,8 @@
                                             <li><a href="{{ url('/' . ($page = 'Admin/rented_units')) }}">الوحدات
                                                     المؤجرة</a></li>
                                             <li><a href="{{ url('/' . ($page = 'Admin/empty_units')) }}"
-                                                    >الوحدات الشاغرة</a></li>
+                                                    >الوحدات الشاغرة</a>
+                                                </li>
                                                      <li><a href="{{ url('/' . ($page = 'Admin/site_units')) }}"
                                                     class="active">الوحدات النشطة في الموقع</a></li>
                                         </ul>
