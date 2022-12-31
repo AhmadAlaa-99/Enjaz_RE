@@ -1637,7 +1637,7 @@ button.bg-danger:hover {
 .bank-details-btn .btn {
     min-width: 160px;
     border-radius: 8px;
-    padding: 10px 0;
+    padding: 10px 10px;
     color: #fff;
     margin-right: inherit;
 }
