@@ -3,7 +3,7 @@
 
 @endsection
 @section('title')
-اضافة وحدة ايجارية
+    اضافة وحدة ايجارية
 @stop
 @section('content')
     <div class="page-wrapper">
@@ -11,11 +11,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-
-
+                        @if (session()->has('max'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session()->get('max') }}</strong>
+                            </div>
+                        @endif
                         <div class="card-body">
-                                                                                <h3 class="card-title">اضافة وحدة ايجارية /  {{ $realty->realty_name }}</h3>
-
+                            <h3 class="card-title">اضافة وحدة ايجارية / {{ $realty->realty_name }}</h3>
                             <form action="{{ route('realty_units_store', $realty->id) }}" method="post"
                                 enctype="multipart/form-data"autocomplete="off">
                                 {{ csrf_field() }}
@@ -151,14 +153,15 @@
                                     </div>
 
 
-                                  <div class="modal-footer">
-                                <div class="bank-details-btn">
-                                    <a type="buttom" href="{{route('empty_units')}}" class="btn bank-save-btn">اغلاق</a>
+                                    <div class="modal-footer">
+                                        <div class="bank-details-btn">
+                                            <a type="buttom" href="{{ route('empty_units') }}"
+                                                class="btn bank-save-btn">اغلاق</a>
 
-                                    <button type="submit" class="btn bank-save-btn">حفظ واضافة المزيد</button>
+                                            <button type="submit" class="btn bank-save-btn">حفظ واضافة المزيد</button>
 
-                                </div>
-                            </div>
+                                        </div>
+                                    </div>
 
 
 

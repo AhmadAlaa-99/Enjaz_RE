@@ -1638,7 +1638,8 @@ button.bg-danger:hover {
     min-width: 160px;
     border-radius: 8px;
     padding: 10px 0;
-    color: #fff
+    color: #fff;
+    margin-right: inherit;
 }
 
 .bank-details-btn .bank-cancel-btn {

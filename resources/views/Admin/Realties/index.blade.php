@@ -29,13 +29,13 @@
                                             </li>
                                              <li><a href="{{ url('/' . ($page = 'Admin/site_units')) }}"
                                                     >الوحدات النشطة في الموقع</a></li>
+
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4">
                                     <div class="invoices-settings-btn">
-                                        <a href="invoices-settings.html" class="invoices-settings-icon">
-                                        </a>
+
                                         <a href="{{ route('contract_commercial') }}" class="btn">
                                             <i data-feather="plus-circle"></i> اضافة عقد استئجار
                                         </a>
@@ -45,6 +45,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="card">
@@ -151,6 +152,12 @@
                         </div>
                     </div>
                 </div>
+                                     @if (session()->has('max'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{ session()->get('max') }}</strong>
+                                </div>
+                            @endif
+
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card card-table">
@@ -203,7 +210,7 @@
                                                                 data-bs-toggle="dropdown" aria-expanded="false"><i
                                                                     class="fas fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-end">
-
+                                                                
                                                                 <a class="dropdown-item"
                                                                     title=" تفاصيل "href="{{ route('realty_units_show', $realty->id) }}"><i
                                                                         class="far fa-eye me-1"></i>اظهار وحدات المنشأة</a>

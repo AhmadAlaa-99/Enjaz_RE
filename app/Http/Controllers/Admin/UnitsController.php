@@ -26,7 +26,7 @@ class UnitsController extends Controller
     }
     public function realty_units_show($id)
     {
-          
+
         $realty=Realty::where('id',$id)->first();
         $units=Units::where('realty_id',$id)->latest()->paginate(5);
         return view('Admin.Units.realty_units',compact('units','realty'));
@@ -60,8 +60,9 @@ class UnitsController extends Controller
 
          $request->img->move(public_path('units'),$image_name);
 
-        if($units_count->count() < $realty->units)
+        if($units_count->count() < $realty->units+$realty->shopsNo)
         {
+
             Units::create([
                     'realty_id'=> $id,
                     'type'=> $request->type,
@@ -81,13 +82,14 @@ class UnitsController extends Controller
                     'img'=>$image_name,
                     'rent_cost'=>$request->rent_cost,
                     'address'=>$realty->address,
-
                     //'status'=>$request->status,
                     //start_date
                     //end_date
                     //name_tenant
                 ]);
+
             //toastr()->success(trans('messages.success'));
+                session()->flash('add','تم اضافة الوحدة بنجاح');
 
             return redirect()->route('realty_units_add',$id)->with([
                 'message' => 'Unit Added successfully',
@@ -96,11 +98,10 @@ class UnitsController extends Controller
         }
         else
         {
-                    session()->flash('max', 'عذرا, لقد بلغت الحد الأقصى للوحدات الايجارية في هذه المنشأة');
-            return redirect()->route('realties.index')->with([
-                'message' => 'عذرا, لقد بلغت الحد الأقصى للوحدات الايجارية في هذه المنشأة',
-                'alert-type' => 'success',
-            ]);
+
+                  session()->flash('max', 'عذرا, لقد بلغت الحد الأقصى للوحدات الايجارية في هذه المنشأة');
+                  return back();
+
         }
     }
     public function rented_units()
@@ -217,12 +218,17 @@ $count_units_rented=Units::where('status','rented')->count();
      }
      public function update(Request $request,$id)
      {
+
         $unit = Units::findorFail($id);
         $realty=Realty::where('id',$unit->realty_id)->first();
+        $units_count=Units::where('realty_id',$id)->get();
+        if($request->units+$request->shopsNo <= $units_count->count())
+        {
 
           $image_name='doc-'.time().'.'.$request->img->extension();
 
          $request->img->move(public_path('units'),$image_name);
+
         $unit->update([
 
                     'type'=> $request->type,
@@ -252,6 +258,14 @@ $count_units_rented=Units::where('status','rented')->count();
                 'message' => 'Realty edited successfully',
                 'alert-type' => 'success',
             ]);
+        }
+            else
+            {
+
+                  session()->flash('count_units', 'عذرا يرجى التحقق من عدد الوحدات الايجارية');
+                  return back();
+
+            }
 
     }
      public function destroy($id)

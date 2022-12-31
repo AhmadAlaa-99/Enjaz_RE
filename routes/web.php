@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\ReportsController as ReportsController;
 use App\Http\Controllers\Admin\SettingsController as SettingsController;
 use App\Http\Controllers\Admin\LeasesController as AdminLeasesController;
 use App\Http\Controllers\Admin\UnitsController as AdminUnitsController;
-use App\Http\Controllers\Admin\OwnersController as AdminOwnersController;
 use App\Http\Controllers\Admin\RealtiesController as AdminRealtiesController;
 use App\Http\Controllers\Tenant\MainTenancesController as TenantMainTenancesController;
 use App\Http\Controllers\OwnerController;
@@ -28,19 +27,17 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
- Route::get('/autocomplete', [HomeController::class,'autocomplete'])->name('autocomplete');
-
+Route::get('/', [HomeController::class,'enjaz'])->name('enjaz')->middleware("guest");
+Route::get('/autocomplete', [HomeController::class,'autocomplete'])->name('autocomplete');
 Route::get('/storage', function () {
     Artisan::call('storage:link');
 });
 Route::get('/clear', function() {
-
 	$exitCode = Artisan::call('cache:clear');
-	//$exitCode = Artisan::call('route:cache');
-    //$exitCode = Artisan::call('route:clear');
+	$exitCode = Artisan::call('route:cache');
+    $exitCode = Artisan::call('route:clear');
 	$exitCode = Artisan::call('config:cache');
     $exitCode = Artisan::call('view:clear');
-
     $exitCode = Artisan::call('migrate');
     return 'All routes cache has just been removed';
 });
@@ -49,18 +46,10 @@ Route::get('/realty_autocomplete',[AdminLeasesController::class,'fetchrealtyrdat
 Route::get('/unit_autocomplete',[AdminLeasesController::class,'fetchunitdata']);
 Route::get('/getunits',[AdminUnitsController::class,'getunits']);
 Route::get('/statistics',[SettingsController::class,'statistics'])->name('statistics');
-
 Route::get('/categories/{key}', [HomeController::class,'categories'])->name('categories');
-
-Route::get('/enjaz', [HomeController::class,'enjaz'])->name('enjaz');
 Route::get('/property_search', [HomeController::class,'property_search'])->name('property_search');
-
 Route::get('/all_units', [HomeController::class,'all_units'])->name('all_units');
 
-
-Route::get('/', function () {
-    return view('auth.login');
-});
 Route::get('/test', function () {
     return view('test');
 });
@@ -80,12 +69,19 @@ Route::group([
           Route::get('/site_setting', [SettingsController::class,'site_setting'])->name('site_setting');
 
 
+
+            Route::get('/add_commercial',[ContractController::class,'add_commercial'])->name('add_commercial');
+            Route::post('/store_commercial',[ContractController::class,'store_commercial'])->name('store_commercial');
+
+
+
+
      Route::resource('/owners',\Admin\OwnersController::class);
-    Route::get('/owner_destroy/{id}',[AdminOwnersController::class,'destroy'])->name('owner.destroy');
+     Route::get('/owner_destroy/{id}',[AdminOwnersController::class,'destroy'])->name('owner.destroy');
 
     Route::get('/leases_renew/{id}',[AdminLeasesController::class,'leases_renew'])->name('leases.renew.show');
     Route::post('/leases_renew_store',[AdminLeasesController::class,'leases_renew_store'])->name('leases.renew.store');
-   Route::get('/previous_leases/{id}',[AdminLeasesController::class,'previous_leases'])->name('previous.leases');
+    Route::get('/previous_leases/{id}',[AdminLeasesController::class,'previous_leases'])->name('previous.leases');
 
 
      Route::get('/tenants',[AdminTenantController::class,'index']);
@@ -110,12 +106,11 @@ Route::group([
      Route::resource('/units',\Admin\UnitsController::class);
 
 
-     Route::resource('/leases',\Admin\LeasesController::class);
+    // Route::resource('/leases',\Admin\LeasesController::class);
 
      Route::get('/unit_rent/{id}',[AdminLeasesController::class,'create'])->name('unit.rent');
     Route::post('/lease_store',[AdminLeasesController::class,'store'])->name('leases.store');
     Route::post('/payment_add/{id}',[ContractController::class,'payment_add'])->name('payment_contract.add');
-
 
 
           Route::get('contract_residential',[ContractController::class,'contract_residential'])->name('contract_residential');

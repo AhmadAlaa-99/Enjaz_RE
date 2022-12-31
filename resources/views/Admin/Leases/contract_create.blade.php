@@ -264,18 +264,18 @@
                                 </div>
 
                             </div>
-                            @if ($type == 'تجاري')
+
                                 <div class="grid">
                                     <div class="col-1-4">
                                         <div class="controls">
                                             <input type="text"
-                                                class="floatLabel"name="shopsNo"value="{{ old('shopsNo') }}"
+                                                class="floatLabel"name="shopsNo"value="0"
                                                 placeholder=""required>
                                             <label class="active" for="phone">عدد الوحدات التجارية</label>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+
                             <div class="grid">
 
                                 <div class="col-1-4">
@@ -401,9 +401,18 @@
 
                         </div>
 
-                        <div class="form-group">
-                            <button type="submit" value="Submit" class="col-1-4">حفظ البيانات</button>
-                        </div>
+                            <div class="modal-footer">
+                                        <div class="bank-details-btn">
+
+                                            <button type="submit" name="action"value="save"class="btn bank-save-btn">حفظ البيانات</button>
+@if ($type == 'سكني')
+                                            <button type="submit" name="action"value="save_and_add_com" class="btn bank-save-btn">حفظ البيانات واضافة عقد تجاري للمنشأة</button>
+@endif
+
+
+
+                                        </div>
+                                    </div>
 
                     </form>
                     <!-- Content wrapper end -->

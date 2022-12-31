@@ -291,7 +291,7 @@ public function finish_contract($id)
                 'units'=> $request->units,
                 'size'=> $request->size,
                 'advantages'=> $request->advantages,
-                'contract_cost'=>$request->rent_value,
+                'contract_cost'=>$request->ejar_cost,
 
                 ]);
                 $realty=Realty::latest()->first();
@@ -301,6 +301,7 @@ public function finish_contract($id)
 
                 if($request->type_sc=='تجاري')
                 {
+
                 contract::create([
                 'realty_id'=>$realty->id,
                 'fee'=>$request->fee,
@@ -320,6 +321,7 @@ public function finish_contract($id)
         }
         else
         {
+
              contract::create([
                 'realty_id'=>$realty->id,
                 'contactNo'=>$request->contactNo,
@@ -374,10 +376,25 @@ public function finish_contract($id)
                 'remain'=>$contract->rent_value-$total,
                 'ensollments_paid'=>$count,
             ]);
-            return redirect()->route('contract_effictive')->with([
+              if($request->input('action')=='save')
+            {
+                 return redirect()->route('contract_effictive')->with([
                 'message' => 'Realty edited successfully',
                 'alert-type' => 'success',
             ]);
+
+            }
+            else
+            {
+                $type="تجاري";
+                return view('Admin.Leases.add_commercial')->with([
+                'owner'=>$owner,
+                'realty'=>$realty,
+                'type'=>$type,
+
+
+            ]);
+        }
     }
      public function contract_edit(Request $request,$id)
      {
@@ -520,11 +537,164 @@ public function finish_contract($id)
                 'remain'=>$contract->rent_value-$total,
                 'ensollments_paid'=>$count,
             ]);
+
+
+
+
+
+}
+public function add_commercial(Request $request)
+{
+
+     Owner::create([
+        'name'=>$request->name,
+        'email'=>$request->email,
+        'mobile'=>$request->mobile,
+        'attribute_name'=>$request->attribute_name,
+       ]);
+       $owner=Owner::latest()->first();
+        Realty::create([
+                 'realty_name'=>$request->realty_name,
+                'owner_id'=>$owner->id,
+                'quarter_id'=>$request->quarter,
+                'address'=>$request->address,
+                'agency_name'=>$request->agency_name,
+                'shopsNo'=>$request->shopsNo,
+                'agency_mobile'=>$request->agency_mobile,
+                  'elevator'=>$request->elevator,
+                 'parking'=>$request->parking,
+                'type'=> $request->type,
+                'use'=> $request->use,
+                'roles'=> $request->roles,
+                'units'=> $request->units,
+                'size'=> $request->size,
+                'advantages'=> $request->advantages,
+                'contract_cost'=>$request->ejar_cost,
+                ]);
+                $realty=Realty::latest()->first();
+                $image_name='doc-'.time().'.'.$request->contract_file->extension();
+                $request->contract_file->move(public_path('contracts'),$image_name);
+             contract::create([
+                'realty_id'=>$realty->id,
+                'contactNo'=>$request->contactNo,
+                'start_date'=>$request->start_date,
+                'end_date'=>$request->end_date,
+                'fee'=>$request->fee,
+                'ejar_cost'=>$request->ejar_cost,
+                'rent_value'=>$request->ejar_cost,
+                'contract_file'=>$image_name,
+                  'tax'=>'0',
+                'tax_amount'=>'0',
+                'type'=>$request->type_sc,//تجاري - سكني
+                'note'=>$request->note,
+                 'ensollments_total'=>$request->ensollments_total,
+                'remain'=>$request->ejar_cost,
+
+             ]);
+
+
+            $contract=contract::latest()->first();
+            $count=0;
+            $total=0;
+            foreach($request->installmentNo as $key=>$items )
+            {
+                $input['contract_id']=$contract->id;
+                $input['installmentNo']=$request->installmentNo[$key];
+                $input['installment_date']=$request->installment_date[$key];
+                $input['refrenceNo']=$request->refrenceNo[$key];
+                $input['payment_date']=$request->payment_date[$key];
+                $input['amount']=$request->amount[$key];
+                $input['payment_type']=$request->payment_type[$key];
+                $total+=$input['amount'];
+                $count++;
+                ensollments::create($input);
+            }
+           $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
+           foreach($enso as $ens)
+           {
+           // return Carbon::now();
+           $ins=$ens->installment_date;
+            if($ins>=Carbon::now())
+            {
+                $next_payment=$ens->installment_date;
+                $contract->update(['next_payment'=>$next_payment,]);
+                break;
+            }
+            continue;
+           }
+            $contract->update([
+                'paid'=>$total,
+                'remain'=>$contract->rent_value-$total,
+                'ensollments_paid'=>$count,
+            ]);
+
+
+
+}
+public function store_commercial(Request $request)
+ {
+
+                 $owner=Owner::latest()->first();
+                $realty=Realty::latest()->first();
+                $image_name='doc-'.time().'.'.$request->contract_file->extension();
+                $request->contract_file->move(public_path('contracts'),$image_name);
+                contract::create([
+                'realty_id'=>$realty->id,
+                'fee'=>$request->fee,
+                'contactNo'=>$request->contactNo,
+                'start_date'=>$request->start_date,
+                'end_date'=>$request->end_date,
+                'ejar_cost'=>$request->ejar_cost,
+                'rent_value'=>$request->rent_value,
+                'contract_file'=>$image_name,
+                'type'=>$request->type_sc,//تجاري - سكني
+                'note'=>$request->note,
+                'tax'=>$request->tax,
+                'tax_amount'=>$request->tax_amount,
+                'ensollments_total'=>$request->ensollments_total,
+                'remain'=>$request->rent_value,
+            ]);
+            $contract=contract::latest()->first();
+            $count=0;
+            $total=0;
+            foreach($request->installmentNo as $key=>$items )
+            {
+                $input['contract_id']=$contract->id;
+                $input['installmentNo']=$request->installmentNo[$key];
+                $input['installment_date']=$request->installment_date[$key];
+                $input['refrenceNo']=$request->refrenceNo[$key];
+                $input['payment_date']=$request->payment_date[$key];
+                $input['amount']=$request->amount[$key];
+                $input['payment_type']=$request->payment_type[$key];
+                $total+=$input['amount'];
+                $count++;
+                ensollments::create($input);
+            }
+
+           $enso= ensollments::where('id',$contract->id)->orderBy('installment_date', 'ASC')->get();
+           foreach($enso as $ens)
+           {
+           // return Carbon::now();
+           $ins=$ens->installment_date;
+            if($ins>=Carbon::now())
+            {
+                $next_payment=$ens->installment_date;
+                $contract->update(['next_payment'=>$next_payment,]);
+                break;
+            }
+            continue;
+           }
+            $contract->update([
+                'paid'=>$total,
+                'remain'=>$contract->rent_value-$total,
+                'ensollments_paid'=>$count,
+            ]);
             return redirect()->route('contract_effictive')->with([
                 'message' => 'Realty edited successfully',
                 'alert-type' => 'success',
             ]);
-}
+    }
+
 public function contract_payments()
 {
     return 'test';

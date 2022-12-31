@@ -32,7 +32,7 @@
                 @endcan
                 @can('اضافة عقد استئجار')
                     <li>
-                        <a href="{{ route('contract_commercial') }}"><i data-feather="users"></i> <span>اضافة عقد
+                        <a href="{{ route('contract_residential') }}"><i data-feather="users"></i> <span>اضافة عقد
                                 استئجار</span></a>
                     </li>
                 @endcan

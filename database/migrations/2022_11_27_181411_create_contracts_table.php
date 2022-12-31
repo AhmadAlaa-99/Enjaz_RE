@@ -30,10 +30,8 @@ return new class extends Migration
             $table->string('note')->nullable('-');
             $table->string('remain');
             $table->string('paid')->default('0');
-                        $table->string('fee')->default('0');
-
+            $table->string('fee')->default('0');
             $table->date('next_payment')->nullable();
-
              $table->string('ensollments_total');
             $table->string('ensollments_paid')->default('0');
 
